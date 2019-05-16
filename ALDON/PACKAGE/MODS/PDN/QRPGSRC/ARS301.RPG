@@ -1,0 +1,20 @@
+     H********************************************************************
+     H**   ARS301                                                        *
+     FMASTERL1IF  E           K        DISK
+     F            ACTGLP                            KRENAMERPGID2
+     C           *ENTRY    PLIST
+     C                     PARM           CHECK   10
+     C           CHECK     IFGT 0
+     C                     ENDIF
+     C                     READ MASTERL1                 90
+     C           *IN90     IFNE '5'
+     C                     GOTO ENDFIL
+     C                     ENDIF
+     C                     READ MASTERL1                 90
+     C           CHECK     IFLT 0
+     C                     GOTO ENDFIL
+     C                     ENDIF
+     C           ENDFIL    TAG
+      *                    SETON                     LR
+     C                     RETRN
+      *

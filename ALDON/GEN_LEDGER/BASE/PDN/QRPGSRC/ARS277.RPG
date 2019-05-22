@@ -2,9 +2,9 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H**  CHANGED ON BASE MAY 22 2019                                    *
-     H*   BY BILL SHUBIN
-     H*   CHANGE DATE FIELD
+     H**  CHANGED ON BASE MAY 23 2019                                    *
+     H*   BY 'THE' MARK WATTS
+     H*   CHANGE DATE FIELDS
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

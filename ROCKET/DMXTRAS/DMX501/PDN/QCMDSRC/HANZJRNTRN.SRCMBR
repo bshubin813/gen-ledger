@@ -1,0 +1,46 @@
+/* ================================================================= */
+/* Object:         HANZJRNTRN      *CMD                              */
+/*                 Analyes the transactions in ANZJRNPF           .  */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HANZJRNTRN)            */
+/*                 HLPID(*CMD)                                       */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HANZJRNTRN *CMD     Command                                       */
+/* HANZJRNTRN *PGM     CPP                                           */
+/* HANZJRNTRN *PNLGRP  Help text                                     */
+/* ANZJRNTRN1 *QRYDFN  Analyses by transaction type, then period     */
+/* ANZJRNTRN2 *QRYDFN  Analyses by transaction type summary          */
+/* HAUMSG     *MSGF    Message file with all messages issued         */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020508 RP  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Analyse ANZJRNPF transactions')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ANALFILE) TYPE(*NAME) DFT(ANZJRNPF) +
+                          MIN(0) PROMPT('Analysis file name')
+             PARM       KWD(ANALFLIB) TYPE(*NAME) DFT(*LIBL) +
+                          SPCVAL((*LIBL) (*CURLIB)) PROMPT('Library +
+                          for analysis file')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

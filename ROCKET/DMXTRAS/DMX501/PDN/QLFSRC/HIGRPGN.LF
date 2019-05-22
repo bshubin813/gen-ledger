@@ -1,0 +1,23 @@
+      * ============================================================ *
+      * Object:    HIGRPGN         *FILE LF                          *
+      *            Logical file over DMGROUPS by GROUP               *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20030424 FK  Initial delivery                                *
+      * 20040319 FK  Add target library                              *
+      * ============================================================ *
+     A          R HIGRPGN@                  PFILE(DMGROUPS)
+     A            GROUP
+     A            GRPTYPE
+     A            APPNAME
+     A            CURRPRIM
+     A            PREVPRIM
+     A            DESC
+     A            GRPTGTLIB                 RENAME(TGTLIB)
+      *
+     A          K GROUP

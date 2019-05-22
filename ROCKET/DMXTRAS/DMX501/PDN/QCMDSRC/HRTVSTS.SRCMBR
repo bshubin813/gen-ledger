@@ -1,0 +1,62 @@
+/*CP: ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD *IMOD)                   */
+/* ================================================================= */
+/* Object:         HRTVSTS         *CMD                              */
+/*                 Retrieves the status of the specified iCluster    */
+/*                 process.                                          */
+/*                                                                   */
+/* Create remarks: CRTCMD ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD      */
+/*                 *IMOD)                                            */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HRTVSTS    *CMD     Command                                       */
+/* HRTVSTS    *PGM     CPP                                           */
+/* HRTVSTS1   *PGM                                                   */
+/* HAUMSG     *MSGF    Message file with all messages issued         */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010101 FK  Initial delivery                                     */
+/* 20030505 FK  Allow *ALL for target/group                          */
+/* 20030506 FK  Enable for iCluster                                  */
+/* 20030508 FK  Include *MON as process                              */
+/* 20030521 FK  Translact *ALL for ICGROUP parameter                 */
+/* 20111217 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve process status')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ICGROUP) TYPE(*NAME) LEN(10) +
+                          SPCVAL((*ANY *N) (*ALL *ANY)) MIN(1) +
+                          PROMPT('Group or resilient application')
+             PARM       KWD(PRCTYP) TYPE(*CHAR) RSTD(*YES) DFT(*ANY) +
+                          SPCVAL((*SND) (*RCV) (*APY) (*MON) (*ANY) +
+                          (*ALL *ANY)) PROMPT('Process type')
+             PARM       KWD(JOBNAM) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Active job name')
+             PARM       KWD(JOBUSR) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Active job user')
+             PARM       KWD(JOBNBR) TYPE(*CHAR) LEN(6) RTNVAL(*YES) +
+                          PROMPT('Active job number')
+             PARM       KWD(STATUS) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Activity status')
+             PARM       KWD(RTNCDE) TYPE(*CHAR) LEN(7) RTNVAL(*YES) +
+                          PROMPT('Return code')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

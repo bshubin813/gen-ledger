@@ -1,0 +1,42 @@
+/* ================================================================= */
+/* Object:         HMONJOBADD      *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(HMONJOBADD) HLPID(*CMD)             */
+/*                                                                   */
+/* Synopsis:       Add subsystem to monitor for jobs                 */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20050707 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Add monitored jobs subsystem')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(SBSD) TYPE(QUALSBSD) MIN(1) +
+                          PROMPT('Subsystem description')
+             PARM       KWD(DTAQ) TYPE(QUALDTAQ) PROMPT('Job +
+                          notification data queue')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALSBSD:   QUAL       TYPE(*NAME) SPCVAL((*ANY) (QBATCH) (QINTER))
+             QUAL       TYPE(*NAME) SPCVAL((*ANY)) PROMPT('Library')
+ QUALDTAQ:   QUAL       TYPE(*NAME) DFT(HMONJOB) SPCVAL((HMONJOB))
+             QUAL       TYPE(*NAME) DFT(DMSYSOBJ) SPCVAL((DMSYSOBJ)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

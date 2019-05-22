@@ -1,0 +1,137 @@
+.* ============================================================ *
+.* Object:    HSETPOS         *PNLGRP                           *
+.*            Help text for the HSETPOS command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20030106 FK  Initial delivery                                *
+.* 20030711 FK  Enable for iCluster                             *
+.* 20111220 FK  Remove HA Suite                                 *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HSETPOS'.Set groups to last apy pos. - Help
+:P.
+The HSETPOS (Set groups to last apy pos.) command allows you to
+reset every group/journal combination and rebuild the metadata
+and the staging store.
+:P.
+The command reads the HAPID file on the target computer to determine
+the last journal entry that was applied onto the target. Subsequently,
+it runs the DMSETPOS for the retrieved position + 1.
+:P.
+:NT.Before you run this command, make sure that the apply jobs have ended
+normally as immediate ending of the apply jobs may not store the last applied
+journal entries in the HAPID file.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+
+.* Help for parameter ICGROUP
+:HELP NAME='HSETPOS/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the positions must be set or checked.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+The synchronisation check will be run for all iCluster groups or resilient
+applications.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the
+positions must be set or checked.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RMTHOST
+:HELP NAME='HSETPOS/RMTHOST'.Remote host name - Help
+:XH3.Remote host name (RMTHOST)
+:P.
+Specify a valid TCP/IP remote host name to be used to connect to the
+system that holds the HAPID file. The specified remote host name will be used
+to build the DDM file over the remote HAPID file.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter PASSWORD
+:HELP NAME='HSETPOS/PASSWORD'.Password on remote system - Help
+:XH3.Password on remote system (PASSWORD)
+:P.
+Specify the password for the current user on the remote system. This is the
+password that will be used to logon to the remote system to read the HAPID
+file.
+:P.
+:NT.When the password is specified, the ADDSVRAUTE command is executed to
+enroll the user for the QDDMSERVICE service. The password will be stored
+locally (encrypted).:ENT.
+:PARML.
+:PT.*NONE
+:PD.
+No password is passed when executing remote commands on the source system.
+This is only valid if the TCP/IP DDM attributes (CHGDDMTCPA) have been set
+to allow anonymous users (*NO).
+:PT.password
+:PD.
+Specify the password that will be used to logon the user to the remote system.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ACTION
+:HELP NAME='HSETPOS/ACTION'.Action to perform - Help
+:XH3.Action to perform (ACTION)
+:P.
+Determines whether the positions will only be checked (displayed) or
+set using the DMSETPOS command.
+:P.
+The possible action-to-perform values are:
+:P.
+:PARML.
+:PT.:PK def.*CHK:EPK.
+:PD.
+The HAPID file is read and for every group/journal combination that
+matches the selection criteria, the journal position is retrieved and a
+message is issued to indicate the retrieved position (journal receiver,
+sequence number, date-time stamp).
+:PT.*SET
+:PD.
+The HAPID file is read and for every target/group/journal combination that
+matches the selection criteria, the journal position is retrieved subsequently
+set using the DMSETPOS command. A message indicating the position set will
+be issued.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JRN
+:HELP NAME='HSETPOS/JRN'.Journal - Help
+:XH3.Journal (JRN)
+:P.
+Specify the name and library of the journal for which the position will
+be checked or set.
+:P.
+The possible journal values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+All journals for the specified target/group combination will be processed
+and positions checked/set.
+:PT.journal-name
+:PD.
+The position will only be checked/set for the specified journal.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

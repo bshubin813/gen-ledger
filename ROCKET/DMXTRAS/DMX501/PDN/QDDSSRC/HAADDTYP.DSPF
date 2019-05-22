@@ -1,0 +1,63 @@
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      PRINT
+     A                                      INDARA
+     A          R SFLRCD                    SFL
+     A            SELECTION      1A  B  7  2
+     A  30                                  DSPATR(PC RI)
+     A            JCOD           1A  O  7  5
+     A  47                                  COLOR(WHT)
+     A N47                                  COLOR(GRN)
+     A            JTYP           2A  O  7 10
+     A  47                                  COLOR(WHT)
+     A N47                                  COLOR(GRN)
+     A            DESC          60A  O  7 14
+     A  47                                  COLOR(WHT)
+     A N47                                  COLOR(GRN)
+     A            SELECTED       1A  H
+     A            HIDEFLD       80A  H
+     A          R SFLCTL                    SFLCTL(SFLRCD)
+     A                                      SFLSIZ(0014)
+     A                                      SFLPAG(0013)
+     A                                      CA03(03 'Exit')
+     A                                      OVERLAY
+     A  40N70                               SFLDSP
+     A N70                                  SFLDSPCTL
+     A  70                                  SFLCLR
+     A N79                                  SFLEND(*MORE)
+     A            DSPREC         4S 0H      SFLRCDNBR(CURSOR)
+     A                                  1 72DATE
+     A                                      EDTWRD('0 /  /  ')
+     A                                  1 30'Rocket Software, Inc. '
+     A                                      COLOR(BLU)
+     A                                  2 24'Add Journal Entry Type to Monitor'
+     A                                      COLOR(WHT)
+     A                                  2 72TIME
+     A                                  4  2'Type options, press Enter.'
+     A                                      COLOR(BLU)
+     A                                  5  4'1=Add Journal Entry Type'
+     A                                      COLOR(BLU)
+     A                                  6  4'Code'
+     A                                      COLOR(WHT)
+     A                                  6  9'Type'
+     A                                      COLOR(WHT)
+     A                                  6 14'Description'
+     A                                      COLOR(WHT)
+     A          R CMDKEY
+     A                                      OVERLAY
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A          R MSGSFL                    SFL
+     A                                      SFLMSGRCD(24)
+     A            KEYFLD                    SFLMSGKEY
+     A            PGMFLD                    SFLPGMQ
+     A
+     A          R MSGCTL                    SFLCTL(MSGSFL)
+     A  40                                  OVERLAY
+     A  98                                  SFLCLR
+     A N98                                  SFLDSP
+     A N98                                  SFLDSPCTL
+     A  99                                  SFLEND
+     A  99                                  SFLINZ
+     A                                      SFLSIZ(0020)
+     A                                      SFLPAG(0001)
+     A            PGMFLD                    SFLPGMQ

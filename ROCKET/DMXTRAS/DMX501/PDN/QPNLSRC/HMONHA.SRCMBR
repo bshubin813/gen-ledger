@@ -1,0 +1,274 @@
+.* ============================================================ *
+.* Object:    HMONHA          *PNLGRP                           *
+.*            Help text for the HMONHA command.                 *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20041220 FK  Initial delivery (copy from HMONEVL)            *
+.* 20111220 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HMONHA'.Monitor iCluster - Help
+:P.
+The HMONHA (Monitor iCluster) is best used as an autostart job (AJE)
+for the XDMCLUSTER subsystem. It can be used to monitor
+for messages that appear in the event logs, objects that have become suspended
+and groups gone inactive on either the primary or backup systems.
+In case of errors found,
+alerts are being sent out to pre-defined alert destinations (message queue or
+e-mail address).
+:P.
+Every interval of time as set in the CHKITV parameter, the monitor wakes
+up and reads the event logs and mirrored object metadata files on the local
+machine. If there are message with severity 30 or higher, or if
+there are any suspended objects, the information is forwarded to the focal
+point as specified by the CTLSYS parameter. If group checking has
+been selected, it will also check the activity of all defined groups and
+report if the group has become inactive and is inactive for the specified
+number of minutes.
+:P.
+The controlling system (focal point) accepts event log errors and suspended
+objects from 1 or more systems (including the local system) and forwards
+the information to the pre-defined alert destinations as specified in the
+HMONALR file.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter CTLSYS
+:HELP NAME='HMONHA/CTLSYS'.Controlling system name - Help
+:XH3.Controlling system name (CTLSYS)
+:P.
+Specifies the name of the focal point (controlling system); this is the system
+that listens for messages from (the) other system(s) and passes them on the
+specified alert destinations.
+:P.
+The controlling system submits an extra job, HMONHAL, to listen for
+incoming alerts.
+:P.
+:NT.The value of this parameter must match the system name of the
+controlling system, which can be displayed using the DSPNETA command
+on that system.:ENT.
+:P.
+This is a required parameter.
+:P.
+The possible controlling-system-name values are:
+:P.
+:PARML.
+:PT.*CURRENT
+:PD.
+Ths controlling system name is the current system on which the
+HMONHA command is executed.
+:PT.system name
+:PD.
+Specify the system name (DSPNETA) of the controlling system.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CTLHOST
+:HELP NAME='HMONHA/CTLHOST'.Controlling system host name - Help
+:XH3.Controlling sytem host name (CTLHOST)
+:P.
+Specifies the host name that identifies the controlling system. This
+is the name by which the HMONHA job will connect to the
+controlling system (focal point) for sending messages.
+:P.
+:NT.The value of this parameter can usually be found in the host
+table on the iSeries server.:ENT.
+:P.
+The possible controlling-system-host-name values are:
+:P.
+:PARML.
+:PT.:PK def.*CTLSYS:EPK.
+:PD.
+The host name by which the controllig system can be reached is the
+same as its network name.
+:PT.host name
+:PD.
+Specify a valid host name to be found in the system's host table.
+:EPARML.
+:EHELP.
+
+.* Help for parameter EVTLOG
+:HELP NAME='HMONHA/EVTLOG'.Monitor event log - Help
+:XH3.Monitor event log (EVTLOG)
+:P.
+Specify if the iCluster event log must be checked for errors by
+the monitoring job.
+:P.
+The possible monitor-event-log values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+If there are any event log entries with severity of 30 or greater, these
+entries are forwarded to the listener job on the focal point (CTLSYS
+parameter).
+:PT.*NO
+:PD.
+The HMONHA job does not check for event log entries on this system.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SUSOBJ
+:HELP NAME='HMONHA/SUSOBJ'.Monitor suspended objects - Help
+:XH3.Monitor suspended objects (SUSOBJ)
+:P.
+Specify if the monitor job must check for suspended objects.
+:P.
+The possible monitor-suspended-objects values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+If the monitor encounters any suspended objects and the object has been
+suspended for the specified number of minutes (as specified in the SUSTIM
+parameter), it will be forwarded to the focal point (CTLSYS parameter).
+:PT.*NO
+:PD.
+The HMONHA job does not check for suspended objects.
+:EPARML.
+:EHELP.
+
+.* Help for parameter GRPSTS
+:HELP NAME='HMONHA/GRPSTS'.Monitor group status - Help
+:XH3.Monitor group status (GRPSTS)
+:P.
+Specify if the monitor job should check for groups that have gone inactive.
+:P.
+The possible monitor-group-status values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+The HMONHA job does not check for the status of groups.
+:PT.*YES
+:PD.
+If the monitor encounters any inactive group and the group has been inactive
+for the specified number of minutes (as specified in the GRPTIM
+parameter), a message will be forwarded to the focal point (CTLSYS parameter).
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKITV
+:HELP NAME='HMONHA/CHKITV'.Check interval - Help
+:XH3.Check interval (CHKITV)
+:P.
+Specify how many minutes the monitoring process must wait between
+subsequent checks for event log errors and suspended objects.
+:P.
+The possible check-interval values are:
+:P.
+:PARML.
+:PT.:PK def.5:EPK.
+:PD.
+Wait for 5 minutes between subsequent checks.
+:PT.number-of-minutes
+:PD.
+Specify the interval time in minutes.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SUSTIM
+:HELP NAME='HMONHA/SUSTIM'.Object suspended for - Help
+:XH3.Object suspended for (SUSTIM)
+:P.
+Specify how many minutes an object must be suspended before it is
+forwarded to the focal point. This to prevent alerts for objects which
+are pending a retry.
+:P.
+The possible object-suspended-for values are:
+:P.
+:PARML.
+:PT.:PK def.15:EPK.
+:PD.
+Objects that have been suspended for 15 minutes or longer will be forwarded
+to the focal point.
+:PT.number-of-minutes
+:PD.
+Specify the number of minutes that the object must be suspended before it
+is forwarded to the focal point.
+:EPARML.
+:EHELP.
+
+.* Help for parameter GRPTIM
+:HELP NAME='HMONHA/GRPTIM'.Group inactive for - Help
+:XH3.Group inactive for (GRPTIM)
+:P.
+Specify how many minutes a group must have been inactive before a warning is
+forwarded to the focal point. This to prevent alerts if the group is only
+inactive temporarily or when iCluster is starting up.
+:P.
+:NT.The actual number of minutes until an inactivity message is sent may
+slightly differ from the number of minutes specified. This because group
+activity is only checked when the monitor job is activated (CHKITV parameter).
+:ENT.
+:P.
+The possible group-inactive-for values are:
+:P.
+:PARML.
+:PT.:PK def.15:EPK.
+:PD.
+Groups that have been inactive for 15 minutes or longer will be notified
+to the focal point.
+:PT.number-of-minutes
+:PD.
+Specify the number of minutes that the group must be inactive before a message
+is forwarded to the focal point.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CLNEVTLOG
+:HELP NAME='HMONHA/CLNEVTLOG'.Clean up event logs - Help
+:XH3.Clean up event logs (CLNEVTLOG)
+:P.
+Specify whether or not the source- and target event logs must
+be cleaned up automatically each day.
+:P.
+The possible clean-up-event-logs values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Every new day that the monitor runs, the DSPSRCLOG, DSPTGTLOG or DMDSPLOG
+commands are run on both the primary- and secondary/backup system. This
+automatically clears any event log entries, older than the
+number of days specified in the iCluster system values.
+:P.
+The spooled files generated are immediately deleted.
+:PT.*NO
+:PD.
+No cleaning up of the event log is done.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PORT
+:HELP NAME='HMONHA/PORT'.Service name for HMONHA - Help
+:XH3.Service name for HMONHA (PORT)
+:P.
+Specifies the service table entry that identifies the port that the
+HMONHAL job on the focal point will listen to for incoming messages. Also, the
+port will be used when accessing the remote listener job.
+:P.
+The possible service-name-for-hmonha values are:
+:P.
+:PARML.
+:PT.:PK def.hmonha:EPK.
+:PD.
+The port number in the service table is identified by the 'hmonha'
+table entry. Usually, port number 4446 will be used to identify the
+listener port.
+:PT.service table entry
+:PD.
+Specify a service table entry that will be used by the listener job.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

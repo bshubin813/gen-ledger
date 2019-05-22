@@ -1,0 +1,49 @@
+/* ================================================================= */
+/* Object:         HMONNETTFC      *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HMONNETTFC) HLPID(*CMD)*/
+/*                                                                   */
+/* Synopsis:       Monitors the network traffic over a specific      */
+/*                 port, in either direction - from or to the        */
+/*                 current machine. Output is stored in an output    */
+/*                 file.                                             */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20051216 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Monitor network traffic')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(FILE) TYPE(QUALFILE) MIN(1) +
+                          PROMPT('Traffic output file')
+             PARM       KWD(PORT) TYPE(*DEC) LEN(5 0) SPCVAL((4545 +
+                          *N)) MIN(1) PROMPT('Port number')
+             PARM       KWD(PORTLOC) TYPE(*CHAR) LEN(7) RSTD(*YES) +
+                          DFT(*RMT) SPCVAL((*LCL) (*RMT) (*LCLRMT)) +
+                          PROMPT('Location of port')
+             PARM       KWD(RMTADR) TYPE(*CHAR) LEN(15) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Remote IP address')
+             PARM       KWD(CHKITV) TYPE(*DEC) LEN(5) RSTD(*NO) +
+                          DFT(*MIN5) SPCVAL((*MIN5 300) (*MIN1 60) +
+                          (*HOUR 3600)) PROMPT('Check interval')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

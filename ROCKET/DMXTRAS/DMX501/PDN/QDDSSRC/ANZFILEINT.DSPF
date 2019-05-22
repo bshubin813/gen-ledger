@@ -1,0 +1,52 @@
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      PRINT
+     A                                      INDARA
+     A                                      CA03(03 'Exit')
+     A                                      CA12(12 'Cancel')
+     A                                      HELP
+     A                                      ALTHELP
+     A                                      HLPPNLGRP(ANZFILEINT *LIBL/ANZFILEI-
+                                            NT)
+     A                                      HLPTITLE('Interactive File Analysis-
+     A                                       - Help')
+     ****************************************************************
+     A          R MSGRCD                    SFL
+     A                                      SFLMSGRCD(24)
+     A            MSGKEY                    SFLMSGKEY
+     A            PGM                       SFLPGMQ
+     A          R MSGCTL                    SFLCTL(MSGRCD)
+     A                                      OVERLAY
+     A                                      SFLSIZ(  10)
+     A                                      SFLPAG(   1)
+     A                                      SFLDSPCTL
+     A                                      SFLDSP
+     A                                      SFLINZ
+     A N99                                  SFLEND
+     A            PGM                       SFLPGMQ
+     ***************************************************************
+     A          R ANZFIL
+     A          H                           HLPARA(8 3 8 44)
+     A                                      HLPPNLGRP(FNAM *LIBL/ANZFILEINT)
+     A          H                           HLPARA(10 5 10 46)
+     A                                      HLPPNLGRP(FLIB *LIBL/ANZFILEINT)
+     A                                  1 29'Rocket Software, Inc. '
+     A                                      COLOR(BLU)
+     A                                  1 72DATE
+     A                                      EDTCDE(Y)
+     A                                  2 27'Interactive File Analysis'
+     A                                      COLOR(WHT)
+     A                                  2 72TIME
+     A                                  4  3'Type choices, press Enter'
+     A                                      COLOR(BLU)
+     A                                  8  3'File Name  . . . . . . . . :'
+     A            FNAM          10A  B  8 35COLOR(WHT)
+     A                                  8 52'Name'
+     A                                 10  5'Library . . . . . . . . . . :'
+     A            FLIB          10A  B 10 37COLOR(WHT)
+     A                                 10 52'Name'
+     A            DMERROR       70A  O 23  2COLOR(WHT)
+     A                                 22  3'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 16'F12=Cancel'
+     A                                      COLOR(BLU)
+     A

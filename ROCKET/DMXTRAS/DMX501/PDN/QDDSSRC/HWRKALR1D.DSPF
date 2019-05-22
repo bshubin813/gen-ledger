@@ -1,0 +1,140 @@
+     A*%%TS  SD  20050128  170145  FKETELAARS  REL-V5R2M0  5722-WDS
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      PRINT
+     A                                      ALTHELP
+     A                                      HELP
+     A          R PNLRCD
+     A                                      TEXT('Screen footer (fields)')
+     A                                 23  2'F3=Exit   F6=Add alert destination-
+     A                                         F12=Cancel'
+     A                                      COLOR(BLU)
+     A          R PNLDLT
+     A*%%TS  SD  20050128  170145  FKETELAARS  REL-V5R2M0  5722-WDS
+     A                                      TEXT('Screen footer (fields)')
+     A                                 23  2'F3=Exit   F12=Cancel'
+     A                                      COLOR(BLU)
+     A          R SFLRCD                    SFL
+     A*%%TS  SD  20050125  153435  FKETELAARS  REL-V5R2M0  5722-WDS
+     A                                      TEXT('Subfile record (fields)')
+     A  84                                  SFLNXTCHG
+     A            DBFRRNSR       9N 0H      TEXT('DBF Relative record no')
+     A            OPTISR         1A  B  9  3
+     A  43                                  DSPATR(PC)
+     A  43                                  DSPATR(RI)
+     A                                      CHECK(AB)
+     A                                      VALUES('4')
+     A            UTLIDSR   R        O  9  6REFFLD(HMONALRR/ALUTLID *LIBL/HMONA-
+     A                                      LR)
+     A            UTLALRSR  R        O  9 17REFFLD(HMONALRR/ALUTLALR *LIBL/HMON-
+     A                                      ALR)
+     A            DSTTYPSR  R        O  9 22REFFLD(HMONALRR/ALDSTTYP *LIBL/HMON-
+     A                                      ALR)
+     A            ALRDSTSR      40   O  9 33
+     A          R SFLCTL                    SFLCTL(SFLRCD)
+     A*%%TS  SD  20050128  164714  FKETELAARS  REL-V5R2M0  5722-WDS
+     A                                      SFLSIZ(0013)
+     A                                      SFLPAG(0012)
+     A                                      TEXT('Subfile control (fields)')
+     A                                      PAGEDOWN(28)
+     A                                      CA03(03 'Exit')
+     A                                      CA05(05 'Reload')
+     A                                      CA06(06 'Add new alert')
+     A                                      CA12(12 'Cancel')
+     A                                      HOME(25)
+     A  29                                  CSRLOC(#ROW       #COL)
+     A                                      OVERLAY
+     A  31                                  SFLDSP
+     A  32                                  SFLDSPCTL
+     A  33                                  SFLCLR
+     A  95                                  SFLEND(*MORE)
+     A            #RRN           4S 0H      SFLRCDNBR(CURSOR)
+     A            #ROW           3S 0H
+     A            #COL           3S 0H
+     A                                  1  2'HWRKALR'
+     A                                      COLOR(BLU)
+     A                                  1 18'Work with alert destinations'
+     A                                      DSPATR(HI)
+     A                                  1 63DATE
+     A                                      EDTCDE(Y)
+     A                                  1 72TIME
+     A                                  3  2'Utility ID  . .'
+     A                                      DSPATR(HI)
+     A            UTLIDSC   R        B  3 20REFFLD(HMONALRR/ALUTLID *LIBL/HMONA-
+     A                                      LR)
+     A                                  5  2'Type options and press Enter'
+     A                                      COLOR(BLU)
+     A                                  6  2'4=Delete'
+     A                                      COLOR(BLU)
+     A                                  8  2'Opt'
+     A                                      DSPATR(HI)
+     A                                  8  6'Utility ID'
+     A                                      DSPATR(HI)
+     A                                  8 17'Alr'
+     A                                      DSPATR(HI)
+     A                                  8 22'Dst Type'
+     A                                      DSPATR(HI)
+     A                                  8 33'Destination'
+     A                                      DSPATR(HI)
+      *
+     A          R DLTRCD                    SFL
+     A                                      TEXT('Delete record (fields)')
+     A  85                                  SFLNXTCHG
+     A            DBFRRNSR       9N 0H      TEXT('DBF Relative record no')
+     A            UTLIDSR   R        O  9  6REFFLD(HMONALRR/ALUTLID *LIBL/HMONA-
+     A                                      LR)
+     A            UTLALRSR  R        O  9 17REFFLD(HMONALRR/ALUTLALR *LIBL/HMON-
+     A                                      ALR)
+     A            DSTTYPSR  R        O  9 22REFFLD(HMONALRR/ALDSTTYP *LIBL/HMON-
+     A                                      ALR)
+     A            ALRDSTSR      40   O  9 33
+     A          R DLTCTL                    SFLCTL(DLTRCD)
+     A*%%TS  SD  20050127  174904  FKETELAARS  REL-V5R2M0  5722-WDS
+     A                                      TEXT('Delete control (fields)')
+     A*                                     PAGEDOWN(28)
+     A                                      CA03(03 'Exit')
+     A                                      CA12(12 'Cancel')
+     A                                      HOME(25)
+     A                                      OVERLAY
+     A  36                                  SFLDSP
+     A  37                                  SFLDSPCTL
+     A  38                                  SFLCLR
+     A                                      SFLSIZ(0013)
+     A                                      SFLPAG(0012)
+     A            #RRNDLT        4S 0H
+     A                                  1  2'HWRKALR'
+     A                                      COLOR(BLU)
+     A                                  1 18'Work with alert destinations'
+     A                                      DSPATR(HI)
+     A                                  1 63DATE
+     A                                      EDTCDE(Y)
+     A                                  1 72TIME
+     A                                  5  2'Press Enter to delete. F12 to canc-
+     A                                      el'
+     A                                      COLOR(BLU)
+     A                                  8  2'Opt'
+     A                                      DSPATR(HI)
+     A                                  8  6'Utility ID'
+     A                                      DSPATR(HI)
+     A                                  8 33'Destination'
+     A                                      DSPATR(HI)
+     A                                  8 22'Dst Type'
+     A                                      DSPATR(HI)
+     A                                  8 17'Alr'
+     A                                      DSPATR(HI)
+      *
+     A          R #MSGRCD                   TEXT('Program messages')
+     A                                      SFL SFLMSGRCD(24)
+     A            MSGKEY                    SFLMSGKEY
+     A            ##PGM                     SFLPGMQ
+     A*=========================================================================
+     A          R #MSGCTL                   SFLCTL(#MSGRCD)
+     A                                      TEXT('Program messages')
+     A                                      OVERLAY
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      SFLINZ
+     A N30                                  SFLEND
+     A                                      SFLSIZ(0003)
+     A                                      SFLPAG(0001)
+     A            ##PGM                     SFLPGMQ

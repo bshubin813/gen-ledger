@@ -1,0 +1,104 @@
+      * ============================================================ *
+      * Object:    HCHKSYNOBJ      *FILE PF                          *
+      *            Holds the object differences found.               *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20021011 FK  Initial delivery (rebuild sync check)           *
+      * 20050204 FK  Include journal information                     *
+      * 20060323 FK  Include "not-mirrored"                          *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNOBJ@
+     A            ODGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            ODCMPL        10A         TEXT('Original library')
+     A                                      COLHDG('Original' 'library')
+     A            ODCMPO        10A         TEXT('Original object')
+     A                                      COLHDG('Original' 'object')
+     A            ODLBNM        10A         TEXT('Object library')
+     A                                      COLHDG('Object' 'library')
+     A            ODOBNM        10A         TEXT('Object name')
+     A                                      COLHDG('Object' 'name')
+     A            ODOBTP         8A         TEXT('Object type')
+     A                                      COLHDG('Object' 'type')
+     A            ODOBAT        10A         TEXT('Object attribute')
+     A                                      COLHDG('Object' 'attribute')
+     A            ODTGTL        10A         TEXT('Target library')
+     A                                      COLHDG('Target' 'library')
+     A            ODMOT          1A         TEXT('Missing object target')
+     A                                      COLHDG('Missing' 'Object' -
+     A                                             'Target')
+     A                                      DFT('N')
+     A            ODMOS          1A         TEXT('Obsolete object target')
+     A                                      COLHDG('Obsolete' 'Object' -
+     A                                             'Target')
+     A                                      DFT('N')
+     A            ODJD           1A         TEXT('Journal difference')
+     A                                      COLHDG('Journal' 'Difference')
+     A                                      DFT('N')
+     A            ODNJ           1A         TEXT('Not journalled')
+     A                                      COLHDG('Not' 'Journalled')
+     A                                      DFT('N')
+     A            ODNM           1A         TEXT('Not mirrored')
+     A                                      COLHDG('Not' 'mirrored')
+     A                                      DFT('N')
+     A            SOCDTS          Z         TEXT('Src Creation DTS')
+     A                                      COLHDG('Source' 'Create DTS')
+     A            TOCDTS          Z         TEXT('Tgt Creation DTS')
+     A                                      COLHDG('Target' 'Create DTS')
+     A            SOLDTS          Z         TEXT('Src Change DTS')
+     A                                      COLHDG('Source' 'Change DTS')
+     A            TOLDTS          Z         TEXT('Tgt Change DTS')
+     A                                      COLHDG('Target' 'Change DTS')
+     A            SOOBTX        50A         TEXT('Src Description')
+     A                                      COLHDG('Source' 'Description')
+     A            TOOBTX        50A         TEXT('Tgt Description')
+     A                                      COLHDG('Target' 'Description')
+     A            SOOBOW        10A         TEXT('Src Object owner')
+     A                                      COLHDG('Source' 'Owner')
+     A            TOOBOW        10A         TEXT('Tgt Object owner')
+     A                                      COLHDG('Target' 'Owner')
+     A            SOOBSZ        10  0       TEXT('Src Object size')
+     A                                      COLHDG('Source' 'Size')
+     A            TOOBSZ        10  0       TEXT('Tgt Object size')
+     A                                      COLHDG('Target' 'Size')
+     A            SOJRST         1A         TEXT('Src Currently journaled -
+     A                                      0=No, 1=Yes')
+     A                                      COLHDG('Source' 'journaled')
+     A            TOJRST         1A         TEXT('Tgt Currently journaled -
+     A                                      0=No, 1=Yes')
+     A                                      COLHDG('Target' 'journaled')
+     A            SOJRNM        10A         TEXT('Source journal')
+     A                                      COLHDG('Source' 'Journal' 'name')
+     A            SOJRLB        10A         TEXT('Source library')
+     A                                      COLHDG('Source' 'Journal' 'library')
+     A            TOJRNM        10A         TEXT('Target journal')
+     A                                      COLHDG('Target' 'Journal' 'name')
+     A            TOJRLB        10A         TEXT('Target library')
+     A                                      COLHDG('Target' 'Journal' 'library')
+     A            SOJRIM         1A         TEXT('Source Journal images -
+     A                                      0=After, 1=Both')
+     A                                      COLHDG('Source' 'Journal' 'images')
+     A            TOJRIM         1A         TEXT('Target Journal images -
+     A                                      0=After, 1=Both')
+     A                                      COLHDG('Target' 'Journal' 'images')
+     A            SOOBLK         1A         TEXT('Source Object locked?')
+     A                                      COLHDG('Source' 'Object' 'Locked?')
+     A            TOOBLK         1A         TEXT('Target Object locked?')
+     A                                      COLHDG('Target' 'Object' 'Locked?')
+     A            SOOBDM         1A         TEXT('Source Object damaged?')
+     A                                      COLHDG('Source' 'Object' 'Damaged?')
+     A            TOOBDM         1A         TEXT('Target Object damaged?')
+     A                                      COLHDG('Target' 'Object' 'Damaged?')
+      *
+     A          K ODGRPN
+     A          K ODCMPL
+     A          K ODCMPO
+     A          K ODOBTP

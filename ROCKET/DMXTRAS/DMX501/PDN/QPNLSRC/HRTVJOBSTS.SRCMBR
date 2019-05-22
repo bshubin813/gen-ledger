@@ -1,0 +1,59 @@
+.* ============================================================ *
+.* Object:    HRTVJOBSTS      *PNLGRP                           *
+.*            Help text for the HRTVJOBSTS command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020930 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRTVJOBSTS'.Retrieve job status - Help
+:P.
+The HRTVJOBSTS (Retrieve job status) command allows you to retrieve the
+current status of any job in the system.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter JOB
+:HELP NAME='HRTVJOBSTS/JOB'.Job - Help
+:XH3.Job (JOB)
+:P.
+Specifies the fully qualified identifier of the job to retrieve the status
+for.
+:EHELP.
+
+.* Help for parameter STATUS
+:HELP NAME='HRTVJOBSTS/STATUS'.Status of job - Help
+:XH3.Status of job (STATUS)
+:P.
+Returns the status of the specified job.
+:P.
+The possible status-of-job values are:
+:P.
+:PARML.
+:PT.*ACTIVE
+:PD.
+The job is active in the subsystem.
+:PT.*JOBQ
+:PD.
+The job is currently on a job queue.
+:PT.*OUTQ
+:PD.
+The job has completed running and has spooled output that has not yet been
+printed.
+:PT.*ERROR
+:PD.
+Either the specified job does not exist on the system or there was an
+error while retrieving its status information.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

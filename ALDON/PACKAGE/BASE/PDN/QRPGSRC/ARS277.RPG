@@ -1,6 +1,8 @@
      H*
      H********************************************************************
      H**   ARS277                                                        *
+     H**   DA Git config exits                                           *
+     H**   May 22, 2019                                                  *
      H********************************************************************
      H*
      FMASTERL1IF  E           K        DISK
@@ -10,10 +12,11 @@
      C           CHECK     IFLT 3
      C                     MOVE '1'       *IN90
      C                     ENDIF
+     C*   I AM A COMMMENT
      C*
      C                     READ MASTERL1                 90
      C           *IN90     IFEQ '3'
-     C*   I AM A COMMMENT
+     C*   I am also a comment
      C                     GOTO ENDFIL
      C                     END
      C                     READ MASTERL1                 90

@@ -1,0 +1,16 @@
+      * ============================================================ *
+      * Object:    ANZTOTL2        *FILE PF                          *
+      *            Holds the totals per object and date/hour         *
+      *            descending by # of transactions (D)               *
+      *                                                              *
+      * Create remarks:                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060127 FK  Comments                                        *
+      * ============================================================ *
+     A          R ANZTR2                    PFILE(ANZTOT2)
+     A          K TOTENT                    DESCEND

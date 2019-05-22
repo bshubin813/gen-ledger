@@ -1,0 +1,98 @@
+.* ============================================================ *
+.* Object:    HSNDFTP         *PNLGRP                           *
+.*            Help text for the HSNDFTP command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20010624 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HSNDFTP'.Send save file through FTP - Help
+:P.
+The HSNDFTP (Send save file through FTP) command allows you to
+send a save file to the specified remote host in batch mode, without
+having to remember and type all FTP subcommands.
+:P.
+The command generates an FTP script in QTEMP which sends the
+specified save file to the remote host. After transferring the save
+file and no errors occurred, the script will be removed from QTEMP; if
+the transfer was not successful, a report will be produced.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter CMD
+:HELP NAME='HSNDFTP/SAVF'.Save file - Help
+:XH3.Save file (SAVF)
+:P.
+Specify the save file to be sent through the FTP script.
+:P.
+:NT.The save file on the remote system is created in the same library
+as on the source system.:ENT.
+:EHELP.
+
+.* Help for parameter RMTHOST
+:HELP NAME='HSNDFTP/RMTHOST'.Remote host name - Help
+:XH3.Remote host name (RMTHOST)
+:P.
+Sepcify a valid TCP/IP remote host name to be used to connect to the
+receiving system. If the remote host cannot be found, an FTP error
+will be issued.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter USRPRF
+:HELP NAME='HSNDFTP/USRPRF'.User name on remote machine - Help
+:XH3.User name on remote machine (USRPRF)
+:P.
+Specifies the user name that will be used to log on to the remote
+system. Ths user profile must exist on the remote system and the
+password specified must match the remote user's password.
+:P.
+Also ensure that the user has proper authorisation to the save
+file library on the remote system.
+:P.
+:PARML.
+:PT.:PK def.*CURRENT:EPK.
+:PD.
+Use the current user profile to sign on to the remote system.
+:PT.user-profile
+:PD.
+Specify a valid user profile on the remote system.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PASSWORD
+:HELP NAME='HSNDFTP/PASSWORD'.Password - Help
+:XH3.Password (PASSWORD)
+:P.
+Specify the password for the user specified on the USRPRF keyword.
+The password must match the password of the user on the remote system.
+:EHELP.
+
+.* Help for parameter BATCH
+:HELP NAME='HSNDFTP/BATCH'.Submit to batch - Help
+:XH3.Submit to batch (BATCH)
+:P.
+Determines whether or not the FTP job must submitted to batch.
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The FTP transfer job is submitted to batch. The utilities' HAUTILS job
+description is used to submit the job.
+:PT.*NO
+:PD.
+The FTP transfer job is run interactively.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

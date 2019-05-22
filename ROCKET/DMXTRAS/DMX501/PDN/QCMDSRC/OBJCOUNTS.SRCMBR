@@ -1,0 +1,36 @@
+/* ================================================================= */
+/* Object:         OBJCOUNTS       *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PGM(SBMOBJCNTS) PNLGRP(OBJCOUNTS)          */
+/*                        HELPID(*CMD)                               */
+/*                                                                   */
+/* Synopsis:       Submits a batch job on hold called OBJCOUNTS      */
+/*                 which produces a summary report by library showing*/
+/*                 number of physical files and their size and the   */
+/*                 number of other objects and their size and totals */
+/*                 by library and system.                            */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* SBMOBJCNTS *CLP     CL to process the command parms               */
+/* OBJCOUNTS  *CLP     CL to call RPG OBJCOUNTS2 report program      */
+/* OBJCOUNTS2 *RPG     RPG program to produce report                 */
+/* OBJCOUNTSA *PF                                                    */
+/* OBJCOUNTSB *PF                                                    */
+/* OBJCNTAL   *LF                                                    */
+/* OBJCNTBL   *LF                                                    */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000204 MW  Added these comments and remove HA Tools library     */
+/*              prompt                                               */
+/* ================================================================= */
+             CMD        PROMPT('Object Counts (Report)')
+             PARM       KWD(LIB) TYPE(*CHAR) LEN(10) DFT(*ALLUSR) +
+                          MIN(0) CHOICE('Name, *ALLUSR') +
+                          PROMPT('Library Name')

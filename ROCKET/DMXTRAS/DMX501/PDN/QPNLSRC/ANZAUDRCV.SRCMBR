@@ -1,0 +1,216 @@
+.* ============================================================ *
+.* Object:    ANZAUDRCV       *PNLGRP                           *
+.*            Help text for the ANZAUDRCV command.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* 20051024 FK  Output files are different                      *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='ANZAUDRCV'.Audit Journal Analysis - Help
+:P.
+This option runs against the system audit journal and populate the
+files QASY* in the HA TOols 2000 library with information required for
+future analysis. No reports are currently produced.
+:P.
+QAUDJRN in QSYS for the journal name and library and *CURCHAIN are
+already specified by default. Break up the analysis further by either
+sequence number or date and time.
+:P.
+The Clear Analysis flag will clear QASY* files while the Append to
+Analysis File flag will allow you to combine multiple audit receivers
+into the same file for spreadsheet analysis. The Archive Analysis flag
+will allow you to keep month-end for example and day to day analysis
+in seperate files.
+:P.
+:NT.Always analyze data for a couple of normal days and then a couple
+of days around a critical heavy period like month-end. Do NOT try to
+analyze a month of data or else the batch job (ANZAUDRCV) that is
+submitted on hold may run for DAYS!
+:ENT.
+:P.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter JNAM
+:HELP NAME='JNAM'.Journal Name (JNAM) - Help
+:XH3.Journal Name (JNAM)
+:P.
+Specify the name of the audit journal. By default this is almost always
+QAUDJRN.
+:P.
+:EHELP.
+.* Help for parameter JLIB
+:HELP NAME='JLIB'.Journal Library (JLIB) - Help
+:XH3.Journal Library (JLIB)
+:P.
+Specify the library for the audit journal. By default this is always
+QSYS.
+:P.
+:EHELP.
+.* Help for parameter JRCV
+:HELP NAME='JRCV'.Journal Receiver Name (JRCV) - Help
+:XH3.Journal Receiver Name (JRCV)
+:P.
+Specify the name of the journal receiver to be analyzed. If you
+use *CURCHAIN, all receivers attached to this journal will be analyzed.
+:P.
+The possible values for Journal Receiver Name are:
+:P.
+:PARML.
+:PT.:PK def.*CURCHAIN:EPK.
+:PD.
+All receivers in the current chain of the audit journal specified will be
+analyzed.
+:PT.Name
+:PD.
+Only the specified audit receiver will be analyzed.
+:EPARML.
+:EHELP.
+.* Help for parameter JRCL
+:HELP NAME='JRCL'.Receiver Library (JRCL) - Help
+:XH3.Receiver Library (JRCL)
+:P.
+Specify the library containing the audit receivers. By default this
+is always QSYS.
+:EHELP.
+.* Help for parameter STRSEQ
+:HELP NAME='STRSEQ'.Starting Sequence Number (STRSEQ) - Help
+:XH3.Starting Sequence Number (STRSEQ)
+:P.
+Specify the sequence number of the receiver entry to begin analysis.
+If you specify *FIRST, analysis will begin at the start of the receiver.
+:P.
+The possible values for Starting Sequence Number are:
+:P.
+:PARML.
+:PT.:PK def.*FIRST:EPK.
+:PD.
+Analyze from the very beginning of the specified audit receiver.
+:PT.Number
+:PD.
+Begin the analysis at the sequence number of the receiver entry
+specified.
+:EPARML.
+:EHELP.
+.* Help for parameter ENDSEQ
+:HELP NAME='ENDSEQ'.Ending Sequence Number (ENDSEQ) - Help
+:XH3.Ending Sequence Number (ENDSEQ)
+:P.
+Specify the sequence number of the receiver entry to end analysis.
+If you specify *LAST, analysis will finish at the end of the receiver.
+:P.
+The possible values for Ending Sequence Number are:
+:P.
+:PARML.
+:PT.:PK def.*LAST:EPK.
+:PD.
+Analyze from the very end of the specified audit receiver.
+:PT.Number
+:PD.
+End the analysis at the sequence number of the receiver entry
+specified.
+:EPARML.
+:EHELP.
+.* Help for parameter STRDTE
+:HELP NAME='STRDTE'.Starting Date (STRDTE) - Help
+:XH3.Starting Date (STRDTE)
+:P.
+Specify the starting date to begin analysis in the format month, day,
+year i.e. MMDDYY.
+:EHELP.
+.* Help for parameter ENDDTE
+:HELP NAME='ENDDTE'.Ending Date (ENDDTE) - Help
+:XH3.Ending Date (ENDDTE)
+:P.
+Specify the ending date to finish analysis in the format month, day,
+year i.e. MMDDYY.
+:EHELP.
+.* Help for parameter APDANZ
+:HELP NAME='APDANZ'.Append to Analysis File (APDANZ) - Help
+:XH3.Append to Analysis File (APDANZ)
+:P.
+Specify whether or not you wish to append the current analysis to
+the end of what is already existing in the analysis file. You might
+want to do this if you wanted to analyze multiple audit receivers
+over a period of a couple of days.
+:P.
+The possible values for Append to Analysis File are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Append the results of this analysis to what already exists.
+:PT.*NO
+:PD.
+Clear the existing analysis file before adding this data.
+:EPARML.
+:EHELP.
+.* Help for parameter CLRANZ
+:HELP NAME='CLRANZ'.Clear Analysis File (CLRANZ) - Help
+:XH3.Clear Analysis File (CLRANZ)
+:P.
+Specify whether or not you wish to clear the existing analysis file
+before running this analysis.
+:P.
+The possible values for Clear Analysis File are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Do not clear the existing analysis file.
+:PT.*YES
+:PD.
+Clear the existing analysis file before adding this data.
+:EPARML.
+:EHELP.
+.* Help for parameter ARCANZ
+:HELP NAME='ARCANZ'.Archive Analysis and Clear (ARCANZ) - Help
+:XH3.Archive Analysis and Clear (ARCANZ)
+:P.
+Specify whether or not you wish to archive the existing data to another
+file and then clear the existing file and run a new analysis. You might
+want to do this if you wanted to keep month-end analysis seperate from
+day to day analysis.
+:P.
+The possible values for Archive Analysis and Clear are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Do not archive the existing analysis file.
+:PT.*YES
+:PD.
+Archive the existing analysis data, clear the file and then analyze
+the specified audit journal/receiver.
+:EPARML.
+:EHELP.
+.* Help for parameter SBMHLD
+:HELP NAME='SBMHLD'.Submit on Hold (SBMHLD) - Help
+:XH3.Submit on Hold (SBMHLD)
+:P.
+Specify whether or not you wish to submit the anlysis job on hold in the
+job queue. You may want to do this to reschedule the analysis to a later
+time.
+:P.
+The possible Submit-on-Hold values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The journal analysis will be submitted on hold in the job queue.
+:PT.*NO
+:PD.
+The journal analysis will not be held on the job queue.
+:EPARML.
+:EHELP.
+:EPNLGRP.

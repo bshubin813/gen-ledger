@@ -1,0 +1,49 @@
+     A****************************************************************
+     A*    (JDE) File Design Aid                                     *
+     A*                                                              *
+     A*    Created By : STOLTZFUS                                    *
+     A*    Date       : 10/28/92                                     *
+     A*    Time       : 140516                                       *
+     A*                                                              *
+     A*    File       : Software Inventory File
+     A****************************************************************
+     A                                      UNIQUE
+     A          R I9801
+     A                                      TEXT('Software Inventory File  +
+     A                                                               ')
+     A            SIMID     R               REFFLD(MID        F98FRFM          )
+     A                                      CCSID(65535)
+     A            SIMD      R               REFFLD(MD         F98FRFM          )
+     A                                      CCSID(00037)
+     A            SISY      R               REFFLD(SY         F98FRFS          )
+     A                                      CCSID(65535)
+     A            SISYR     R               REFFLD(SYR        F98FRFS          )
+     A                                      CCSID(65535)
+     A            SIFUNC    R               REFFLD(FUNC       F98FRFF          )
+     A                                      CCSID(65535)
+     A            SIFUNU    R               REFFLD(FUNU       F98FRFF          )
+     A                                      CCSID(65535)
+     A            SIOMIT    R               REFFLD(OMIT       F98FRFO          )
+     A                                      CCSID(65535)
+     A            SIBASE    R               REFFLD(BASE       F98FRFB          )
+     A                                      CCSID(65535)
+     A            SIVN      R               REFFLD(VN         F98FRFV          )
+     A                                      CCSID(65535)
+     A            SILFMT    R               REFFLD(LFMT       F98FRFL          )
+     A                                      CCSID(65535)
+     A            SICLOQ    R               REFFLD(CLOQ       F98FRFC          )
+     A                                      CCSID(65535)
+     A            SICPYD    R               REFFLD(CPYD       F98FRFC          )
+     A                                      CCSID(65535)
+     A            SIOPDF    R               REFFLD(OPDF       F98FRFO          )
+     A                                      CCSID(65535)
+     A            SICLDF    R               REFFLD(CLDF       F98FRFC          )
+     A                                      CCSID(65535)
+     A            SIPFX     R               REFFLD(PFX        F98FRFP          )
+     A                                      CCSID(65535)
+     A            SIGENL    R               REFFLD(GENL       F98FRFG          )
+     A            SIMODL    R               REFFLD(MODL       F98FRFM          )
+     A                                      CCSID(65535)
+     A            SIACVG    R               REFFLD(ACVG       F98FRFA          )
+     A                                      CCSID(65535)
+     A          K SIMID

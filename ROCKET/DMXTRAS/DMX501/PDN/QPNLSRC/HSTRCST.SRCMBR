@@ -1,0 +1,225 @@
+.* ============================================================ *
+.* Object:    HSTRCST         *PNLGRP                           *
+.*            Help text for the HSTRCST command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20040519 FK  Initial delivery                                *
+.* 20040920 FK  Delay before starting groups                    *
+.* 20050309 FK  Rejoin replaced by DMSTRNODE if decoupled       *
+.* 20080212 FK  Allow wait until TCP/IP active                  *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HSTRCST'.Start iCluster processes - Help
+:P.
+The HSTRCST (Start iCluster processes) can be used from a job scheduler
+or the IPL startup program to start the iCluster node and groups that have
+been defined for autostart.
+:P.
+The following actions are taken when run:
+:OL.
+:LI.Wait for TCP/IP to become active (optional)
+:LI.Start XDMCLUSTER subsystem if not started yet
+:LI.If HSTRCST is run interactively, submit to batch, user DMCLUSTER
+:LI.Start the current node, if not already active; DMREJOIN is used if
+iCluster is coupled to OS/400 cluster services, DMSTRNODE is used in decoupled
+mode
+:LI.If current node is master node, try to start all other nodes
+:LI.If current node started, start autostart groups ("*A" in description)
+:EOL.
+:P.
+A node (including the current node) will not be started if its current
+or previous status is:
+:UL.
+:LI.*FAILED
+:LI.*RMV_PEND
+:LI.*PARTITION
+:LI.*INACT_PND
+:EUL.
+:P.
+The job waits a maximum amount of time, as specified in the MAXWAITNOD
+parameter, until the current node is active. If the current node has not
+become active by that time, no groups will be started.
+:P.
+:NT.If no nodes are active in the cluster, rejoining the node may only
+work for the master node.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter STRGRP
+:HELP NAME='HSTRCST/STRGRP'.Start groups/resil. apps - Help
+:XH3.Start groups/resil. apps (STRGRP)
+:P.
+Determines whether groups and/or resilient applications will be started
+automatically. Groups and/or resilient applications which have "*A" somewhere
+in their description are viable for automatic start.
+:P.
+A group is not automatically started if:
+:UL.
+:LI.Its current status is *ACTIVE (this does not necessarily mean that the
+replication is also active)
+:LI.Either its primary node or its backup node is not active
+:LI.The primary node as reflected in the iCluster metadata does not match the
+CRG's primary node (*CRG object)
+:EUL.
+:P.
+The possible start-groups/resil.-apps values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Groups or resilient applications which have "*A" in their description are
+started when its primary- and backup node are active.
+:PT.*NO
+:PD.
+No groups or resilient applications will be started automatically.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STRAPY
+:HELP NAME='HSTRCST/STRAPY'.Start replication apply jobs - Help
+:XH3.Start replication apply jobs (STRAPY)
+:P.
+Indicates whether the apply process for the replication groups will be
+started on the backup node when mirroring begins.
+:P.
+The possible start-replication-apply-jobs values are:
+:P.
+:PARML.
+:PT.:PK def.*NOCHG:EPK.
+:PD.
+Indicates that the last operational status of the apply jobs on the backup
+node remains in effect.
+:PT.*YES
+:PD.
+Indicates that all replication groups' apply processes on the backup node
+will be started.
+:PT.*NO
+:PD.
+The replication groups' apply processes will not be started.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STSMSGQ
+:HELP NAME='HSTRCST/STSMSGQ'.Status/Alert message queue - Help
+:XH3.Status/Alert message queue (STSMSGQ)
+:P.
+Specify the name of the message queue to which status- and alert messages
+are sent.
+:P.
+:PARML.
+:PT.:PK def.*CURRENT:EPK.
+:PD.
+Messages are sent to the user who issued the command.
+:PT.QSYSOPR
+:PD.
+Messages are sent to the system operator message queue.
+:PT.*NONE
+:PD.
+No status and/or alert messages are sent.
+:PT.message-queue-name
+:PD.
+Specify the name and library of the message queue that is to
+receive the messages.
+:EPARML.
+:EHELP.
+
+.* Help for parameter NBRATM
+:HELP NAME='HSTRCST/NBRATM'.Number of attempts to rejoin - Help
+:XH3.Number of attempts to rejoin (NBRATM)
+:P.
+Specifies the number of attempts that will be made to rejoin the current
+node to an active cluster (DM_CLUSTER). This is the parameter that will be
+used for the DMREJOIN command.
+:P.
+:PARML.
+:PT.:PK def.1:EPK.
+:PD.
+One attempt will be made to rejoin the current node to an active cluster.
+:PT.Number of attempts
+:PD.
+Specify the number of attempts to rejoin to an active cluster.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MAXWAITNOD
+:HELP NAME='HSTRCST/MAXWAITNOD'.Max. wait until node active - Help
+:XH3.Max. wait until node active (MAXWAITNOD)
+:P.
+Specifies the maximum amount of time (in minutes) that the startup program
+waits for activity of the current node. Also, if the current node is the
+master node and attempts to start all other nodes in the cluster, this is
+the maximum amount of time waited until no nodes have status *ACT_PEND anymore.
+:P.
+:PARML.
+:PT.:PK def.10:EPK.
+:PD.
+The startup program waits a maximum of 10 minutes until the current node
+is started. If the current node is the master node and attempts to start any
+other node in the cluster, a maximum of 10 minutes is waited until no nodes
+have status *ACT_PEND anymore.
+:PT.Number of minutes
+:PD.
+Specify the number of minutes that must be waited until the current node
+(and optionally other nodes) is active.
+:EPARML.
+:EHELP.
+
+.* Help for parameter DLYSTRGRP
+:HELP NAME='HSTRCST/DLYSTRGRP'.Delay before starting groups - Help
+:XH3.Delay before starting groups (DLYSTRGRP)
+:P.
+Specify the time (seconds) that the startup program should wait after
+starting the nodes and before starting the groups that have been marked
+for autostart. This time may be necessary to let the definition manager
+come up after starting the node.
+:P.
+:PARML.
+:PT.:PK def.30:EPK.
+:PD.
+The startup program waits 30 seconds before starting the groups.
+:PT.Number of seconds
+:PD.
+Specify the number of seconds that must be waited until the groups are
+started.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MAXWAITTCP
+:HELP NAME='HSTRCST/MAXWAITTCP'.Max. wait until TCP/IP active - Help
+:XH3.Max. wait until TCP/IP active (MAXWAITTCP)
+:P.
+Specifies the maximum amount of time (in minutes) that program waits until
+TCP/IP is active. This is sometimes needed when HSTRCST is built into the
+startup program of the server. TCP/IP may not be fully active when the startup
+program becomes active. To avoid iCluster not starting up, it will wait
+maximally the specified number of minutes before starting the XDMCLUSTER
+subsystem and subsequently the node and groups.
+:P.
+:PARML.
+:PT.:PK def.10:EPK.
+:PD.
+The startup program waits a maximum of 10 minutes until TCP/IP has become
+active. If TCP/IP is not active, the program waits for 15 seconds until the
+next attempt
+:PT.*NONE
+:PD.
+The program does not wait for TCP/IP to become active, nor does it check
+for its activity.
+:PT.Number of minutes
+:PD.
+Specify the number of minutes that must be waited until TCP/IP has become
+active. If TCP/IP is not active, the program waits for 15 seconds until the
+next attempt
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

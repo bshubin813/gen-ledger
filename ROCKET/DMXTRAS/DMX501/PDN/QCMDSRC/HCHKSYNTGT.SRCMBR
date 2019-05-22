@@ -1,0 +1,109 @@
+/* ================================================================= */
+/* Object:         HCHKSYNTGT      *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HCHKSYNTGT) HLPID(*CMD)*/
+/*                                                                   */
+/* Synopsis:                                                         */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000227 FK  Initial delivery                                     */
+/* 20001013 FK  Allow group selection and suspend of apply job       */
+/* 20001203 FK  Compare change dates against allowed replication lag */
+/*              Authorities are checked optionally                   */
+/* 20010404 FK  Remove replication lag check, not possible           */
+/*              Allow for output file                                */
+/* 20010514 FK  Allow for send delay                                 */
+/* 20011221 FK  Allow setting authorities after finished             */
+/* 20020523 FK  Check for IFS                                        */
+/* 20021111 FK  Ignore interval of time for differences              */
+/* 20030428 FK  Enable for iCluster                                  */
+/* 20030506 FK  Clarify use of TARGET/ICGROUP parameters             */
+/*              Change TGTNAM/GRPNAM parms to TARGET/GROUP           */
+/*              Change position of parameters                        */
+/* 20030710 FK  Change TARGET/GROUP back to TGTNAM/GRPNAM            */
+/* 20050210 FK  Add BCKNOD parameter                                 */
+/*              Control checking of member attributes                */
+/* 20050401 FK  OUTFILE(*YES) is new default                         */
+/* 20050422 FK  Show more parameters after initial enter             */
+/* 20060206 FK  Selective group sync check                           */
+/* 20070125 FK  Default target is now *ICLUSTER                      */
+/* 20070919 FK  Allow to send sync check reports by e-mail           */
+/* 20111217 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Run iCluster sync. check')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ICGROUP) TYPE(*GENERIC) LEN(10) +
+                          SPCVAL((*ALL *N) (*MRKSTR *N)) MIN(1) +
+                          PROMPT('Group or resilient application')
+             PARM       KWD(SAVFLIB) TYPE(*NAME) DFT(*SNDOBJ) +
+                          SPCVAL((*SNDOBJ)) PROMPT('Save file library')
+             PARM       KWD(OUTFILE) TYPE(*CHAR) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Create query output files')
+             PARM       KWD(SETAUT) TYPE(*CHAR) RSTD(*YES) DFT(*NO) +
+                          SPCVAL((*YES) (*NO)) PROMPT('Adjust +
+                          authorities on target')
+             PARM       KWD(IGNITV) TYPE(*DEC) LEN(5) DFT(30) +
+                          SPCVAL((*NONE 0)) CHOICE('*NONE, Number +
+                          of minutes') PROMPT('Ignore differences +
+                          within')
+             PARM       KWD(BCKNOD) TYPE(*NAME) LEN(8) DFT(*FIRST) +
+                          SPCVAL((*FIRST)) PMTCTL(ICALLGRP) +
+                          PROMPT('Backup node')
+             PARM       KWD(EMLRPT) TYPE(*CHAR) LEN(6) RSTD(*YES) +
+                          DFT(*ERROR) SPCVAL((*ERROR) (*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Send reports by +
+                          e-mail')
+             PARM       KWD(SYNID) TYPE(*NAME) LEN(5) DFT(*TGT) +
+                          SPCVAL((*TGT)) PMTCTL(*PMTRQS) +
+                          PROMPT('Sync. check identifier')
+             PARM       KWD(CHKMBR) TYPE(*CHAR) RSTD(*YES) DFT(*YES) +
+                          SPCVAL((*YES) (*NO)) PMTCTL(*PMTRQS) +
+                          PROMPT('Check members')
+             PARM       KWD(CHKIFS) TYPE(*CHAR) RSTD(*YES) DFT(*YES) +
+                          SPCVAL((*YES) (*NO)) PMTCTL(*PMTRQS) +
+                          PROMPT('Check IFS object specifiers')
+             PARM       KWD(CHKAUT) TYPE(*CHAR) RSTD(*YES) DFT(*YES) +
+                          SPCVAL((*YES) (*NO)) PMTCTL(*PMTRQS) +
+                          PROMPT('Check authorities')
+             PARM       KWD(CHKLIB) TYPE(*CHAR) RSTD(*YES) DFT(*YES) +
+                          SPCVAL((*YES) (*NO)) PMTCTL(*PMTRQS) +
+                          PROMPT('Check libraries')
+             PARM       KWD(SUSAPY) TYPE(*CHAR) RSTD(*YES) DFT(*NO) +
+                          SPCVAL((*YES) (*NO)) PMTCTL(*PMTRQS) +
+                          PROMPT('Suspend apply job')
+             PARM       KWD(SNDDLY) TYPE(*DEC) LEN(3) DFT(*NONE) +
+                          SPCVAL((*NONE 0)) PMTCTL(*PMTRQS) +
+                          PROMPT('Delay minutes before sending')
+             PARM       KWD(MRKSTR) TYPE(*CHAR) LEN(4) DFT('*S') +
+                          PMTCTL(*PMTRQS) PROMPT('Group selection +
+                          string')
+             PARM       KWD(TGTRLS) TYPE(*CHAR) LEN(8) DFT(*PRV) +
+                          SPCVAL((*CURRENT) (*PRV)) +
+                          CHOICE('*CURRENT, *PRV, VxRxMx') +
+                          PMTCTL(*PMTRQS) PROMPT('Target release')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&ICGROUP *EQ '*MRKSTR') PARM((&MRKSTR +
+                          *NE ' ')) MSGID(CST0015)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ OUTF:       PMTCTL     CTL(OUTFILE) COND((*EQ '*YES'))
+ ICALLGRP:   PMTCTL     CTL(ICGROUP) COND((*EQ '*ALL'))

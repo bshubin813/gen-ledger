@@ -1,0 +1,414 @@
+     A*%%***********************************************************************
+     A*%%TS  RD  20060425  222409  FKETELAARS  REL-V5R2M0  5722-WDS
+     A*%%FI+10661100000000000000000000110000000000000000000000000000
+     A*%%FI       0000000000000000000000000000000000000000000000000
+     A*%%***********************************************************************
+      *CP: CPI(16.7) PAGESIZE(*N 198 *N)
+      * ============================================================ *
+      * Object:    HCMPCKS1P       *FILE PRTF                        *
+      *            Printer file to report checksum differences       *
+      *                                                              *
+      * Create remarks: CRTPRTF PAGESIZE(66 198) CPI(16.7)           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050503 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R @CKSHDR
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                      SKIPB(001)
+     A                                    51
+     A                                      'Checksum differences'
+     A                                      SPACEB(001)
+     A                                   158
+     A                                      DATE(*SYS *YY)
+     A                                      EDTCDE(Y)
+     A                                   169
+     A                                      TIME
+     A                                      EDTWRD('  :  :  ')
+     A                                      SPACEA(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @CKSH1P
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'HRTVCKS file 1  . . . :'
+     A                                      SPACEB(002)
+     A            OUTF01H1      21A  O    +3
+     A            OUTFSYS01      8A  O    +1
+     A                                     1
+     A                                      'HRTVCKS file 2  . . . :'
+     A                                      SPACEB(001)
+     A            OUTF02H1      21A  O    +3
+     A            OUTFSYS02      8A  O    +1
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @CKSNTVH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                      SKIPB(001)
+     A                                     1
+     A                                      'Native objects'
+     A                                      SPACEB(001)
+     A                                    62
+     A                                      'Str RRN'
+     A                                      SPACEB(001)
+     A                                    72
+     A                                      'End RRN'
+     A                                    82
+     A                                      'Checksum (hex)'
+     A                                   115
+     A                                      'Date-Time'
+     A                                   +11
+     A                                      'Record length'
+     A                                     1
+     A                                      'Library'
+     A                                      SPACEB(001)
+     A                                    +4
+     A                                      'File'
+     A                                    +7
+     A                                      'Member'
+     A                                    34
+     A                                      'Type'
+     A                                    40
+     A                                      'Block #'
+     A                                    50
+     A                                      'Match?'
+     A            STRSYS01  R        O    62
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            ENDSYS01  R        O    72
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            CKSSYS01  R    8   O    82
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            DTSSYS01  R        O   115
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            RLNSYS01  R        O   135
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            STRSYS02  R        O    62
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A                                      SPACEB(001)
+     A            ENDSYS02  R        O    72
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            CKSSYS02  R        O    82
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            DTSSYS02  R        O   115
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            RLNSYS02  R        O   135
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '-----'
+     A                                    +1
+     A                                      '---------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +2
+     A                                      '---------'
+     A                                    +1
+     A                                      '---------'
+     A                                    +1
+     A                                      '--------------------------------'
+     A                                   115
+     A                                      '-------------------'
+     A                                    +1
+     A                                      '-------------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @CKSNTVD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            CKLIB     R        O     1
+     A                                      REFFLD(RTVCKS@/CKLIB *LIBL/HRTVCKS)
+     A                                      SPACEB(001)
+     A            CKFILE    R        O    +1
+     A                                      REFFLD(RTVCKS@/CKFILE *LIBL/HRTVCKS)
+     A            CKMBR     R        O    +1
+     A                                      REFFLD(RTVCKS@/CKMBR *LIBL/HRTVCKS)
+     A            CKCKSTYP  R        O    34
+     A                                      REFFLD(RTVCKS@/CKCKSTYP *LIBL/HRTVC-
+     A                                      KS)
+     A            MATCH         11   O    50
+     A            RCDSTR01  R        O    62
+     A                                      REFFLD(RTVCKS@/CKRCDSTR *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A            RCDEND01  R        O    72
+     A                                      REFFLD(RTVCKS@/CKRCDSTR *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A            CHKSUM01  R        O    82
+     A                                      REFFLD(RTVCKS@/CKCHKSUM *LIBL/HRTVC-
+     A                                      KS)
+     A            DTS01         19   O   115
+     A            RCDLEN01  R        O    +9
+     A                                      REFFLD(RTVCKS@/CKRCDLEN *LIBL/HRTVC-
+     A                                      KS)
+     A N21        CKBLKNUM  R        O    40
+     A                                      REFFLD(RTVCKS@/CKBLKNUM *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A  21                                40
+     A                                      '*FILE'
+     A  22        CKTGTLIB  R        O     1
+     A                                      REFFLD(RTVCKS@/CKTGTLIB *LIBL/HRTVC-
+     A                                      KS)
+     A                                      SPACEB(001)
+     A  22        FILE02    R        O    +1
+     A                                      REFFLD(RTVCKS@/CKFILE *LIBL/HRTVCKS)
+     A  22        MBR02     R        O    +1
+     A                                      REFFLD(RTVCKS@/CKMBR *LIBL/HRTVCKS)
+     A            RCDSTR02  R        O    62
+     A                                      REFFLD(RTVCKS@/CKRCDSTR *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A N22                                  SPACEB(001)
+     A            RCDEND02  R        O    72
+     A                                      REFFLD(RTVCKS@/CKRCDSTR *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A            CHKSUM02  R        O    82
+     A                                      REFFLD(RTVCKS@/CKCHKSUM *LIBL/HRTVC-
+     A                                      KS)
+     A            DTS02         19   O   115
+     A            RCDLEN02  R        O    +9
+     A                                      REFFLD(RTVCKS@/CKRCDLEN *LIBL/HRTVC-
+     A                                      KS)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @CKSNTVF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of out-of-sync blocks . . .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRNTV         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @CKSIFSH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                      SKIPB(001)
+     A                                     1
+     A                                      'IFS objects'
+     A                                      SPACEB(001)
+     A                                    70
+     A                                      'Str RRN'
+     A                                      SPACEB(001)
+     A                                    80
+     A                                      'End RRN'
+     A                                    90
+     A                                      'Checksum (hex)'
+     A                                   123
+     A                                      'Date-Time'
+     A                                   143
+     A                                      'Record length'
+     A                                     1
+     A                                      'IFS file'
+     A                                      SPACEB(001)
+     A                                    42
+     A                                      'Type'
+     A                                    48
+     A                                      'Block #'
+     A                                    58
+     A                                      'Match?'
+     A            STRSYS01  R        O    70
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            ENDSYS01  R        O    80
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            CKSSYS01  R    8   O    90
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            DTSSYS01  R        O   123
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            RLNSYS01  R        O   143
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            STRSYS02  R        O    70
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A                                      SPACEB(001)
+     A            ENDSYS02  R        O    80
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            CKSSYS02  R        O    90
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            DTSSYS02  R        O   123
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A            RLNSYS02  R        O   143
+     A                                      REFFLD(RTVCKS@/CKSYSNAM *LIBL/HRTVC-
+     A                                      KS)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------'
+     A                                      SPACEB(001)
+     A                                    +1
+     A                                      '-----'
+     A                                    +1
+     A                                      '---------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +2
+     A                                      '---------'
+     A                                    +1
+     A                                      '---------'
+     A                                    +1
+     A                                      '--------------------------------'
+     A                                   123
+     A                                      '-------------------'
+     A                                   143
+     A                                      '-------------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @CKSIFSD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            IFSFILE       40   O     1
+     A                                      SPACEB(001)
+     A            CKCKSTYP  R        O    42
+     A                                      REFFLD(RTVCKS@/CKCKSTYP *LIBL/HRTVC-
+     A                                      KS)
+     A N21        CKBLKNUM  R        O    48
+     A                                      REFFLD(RTVCKS@/CKBLKNUM *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A  21                                48
+     A                                      '*FILE'
+     A            MATCH         11   O    58
+     A            RCDSTR01  R        O    70
+     A                                      REFFLD(RTVCKS@/CKRCDSTR *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A            RCDEND01  R        O    80
+     A                                      REFFLD(RTVCKS@/CKRCDSTR *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A            CHKSUM01  R        O    90
+     A                                      REFFLD(RTVCKS@/CKCHKSUM *LIBL/HRTVC-
+     A                                      KS)
+     A            DTS01         19   O   123
+     A            RCDLEN01  R        O   151
+     A                                      REFFLD(RTVCKS@/CKRCDLEN *LIBL/HRTVC-
+     A                                      KS)
+     A            RCDSTR02  R        O    70
+     A                                      REFFLD(RTVCKS@/CKRCDSTR *LIBL/HRTVC-
+     A                                      KS)
+     A                                      SPACEB(001)
+     A                                      EDTCDE(3)
+     A            RCDEND02  R        O    80
+     A                                      REFFLD(RTVCKS@/CKRCDSTR *LIBL/HRTVC-
+     A                                      KS)
+     A                                      EDTCDE(3)
+     A            CHKSUM02  R        O    90
+     A                                      REFFLD(RTVCKS@/CKCHKSUM *LIBL/HRTVC-
+     A                                      KS)
+     A            DTS02         19   O   123
+     A            RCDLEN02  R        O   151
+     A                                      REFFLD(RTVCKS@/CKRCDLEN *LIBL/HRTVC-
+     A                                      KS)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @CKSIFSF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of out-of-sync IFS blocks .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRIFS         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%CP+999CRTPRTF
+     A*%%CP+    CPI(16.7)
+     A*%%CP+    MAXRCDS(*NOMAX)
+     A*%%CP+    FILE(DMXTRASOBJ/HCMPCKS1P)
+     A*%%CP+    DEVTYPE(*SCS)
+     A*%%CP     PAGESIZE(*N       198      *N     )
+     A*%%***********************************************************************

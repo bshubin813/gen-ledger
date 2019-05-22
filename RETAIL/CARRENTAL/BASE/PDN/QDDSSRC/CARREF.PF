@@ -1,0 +1,40 @@
+     A*****************************************************************
+     A*¹COPYRIGHT·1993, 1997 BY¹SEAGULL BUSINESS SOFTWARE·B.V.        *
+     A*¹                        LAAN DER VERENIGDE NATIES 60        · *
+     A*¹                        3314 DA DORDRECHT·                    *
+     A*¹                        THE NETHERLANDS·(TEL:+ 31 78 6322800) *
+     A*****************************************************************
+     A*¹USED FOR·.........:¹CAR RENTAL·DEMO                           *
+     A*¹NAME·.............:¹CARREF·REFERENCES                         *
+     A*****************************************************************
+     A          R REFREC
+     A            ADRESS        30A         TEXT('CONTRACTERS ADDRESS')
+     A            AGE            2S 0       TEXT('CONTRACTORS AGE')
+     A            AGGT23         1A         TEXT('CONTRACTOR ELDER THAN 23 ?')
+     A            BRAND          1S 0       TEXT('BRAND CODE, 1=OPEL, 2=FORD, 3-
+     A                                      =MERCEDES')
+     A            CARDNR        16S 0       TEXT('CARD NUMBER TO PAY')
+     A            CASH           1A         TEXT('CONTRACTOR CASH PAYMENT ?')
+     A            CHKDMG         1A         TEXT('CHECKED FOR DAMAGE ?')
+     A            CONTNR         7S 0       TEXT('CONTRACT NUMBER')
+     A            CRCHK          1A         TEXT('CONTRACTOR CREDIT CHECK ?')
+     A            DAMFND         1A         TEXT('DAMAGE FOUND ?')
+     A            DAMHIS         1A         TEXT('CAR DAMAGE HISTORY')
+     A            INITIA         5A         TEXT('CONTRACTORS INITIALS')
+     A            LPLATE         8A         TEXT('LICENSE PLATE')
+     A            MILAGE         6S 0       TEXT('MILAGE')
+     A            MDLDES        12A         TEXT('MODEL DESCRIPTION')
+     A            MODEL          1S 0       TEXT('MODEL CODE')
+     A            MONTH          2S 0       TEXT('MONTH OF STATISTICS')
+     A            NAME          30A         TEXT('CONTRACTORS NAME')
+     A            PAID           1S 0       TEXT('CODE HOW PAID')
+     A            PLACE         17A         TEXT('CONTRACTORS HOME TOWN')
+     A            PRCCAT         1A         TEXT('PRICE CATEGORY A=UPTO 30$, B=-
+     A                                      30-50$, C=ABOVE 50$')
+     A            RESIDE         1S 0       TEXT('CONTRACTOR RESIDENT CODE')
+     A            RETNNR         7S 0       TEXT('RETURN NUMBER')
+     A            TARIF          5S 2       TEXT('TARIF PER DAY OF RENTED CAR')
+     A            TNKFIL         1A         TEXT('TANK FILLED ?')
+     A            TOTDAM         4S 0       TEXT('TOTAL DAMAGES')
+     A            TOTMIL         8S 0       TEXT('TOTAL MILAGE')
+     A            YEAR           4S 0       TEXT('YEAR OF STATISTIC')

@@ -1,0 +1,146 @@
+.* ============================================================ *
+.* Object:    HRTVSTS         *PNLGRP                           *
+.*            Help text for the HRTVSTS command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20011019 FK  Initial delivery                                *
+.* 20030506 FK  Enable for iCluster                             *
+.* 20111217 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRTVSTS'.Retrieve process status - Help
+:P.
+The HRTVSTS (Retrieve process status) command allows you to
+check if certain iCluster processes are active or not. The
+command checks several files in the metadata and the current
+job status of the specified group to determine if the specified
+replication process is active.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ICGROUP
+:HELP NAME='HRTVSTS/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the status must be retrieved.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ANY or *ALL
+:PD.
+If any of the iCluster groups or resilient applications is active, *ACTIVE is
+returned in the STATUS parameter.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the status
+must be retrieved.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PRCTYP
+:HELP NAME='HRTVSTS/PRCTYP'.Process type - Help
+:XH3.Process type (PRCTYP)
+:P.
+Specifies the process for which the status must be retrieved.
+:P.
+The possible process-type values are:
+:P.
+:PARML.
+:PT.:PK def.*ANY or *ALL:EPK.
+:PD.
+If any of the processes: send, receive, apply for the specified target and
+group is active, *ACTIVE is returned in the status. The *MON process is not
+included in activity checking.
+:PT.*SND
+:PD.
+Returns the activity status of the scrape job(s), i.e. send. These job only
+run on the source machine.
+:PT.*RCV
+:PD.
+Returns the activity status of the receive job(s). These jobs only run on
+the target machine.
+:PT.*MON
+:PD.
+Returns the activity status of the iCluster monitor job. This
+value is mainly for internal usage and should not be used.
+:PT.*APY
+:PD.
+Returns the activity status of the apply job(s). These jobs only run on
+the target machine.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JOBNAM
+:HELP NAME='HRTVSTS/JOBNAM'.Active job name - Help
+:XH3.Active job name (JOBNAM)
+:P.
+Return value for the active job name that represents the system job
+for the process specified. This parameter is only returned if an explicit
+target, group and process type has been specified.
+:EHELP.
+
+.* Help for parameter JOBUSR
+:HELP NAME='HRTVSTS/JOBUSR'.Active job user - Help
+:XH3.Active job user (JOBUSR)
+:P.
+Return value for the active job user that represents the system job
+for the process specified. This parameter is only returned if an explicit
+target, group and process type has been specified.
+:EHELP.
+
+.* Help for parameter JOBNBR
+:HELP NAME='HRTVSTS/JOBNBR'.Active job number - Help
+:XH3.Active job number (JOBNBR)
+:P.
+Return value for the active job number that represents the system job
+for the process specified. This parameter is only returned if an explicit
+target, group and process type has been specified.
+:EHELP.
+
+.* Help for parameter STATUS
+:HELP NAME='HRTVSTS/STATUS'.Activity status - Help
+:XH3.Activity status (STATUS)
+:P.
+Returns the status of the replication process for the target/group.
+:P.
+The possible activity-status values are:
+:P.
+:PARML.
+:PT.*ACTIVE
+:PD.
+The job for the specified target, group and process type is active. If
+target, group, process type *ANY is specified, any of the jobs is active
+but not necessarily all.
+:PT.*INACTIVE
+:PD.
+The job for the specified target, group and process type is not active. If
+target, group, process type *ANY is specified, none of the jobs is active.
+:PT.*ERROR
+:PD.
+The target or group that was specified does not exist in the iCluster
+configuration or its status could not be retrieved. Return code (RTNCDE)
+indicates the message ID of the error that occurred.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RTNCDE
+:HELP NAME='HRTVSTS/RTNCDE'.Return code - Help
+:XH3.Return code (RTNCDE)
+:P.
+Indicates the type of error that occurred in case the status could not be
+retrieved. If blank, no error occurred. Otherwise, the message ID of the
+HAUMSG message file is returned.
+:EHELP.
+
+:EPNLGRP.

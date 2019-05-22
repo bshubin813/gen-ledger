@@ -1,0 +1,24 @@
+      * ============================================================ *
+      * Object:    HSOSJRNJ        *FILE PF                          *
+      *            Temporary file that holds the journals by target  *
+      *            and group. Ordered by Journal and library.        *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000402 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R HSOSJRJ@                  PFILE(HSOSJRN)
+     A            SOTGTN
+     A            SOGRPN
+     A            SOJRNN
+     A            SOJRNL
+      *
+     A          K SOJRNN
+     A          K SOJRNL
+     A          K SOTGTN
+     A          K SOGRPN

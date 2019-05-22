@@ -1,0 +1,68 @@
+/* ================================================================= */
+/* Object:         HMONHA          *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HMONHA) HLPID(*CMD)    */
+/*                                                                   */
+/* Synopsis:       Basis for a variety of monitor functions:         */
+/*                 - Monitor event log for events severity >= 30     */
+/*                 - Monitor suspended objects                       */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20041216 FK  Initial delivery (copy from HMONEVL)                 */
+/* 20111220 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Monitor iCluster')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(CTLSYS) TYPE(*CNAME) SPCVAL((*CURRENT)) +
+                          MIN(1) PROMPT('Controlling system name')
+             PARM       KWD(CTLHOST) TYPE(*CHAR) LEN(100) +
+                          DFT(*CTLSYS) SPCVAL((*CTLSYS)) +
+                          PROMPT('Controlling system host name')
+             PARM       KWD(EVTLOG) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Monitor event log')
+             PARM       KWD(SUSOBJ) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Monitor suspended +
+                          objects')
+             PARM       KWD(GRPSTS) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Monitor group +
+                          status')
+             PARM       KWD(CLNEVTLOG) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Clean up event logs')
+             PARM       KWD(CHKITV) TYPE(*DEC) LEN(3 0) DFT(5) +
+                          CHOICE('Number of minutes') +
+                          PMTCTL(*PMTRQS) PROMPT('Check interval')
+             PARM       KWD(SUSTIM) TYPE(*DEC) LEN(5 0) DFT(15) +
+                          CHOICE('Number of minutes') +
+                          PMTCTL(*PMTRQS) PROMPT('Object suspended +
+                          for')
+             PARM       KWD(GRPTIM) TYPE(*DEC) LEN(5 0) DFT(15) +
+                          CHOICE('Number of minutes') +
+                          PMTCTL(*PMTRQS) PROMPT('Group inactive for')
+             PARM       KWD(PORT) TYPE(*CHAR) LEN(30) DFT('hmonha') +
+                          PMTCTL(*PMTRQS) PROMPT('Service name for +
+                          HMONHA')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

@@ -1,0 +1,50 @@
+/* ================================================================= */
+/* Object:         HMONJOB         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(HMONJOB) HLPID(*CMD)                */
+/*                                                                   */
+/* Synopsis:       Monitors for active jobs through the job notifi-  */
+/*                 cation exit point.                                */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20050707 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Monitor active jobs')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(FILE) TYPE(QUALFILE) PROMPT('Job status +
+                          output file')
+             PARM       KWD(DTAQ) TYPE(QUALDTAQ) PROMPT('Job +
+                          notification data queue')
+             PARM       KWD(PRGAGE) TYPE(*DEC) LEN(5) DFT(7) +
+                          SPCVAL((*NONE 0)) CHOICE('Days, *NONE') +
+                          PROMPT('Purge ended jobs older than')
+             PARM       KWD(SYSDTAQ) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Monitor system data queue')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME) DFT(HMONJOB) SPCVAL((HMONJOB))
+             QUAL       TYPE(*NAME) DFT(DMSYSOBJ) SPCVAL((DMSYSOBJ)) +
+                          PROMPT('Library')
+ QUALDTAQ:   QUAL       TYPE(*NAME) DFT(HMONJOB) SPCVAL((HMONJOB))
+             QUAL       TYPE(*NAME) DFT(DMSYSOBJ) SPCVAL((DMSYSOBJ)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

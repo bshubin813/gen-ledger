@@ -1,0 +1,59 @@
+.* ============================================================ *
+.* Object:    HDLTJRNDSP      *PNLGRP                           *
+.*            Help text for the HDLTJRNDSP command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20070516 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HDLTJRNDSP'.Display journal use in product - Help
+:P.
+The HDLTJRNDSP (Display journal use in product) command checks if
+the specified journal is used by
+iCluster and displays the oldest receiver still needed by the product in
+question and a few other attributes.
+:P.
+The command may be used to ascertain the usage of a journal by a
+product. Ensure that the product library of the specified
+product is in the library list.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter JRN
+:HELP NAME='HDLTJRNDSP/JRN'.Journal - Help
+:XH3.Journal (JRN)
+:P.
+Specifies the journal that must be checked against the HA/iCluster/TS
+configuration.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter PRD
+:HELP NAME='HDLTJRNDSP/PRD'.Product - Help
+:XH3.Product (PRD)
+:P.
+Enter the product that must be checked for use of the specified
+journal.
+:P.
+The possible product values are:
+:P.
+:PARML.
+:PT.*IC
+:PD.
+iCluster will be checked for usage of the specified journal. If the
+journal is scraped by any group or resilient application,
+it is considered that iCluster uses the journal.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

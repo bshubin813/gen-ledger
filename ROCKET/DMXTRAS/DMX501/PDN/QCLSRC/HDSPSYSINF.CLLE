@@ -1,0 +1,170 @@
+/*CP: DBGVIEW(*SOURCE)                                               */
+/* ================================================================= */
+/* Object:         HDSPSYSINF         *PGM CLP                       */
+/*                 Display system information required for licencing */
+/*                                                                   */
+/* Synopsis:       This program displays system information required */
+/*                 to generate a DM product licence.                 */
+/*                 The utilities date and version is also displayed  */
+/*                 The user may also specify a product to chech      */
+/*                 version and packm-id                              */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020508 RP  Initial delivery                                     */
+/* 20030122 FK  Use HRTVPRDLIB to retrieve product libraries         */
+/* 20030717 FK  Longer length for pack id                            */
+/* 20030904 FK  Longer length for DMXtras version                    */
+/* 20060102 FK  Split HA/iC/TS                                       */
+/*              Show iCluster node                                   */
+/*              iCluster 2.2 compatibility                           */
+/* 20070102 FK  Use Materialize Machine Attributes for system info   */
+/*              Use API to retrieve OS attributes                    */
+/* 20071110 FK  DMXtras version field too short                      */
+/* 20111217 FK  REMOVE HA                                            */
+/* ================================================================= */
+             PGM
+
+/*           Declare program variables                               */
+             DCL        VAR(&APIERR) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&ERROR) TYPE(*LGL) VALUE('0')
+
+             DCL        VAR(&RCV012C) TYPE(*CHAR) LEN(4096)
+             DCL        VAR(&RCV01E0) TYPE(*CHAR) LEN(100)
+             DCL        VAR(&RCV01F4) TYPE(*CHAR) LEN(400)
+
+             DCL        VAR(&OSPRDID) TYPE(*CHAR) LEN(7)
+             DCL        VAR(&OSVRM) TYPE(*CHAR) LEN(6)
+
+             DCL        VAR(&VER) TYPE(*CHAR) LEN(6)
+             DCL        VAR(&PACK) TYPE(*CHAR) LEN(4)
+
+             DCL        VAR(&MODEL) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&SRLNBR) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRLNBR@) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PRCGRP) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&PRCFEAT) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&INTFEAT) TYPE(*CHAR) LEN(4)
+
+             DCL        VAR(&LPARSRLNBR) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LPARNBR) TYPE(*CHAR) LEN(2)
+             DCL        VAR(&LPARNBR@) TYPE(*CHAR) LEN(2)
+             DCL        VAR(&LPARNBR#) TYPE(*DEC) LEN(2 0)
+             DCL        VAR(&LPARCUR) TYPE(*CHAR) LEN(2)
+             DCL        VAR(&LPARCUR@) TYPE(*CHAR) LEN(2)
+             DCL        VAR(&LPARCUR#) TYPE(*DEC) LEN(2 0)
+
+             DCL        VAR(&CUODMAX) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&CUODACT) TYPE(*CHAR) LEN(4)
+
+             DCL        VAR(&PRDR0100) TYPE(*CHAR) LEN(100)
+
+             DCLF       FILE(HDSPSYSINF)
+
+/*           Global monitor                                          */
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(ERROR))
+
+/* ----------------------------------------------------------------- */
+/*           Main line                                               */
+/* ----------------------------------------------------------------- */
+
+/*           Initialisation                                          */
+             RTVNETA    SYSNAME(&SYSNAME)
+
+/*           Get system info by materialize machine attributes API   */
+/*           Vital product data                                      */
+             CHGVAR     VAR(%BIN(&RCV012C 1 4)) VALUE(4096)
+             CALLPRC    PRC('_MATMATR1') PARM(&RCV012C X'012C')
+             MONMSG     MSGID(MCH0000)
+/*           Extract the vital product data                          */
+             CHGVAR     VAR(&MODEL) VALUE(%SST(&RCV012C 2513 4))
+             CHGVAR     VAR(&SRLNBR) VALUE(%SST(&RCV012C 2534 10))
+             CHGVAR     VAR(&PRCFEAT) VALUE(%SST(&RCV012C 2609 4))
+             CHGVAR     VAR(&INTFEAT) VALUE(%SST(&RCV012C 2613 4))
+             CHGVAR     VAR(&PRCGRP) VALUE(%SST(&RCV012C 2521 4))
+
+/*           Partitioning information                                */
+             CHGVAR     VAR(%BIN(&RCV01E0 1 4)) VALUE(100)
+             CALLPRC    PRC('_MATMATR1') PARM(&RCV01E0 X'01E0')
+             MONMSG     MSGID(MCH0000)
+/*           Extract the partitioning information                    */
+             CHGVAR     VAR(&LPARNBR@) VALUE(X'0000')
+             CHGVAR     VAR(%SST(&LPARNBR@ 2 1)) VALUE(%SST(&RCV01E0 +
+                          9 1))
+             CHGVAR     VAR(&LPARNBR#) VALUE(%BIN(&LPARNBR@))
+             MONMSG     MSGID(CPF0000 MCH0000)
+             CHGVAR     VAR(&LPARNBR) VALUE(&LPARNBR#)
+             CHGVAR     VAR(&LPARCUR@) VALUE(X'0000')
+             CHGVAR     VAR(%SST(&LPARCUR@ 2 1)) VALUE(%SST(&RCV01E0 +
+                          10 1))
+             CHGVAR     VAR(&LPARCUR#) VALUE(%BIN(&LPARCUR@))
+             MONMSG     MSGID(CPF0000 MCH0000)
+             CHGVAR     VAR(&LPARCUR) VALUE(&LPARCUR#)
+             CHGVAR     VAR(&LPARSRLNBR) VALUE(%SST(&RCV01E0 17 10))
+
+/*           On-demand processor information                         */
+             CHGVAR     VAR(%BIN(&RCV01F4 1 4)) VALUE(400)
+             CALLPRC    PRC('_MATMATR1') PARM(&RCV01F4 X'01F4')
+             MONMSG     MSGID(MCH0000)
+/*           Extract the CUOD information                            */
+             CHGVAR     VAR(&CUODMAX) VALUE(%SST(&RCV01F4 67 4))
+             CHGVAR     VAR(&CUODACT) VALUE(%SST(&RCV01F4 57 4))
+             IF         COND(&CUODMAX *EQ ' ') THEN(DO)
+              CHGVAR     VAR(&CUODMAX) VALUE('N/A')
+              CHGVAR     VAR(&CUODACT) VALUE('N/A')
+             ENDDO
+
+/*           Get operating system release                            */
+             CHGVAR     VAR(&APIERR) VALUE(X'00000000')
+             CALL       PGM(QSZRTVPR) PARM(&PRDR0100 X'00000064' +
+                          'PRDR0100' '*OPSYS *CUR  0000*CODE      ' +
+                          &APIERR)
+             CHGVAR     VAR(&OSPRDID) VALUE(%SST(&PRDR0100 13 7))
+             CHGVAR     VAR(&OSVRM) VALUE(%SST(&PRDR0100 20 6))
+             RTVSYSVAL  SYSVAL(QMODEL) RTNVAR(&MODEL)
+
+/*           Retrieve product libraries                              */
+             HRTVPRDLIB UTILLIB(&UTLLIB) ICPRODLIB(&ICLIB)
+
+/*           Retrieve DMXtras version & Pack                         */
+             RTVDTAARA  DTAARA(&UTLLIB/DMXVERSION (1 8)) +
+                          RTNVAR(&UTLDATE)
+             RTVDTAARA  DTAARA(&UTLLIB/DMXVERSION (9 25)) +
+                          RTNVAR(&UTLVER)
+
+             CHGVAR     VAR(&IN21) VALUE('0')
+
+             IF         COND(&ICLIB *NE '*NONE') THEN(DO)
+              CHGVAR     VAR(&IN21) VALUE('1')
+              RTVDTAARA  DTAARA(&ICLIB/HAPACKID (1 50)) RTNVAR(&ICVER)
+              HRTVNETA   SYSNAME(&NODE)
+             ENDDO
+
+ DISP:       SNDRCVF
+
+             IF         COND(&IN03 *OR &IN12) THEN(GOTO CMDLBL(EOP))
+
+             GOTO       CMDLBL(EOP)
+
+/* ----------------------------------------------------------------- */
+/*           Error handling                                          */
+/* ----------------------------------------------------------------- */
+
+/*           Ensure that the program does not loop when error        */
+ ERROR:      IF         COND(&ERROR) THEN(GOTO CMDLBL(EOP))
+             CHGVAR     VAR(&ERROR) VALUE('1')
+
+/*           Move all *DIAG messages to the previous queue           */
+             CHGVAR     VAR(&APIERR) VALUE(X'00000000')
+             CALL       PGM(QMHMOVPM) PARM(' ' '*DIAG' X'00000001' +
+                          '*' X'00000001' &APIERR)
+
+/*           Resend last escape message                              */
+             CHGVAR     VAR(&APIERR) VALUE(X'00000000')
+             CALL       PGM(QMHRSNEM) PARM(' ' &APIERR)
+
+ EOP:        ENDPGM

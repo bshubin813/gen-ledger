@@ -1,0 +1,34 @@
+      * ============================================================ *
+      * Object:    HUEVNL0         *FILE LF                          *
+      *            Logical file over OMEVNTLOGP by MSGTYPE|DATETIME  *
+      *            MITIME                                            *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000712 FK  Initial delivery                                *
+      * 20040302 FK  Include machine name                            *
+      * ============================================================ *
+     A          R HUEVNL0@                  PFILE(OMEVNTLOGP)
+     A            MSGTYPE
+     A            MACHNAME
+     A            SYSNAME
+     A            GRPNAME
+     A            OBJNAME
+     A            OBJLIB
+     A            OBJTYPE
+     A            OBJATTR
+     A            MSGID
+     A            DATETIME
+     A            OFFSETHRS
+     A            OFFSETMIN
+     A            MITIME
+     A            JOBLOGID
+     A            EVMSGTXT     500A  I      VARLEN SST(MSGTEXT 1 500)
+      *
+     A          K MSGTYPE
+     A          K DATETIME
+     A          K MITIME

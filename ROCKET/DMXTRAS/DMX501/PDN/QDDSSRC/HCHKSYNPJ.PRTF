@@ -1,0 +1,626 @@
+     A*%%***********************************************************************
+     A*%%TS  RD  20111217  145214  FKETELAARS  REL-V5R4M0  5722-WDS
+     A*%%FI+10660100000000000000000000000000000000000000000000000000
+     A*%%FI       0000000000000000000000000000000000000000000000000
+     A*%%***********************************************************************
+      *CP: CPI(16.7) PAGESIZE(*N 198 *N)
+      * ============================================================ *
+      * Object:    HCHKSYNPJ       *FILE PRTF                        *
+      *            Printer file to report IFS authority differences  *
+      *                                                              *
+      * Create remarks: CRTPRTF PAGESIZE(66 198) CPI(16.7)           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050518 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R @IFAHDR
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                      SKIPB(001)
+     A                                    51
+     A                                      'IFS Authority Differences'
+     A                                      SPACEB(001)
+     A                                   155
+     A                                      DATE(*SYS *YY)
+     A                                      EDTCDE(Y)
+     A                                   166
+     A                                      TIME
+     A                                      EDTWRD('  :  :  ')
+     A                                   161
+     A                                      'Page'
+     A                                      SPACEB(001)
+     A            PAGENBR        7S 0O   167
+     A                                      EDTCDE(4)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAH1P
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                    64
+     A                                      'Ignore interval . . . :'
+     A                                      SPACEB(002)
+     A            IGNIH1         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      'Group . . . . . . . . :'
+     A                                      SPACEB(001)
+     A            GRPNH1        10A  O    +3
+     A  21        MRKSH1         4A  O    +1
+     A                                   +22
+     A                                      'Output file . . . . . :'
+     A            OUTFPA         4A  O    +3
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAMATH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Missing IFS authorities'
+     A                                      SPACEB(001)
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(002)
+     A                                    12
+     A                                      'Type'
+     A                                    24
+     A                                      'User'
+     A                                    35
+     A                                      'Fix'
+     A                                    39
+     A                                      'Aut'
+     A                                    50
+     A                                      'AutLst'
+     A                                    61
+     A                                      'OprMgtExsAltRefExc RAUD AM'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '-----------'
+     A                                    24
+     A                                      '----------'
+     A                                    35
+     A                                      '---'
+     A                                    39
+     A                                      '----------'
+     A                                    50
+     A                                      '----------'
+     A                                    61
+     A                                      '--------------------------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAMATD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A  21        IAGRPN    R        O     1
+     A                                      REFFLD(SYNIFA@/IAGRPN *LIBL/HCHKSYN-
+     A                                      IFA)
+     A                                      SPACEB(001)
+     A  21        IATYPE    R        O    12
+     A                                      REFFLD(SYNIFA@/IATYPE *LIBL/HCHKSYN-
+     A                                      IFA)
+     A  22        IAOBJ@        80A  O    24
+     A N21                                  SPACEB(001)
+     A N22        IAUSR     R        O    24
+     A                                      REFFLD(SYNIFA@/IAUSR *LIBL/HCHKSYNI-
+     A                                      FA)
+     A                                      SPACEB(001)
+     A N22        IAFIX     R        O    36
+     A                                      REFFLD(SYNIFA@/IAFIX *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJDTAA    R        O    39
+     A                                      REFFLD(SYNIFA@/SJDTAA *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJANAM    R        O    50
+     A                                      REFFLD(SYNIFA@/SJANAM *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJOPR     R        O    62
+     A                                      REFFLD(SYNIFA@/SJOPR *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJOMGT    R        O    65
+     A                                      REFFLD(SYNIFA@/SJOMGT *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJEXS     R        O    68
+     A                                      REFFLD(SYNIFA@/SJEXS *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJALT     R        O    69
+     A                                      REFFLD(SYNIFA@/SJALT *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJREF     R        O    74
+     A                                      REFFLD(SYNIFA@/SJREF *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJEXEC    R        O    77
+     A                                      REFFLD(SYNIFA@/SJEXEC *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJREAD    R        O    80
+     A                                      REFFLD(SYNIFA@/SJREAD *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJADD     R        O    81
+     A                                      REFFLD(SYNIFA@/SJADD *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJUPD     R        O    82
+     A                                      REFFLD(SYNIFA@/SJUPD *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJDLT     R        O    83
+     A                                      REFFLD(SYNIFA@/SJDLT *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJAMGT    R        O    85
+     A                                      REFFLD(SYNIFA@/SJAMGT *LIBL/HCHKSYN-
+     A                                      IFA)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAMATF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of missing IFS authorities -
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRIMAT        5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAMASH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Obsolete IFS authorities'
+     A                                      SPACEB(001)
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(002)
+     A                                    12
+     A                                      'Type'
+     A                                    24
+     A                                      'User'
+     A                                    35
+     A                                      'Fix'
+     A                                    39
+     A                                      'Aut'
+     A                                    50
+     A                                      'AutLst'
+     A                                    61
+     A                                      'OprMgtExsAltRefExc RAUD AM'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '-----------'
+     A                                    24
+     A                                      '----------'
+     A                                    35
+     A                                      '---'
+     A                                    39
+     A                                      '----------'
+     A                                    50
+     A                                      '----------'
+     A                                    61
+     A                                      '--------------------------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAMASD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A  21        IAGRPN    R        O     1
+     A                                      REFFLD(SYNIFA@/IAGRPN *LIBL/HCHKSYN-
+     A                                      IFA)
+     A                                      SPACEB(001)
+     A  21        IATYPE    R        O    12
+     A                                      REFFLD(SYNIFA@/IATYPE *LIBL/HCHKSYN-
+     A                                      IFA)
+     A  22        IAOBJ@        80A  O    24
+     A N21                                  SPACEB(001)
+     A N22        IAUSR     R        O    24
+     A                                      REFFLD(SYNIFA@/IAUSR *LIBL/HCHKSYNI-
+     A                                      FA)
+     A                                      SPACEB(001)
+     A N22        IAFIX     R        O    36
+     A                                      REFFLD(SYNIFA@/IAFIX *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJDTAA    R        O    39
+     A                                      REFFLD(SYNIFA@/TJDTAA *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJANAM    R        O    50
+     A                                      REFFLD(SYNIFA@/TJANAM *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJOPR     R        O    62
+     A                                      REFFLD(SYNIFA@/TJOPR *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJOMGT    R        O    65
+     A                                      REFFLD(SYNIFA@/TJOMGT *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJEXS     R        O    68
+     A                                      REFFLD(SYNIFA@/TJEXS *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJALT     R        O    69
+     A                                      REFFLD(SYNIFA@/TJALT *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJREF     R        O    74
+     A                                      REFFLD(SYNIFA@/TJREF *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJEXEC    R        O    77
+     A                                      REFFLD(SYNIFA@/TJEXEC *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJREAD    R        O    80
+     A                                      REFFLD(SYNIFA@/TJREAD *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJADD     R        O    81
+     A                                      REFFLD(SYNIFA@/TJADD *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJUPD     R        O    82
+     A                                      REFFLD(SYNIFA@/TJUPD *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJDLT     R        O    83
+     A                                      REFFLD(SYNIFA@/TJDLT *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJAMGT    R        O    85
+     A                                      REFFLD(SYNIFA@/TJAMGT *LIBL/HCHKSYN-
+     A                                      IFA)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001                        XXXXXXXXXXX
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAMASF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of obsolete IFS authorities-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRIMAS        5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAADH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'IFS Authority Differences'
+     A                                      SPACEB(001)
+     A                                    39
+     A                                      'Source'
+     A                                      SPACEB(001)
+     A                                    50
+     A                                      'Target'
+     A                                    61
+     A                                      'Source'
+     A                                    72
+     A                                      'Target'
+     A                                    83
+     A                                      'Source'
+     A                                   110
+     A                                      'Target'
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      'Type'
+     A                                    24
+     A                                      'User'
+     A                                    35
+     A                                      'Fix'
+     A                                    39
+     A                                      'Aut'
+     A                                    50
+     A                                      'Aut'
+     A                                    61
+     A                                      'AutLst'
+     A                                    72
+     A                                      'AutLst'
+     A                                    83
+     A                                      'OprMgtExsAltRefExc RAUD AM'
+     A                                   110
+     A                                      'OprMgtExsAltRefExc RAUD AM'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '----------'
+     A                                    24
+     A                                      '----------'
+     A                                    35
+     A                                      '---'
+     A                                    39
+     A                                      '----------'
+     A                                    50
+     A                                      '----------'
+     A                                    61
+     A                                      '----------'
+     A                                    72
+     A                                      '----------'
+     A                                    83
+     A                                      '--------------------------'
+     A                                   110
+     A                                      '--------------------------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAADD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A  21        IAGRPN    R        O     1
+     A                                      REFFLD(SYNIFA@/IAGRPN *LIBL/HCHKSYN-
+     A                                      IFA)
+     A                                      SPACEB(001)
+     A  21        IATYPE    R        O    12
+     A                                      REFFLD(SYNIFA@/IATYPE *LIBL/HCHKSYN-
+     A                                      IFA)
+     A  22        IAOBJ@        80A  O    24
+     A N21                                  SPACEB(001)
+     A N22        IAUSR     R        O    24
+     A                                      REFFLD(SYNIFA@/IAUSR *LIBL/HCHKSYNI-
+     A                                      FA)
+     A                                      SPACEB(001)
+     A N22        IAFIX     R        O    36
+     A                                      REFFLD(SYNIFA@/IAFIX *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJDTAA    R        O    39
+     A                                      REFFLD(SYNIFA@/SJDTAA *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJDTAA    R        O    50
+     A                                      REFFLD(SYNIFA@/TJDTAA *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJANAM    R        O    61
+     A                                      REFFLD(SYNIFA@/SJANAM *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJANAM    R        O    72
+     A                                      REFFLD(SYNIFA@/TJANAM *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJOPR     R        O    84
+     A                                      REFFLD(SYNIFA@/SJOPR *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJOMGT    R        O    87
+     A                                      REFFLD(SYNIFA@/SJOMGT *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJEXS     R        O    90
+     A                                      REFFLD(SYNIFA@/SJEXS *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJALT     R        O    93
+     A                                      REFFLD(SYNIFA@/SJALT *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJREF     R        O    96
+     A                                      REFFLD(SYNIFA@/SJREF *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJEXEC    R        O    99
+     A                                      REFFLD(SYNIFA@/SJEXEC *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJREAD    R        O   102
+     A                                      REFFLD(SYNIFA@/SJREAD *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        SJADD     R        O   103
+     A                                      REFFLD(SYNIFA@/SJADD *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJUPD     R        O   104
+     A                                      REFFLD(SYNIFA@/SJUPD *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJDLT     R        O   105
+     A                                      REFFLD(SYNIFA@/SJDLT *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        SJAMGT    R        O   107
+     A                                      REFFLD(SYNIFA@/SJAMGT *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJOPR     R        O   111
+     A                                      REFFLD(SYNIFA@/TJOPR *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJOMGT    R        O   114
+     A                                      REFFLD(SYNIFA@/TJOMGT *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJEXS     R        O   117
+     A                                      REFFLD(SYNIFA@/TJEXS *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJALT     R        O   120
+     A                                      REFFLD(SYNIFA@/TJALT *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJREF     R        O   123
+     A                                      REFFLD(SYNIFA@/TJREF *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJEXEC    R        O   126
+     A                                      REFFLD(SYNIFA@/TJEXEC *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJREAD    R        O   129
+     A                                      REFFLD(SYNIFA@/TJREAD *LIBL/HCHKSYN-
+     A                                      IFA)
+     A N22        TJADD     R        O   130
+     A                                      REFFLD(SYNIFA@/TJADD *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJUPD     R        O   131
+     A                                      REFFLD(SYNIFA@/TJUPD *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJDLT     R        O   132
+     A                                      REFFLD(SYNIFA@/TJDLT *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJAMGT    R        O   134
+     A                                      REFFLD(SYNIFA@/TJAMGT *LIBL/HCHKSYN-
+     A                                      IFA)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAADF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of IFS auth. differences  .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRIAD         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAODH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Owner Differences'
+     A                                      SPACEB(001)
+     A                                    28
+     A                                      'Source'
+     A                                      SPACEB(001)
+     A                                    39
+     A                                      'Target'
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      'Type'
+     A                                    24
+     A                                      'Fix'
+     A                                    28
+     A                                      'Owner'
+     A                                    39
+     A                                      'Owner '
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '-----------'
+     A                                    24
+     A                                      '---'
+     A                                    28
+     A                                      '----------'
+     A                                    39
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAODD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A  21        IAGRPN    R        O     1
+     A                                      REFFLD(SYNIFA@/IAGRPN *LIBL/HCHKSYN-
+     A                                      IFA)
+     A                                      SPACEB(001)
+     A  21        IATYPE    R        O    12
+     A                                      REFFLD(SYNIFA@/IATYPE *LIBL/HCHKSYN-
+     A                                      IFA)
+     A  22        IAOBJ@        80A  O    24
+     A N21                                  SPACEB(001)
+     A N22        IAFIX     R        O    25
+     A                                      REFFLD(SYNIFA@/IAFIX *LIBL/HCHKSYNI-
+     A                                      FA)
+     A                                      SPACEB(001)
+     A N22        SJOWN     R        O    28
+     A                                      REFFLD(SYNIFA@/SJOWN *LIBL/HCHKSYNI-
+     A                                      FA)
+     A N22        TJOWN     R        O    39
+     A                                      REFFLD(SYNIFA@/TJOWN *LIBL/HCHKSYNI-
+     A                                      FA)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @IFAODF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of IFS owner differences  .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRIOD         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%CP+999CRTPRTF
+     A*%%CP+    CPI(16.7)
+     A*%%CP+    MAXRCDS(*NOMAX)
+     A*%%CP+    FILE(DMXTRASDEV/HCHKSYNPJ)
+     A*%%CP+    DEVTYPE(*SCS)
+     A*%%CP     PAGESIZE(*N       198      *N     )
+     A*%%***********************************************************************

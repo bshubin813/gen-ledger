@@ -1,0 +1,61 @@
+/* ================================================================= */
+/* Object:         HSTRCST         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Synopsis:       This command can be used in the startup program   */
+/*                 of the system to automatically start the node and */
+/*                 all groups.                                       */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20040429 FK  Initial delivery                                     */
+/* 20040524 FK  Default message queue is *CURRENT                    */
+/* 20080212 FK  Allow wait until TCP/IP active                       */
+/* ================================================================= */
+             CMD        PROMPT('Start iCluster processes')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(STRGRP) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Start groups/resil. apps')
+             PARM       KWD(STRAPY) TYPE(*CHAR) LEN(6) RSTD(*YES) +
+                          DFT(*NOCHG) SPCVAL((*YES) (*NO) (*NOCHG)) +
+                          PROMPT('Start replication apply jobs')
+             PARM       KWD(STSMSGQ) TYPE(MSGQQ) PROMPT('Status/Alert +
+                          message queue')
+             PARM       KWD(NBRATM) TYPE(*DEC) LEN(3) DFT(1) +
+                          PMTCTL(*PMTRQS) PROMPT('Number of +
+                          attempts to rejoin')
+             PARM       KWD(MAXWAITNOD) TYPE(*DEC) LEN(3) DFT(10) +
+                          CHOICE('Number of minutes') +
+                          PMTCTL(*PMTRQS) PROMPT('Max. wait until +
+                          node active')
+             PARM       KWD(DLYSTRGRP) TYPE(*DEC) LEN(3) DFT(30) +
+                          CHOICE('Seconds') PMTCTL(*PMTRQS) +
+                          PROMPT('Delay before starting groups')
+             PARM       KWD(MAXWAITTCP) TYPE(*DEC) LEN(3) DFT(10) +
+                          SPCVAL((*NONE 0)) CHOICE('Number of +
+                          minutes, *NONE') PMTCTL(*PMTRQS) +
+                          PROMPT('Max. wait until TCP/IP active')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ MSGQQ:      QUAL       TYPE(*NAME) DFT(*CURRENT) SPCVAL((*CURRENT) +
+                          (QSYSOPR) (*NONE))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL) +
+                          (*CURLIB)) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

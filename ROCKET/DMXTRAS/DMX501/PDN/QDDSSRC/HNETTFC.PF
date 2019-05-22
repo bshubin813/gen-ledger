@@ -1,0 +1,52 @@
+      * ============================================================ *
+      * Object:    HNETTFC         *FILE PF                          *
+      *            File that holds the network traffic per channel   *
+      *            that is open between 2 systems. This is the       *
+      *            template output file.                             *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20051216 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HNETTFCR
+     A            NTSYSN         8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            NTADRL        15A         TEXT('Local IP address')
+     A                                      COLHDG('Local IP' 'Address')
+     A            NTADRR        15A         TEXT('Remote IP address')
+     A                                      COLHDG('Remote IP' 'Address')
+     A            NTPORT         5  0       TEXT('Port number')
+     A                                      COLHDG('Port' 'Number')
+     A            NTPORTLOC      7A         TEXT('Port location')
+     A                                      COLHDG('Port' 'Location')
+     A                                      VALUES('*LCL' '*RMT' '*LCLRMT')
+     A            NTDTSM          Z         TEXT('Measurement date/time')
+     A                                      COLHDG('Date/time of' 'measurement')
+     A            NTBYTIN       25  0       TEXT('Bytes incoming')
+     A                                      COLHDG('Bytes' 'incoming')
+     A            NTBYTOUT      25  0       TEXT('Bytes outgoing')
+     A                                      COLHDG('Bytes' 'outgoing')
+     A            NTBYTTOT      25  0       TEXT('Bytes total')
+     A                                      COLHDG('Bytes' 'total')
+     A            NTITV         10  0       TEXT('Measurement interval (s)')
+     A                                      COLHDG('Measurement' 'interval (s)')
+     A            NTBPSIN       15  0       TEXT('Incoming Bandwidth (bits/s)')
+     A                                      COLHDG('Incoming' 'Bandwidth' -
+     A                                      '(bits/s)')
+     A            NTBPSOUT      15  0       TEXT('Outgoing Bandwidth (bits/s)')
+     A                                      COLHDG('Outgoing' 'Bandwidth' -
+     A                                      '(bits/s)')
+     A            NTBPSTOT      15  0       TEXT('Total Bandwidth (bits/s)')
+     A                                      COLHDG('Total' 'Bandwidth' -
+     A                                      '(bits/s)')
+      *
+     A          K NTSYSN
+     A          K NTADRL
+     A          K NTADRR
+     A          K NTPORT
+     A          K NTPORTLOC
+     A          K NTDTSM

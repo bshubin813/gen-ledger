@@ -1,0 +1,19 @@
+      * ============================================================ *
+      * Object:    HIBSFGL         *FILE LF                          *
+      *            Logical file over DMBSFOBJ by GROUP               *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20030424 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HIBSFGN@                  PFILE(DMBSFOBJ)
+     A            GROUP
+     A            INCLUDE
+     A            DESC
+     A            PATH
+      *
+     A          K GROUP

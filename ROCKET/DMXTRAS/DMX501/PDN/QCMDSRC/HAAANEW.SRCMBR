@@ -1,0 +1,86 @@
+/*CP: PMTOVRPGM(HAAANEWPO)                                           */
+/* ================================================================= */
+/* Object:         HAAANEW         *CMD                              */
+/*                 Install/Upgrade DMXtras.                          */
+/*                                                                   */
+/* Create remarks: PMTOVRPGM(HAAANEWPO)                              */
+/*                                                                   */
+/* Synopsis:                                                         */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000411 FK  Initial delivery                                     */
+/* 20000510 FK  Include TS library                                   */
+/* 20000702 FK  Include iCluster library                             */
+/* 20001202 FK  Port for hstrha service table entry                  */
+/* 20010102 FK  Port for hmonevl service table entry                 */
+/* 20010314 FK  Port for tstrts service table entry                  */
+/* 20010315 FK  User for tstrts job description                      */
+/* 20011128 FK  Retrieve current values (if existing)                */
+/*              H###NEW command must be prompted!                    */
+/* 20020516 FK  Different TMPLIB/ORGLIB                              */
+/* 20020522 FK  Allow submit to batch                                */
+/* 20021227 FK  Rename to HAAANEW                                    */
+/* 20030605 FK  Prevent specifying HALIB and ICLIB                   */
+/* 20030710 FK  Also show hmonevl service table entry for iCluster   */
+/* 20030728 FK  Specify temporary installation library               */
+/*              Change parameter TMPLIB to OLDLIB                    */
+/* 20040623 FK  TSLIB includes DMIRROR special value                 */
+/*              HALIB default is *NONE                               */
+/* 20041218 FK  HMONEVL parameter replaced by HMONHA                 */
+/* 20050203 FK  Specify modules to install                           */
+/* 20070821 FK  Port for tmonts service table entry                  */
+/* 20071024 FK  Support to specify CCSID                             */
+/* 20111212 FK  Remove HA Suite and CDC                              */
+/* 20120301 MW  Identify ICLUSTER library as ICLUSTER                */
+/* ================================================================= */
+             CMD        PROMPT('Install/Upgrade DMXtras')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(CUSLIB) TYPE(*NAME) MIN(1) KEYPARM(*YES) +
+                          PROMPT('Custom DMXtras library')
+             PARM       KWD(OLDLIB) TYPE(*NAME) DFT(*NOPROMPT) +
+                          SPCVAL((*NOPROMPT)) CHOICE('Name, +
+                          DMXTRASOLD') PROMPT('Library for old +
+                          version')
+             PARM       KWD(INSLIB) TYPE(*NAME) DFT(DMXTRASTMP) +
+                          SPCVAL((DMXTRASTMP)) PROMPT('Temporary +
+                          library for install')
+             PARM       KWD(ICLIB) TYPE(*NAME) DFT(*NONE) +
+                          SPCVAL((ICLUSTER) (*NONE)) +
+                          PROMPT('iCluster library')
+             PARM       KWD(ORGLIB) TYPE(*NAME) RSTD(*YES) +
+                          DFT(DMXTRAS) VALUES(DMXTRAS) +
+                          PROMPT('Utilities base library')
+             PARM       KWD(BATCH) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Submit to batch')
+             PARM       KWD(HMONHA) TYPE(*DEC) LEN(5 0) DFT(4446) +
+                          SPCVAL((*NONE 0)) PROMPT('Listening port +
+                          for HMONHA')
+             PARM       KWD(CCSID) TYPE(*DEC) LEN(5 0) DFT(*QCCSID) +
+                          RANGE(1 65535) SPCVAL((*QCCSID 0) +
+                          (*QCHRID 99999)) PMTCTL(*PMTRQS) +
+                          PROMPT('CCSID for DMXtras files')
+             PARM       KWD(MODULES) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*ALL) SPCVAL((*ALL) (*ANZ) (*OPR) +
+                          (*MON) (*CFG) (*SWO)) MAX(10) +
+                          PMTCTL(*PMTRQS) PROMPT('Modules to install')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

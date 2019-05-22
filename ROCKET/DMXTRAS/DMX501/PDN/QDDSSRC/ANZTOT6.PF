@@ -1,0 +1,33 @@
+      *CP: SIZE(*NOMAX)
+      * ============================================================ *
+      * Object:    ANZTOT6         *FILE PF                          *
+      *            Holds the totals per journal and date/hour        *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060130 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R ANZTR6
+     A            JRNLIB        10A         TEXT('Journal library')
+     A                                      COLHDG('Journal' 'library')
+     A            JRNNME        10A         TEXT('Journal name')
+     A                                      COLHDG('Journal' 'name')
+     A            DTE            8A         TEXT('Date YYYYMMDD')
+     A                                      COLHDG('Date')
+     A            HOURX          2A         TEXT('Hour')
+     A                                      COLHDG('Hour')
+     A            TOTENT        15S 0       TEXT('# of Transactions')
+     A                                      COLHDG('Total # of' 'Transactions')
+     A            TOTLEN        15S 0       TEXT('Total Tx Length')
+     A                                      COLHDG('Total' 'Tx length')
+      * Key fields
+     A          K JRNLIB
+     A          K JRNNME
+     A          K DTE
+     A          K HOURX

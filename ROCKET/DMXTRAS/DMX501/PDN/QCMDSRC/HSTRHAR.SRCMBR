@@ -1,0 +1,51 @@
+/* ================================================================= */
+/* Object:         HSTRHAR         *CMD                              */
+/*                 Internal command to pass parameters properly.     */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HSTRHAR) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Only used internally from the HSTRHA program.     */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20001202 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Internal command, do not use')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(PRINAME) TYPE(*CNAME) LEN(8) MIN(1)
+             PARM       KWD(SECNAME) TYPE(*CNAME) LEN(8) MIN(1)
+             PARM       KWD(PRIHOST) TYPE(*CHAR) LEN(100) +
+                          DFT(*PRINAME) SPCVAL((*PRINAME))
+             PARM       KWD(SECHOST) TYPE(*CHAR) LEN(100) +
+                          DFT(*SECNAME) SPCVAL((*SECNAME))
+             PARM       KWD(STARTHA) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO))
+             PARM       KWD(STARTUPD) TYPE(*CHAR) LEN(6) RSTD(*YES) +
+                          DFT(*NOCHG) SPCVAL((*YES) (*NO) (*NOCHG)) +
+                          PMTCTL(STARTHA)
+             PARM       KWD(PORT) TYPE(*CHAR) LEN(30) DFT('hstrha') +
+                          PMTCTL(*PMTRQS)
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ STARTHA:    PMTCTL     CTL(STARTHA) COND((*EQ '*YES'))

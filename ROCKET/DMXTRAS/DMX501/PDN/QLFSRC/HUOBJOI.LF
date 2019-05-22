@@ -1,0 +1,21 @@
+      * ============================================================ *
+      * Object:    HUOBJOI         *FILE LF                          *
+      *            Logical file over OMFOBJ by Object ID             *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUOBJOI@                  PFILE(OMFOBJ)
+     A            OBJID                     RENAME(ID)
+     A            OBJNAME                   RENAME(NAME)
+     A            OBJLIB                    RENAME(LIBRARY)
+     A            OBJTYPE                   RENAME(TYPE)
+     A            OBJATTR                   RENAME(ATTR)
+     A            OBJDESC                   RENAME(DESC)
+      *
+     A          K OBJID

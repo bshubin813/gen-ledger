@@ -1,0 +1,41 @@
+      *CP: SIZE(*NOMAX)
+      * ============================================================ *
+      * Object:    ANZTOT2         *FILE PF                          *
+      *            Holds the totals per object and date/hour         *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060127 FK  Field text and column headings                  *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R ANZTR2
+     A            FLIB          10A         TEXT('Object library')
+     A                                      COLHDG('Object' 'library')
+     A            FNAM          10A         TEXT('Object name')
+     A                                      COLHDG('Object' 'name')
+     A            IFSID         32A         TEXT('IFS Object ID')
+     A                                      COLHDG('IFS Object' 'ID')
+     A            OTYP           8A         TEXT('Object type')
+     A                                      COLHDG('Object' 'type')
+     A            DTE            8A         TEXT('Date YYYYMMDD')
+     A                                      COLHDG('Date')
+     A            HOURX          2A         TEXT('Hour')
+     A                                      COLHDG('Hour')
+     A            TOTENT        15S 0       TEXT('# of Transactions')
+     A                                      COLHDG('Total # of' 'Transactions')
+     A            TOTLEN        15S 0       TEXT('Total Tx Length')
+     A                                      COLHDG('Total' 'Tx length')
+     A            IFSOBJ      5001A         VARLEN TEXT('IFS Object name')
+     A                                      COLHDG('IFS Object')
+      * Key fields
+     A          K FLIB
+     A          K FNAM
+     A          K IFSID
+     A          K OTYP
+     A          K DTE
+     A          K HOURX

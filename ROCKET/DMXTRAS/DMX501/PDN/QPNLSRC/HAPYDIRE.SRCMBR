@@ -1,0 +1,180 @@
+.* ============================================================ *
+.* Object:    HAPYDIRE        *PNLGRP                           *
+.*            Help text for the HAPYDIRE command.               *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20010719 FK  Initial delivery                                *
+.* 20050128 FK  New parameters                                  *
+.* 20050202 FK  More explicit notification of DSPDIRE command   *
+.* 20050710 FK  Default value for USRLESS changed to *YES       *
+.*              Describe how *ANY will be handled               *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HAPYDIRE'.Apply directory entries - Help
+:P.
+The HAPYDIRE (Apply directory entries) command allows you to
+generate directory entries based on a file that was composed on the
+primary (production) system.
+:P.
+:NT.Directory entries must be output on the primary system to an output
+file using the command: DSPDIRE OUTPUT(*OUTFILE) DETAIL(*FULL)
+OUTFILEFMT(*TYPE1):ENT.
+:P.
+Usually, the HAPYDIRE command is issued at switchover time, but it may be
+run from time to time for testing or to enroll users on the backup
+machine (for instance, if DLS objects are replicated).
+:P.
+Typically, you will run the following command at switchover time:
+HAPYDIRE FILE() ORGADR(*All) NEWSYS(*CURRENT) USRLESS(*YES) to add
+all directory entries in the directory entry output file to the current
+system's directory table. Directory entries which have a user associated
+with them are added to the current system as a local directory entry. Directory
+entries which didn't have a user associated with them are added as remote
+addresses (such as *ANY directory entries).
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter DIREFILE
+:HELP NAME='HAPYDIRE/DIREFILE'.File with directory entries - Help
+:XH3.File with directory entries (DIREFILE)
+:P.
+Specify the physical file that contains the directory entries listed
+on the source system via the DSPDIRE command.
+:P.
+:NT.Directory entries must be output on the primary system to an output
+file using the command: DSPDIRE OUTPUT(*OUTFILE) DETAIL(*FULL)
+OUTFILEFMT(*TYPE1):ENT.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter ORGSYS
+:HELP NAME='HAPYDIRE/ORGSYS'.Select entries from system - Help
+:XH3.Select entries from system (ORGSYS)
+:P.
+Controls that only certain directory entries are created on the current
+system. Only directory entries in the file for which the system name
+field (WOSDREN field) is the same as the specified value will be added.
+:P.
+The possible select-entries-from-system values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+The HAPYDIRE command will attempt to apply all directory entries in the
+file, regardless of the system name.
+:PT.system name
+:PD.
+Specify the name of the originating system which selects the directory
+entry records to be applied.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ORGADR
+:HELP NAME='HAPYDIRE/ORGADR'.Select entries from address - Help
+:XH3.Select entries from address (ORGADR)
+:P.
+Controls that only certain directory entries are created on the current
+system. Only directory entries in the file for which the address field
+(WOSDDGN field) is the same as the specified value will be added.
+:P.
+The possible select-entries-from-address values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+The HAPYDIRE command will attempt to apply all directory entries in the
+file, regardless of the address.
+:PT.system name
+:PD.
+Specify the address of the directory entries which must be selected.
+:EPARML.
+:EHELP.
+
+.* Help for parameter NEWSYS
+:HELP NAME='HAPYDIRE/NEWSYS'.New system name - Help
+:XH3.New system name (NEWSYS)
+:P.
+Specifies the system name (SYSNAME) of the newly created directory
+entries. This parameter does not apply to directory entries which do not have
+a user associated with them (such as the *ANY directory entries).
+:P.
+The possible new-system-name values are:
+:P.
+:PARML.
+:PT.:PK def.*CURRENT:EPK.
+:PD.
+Local directory entries are created with a system name (SYSNAME) of the
+current system's network name (DSPNETA).
+:PT.*ORGSYS
+:PD.
+Directory entries are created with system name (SYSNAME) value the same
+as on the originating system. The WOSDREN field in the specified file is
+the name of the directory entries' system.
+:PT.system name
+:PD.
+Specify the value to be used for the SYSNAME parameter of the ADDDIRE command.
+:EPARML.
+:EHELP.
+
+.* Help for parameter NEWADR
+:HELP NAME='HAPYDIRE/NEWADR'.New address - Help
+:XH3.New address (NEWADR)
+:P.
+Specifies the address (second value of the USRID parameter) of the newly
+created entries. This only applies to directory entries which have a user
+profile associated with them (local entries).
+:P.
+The possible new-address values are:
+:P.
+:PARML.
+:PT.:PK def.*ORGADR:EPK.
+:PD.
+Directory entries are created with the address (2nd USRID parm) value the same
+as on the originating system. The WOSDDGN field in the specified file is
+the value of the directory entries' address.
+:PT.*CURRENT
+:PD.
+Directory entries are created with address (2nd USRID parm) of the current
+system's network name (DSPNETA).
+:PT.address name
+:PD.
+Specify the value to be used for the 2nd value of the USRID parameter in the
+ADDDIRE command.
+:EPARML.
+:EHELP.
+
+.* Help for parameter USRLESS
+:HELP NAME='HAPYDIRE/USRLESS'.Add user-less entries - Help
+:XH3.Add user-less entries (USRLESS)
+:P.
+Controls whether or no entries which do not have a specific user (such as
+*ANY <sysnam> entries are added.
+:P.
+The possible add-user-less-entries values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Directory entries which have no user profile associated with them (and are
+therefore not local users) will also be added. Please note that the address
+and system name for these entries will be taken exactly from the input file
+and the NEWSYS and NEWADR parameters do not apply.
+:PT.*YES
+:PD.
+Directory entries which do not have a specific user (emtpy WOSDUSRP field)
+are skipped, this applies to any directory entry which is not associated with
+a user profile (including *ANY directory entries).
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

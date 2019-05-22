@@ -1,0 +1,50 @@
+/* ================================================================= */
+/* Object:         HPRTXLF         *CMD                              */
+/*                 Print cross-library logical files.                */
+/*                                                                   */
+/* Create remarks: CRTCMD                                            */
+/*                                                                   */
+/* Synopsis:       Displays the database relations for the specified */
+/*                 libraries to an output file (HPRTXLF) and runs a  */
+/*                 query to display the x-library logical files.     */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HPRTXLF    *PGM     CPP                                           */
+/* HPRTXLF    *FILE    File to keep the database relations           */
+/* HPRTXLF    *QRYDFN  Query to display the cross-library LFs        */
+/* HAUMSG     *MSGF    Message file with all messages issued         */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020510 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Print cross-library LFs')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(LIB) TYPE(*NAME) SPCVAL((*ALLUSR) (*ALL) +
+                          (*LIBL) (*USRLIBL)) MIN(1) MAX(100) +
+                          PROMPT('Library')
+             PARM       KWD(OUTFILLIB) TYPE(*NAME) DFT(QTEMP) +
+                          PROMPT('Library for output file')
+             PARM       KWD(BATCH) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Submit to batch')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

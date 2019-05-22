@@ -1,0 +1,66 @@
+      * ============================================================ *
+      * Object:    HLSTCST         *FILE PF                          *
+      *            File to hold constraints listed by the HLSTCST    *
+      *            command.                                          *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020708 FK  Initial delivery                                *
+      * 20030114 FK  Add target/group name to file                   *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R HLSTCST@
+     A            CSSYSN         8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            CSGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'name')
+     A            CSFILE        10A         TEXT('File')
+     A                                      COLHDG('File')
+     A            CSLIB         10A         TEXT('File library')
+     A                                      COLHDG('Library')
+     A            CSFTYP         1A         TEXT('File type')
+     A                                      COLHDG('File' 'Type')
+     A            PHCSTT         2A         TEXT('Constraint type +
+     A                                      P=*PRIMARY, U=*UNIQUE, +
+     A                                      R=*REFCST')
+     A                                      COLHDG('Cst' 'Type')
+     A            PHCSTN       258A         TEXT('Constraint name')
+     A                                      VARLEN
+     A                                      COLHDG('Constraint name')
+     A            PHCSTL        10A         TEXT('Constraint library')
+     A                                      COLHDG('Constraint' 'Library')
+     A            PHCSTS         2A         TEXT('Constraint state +
+     A                                      DD=dfn/dis, DE=dfn/en, ED=est/dis, +
+     A                                      EE=est/en')
+     A                                      COLHDG('Constraint' 'State')
+     A            PHNMKY         3  0       TEXT('Number of keys')
+     A                                      COLHDG('Number' 'of keys')
+     A            PHCPFN        10A         TEXT('Parent file name')
+     A                                      COLHDG('Parent' 'file')
+     A            PHCPLN        10A         TEXT('Parent library name')
+     A                                      COLHDG('Parent' 'library')
+     A            PHPRKY      1200A         TEXT('Parent key')
+     A                                      VARLEN
+     A                                      COLHDG('Parent key')
+     A            PHFRKY      1200A         TEXT('Foreign key')
+     A                                      VARLEN
+     A                                      COLHDG('Foreign key')
+     A            PHDLTR         2A         TEXT('Delete rule +
+     A                                      RS=Rstr, NA=Noac, CC=Casc, SN=Setn +
+     A                                      SD=Setd')
+     A                                      COLHDG('Delete' 'rule')
+     A            PHULTR         2A         TEXT('Update rule +
+     A                                      NA=Noaction, RS=Restrict')
+     A                                      COLHDG('Update' 'rule')
+     A            PHCKXP      2000A         TEXT('Check Constraint Expression')
+     A                                      VARLEN
+     A                                      COLHDG('Check constraint' +
+     A                                      'expression')
+      *
+     A          K CSGRPN
+     A          K CSLIB
+     A          K CSFILE

@@ -1,0 +1,34 @@
+      * ============================================================ *
+      * Object:    DMXOBJL1        *FILE LF                          *
+      *            LF over DMXOBJ by OBJNAM and OBJTYP               *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050124 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R DMXOBJL1R                 PFILE(DMXOBJ)
+     A            DOUTLID       10A         TEXT('Utility ID')
+     A                                      COLHDG('Utility' 'ID')
+     A            DOOBJNAM      10A         TEXT('Object name')
+     A                                      COLHDG('Object' 'name')
+     A            DOOBJTYP       8A         TEXT('Object type')
+     A                                      COLHDG('Object' 'type')
+     A            DOOBJATR      10A         TEXT('Object attribute')
+     A                                      COLHDG('Object' 'attribute')
+     A            DOOBJTXT      50A         TEXT('Object text')
+     A                                      COLHDG('Object text')
+     A            DOSUPPRD      12A         TEXT('Products')
+     A                                      COLHDG('Supported' 'Products')
+     A            DODMXMOD     100A         TEXT('DMXtras Modules')
+     A                                      COLHDG('DMXtras' 'Modules')
+     A            DOCUSOBJ       4A         TEXT('Customisable object')
+     A                                      COLHDG('Customisable' 'Object')
+     A                                      VALUES('*YES' '*NO')
+      *
+     A          K DOOBJNAM
+     A          K DOOBJTYP

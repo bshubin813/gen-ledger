@@ -1,0 +1,7 @@
+                                            UNIQUE
+                R ANZTYP2
+                  JCOD           1A
+                  JTYP           2A
+                  DESC          60A
+                K JCOD
+                K JTYP

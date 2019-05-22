@@ -1,0 +1,48 @@
+/* ================================================================= */
+/* Object:         HMRKPOS         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HMRKPOS) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Marks the journal positions using either the      */
+/*                 MRKHAPOS or DMMRKPOS commands parallel for        */
+/*                 all groups.                                       */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20030603 FK  Initial delivery                                     */
+/* 20070125 FK  Default for TARGET changed to *ICLUSTER              */
+/* 20111222 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Mark journal pos. parallel')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ICGROUP) TYPE(*NAME) LEN(10) +
+                          SPCVAL((*ALL *N)) MIN(1) PROMPT('Group or +
+                          resilient application')
+             PARM       KWD(WAIT) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Wait for completion')
+             PARM       KWD(JOBQ) TYPE(JOBQQ) PROMPT('Job queue for +
+                          submitted jobs')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ JOBQQ:      QUAL       TYPE(*NAME) DFT(*JOBD) SPCVAL((*JOBD) +
+                          (QSYSNOMAX))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

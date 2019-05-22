@@ -1,0 +1,19 @@
+      * ============================================================ *
+      * Object:    TPUTDTS         *FILE PF                          *
+      *            File that holds the date-time stamps put by the   *
+      *            TPUTDTS command.                                  *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20010531 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R TPUTDTS@
+     A            KEY           10A         TEXT('Key value for record')
+     A            DTS             Z         TEXT('Date-time stamp')
+      *
+     A          K KEY

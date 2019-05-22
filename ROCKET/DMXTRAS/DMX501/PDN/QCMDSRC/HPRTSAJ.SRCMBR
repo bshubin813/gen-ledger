@@ -1,0 +1,104 @@
+/* ================================================================= */
+/* Object:         HPRTSAJ         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HPRTSAJ) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Prints the security audit journal and allows fil- */
+/*                 tering of the journal entries based on several    */
+/*                 selection values.                                 */
+/*                                                                   */
+/*                 Supported selections:                             */
+/*                 - User profile                                    */
+/*                 - Job name                                        */
+/*                 - Program name that made the change               */
+/*                 - Altered object name                             */
+/*                 - Library of altered object                       */
+/*                 - Type of altered object                          */
+/*                 - Journal entry contains scan value               */
+/*                 - Type of journal entry                           */
+/*                                                                   */
+/*                 One can specify the number of hours or days       */
+/*                 which determines the age of the journal entry.    */
+/*                 Journal entries are always retrieved from the     */
+/*                 current chain of receivers (*CURCHAIN).           */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 19990708 FK  Initial delivery                                     */
+/* 20010719 FK  Allow output to file                                 */
+/* 20030122 FK  Default number of days to 1                          */
+/*              Allow entry of both hours and days                   */
+/*              Allow submit to batch                                */
+/* ================================================================= */
+             CMD        PROMPT('Print Security Audit Journal')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(DAYS) TYPE(*DEC) LEN(3) DFT(1) +
+                          SPCVAL((*HOURS -1)) PROMPT('Journal entry +
+                          age in days')
+             PARM       KWD(HOURS) TYPE(*DEC) LEN(2) DFT(*DAYS) +
+                          SPCVAL((*DAYS -1)) PROMPT('Journal entry +
+                          age in hours')
+             PARM       KWD(USRPRF) TYPE(*NAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('User profile')
+             PARM       KWD(JOB) TYPE(*NAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Job')
+             PARM       KWD(PGM) TYPE(*NAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Program')
+             PARM       KWD(OBJ) TYPE(*NAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Object')
+             PARM       KWD(LIB) TYPE(*NAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Object library')
+             PARM       KWD(TYPE) TYPE(*CHAR) LEN(8) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Object type')
+             PARM       KWD(SCAN) TYPE(*CHAR) LEN(20) DFT(*NONE) +
+                          SPCVAL((*NONE)) PROMPT('Journal entry +
+                          contains value')
+             PARM       KWD(INCTZC) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Include T-ZC entries')
+             PARM       KWD(ENTTYP) TYPE(*CHAR) LEN(4) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Journal entry type')
+             PARM       KWD(BATCH) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Submit to batch')
+             PARM       KWD(OUTPUT) TYPE(*CHAR) LEN(8) RSTD(*YES) +
+                          DFT(*PRINT) SPCVAL((*) (*PRINT) +
+                          (*OUTFILE)) PROMPT('Output')
+             PARM       KWD(JRNRCV) TYPE(QUALJRNRCV) PMTCTL(*PMTRQS) +
+                          PROMPT('Starting journal receiver')
+             PARM       KWD(OUTFILE) TYPE(QUALFILE) PMTCTL(OUTFILE) +
+                          PROMPT('Output file')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJRNRCV: QUAL       TYPE(*NAME) DFT(*CURCHAIN) SPCVAL((*CURCHAIN))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+ QUALFILE:   QUAL       TYPE(*NAME) DFT(HSAJOUT)
+             QUAL       TYPE(*NAME) DFT(QTEMP) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&DAYS *EQ -1) PARM((&HOURS *NE -1)) +
+                          MSGID(PSA0005)
+             DEP        CTL(&OUTPUT *EQ '*OUTFILE') PARM((&OUTFILE +
+                          *NE ' ')) MSGID(PSA0006)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ OUTFILE:    PMTCTL     CTL(OUTPUT) COND((*EQ '*OUTFILE'))

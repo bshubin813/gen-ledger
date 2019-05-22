@@ -1,0 +1,31 @@
+      * ============================================================ *
+      * Object:    HUSOBSO         *FILE LF                          *
+      *            Logical file over HASOBJ by Object name, Object   *
+      *            library (only suspended)                          *
+      *                                                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20041209 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUSOBSO@                  PFILE(HASOBJ)
+     A            TGTID
+     A            GRPID
+     A            OBJNAME                   RENAME(NAME)
+     A            OBJLIB                    RENAME(LIB)
+     A            OBJTYPE                   RENAME(TYPE)
+     A            OBJATTR                   RENAME(ATTR)
+     A            MEMBER
+     A            STATE
+     A            REASON
+     A            NUMRETRY
+     A            CHECKPOINT
+      *
+     A          K OBJNAME
+     A          K OBJLIB
+      * Only select records that have STATE='SUS'
+     A          S STATE                     COMP(EQ 'SUS')

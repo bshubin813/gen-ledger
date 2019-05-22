@@ -1,0 +1,33 @@
+      * ============================================================ *
+      * Object:    HMONHASI        *FILE PF                          *
+      *            Holds the suspended IFS objects received by the   *
+      *            listener program to be sent to the message queues *
+      *            or e-mail addresses.                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20041117 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HMONHASIR                 PFILE(HMONHAS)
+     A            MSORGSYS
+     A            MSSUSTYP
+     A            MSGRPNAM
+     A            MSRSNCDE
+     A            MSSUSDTS
+     A            MSUPDDTS
+     A            MSIFSTYP
+     A            MSIFSKEY
+     A            MSIFSPTH
+
+      * Keys
+     A          K MSORGSYS
+     A          K MSSUSTYP
+     A          K MSGRPNAM
+     A          K MSIFSTYP
+     A          K MSIFSKEY
+      * Select only IFS records
+     A          S MSSUSTYP                  COMP(EQ '*IFS')

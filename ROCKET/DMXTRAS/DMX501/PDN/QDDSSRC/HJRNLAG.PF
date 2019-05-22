@@ -1,0 +1,76 @@
+      * ============================================================ *
+      * Object:    HJRNLAG         *FILE PF                          *
+      *            File that holds the journal positions retrieved   *
+      *            and the associated replication lag.               *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020911 FK  Initial delivery                                *
+      * 20030708 FK  Add column headings                             *
+      * 20030926 FK  Rebuild for history monitor                     *
+      * 20031006 FK  Include measurement type                        *
+      * 20070502 FK  Allow 20-digit sequence numbers                 *
+      * ============================================================ *
+     A          R HJRNLAG@
+     A            JLSYSN         8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            JLTYPM         4A         TEXT('Measurement type')
+     A                                      COLHDG('Measurement' 'type')
+     A                                      DFT('*ADH')
+     A            JLTGTN        10          TEXT('Target definition')
+     A                                      COLHDG('Target' 'definition')
+     A            JLGRPN        10          TEXT('Group name')
+     A                                      COLHDG('Group' 'name')
+     A            JLJRNN        10A         TEXT('Journal name')
+     A                                      COLHDG('Journal' 'name')
+     A            JLJRNL        10A         TEXT('Journal library')
+     A                                      COLHDG('Journal' 'library')
+     A            JLDTSM          Z         TEXT('Measurement date/time')
+     A                                      COLHDG('Date/time of' 'measurement')
+     A            JLLSTR        10A         TEXT('Last receiver')
+     A                                      COLHDG('Last' 'receiver')
+     A            JLLSTL        10A         TEXT('Last receiver library')
+     A                                      COLHDG('Last' 'receiver' 'library')
+     A            JLLSTS        20  0       TEXT('Last sequence number')
+     A                                      COLHDG('Last' 'sequence' 'number')
+     A            JLLSTT          Z         TEXT('Last date/time')
+     A                                      COLHDG('Date/time of' 'last entry')
+     A            JLSRCR        10A         TEXT('Source receiver')
+     A                                      COLHDG('Source' 'receiver')
+     A            JLSRCL        10A         TEXT('Source receiver library')
+     A                                      COLHDG('Source' 'receiver' +
+     A                                      'library')
+     A            JLSRCS        20  0       TEXT('Source sequence number')
+     A                                      COLHDG('Source' 'sequence' 'number')
+     A            JLSRCT          Z         TEXT('Source date/time')
+     A                                      COLHDG('Date/time of' 'source ent.')
+     A                                      ALWNULL
+     A                                      DFT(*NULL)
+     A            JLAPYR        10A         TEXT('Applied receiver')
+     A                                      COLHDG('Apply' 'receiver')
+     A            JLAPYL        10A         TEXT('Applied receiver library')
+     A                                      COLHDG('Apply' 'receiver' 'library')
+     A            JLAPYS        20  0       TEXT('Applied sequence number')
+     A                                      COLHDG('Apply' 'sequence' 'number')
+     A            JLAPYT          Z         TEXT('Applied date/time')
+     A                                      COLHDG('Date/time of' 'apply')
+     A                                      ALWNULL
+     A                                      DFT(*NULL)
+     A            JLSNDM        10  0       TEXT('Scrape lag in minutes')
+     A                                      COLHDG('Scrape lag' 'minutes')
+     A            JLAPYM        10  0       TEXT('Apply lag in minutes')
+     A                                      COLHDG('Apply lag' 'minutes')
+     A            JLLAGM        10  0       TEXT('Total lag in minutes')
+     A                                      COLHDG('Total lag' 'minutes')
+     A            JLRTNC         7A         TEXT('Return code')
+     A                                      COLHDG('Return' 'code')
+      *
+     A          K JLSYSN
+     A          K JLTYPM
+     A          K JLJRNN
+     A          K JLJRNL
+     A          K JLDTSM

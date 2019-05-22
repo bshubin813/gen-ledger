@@ -1,0 +1,75 @@
+      * ============================================================ *
+      * Object:    HCHKSYNOA       *FILE PF                          *
+      *            Holds the retrieved object authorities.           *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20001011 FK  Initial delivery                                *
+      * 20001205 FK  Handle different target library                 *
+      * 20010226 FK  Specific authorities                            *
+      * 20021111 FK  Include retrieval date                          *
+      * 20021119 FK  Include target/group                            *
+      * 20050513 FK  Retrieve date-time stamp                        *
+      * 20051010 FK  Include target library                          *
+      * 20060327 FK  Include original object name                    *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNOA@
+     A            OAGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            OACMPL        10A         TEXT('Original library')
+     A                                      COLHDG('Original' 'library')
+     A            OACMPO        10A         TEXT('Original object')
+     A                                      COLHDG('Original' 'object')
+     A            OALIB         10A         TEXT('Object library')
+     A                                      COLHDG('Object' 'library')
+     A            OANAME        10A         TEXT('Object name')
+     A                                      COLHDG('Object' 'name')
+     A            OATYPE         8A         TEXT('Object type')
+     A                                      COLHDG('Object' 'type')
+     A            OATGTL        10A         TEXT('Target library')
+     A                                      COLHDG('Target' 'library')
+     A            OAOWN         10A         TEXT('Owner of object')
+     A                                      COLHDG('Object' 'Owner')
+     A            OAUSR         10A         TEXT('User profile')
+     A                                      COLHDG('User' 'profile')
+     A            OAOBJA         8A         TEXT('Object authority')
+     A                                      COLHDG('Object' 'Authority')
+     A            OAANAM        10A         TEXT('Authorisation list')
+     A                                      COLHDG('Auth.' 'List')
+     A            OAOPR          1A         TEXT('Object operational auth')
+     A                                      COLHDG('Opr.')
+     A            OAOMGT         1A         TEXT('Object management auth')
+     A                                      COLHDG('Obj.' 'Mgt')
+     A            OAEXS          1A         TEXT('Object existence auth')
+     A                                      COLHDG('Obj.' 'Exs')
+     A            OAREAD         1A         TEXT('Read authority')
+     A                                      COLHDG('Read')
+     A            OAADD          1A         TEXT('Add authority')
+     A                                      COLHDG('Add')
+     A            OAUPD          1A         TEXT('Update authority')
+     A                                      COLHDG('Update')
+     A            OADLT          1A         TEXT('Delete authority')
+     A                                      COLHDG('Delete')
+     A            OAEXEC         1A         TEXT('Execute authority')
+     A                                      COLHDG('Execute')
+     A            OAALT          1A         TEXT('Object alter authority')
+     A                                      COLHDG('Alter')
+     A            OAREF          1A         TEXT('Object reference auth')
+     A                                      COLHDG('Obj.' 'Ref.')
+     A            OAAMGT         1A         TEXT('Auth. list mgt auth')
+     A                                      COLHDG('Autl.' 'Mgt')
+     A            OARTVD          Z         TEXT('Retrieve DTS')
+     A                                      COLHDG('Retrieve DTS')
+      *
+     A          K OAGRPN
+     A          K OACMPL
+     A          K OACMPO
+     A          K OATYPE
+     A          K OAUSR

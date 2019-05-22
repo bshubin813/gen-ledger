@@ -1,0 +1,151 @@
+.* ============================================================ *
+.* Object:    HAPYJSE         *PNLGRP                           *
+.*            Help text for the HAPYJSE command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 19991101 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HAPYJSE'.Apply job schedule entries - Help
+:P.
+The HAPYJSE (Apply job schedule entries) command inserts the
+job schedule entries in the specified user space into the current
+system's job scheduler QUSRSYS/QDFTJOBSCD.
+:P.
+The specified user space contains the job schedule entries which
+were retrieved with the HRTVJSE command.
+:P.
+Job schedule entries that have been submitted without a specific
+schedule date (SCDDATE) will be also be added without a specific
+schedule date. The first submission date is therefore relative to
+the current date.
+:P.
+Entries with a specific schedule date will be added as-is, if the
+schedule date/time is in the future. If the schedule date/time is
+in the past, the next submission date/time is used. If that date is
+also in the past, the entry will either be placed in a held status
+or skipped, dependent on the SKPEXP parameter.
+:P.
+Before adding the job schedule entry, the library list will be
+set according to the job description's initial library list (INLLIBL).
+If the library list cannot be set, an attempt to add the job schedule
+entry is still made and a message will be issued.
+:P.
+:NT.The omit date is ignored when adding job schedule entries. Take
+this into account when automating the insertion process.:ENT.
+:EHELP.
+
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter USRSPC
+:HELP NAME='HRTVJSE/USRSPC'.User space - Help
+:XH3.User space (USRSPC)
+:P.
+Specify the name of the user space from which the job schedule entries
+must be retrieved. Usually, the user space name is the same as the
+name of the originating system.
+:P.
+The possible library values are:
+:PARML.
+:PT.*LIBL
+:PD.
+The user space will be searched in the current job's library list.
+:PT.*CURLIB
+:PD.
+The user space will be searched in the current library
+that has been set for this job.
+:PT.library-name
+:PD.
+Specify the library which contains the user space.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JSEID
+:HELP NAME='HAPYJSE/JSEID'.Job schedule entry ID - Help
+:XH3.Job schedul entry ID (JSEID)
+:P.
+Specifies the identification of the job schedule entries when they
+are inserted in the job scheduler. The original text 'description'
+of the entries is concatenated to the specified identification to
+be able to recognise/remove them easily.
+:P.
+The possible job-schedule-entry-ID values are:
+:P.
+:PARML.
+:PT.:PK def.*USRSPC:EPK.
+:PD.
+The name of the user space specified on the USRSPC parameter is used
+to identify the job schedule entries. Usually, the user space has the
+name of the originating system.
+:PT.job-schedule-entry-ID
+:PD.
+Specify the identification by which the job schedule entries can be
+recognised.
+:EPARML.
+:EHELP.
+
+.* Help for parameter HOLD
+:HELP NAME='HAPYJSE/HOLD'.Hold job schedule entries - Help
+:XH3.Hold job schedule entries (HOLD)
+:P.
+Controls whether or not all job schedule entries will be placed in
+a held status immediately after they have been inserted into the
+current system's job scheduler.
+:P.
+You may want to hold the job schedule entries initially to prevent
+them from getting executed uncontrolled.
+:P.
+:NT.Even when specifying *NO for this parameter, some job schedule
+entries may be held anyway. See SKPEXP parameter help for more details.:ENT.
+:P.
+The possible hold-job-schedule-entries values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+All job schedule entries will be placed in a held status immediately
+after they have been inserted.
+:PT.*NO
+:PD.
+Job schedule entries will be inserted as-is. If they were held on the
+original system, they are held on the current system. If not, they
+are immediately available for submission.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SKPEXP
+:HELP NAME='HAPYJSE/SKPEXP'.Skip expired entries - Help
+:XH3.Skip expired entries (SKPEXP)
+:P.
+Indicates if expired entries must be skipped or inserted and placed
+in a held status. An expired entry is a job schedule entry which was
+scheduled for a one-time execution FRQ(*ONCE) and for which the next
+submission date/time lies in the past or for which the schedule date
+was specified upon entry and the next submission date is also in the
+past.
+:P.
+The possible skip-expired-entries values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Job schedule entries which have expired will be skipped. A message
+indicating which job schedule entry was skipped will be issued.
+:PT.*NO
+:PD.
+Expired job schedule entries will be added with SCDDATE(*CURRENT)
+and SCDTIME(*CURRENT). Also, the omit date will be set to the current
+date and the entry is placed on hold to prevent inadvertent execution.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

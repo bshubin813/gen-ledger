@@ -1,0 +1,75 @@
+.* ============================================================ *
+.* Object:    HSTRAPY         *PNLGRP                           *
+.*            Help text for the HSTRAPY command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20030506 FK  Initial delivery                                *
+.* 20030610 FK  New parameter for draining staging store        *
+.* 20111217 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HSTRAPY'.Start HA/iCluster apply jobs - Help
+:P.
+The HSTRAPY (Start iCluster apply jobs) command allows you to
+start iCluster apply jobs, dependent on the parameters
+specified.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ICGROUP
+:HELP NAME='HSTRAPY/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the apply jobs must be started.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+Apply jobs for all groups or resilient applications will be started.
+iCluster.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the apply
+jobs must be started.
+:EPARML.
+:EHELP.
+
+.* Help for parameter FRCDRN
+:HELP NAME='HSTRAPY/FRCDRN'.Drain staging store - Help
+:XH3.Drain staging store (FRCDRN)
+:P.
+Specifies whether the staging store will be force drained.
+The apply processes merge entries from the audit and
+database channels. Depending on your selection, the apply
+processes will either continue draining the staging store
+even if one of the channels is empty (known as force
+draining), or it will stop draining when one of the
+channels is empty.
+:P.
+The possible drain-staging-store values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+The staging store will not be drained.
+:PT.*YES
+:PD.
+Indicates that the staging store will be force drained. Once it reaches the
+last entry of the channel with fewer entries, the merge will stop, and the
+apply processes will drain the other channel until it is empty.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

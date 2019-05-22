@@ -1,0 +1,127 @@
+.im #HDR
+
+:import       name  = 'HSTRHA'
+              pnlgrp = HSTRHA.
+:import       name  = 'HSTRCST'
+              pnlgrp = HSTRCST.
+:import       name  = 'HENDCST'
+              pnlgrp = HENDCST.
+:import       name  = 'HSTRAPY'
+              pnlgrp = HSTRAPY.
+:import       name  = 'HENDAPY'
+              pnlgrp = HENDAPY.
+:import       name  = 'HRSHCHGF'
+              pnlgrp = HRSHCHGF.
+:import       name  = 'HSNDCMD'
+              pnlgrp = HSNDCMD.
+:import       name  = 'HSNDFTP'
+              pnlgrp = HSNDFTP.
+:import       name  = 'HSETPOS'
+              pnlgrp = HSETPOS.
+:import       name  = 'HMRKPOS'
+              pnlgrp = HMRKPOS.
+:import       name  = 'HRLSSIGW'
+              pnlgrp = HRLSSIGW.
+
+.im #VAR
+:cond         name=cstrha
+              expr='chkobj("HSTRHA", "*CMD")'.
+:cond         name=cstrcst
+              expr='chkobj("HSTRCST", "*CMD")'.
+:cond         name=cendcst
+              expr='chkobj("HENDCST", "*CMD")'.
+:cond         name=cstrapy
+              expr='chkobj("HSTRAPY", "*CMD")'.
+:cond         name=cendapy
+              expr='chkobj("HENDAPY", "*CMD")'.
+:cond         name=crshchgf
+              expr='chkobj("HRSHCHGF", "*CMD")'.
+:cond         name=csndcmd
+              expr='chkobj("HSNDCMD", "*CMD")'.
+:cond         name=csndftp
+              expr='chkobj("HSNDFTP", "*CMD")'.
+:cond         name=csetpos
+              expr='chkobj("HSETPOS", "*CMD")'.
+:cond         name=cmrkpos
+              expr='chkobj("HMRKPOS", "*CMD")'.
+:cond         name=crlssigw
+              expr='chkobj("HRLSSIGW", "*CMD")'.
+.im #KEY
+:ekeyl.
+.im #TTL
+DMXtras High Availability Operations menu
+.im #OPT
+
+:menugrp.     Operations
+:menui        option=11
+              cond=cstrha
+              help='HSTRHA'
+              action='cmd ?hstrha'
+              .Start HA Suite automatically                     HSTRHA     (S/T)
+:menui        option=12
+              cond=cstrcst
+              help='HSTRCST'
+              action='cmd ?hstrcst'
+              .Start iCluster automatically                     HSTRCST    (S/T)
+:menui        option=13
+              cond=cendcst
+              help='HENDCST'
+              action='cmd ?hendcst'
+              .End iCluster automatically                       HENDCST    (S/T)
+:menui        option=14
+              cond=cstrapy
+              help='HSTRAPY'
+              action='cmd ?hstrapy'
+              .Start apply jobs                                 HSTRAPY      (T)
+:menui        option=15
+              cond=cendapy
+              help='HENDAPY'
+              action='cmd ?hendapy'
+              .End apply jobs                                   HENDAPY      (T)
+:menui        option=20
+              cond=crshchgf
+              help='HRSHCHGF'
+              action='cmd ?hrshchgf'
+              .Refresh changed files                            HRSHCHGF   (S)
+:menui        option=21
+              cond=csndcmd
+              help='HSNDCMD'
+              action='cmd ?hsndcmd'
+              .Send command through mirroring process           HSNDCMD    (S)
+:menui        option=22
+              cond=csndftp
+              help='HSNDFTP'
+              action='cmd ?hsndftp'
+              .Send save file via FTP                           HSNDFTP    (Any)
+:menui        option=25
+              cond=csetpos
+              help='HSETPOS'
+              action='cmd ?hsetpos'
+              .Set HA position to last applied                  HSETPOS    (S)
+:menui        option=26
+              cond=cmrkpos
+              help='HMRKPOS'
+              action='cmd ?hmrkpos'
+              .Mark journal positions parallel                  HMRKPOS    (S)
+:menui        option=31
+              cond=crlssigw
+              help='HRLSSIGW'
+              action='cmd ?hrlssigw'
+              .Release jobs waiting for checkpoint              HRLSSIGW   (S/T)
+:emenugrp.
+
+.im #DMXHAHA
+
+:emenu.
+.im #CMDL
+
+.im #HLP
+
+:help         name='menu/help'.
+DMXtras High Availability Operations Menu - Help
+:p.
+This menu shows the tools related to the operations of your high availability
+solution.
+:ehelp.
+
+:epnlgrp.

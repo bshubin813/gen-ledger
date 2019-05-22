@@ -1,0 +1,17 @@
+      * ============================================================ *
+      * Object:    HUBSRBI         *FILE LF                          *
+      *            Logical file over HABSFREL by OBJRELID            *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020517 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUBSRBI@                  PFILE(HABSFREL)
+     A            OBJRELID                  RENAME(ID)
+     A            RELPATH                   RENAME(PATHNAME)
+      *
+     A          K OBJRELID

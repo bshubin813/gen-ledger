@@ -1,0 +1,48 @@
+/* ================================================================= */
+/* Object:         HDSPSYSINF      *CMD                              */
+/*                 Display system information                        */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(HDSPSYSINF) HLPID(*CMD)             */
+/*                                                                   */
+/* Synopsis:       Retrieves information on the system required for  */
+/*                 DM product licencing. The information is display- */
+/*                 ed on screen and the user can transcribe, print   */
+/*                 screen or copy/past into document                 */
+/*                                                                   */
+/*                 The user can also nominate a product to display   */
+/*                 the version and packid (*HA, *TS or *ICLUSTER)    */
+/*                 The following information is retrieved            */
+/*                       system name    (from RTVNETA)               */
+/*                       OS/400 version (from QSS1NRI data area)     */
+/*                       serial number  (from QSRLNBR system value)  */
+/*                       model          (from QMODEL system value)   */
+/*                       processor feature                           */
+/*                                      (from QPRCFEAT system value) */
+/*                       product version and packid if specified     */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020508 RP  Initial delivery                                     */
+/* 20060102 FK  Automatically find all products in library list      */
+/* ================================================================= */
+             CMD        PROMPT('Display system information')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

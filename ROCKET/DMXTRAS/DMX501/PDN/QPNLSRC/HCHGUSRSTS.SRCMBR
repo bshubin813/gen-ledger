@@ -1,0 +1,177 @@
+.* ============================================================ *
+.* Object:    HCHGUSRSTS      *PNLGRP                           *
+.*            Help text for the HCHGUSRSTS command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000321 FK  Initial delivery                                *
+.* 20001204 FK  Allow reset of password                         *
+.* 20010328 FK  Allow input file for user profiles              *
+.* 20011128 FK  Exclude Q* user profiles by default             *
+.* 20020508 FK  Allow selection of user class                   *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HCHGUSRSTS'.Change user profile status - Help
+:P.
+The HCHGUSRSTS (Change user profile status) command allows you to
+generically disable or enable user profiles. This is useful at
+switchover time or whenever user profile statuses must be altered.
+:P.
+Additionally, the password of the user profile can be set to the same
+value as the user profile in case of *ENABLE.
+:P.
+The following user profiles will never be changed by this command:
+:SL.
+:LI.QSECOFR
+:LI.QSYSOPR
+:LI.QSYS
+:LI.DMCLUSTER
+:ESL.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter USRPRF
+:HELP NAME='HCHGUSRSTS/USRPRF'.User profile - Help
+:XH3.User profile (USRPRF)
+:P.
+Specify a user profile name or a generic name of those user profiles
+that must be changed.
+:P.
+The possible user-profile values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+All user profiles will be included in the processing.
+:PT.generic*-user-profile
+:PD.
+Specify the generic name of the user profile that must be enabled
+or disabled.
+:PT.*FILE
+:PD.
+Use the input file specified on the FILE parameter for the user profiles
+and the status.
+:PT.user-profile
+:PD.
+Specify the name of the user profile that must be enabled or disabled.
+:EPARML.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter USRCLS
+:HELP NAME='HCHGUSRSTS/USRCLS'.User class - Help
+:XH3.User class (USRCLS)
+:P.
+Specify the user class that the profile must belong to. Only user profiles
+belonging to the specified user class will be changed.
+:P.
+The possible user-class values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+User profiles of any class will be included for processing.
+:PT.*USER
+:PD.
+User profiles of the User class will be included for processing.
+:PT.*SYSOPR
+:PD.
+User profiles of the System operator class will be included for processing.
+:PT.*PGMR
+:PD.
+User profiles of the Programmer class will be included for processing.
+:PT.*SECADM
+:PD.
+User profiles of the Security administrator class will be included
+for processing.
+:PT.*SECOFR
+:PD.
+User profiles of the Security officer class will be included for processing.
+:EPARML.
+:EHELP.
+
+.* Help for parameter EXCQPRF
+:HELP NAME='HCHGUSRSTS/EXCQPRF'.Exclude Q* user profiles - Help
+:XH3.Exclude Q* user profiles (EXCQPRF)
+:P.
+Specify whether user profiles that start with a "Q" must be skipped
+for the enable/disable action.
+:P.
+The possible exclude-q*-user-profiles values are:
+:P.
+:PARML.
+:PT.*YES
+:PD.
+All user profiles which start with a Q will be skipped for processing.
+:PT.*NO
+:PD.
+User profiles which start with a Q will be processed, except for the one
+explicitly excluded by the command (see command-level help text).
+:EPARML.
+:EHELP.
+
+.* Help for parameter STATUS
+:HELP NAME='HCHGUSRSTS/STATUS'.New user profile status - Help
+:XH3.New user profile status (STATUS)
+:P.
+Specify status to which the user profile must be changed.
+:P.
+The possible new-user-profile-status values are:
+:P.
+:PARML.
+:PT.*ENABLED
+:PD.
+The selected user profile(s) will be enabled and valid for
+sign on and evoked jobs.
+:PT.*DISABLED
+:PD.
+The selected user profile(s) will not be able to sign on or
+evoke jobs.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RSTPWD
+:HELP NAME='HCHGUSRSTS/RSTPWD'.Reset password - Help
+:XH3.Reset password (RSTPWD)
+:P.
+Allows passwords to be reset to the same value as the name of the
+user profile in case of enabling.
+:P.
+:NT.Passwords will only be reset for profiles that do not start with
+a Q, in order to prevent opening a security gap.:ENT.
+:P.
+The possible reset-password values are:
+:P.
+:PARML.
+:PT.*YES
+:PD.
+The password of the user profile will be set to *USRPRF. Also, the
+password will be set to expired so that is must be changed the next
+time the user signs on to the system.
+:PT.*NO
+:PD.
+Passwords will not be reset.
+:EPARML.
+:EHELP.
+
+.* Help for parameter FILE
+:HELP NAME='HCHGUSRSTS/FILE'.Input files for profiles - Help
+:XH3.Input file for profiles (FILE)
+:P.
+Sets the status of the user profiles according to the status in the
+specified file. The file must be of the DSPUSRPRF *OUTFILE format.
+:P.
+:NT. If RSTPWD(*YES) has been specified, the passwords will still be
+reset to the user profile name.:ENT.
+:EHELP.
+
+:EPNLGRP.

@@ -1,0 +1,27 @@
+      * ============================================================ *
+      * Object:    ANZJRNL1        *FILE PF                          *
+      *            ANZJRNPF by Object, Date, Hour                    *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060126 FK  Comments                                        *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R ANZREC                    PFILE(ANZJRNPF)
+     A          K FLIB
+     A          K FNAM
+     A          K MBRN
+     A          K IFSID
+     A          K OTYP
+     A          K DTE
+     A          K HOURX
+     A          K USRPRF
+     A          K JOBNM
+     A          K PGMN
+     A          K JCOD
+     A          K JTYP

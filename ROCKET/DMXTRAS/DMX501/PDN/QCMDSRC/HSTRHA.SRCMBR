@@ -1,0 +1,70 @@
+/* ================================================================= */
+/* Object:         HSTRHA          *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HSTRHA) HLPID(*CMD)    */
+/*                                                                   */
+/* Synopsis:       This command is used as an AJE for the HASUITE    */
+/*                 subsystem and it starts the HA mirroring process. */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HSTRHA     *JOBD    Job description for AJE                       */
+/* HSTRHA     *CMD     Command which is submitted                    */
+/* HSTRHA     *PGM     CPP                                           */
+/* HSTRHA     *PNLGRP  Help text for command                         */
+/* HSTRHAR    *PGM     Requester job                                 */
+/* HSTRHA1    *PGM     Server job listener                           */
+/* HSTRHA2    *PGM     Start targets for a specific system           */
+/* HSTRHA3    *PGM     Send request to remote listener               */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 19991220 FK  Initial delivery                                     */
+/* 20000323 FK  Parameterise system names and locations              */
+/* 20000329 FK  Control start of HA Suite and update                 */
+/* 20001201 FK  Use TCP/IP sockets instead of SNA                    */
+/* ================================================================= */
+             CMD        PROMPT('Start HA Suite processes')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(PRINAME) TYPE(*CNAME) LEN(8) MIN(1) +
+                          PROMPT('Primary system name' 1)
+             PARM       KWD(SECNAME) TYPE(*CNAME) LEN(8) MIN(1) +
+                          PROMPT('Secondary system name' 3)
+             PARM       KWD(PRIHOST) TYPE(*CHAR) LEN(100) +
+                          DFT(*PRINAME) SPCVAL((*PRINAME)) +
+                          PROMPT('Primary host name' 2)
+             PARM       KWD(SECHOST) TYPE(*CHAR) LEN(100) +
+                          DFT(*SECNAME) SPCVAL((*SECNAME)) +
+                          PROMPT('Secondary host name')
+             PARM       KWD(STARTHA) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Start HA Suite')
+             PARM       KWD(STARTUPD) TYPE(*CHAR) LEN(6) RSTD(*YES) +
+                          DFT(*NOCHG) SPCVAL((*YES) (*NO) (*NOCHG)) +
+                          PMTCTL(STARTHA) PROMPT('Start target +
+                          update job')
+             PARM       KWD(PORT) TYPE(*CHAR) LEN(30) DFT('hstrha') +
+                          PMTCTL(*PMTRQS) PROMPT('Service name for +
+                          HSTRHA')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ STARTHA:    PMTCTL     CTL(STARTHA) COND((*EQ '*YES'))

@@ -1,0 +1,45 @@
+      *CP: SIZE(*NOMAX)
+      * ============================================================ *
+      * Object:    HCHKSYNID       *FILE PF                          *
+      *            Holds the retrieved IFS object descriptions.      *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020523 FK  Initial delivery                                *
+      * 20021203 FK  Modify for output file in C program             *
+      * 20050517 FK  Remove owner and mode fields                    *
+      * 20051230 FK  Exclude flag instead of delete of record        *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNID@
+     A            IDGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            IDTYPE        11A         TEXT('IFS Object type')
+     A                                      COLHDG('IFS Object' 'type')
+     A            IDSIZE         9B 0       TEXT('IFS Allocated size')
+     A                                      COLHDG('Object' 'Size')
+     A            IDCNTD          Z         TEXT('IFS Content change DTS')
+     A                                      COLHDG('Content' -
+     A                                             'Change DTS')
+     A            IDSTSD          Z         TEXT('IFS Status change DTS')
+     A                                      COLHDG('Status' -
+     A                                             'Change DTS')
+     A            IDRTVD          Z         TEXT('IFS Retrieve DTS')
+     A                                      COLHDG('Retrieve DTS')
+     A            IDOBJK       500A         VARLEN TEXT('IFS Object name (key)')
+     A                                      COLHDG('IFS Object' 'Key')
+     A            IDINC          4A         TEXT('Included/Excluded')
+     A                                      COLHDG('Object' 'Included')
+     A                                      VALUES('*INC' '*EXC')
+     A                                      DFT('*INC')
+     A            IDOBJ       5001A         VARLEN TEXT('IFS Object name')
+     A                                      COLHDG('IFS Object')
+      *
+     A          K IDGRPN
+     A          K IDOBJK

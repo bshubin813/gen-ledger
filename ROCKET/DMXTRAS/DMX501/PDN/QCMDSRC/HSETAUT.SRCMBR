@@ -1,0 +1,60 @@
+/* ================================================================= */
+/* Object:         HSETAUT         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD                                            */
+/*                                                                   */
+/* Synopsis:       Sets authorities according to file in utilities   */
+/*                 library.                                          */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010226 FK  Initial delivery                                     */
+/* 20010227 FK  Input for target name                                */
+/* 20010921 FK  Process differences by default                       */
+/* 20030505 FK  Enable for iCluster                                  */
+/*              Allow selection for group                            */
+/* 20030710 FK  Change TARGET/GROUP parameters back to TGTNAM/GRPNAM */
+/* 20031209 FK  Set IFS authorities                                  */
+/* 20070919 FK  Target not mandatory so it can be defaulted          */
+/* 20111217 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Set auth. from sync check file')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ICGROUP) TYPE(*NAME) LEN(10) +
+                          SPCVAL((*ALL *N)) MIN(1) PROMPT('Group or +
+                          resilient application')
+             PARM       KWD(ACTION) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*DIF) SPCVAL((*DIF) (*GRT) (*RVK)) +
+                          PROMPT('Action for object authority')
+             PARM       KWD(AUTIFS) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(SETDIF) PROMPT('Set IFS authorities')
+             PARM       KWD(SYNID) TYPE(*NAME) LEN(5) DFT(*TGT) +
+                          SPCVAL((*TGT)) PMTCTL(*PMTRQS) +
+                          PROMPT('Sync. check identifier')
+             PARM       KWD(TGTLIB) TYPE(*NAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PMTCTL(*PMTRQS) +
+                          PROMPT('Target library')
+             PARM       KWD(SUSAPY) TYPE(*CHAR) RSTD(*YES) DFT(*NO) +
+                          SPCVAL((*YES) (*NO)) PMTCTL(*PMTRQS) +
+                          PROMPT('Suspend apply job')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ SETDIF:     PMTCTL     CTL(ACTION) COND((*EQ '*DIF'))

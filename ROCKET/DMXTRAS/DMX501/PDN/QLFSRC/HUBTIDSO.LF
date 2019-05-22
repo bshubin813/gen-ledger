@@ -1,0 +1,31 @@
+      * ============================================================ *
+      * Object:    HUBTIDSO         *FILE LF                         *
+      *            Logical file over HABTIDPATH by TGTNAME, GRPNAME  *
+      *            (only suspended objects)                          *
+      *                                                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20041214 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUBTIDSO@                 PFILE(HABTIDPATH)
+     A            TGTNAME
+     A            GRPNAME
+     A            STATE
+     A            REASON
+     A            BSFTYPE                   RENAME(OBJTYPE)
+     A            JRNNAME
+     A            JRNLIB
+     A            CHKPOINT
+     A            PATHNME      500   I      VARLEN SST(PATHNAME 1 500)
+     A            TGTID
+     A            GRPID
+      *
+     A          K TGTNAME
+     A          K GRPNAME
+      * Omit records that have STATE=ACT
+     A          O STATE                     COMP(EQ 'ACT')

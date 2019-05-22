@@ -1,0 +1,52 @@
+/* ================================================================= */
+/* Object:         HSETPOS         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HSETPOS) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Set the position of an iClsuter group to the last */
+/*                 position + 1.                                     */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20030103 FK  Initial delivery                                     */
+/* 20030710 FK  Enable for iCluster                                  */
+/* 20070125 FK  Default target is *ICLUSTER                          */
+/* 20111220 FK  Remove HA Suite                                      */
+/* ================================================================= */
+             CMD        PROMPT('Set groups to last apy pos.')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ICGROUP) TYPE(*NAME) LEN(10) +
+                          SPCVAL((*ALL *N)) MIN(1) PROMPT('Group or +
+                          resilient application')
+             PARM       KWD(RMTHOST) TYPE(*CHAR) LEN(100) REL(*NE ' +
+                          ') PROMPT('Remote host name')
+             PARM       KWD(PASSWORD) TYPE(*NAME) LEN(10) +
+                          SPCVAL((*NONE)) DSPINPUT(*NO) +
+                          PROMPT('Password on remote system')
+             PARM       KWD(ACTION) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*CHK) SPCVAL((*CHK) (*SET)) +
+                          PROMPT('Action to perform')
+             PARM       KWD(JRN) TYPE(JRNQ) PMTCTL(*PMTRQS) +
+                          PROMPT('Journal')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ JRNQ:       QUAL       TYPE(*NAME) DFT(*ALL) SPCVAL((*ALL))
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

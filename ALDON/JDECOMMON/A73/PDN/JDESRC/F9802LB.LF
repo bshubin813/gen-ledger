@@ -1,0 +1,14 @@
+     A****************************************************************
+     A*    (JDE) File Design Aid                                     *
+     A*                                                              *
+     A*    Created By : NUGENT                                       *
+     A*    Date       : 05/11/89                                     *
+     A*    Time       : 125446                                       *
+     A*                                                              *
+     A*    File       : by sys
+     A****************************************************************
+     A          R I9802                     PFILE(F9802     )
+     A          K SIMID
+     A          K SIRLS
+     A          K SISTC
+     A          K SILIBR

@@ -1,0 +1,24 @@
+     A*****************************************************************
+     A*¹COPYRIGHT·1993, 1997 BY¹SEAGULL BUSINESS SOFTWARE·B.V.        *
+     A*¹                        LAAN DER VERENIGDE NATIES 60        · *
+     A*¹                        3314 DA DORDRECHT·                    *
+     A*¹                        THE NETHERLANDS·(TEL:+ 31 78 6322800) *
+     A*****************************************************************
+     A*¹USED FOR·.........:¹CAR RENTAL·DEMO                           *
+     A*¹NAME·.............:¹CARB04·RETURNED CARS                      *
+     A*****************************************************************
+     A                                      UNIQUE
+     A                                      REF(CARREF)
+     A          R CARB04R1
+     A            RETURN    R               REFFLD(RETNNR)
+     A            CNTRCT    R               REFFLD(CONTNR)
+     A            LICENC    R               REFFLD(LPLATE)
+     A            BRANDC    R               REFFLD(BRAND)
+     A            MODELC    R               REFFLD(MODEL)
+     A            MILAGE    R               REFFLD(MILAGE)
+     A            CHKDMG    R               REFFLD(CHKDMG)
+     A            DAMAGE    R               REFFLD(DAMFND)
+     A            TANKED    R               REFFLD(TNKFIL)
+     A            PAID      R               REFFLD(PAID)
+     A            CARDNR    R               REFFLD(CARDNR)
+     A          K RETURN

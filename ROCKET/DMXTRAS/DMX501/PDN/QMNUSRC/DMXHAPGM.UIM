@@ -1,0 +1,56 @@
+.im #HDR
+
+:import       name  = 'WRKMBRPDM'
+              pnlgrp = QHUOCMD.
+:import       name  = 'WRKOBJPDM'
+              pnlgrp = QHUOCMD.
+
+.im #VAR
+.im #KEY
+:ekeyl.
+.im #TTL
+DMXtras High Availability Programming menu
+.im #OPT
+
+:menugrp.     Work with customer members
+:menui        option=11
+              help='WRKMBRPDM'
+              action='cmd wrkmbrpdm &zmnulib/HEXMCMD'
+              .Start PDM for CMD sources                        WRKMBRPDM  (S/T)
+:menui        option=12
+              help='WRKMBRPDM'
+              action='cmd wrkmbrpdm &zmnulib/HEXMCLP'
+              .Start PDM for CLP sources                        WRKMBRPDM  (S/T)
+:menui        option=13
+              help='WRKMBRPDM'
+              action='cmd wrkmbrpdm &zmnulib/HEXMRPGLE'
+              .Start PDM for RPGLE sources                      WRKMBRPDM  (S/T)
+:menui        option=14
+              help='WRKMBRPDM'
+              action='cmd wrkmbrpdm &zmnulib/HEXMCBL'
+              .Start PDM for CBL sources                        WRKMBRPDM  (S/T)
+:menui        option=15
+              help='WRKMBRPDM'
+              action='cmd wrkmbrpdm &zmnulib/HEXMDDS'
+              .Start PDM for DDS sources                        WRKMBRPDM  (S/T)
+:menui        option=20
+              help='WRKOBJPDM'
+              action='cmd wrkobjpdm &zmnulib HEXM*'
+              .Work with HA Example source files                WRKOBJPDM  (S/T)
+:emenugrp.
+
+.im #DMXHAHA
+
+:emenu.
+.im #CMDL
+
+.im #HLP
+
+:help         name='menu/help'.
+DMXtras High Availability Programming Menu - Help
+:p.
+This menu holds options to start the Program Development Manager and work with
+source files holding example sources delivered with the DMXtras tools.
+:ehelp.
+
+:epnlgrp.

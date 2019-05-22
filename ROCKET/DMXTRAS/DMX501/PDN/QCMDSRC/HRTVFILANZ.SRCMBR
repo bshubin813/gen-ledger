@@ -1,0 +1,47 @@
+/* ================================================================= */
+/* Object:         HRTVFILANZ      *CMD                              */
+/*                 Retrieve file analysis                            */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) HLPPNLGRP(HRTVFILANZ)         */
+/*                 HLPID(*CMD)                                       */
+/*                                                                   */
+/* Synopsis:       Retrieves file attributes to the ANZFILA and      */
+/*                 ANZFILC files.                                    */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HRTVFILANZ *PGM     CPP                                           */
+/* HRTVFILANZ *PNLGRP  Help for HPRGMIF command                      */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020507 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve file analysis')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(FILE) TYPE(QUALFILE) MIN(1) PROMPT('Files +
+                          to analyse')
+             PARM       KWD(BATCH) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Submit to batch')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*GENERIC) SPCVAL((*ALL)) MIN(1)
+             QUAL       TYPE(*NAME) MIN(1) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

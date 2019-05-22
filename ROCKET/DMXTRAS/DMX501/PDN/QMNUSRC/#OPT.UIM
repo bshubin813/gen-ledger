@@ -1,0 +1,5 @@
+:menu         depth='*'
+              botsep=space
+              scroll=yes.
+
+:topinst.Select one of the following:

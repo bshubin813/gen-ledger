@@ -1,0 +1,39 @@
+      * ============================================================ *
+      * Object:    HLSTJRN         *FILE PF                          *
+      *            File that holds the journal(s) and its attributes *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20070422 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R LSTJRNR
+     A            LJJRN         10A         TEXT('Journal name')
+     A                                      COLHDG('Journal' 'name')
+     A            LJJRNL        10A         TEXT('Journal library')
+     A                                      COLHDG('Journal' 'library')
+     A            LJJRNTYP       8A         TEXT('Journal type')
+     A                                      COLHDG('Journal' 'type')
+     A                                      VALUES('*LOCAL' '*REMOTE')
+     A            LJNBRRCV      10  0       TEXT('Number of attached receivers')
+     A                                      COLHDG('Number of' 'attached' +
+     A                                      'receivers')
+     A            LJTOTSIZGB    11  1       TEXT('Total size of receivers GB')
+     A                                      COLHDG('Total size' 'of receivers' +
+     A                                      'in GB')
+     A            LJJRNSTT      10A         TEXT('Journal state')
+     A                                      COLHDG('Journal' 'state')
+     A            LJATTRCV      10A         TEXT('Attached receiver')
+     A                                      COLHDG('Attached' 'receiver')
+     A            LJATTRCVL     10A         TEXT('Attached receiver library')
+     A                                      COLHDG('Attached' 'receiver' +
+     A                                      'library')
+     A            LJRTVDTS        Z         TEXT('Retrieve timestamp')
+     A                                      COLHDG('Retrieve' 'timestamp')
+      *
+     A          K LJJRNL
+     A          K LJJRN

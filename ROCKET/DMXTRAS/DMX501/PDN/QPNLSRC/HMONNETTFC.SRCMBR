@@ -1,0 +1,198 @@
+.* ============================================================ *
+.* Object:    HMONNETTFC      *PNLGRP                           *
+.*            Help text for the HMONNETTFC command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20051219 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HMONNETTFC'.Monitor active jobs - Help
+:P.
+The HMONNETTFC (Monitor network traffic) keeps a record of network traffic
+going over a specific port and can be used to measure the actual bandwidth
+used by iCluster (or any other application
+that connects over TCP/IP). The utility uses an API to retrieve network
+statistics over all established TCP/IP channels and gathers the totals per
+combination of Local IP, Remote IP and Port number so that the incoming or
+outgoing traffic from/to a specific location can be measured.
+:P.
+If the HMONNETTFC command is run interactively, it will be submitted to batch
+using the HAUTILS job description; the name of the job is HMONNETTFC.
+:P.
+For the passed port number, the following information is gathered and stored
+in the specified output file:
+:UL.
+:LI.System name
+:LI.Local IP address
+:LI.Remote IP address
+:LI.Port number
+:LI.Port location
+:LI.Measurement date-time
+:LI.Number of incoming bytes
+:LI.Number of outgoing bytes
+:LI.Total number of bytes (in+out)
+:LI.Measurement interval in seconds
+:LI.Incoming bits per second
+:LI.Outgoing bits per second
+:LI.Total bits per second (in+out)
+:EUL.
+:P.
+When started, the monitor job first records the current status of traffic that
+has gone of the established channels. After the specified interval (number of
+seconds), another snapshot is taken of the updated status. At that time, the
+number of incoming and outgoing bytes of the established channels are
+compared with each other and the number of bits per second transmitted in
+the passed interval is calculated.
+:P.
+By querying the output file, you will be able to see what the consumed band-
+width is per time interval and understand if there are any peaks in the
+traffic. When looking for bandwidth measurements, ignore the records with
+Measurement Interval (NTITV) equal to 0, these are the initial recordings of
+the monitor job.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter FILE
+:HELP NAME='HMONNETTFC/FILE'.Traffic output file - Help
+:XH3.Traffic output file (FILE)
+:P.
+Specify the name of the file that will hold the network traffic statistics
+per channel. If the file does not exist, it will be created automatically
+using the HNETTFC template file in the DMXtras customer library.
+:P.
+The possible traffic-output-file values are:
+:PARML.
+:PT.file-name
+:PD.
+Specify the name of the file that should hold the network traffic statistics.
+the file does not exist, it will be created based on the HNETTFC template file
+in the DMXtras customer library.
+:EPARML.
+:P.
+The possible library values are:
+:PARML.
+:PT.library-name
+:PD.
+Specify the library in which the network traffic output file is located or
+placed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PORT
+:HELP NAME='HMONNETTFC/PORT'.Port number - Help
+:XH3.Port number (PORT)
+:P.
+Specify the port number for which the network traffic must be measured. If you
+want to measure network traffic for more than 1 port, issue a HMONNETTFC for
+each port you want to measure.
+:P.
+The possible port-number values are:
+:PARML.
+:PT.port-number
+:PD.
+Specify the port number for which network traffic must be gathered.
+:PT.4545
+:PD.
+This is the default iCluster port on iSeries.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PORTLOC
+:HELP NAME='HMONNETTFC/PORTLOC'.Port location - Help
+:XH3.Port location (PORTLOC)
+:P.
+Specify whether traffic measurement should take place for the specified port
+on the current system (*LCL), a remote system (*RMT) or both (*LCLRMT). By
+default, incoming and outgoing traffic from/to the specified port number on the
+current (*LCL) system will be measured.
+:P.
+Example: If you have iCluster replicating from system A to B and you would
+want to measure traffic on system B, you would specify PORT(4545) and
+PORTLOC(*LCL); all traffic coming in on port 4545 will then be measured. If
+you have iCluster going in both directions and you want to summarise all
+traffic on port 4545, you would specify PORT(4545) and PORTLOC(*LCLRMT),
+IP traffic directed to port 4545 on the local system and traffic directed to
+port 4545 on the remote system will then be added together.
+:P.
+The possible port-location values are:
+:PARML.
+:PT.:PK def.*RMT:EPK.
+:PD.
+Traffic directed to or from the specified port on the remote system will be
+gathered and summarised.
+:PT.*LCL
+:PD.
+Traffic directed to or from the specified port number on the local sytem will
+be gathered and summarised.
+:PT.*LCLRMT
+:PD.
+Traffic for the specified port on any system will be gathered and summarised.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RMTADR
+:HELP NAME='HMONNETTFC/RMTADR'.Remote IP address - Help
+:XH3.Remote IP address (RMTADR)
+:P.
+Use this parameter if you want to summarise network traffic only for incoming
+and outgoing traffic for a specific IP address. This could be useful if you
+have multiple systems connected to the current system for iCluster
+and want to measure traffic only for a specific system.
+:P.
+The possible remote-IP-address values are:
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Traffic for all remote systems will be retrieved. Summarisation will happen
+per combination of Local IP address, Remote IP address and Port number.
+:PT.IP-address
+:PD.
+Specify an IP address in dotted decimal format (i.e. 192.168.1.2) to identify
+the remote system. If you specify an invalid IP address, the parameter is
+ignored and all remote addresses are listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKITV
+:HELP NAME='HMONNETTFC/CHKITV'.Check interval - Help
+:XH3.Check interval (CHKITV)
+:P.
+Controls the interval by which the network traffic will be measured. Every
+specified number of seconds, the traffic job wakes up and takes a
+snapshot of the network statistics for the active connections and measures the
+used bandwidth in bits per seconds.
+:P.
+For accuracy of the measured bandwidth it is best to specify an interval that
+is not too small. Specify 1 minute rather than 10 seconds.
+:P.
+The possible check-interval values are:
+:P.
+:PARML.
+:PT.:PK def.*MIN5:EPK.
+:PD.
+The monitor job wakes up every 5 minutes (300 seconds) to measure the
+network traffic and write to the output file.
+:PT.*MIN1
+:PD.
+The monitor job wakes up every minute (60 seconds) to measure the
+network traffic and write to the output file.
+:PT.*HOUR
+:PD.
+The monitor job wakes up every hour (3600 seconds) to measure the
+network traffic and write to the output file.
+:PT.number of seconds
+:PD.
+Specify the number of seconds between 2 measurements.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

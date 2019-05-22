@@ -1,0 +1,111 @@
+.* ============================================================ *
+.* Object:    HRTVNODSTS      *PNLGRP                           *
+.*            Help text for the HRTVNODSTS command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20040429 FK  Initial delivery                                *
+.* 20050223 FK  Return listener status                          *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRTVNODSTS'.Retrieve iCluster node status - Help
+:P.
+The HRTVNODSTS (Retrieve iCluster node status) allows you to retrieve the
+status of any node in the cluster.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter NODE
+:HELP NAME='HRTVNODSTS/NODE'.Node - Help
+:XH3.Node (NODE)
+:P.
+Specify the name of a valid node in the cluster.
+:P.
+The possible node values are:
+:P.
+:PARML.
+:PT.*CURRENT
+:PD.
+The network name of the current system is used as the node name.
+:PT.node-name
+:PD.
+Specify the name of a valid node in the cluster.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STATUS
+:HELP NAME='HRTVNODSTS/STATUS'.Status - Help
+:XH3.Status (STATUS)
+:P.
+This value returns the current status of the node. If the current status
+could not be retrieved or if the current node is not active in the cluster
+the status will be *UNKNOWN.
+:P.
+The possible status values are:
+:P.
+:UL.
+:LI.*UNKNOWN   - Indicates that the node is not recognised in iCluster, the
+node is not recognised on the system or the current node is not active in the
+cluster. The last known status is returned in the LSTSTS parameter
+:LI.*NEW       - The node has been defined in the cluster, but cluster
+operations have not started on the node
+:LI.*ACTIVE    - Cluster operations are running on the node
+:LI.*RMV_PEND  - The node is in being removed from the cluster
+:LI.*ACT_PEND  - Cluster operations are being started on the node
+:LI.*INACT_PND - Cluster operations are being stopped on the node
+:LI.*INACTIVE  - Cluster operations are not running on the node
+:LI.*FAILED    - A system failure has occurred on the node
+:LI.*PARTITION - A system failure has occurred on the node or communications
+with the node have been lost
+:EUL.
+:EHELP.
+
+.* Help for parameter LSTSTS
+:HELP NAME='HRTVNODSTS/LSTSTS'.Last known status - Help
+:XH3.Last known status (LSTSTS)
+:P.
+This value returns the last known status of the node. If the current status
+is *UNKNOW, this value returns the last status that was known by the cluster
+resource services.
+:P.
+The possible last-known-status values are:
+:P.
+:UL.
+:LI.*NEW       - The node has been defined in the cluster, but cluster
+operations were not started on the node
+:LI.*ACTIVE    - Cluster operations were running on the node
+:LI.*RMV_PEND  - The node was in being removed from the cluster
+:LI.*ACT_PEND  - Cluster operations were being started on the node
+:LI.*INACT_PND - Cluster operations were being stopped on the node
+:LI.*INACTIVE  - Cluster operations were not running on the node
+:LI.*FAILED    - A system failure has occurred on the node
+:LI.*PARTITION - A system failure has occurred on the node or communications
+with the node have been lost
+:EUL.
+:EHELP.
+
+.* Help for parameter LSNACT
+:HELP NAME='HRTVNODSTS/LSNACT'.Listener port active on node - Help
+:XH3.Listener port active on node (LSNACT)
+:P.
+This value returns whether the iCluster listener port (usually dmcluster) is
+active on the node in question.
+:P.
+The possible listener-port-active values are:
+:P.
+:UL.
+:LI.*YES - The node has the XDMCLUSTER subsystem active and the listener
+job has been started
+:LI.*NO  - The listener job has not been started on the node
+:EUL.
+:EHELP.
+
+:EPNLGRP.

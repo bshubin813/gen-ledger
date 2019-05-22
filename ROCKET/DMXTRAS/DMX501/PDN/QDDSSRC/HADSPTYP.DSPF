@@ -1,0 +1,77 @@
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      PRINT
+     A                                      INDARA
+     A                                      HELP
+     A                                      ALTHELP
+     A                                      HLPPNLGRP(HADSPTYP *LIBL/HADSPTYP)
+     A                                      HLPTITLE('Monitored Journal Entry T-
+     A                                      ypes - Help')
+     A          R SFLRCD                    SFL
+     A            SELECTION      1A  B  7  2
+     A  30                                  DSPATR(PC RI)
+     A            JCOD           1A  O  7  5
+     A            JTYP           2A  O  7 10
+     A            DESC          60A  O  7 14
+     A            HIDEFLD       80A  H
+     A          R SFLCTL                    SFLCTL(SFLRCD)
+     A                                      SFLSIZ(0014)
+     A                                      SFLPAG(0013)
+     A                                      CA03(03 'Exit')
+     A                                      CA06(06 'Add JE')
+     A                                      CA12(12 'Cancel')
+     A                                      OVERLAY
+     A  40N70                               SFLDSP
+     A N70                                  SFLDSPCTL
+     A  70                                  SFLCLR
+     A N79                                  SFLEND(*MORE)
+     A          H                           HLPARA(5 4 5 25)
+     A                                      HLPPNLGRP(RMVE *LIBL/HADSPTYP)
+     A          H                           HLPARA(6 4 6 8)
+     A                                      HLPPNLGRP(CODE *LIBL/HADSPTYP)
+     A          H                           HLPARA(6 9 6 13)
+     A                                      HLPPNLGRP(TYPE *LIBL/HADSPTYP)
+     A          H                           HLPARA(6 14 6 25)
+     A                                      HLPPNLGRP(DESC *LIBL/HADSPTYP)
+     A          H                           HLPARA(22 15 22 24)
+     A                                      HLPPNLGRP(ADDE *LIBL/HADSPTYP)
+     A            DSPREC         4S 0H      SFLRCDNBR(CURSOR)
+     A                                  1 72DATE
+     A                                      EDTWRD('0 /  /  ')
+     A                                  1 30'Rocket Software, Inc. '
+     A                                      COLOR(BLU)
+     A                                  2 26'Monitored Journal Entry Types'
+     A                                      COLOR(WHT)
+     A                                  2 72TIME
+     A                                  4  2'Type options, press Enter.'
+     A                                      COLOR(BLU)
+     A                                  5  4'4=Remove Journal Entry'
+     A                                      COLOR(BLU)
+     A                                  6  4'Code'
+     A                                      COLOR(WHT)
+     A                                  6  9'Type'
+     A                                      COLOR(WHT)
+     A                                  6 14'Description'
+     A                                      COLOR(WHT)
+     A          R CMDKEY
+     A                                      OVERLAY
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 15'F6=Add J/E'
+     A                                      COLOR(BLU)
+     A                                 22 31'F12=Cancel'
+     A                                      COLOR(BLU)
+     A          R MSGSFL                    SFL
+     A                                      SFLMSGRCD(24)
+     A            KEYFLD                    SFLMSGKEY
+     A            PGMFLD                    SFLPGMQ
+     A
+     A          R MSGCTL                    SFLCTL(MSGSFL)
+     A  40                                  OVERLAY
+     A  98                                  SFLCLR
+     A N98                                  SFLDSP
+     A N98                                  SFLDSPCTL
+     A  99                                  SFLEND
+     A  99                                  SFLINZ
+     A                                      SFLSIZ(0020)
+     A                                      SFLPAG(0001)
+     A            PGMFLD                    SFLPGMQ

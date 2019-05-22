@@ -1,0 +1,21 @@
+      * ============================================================ *
+      * Object:    HAPYDIRE        *FILE PF                          *
+      *            Temporary file that holds the output for the      *
+      *            DSPDIRE *FULL command. This file is placed in     *
+      *            QTEMP at the time the HAPYDIRE command is run.    *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20010719 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HAPYDIR@
+     A            WOSDDEN        8A         TEXT('User ID')
+     A            WOSDDGN        8A         TEXT('Address')
+     A            WOSDDESC      50A         TEXT('Description')
+     A            WOSDREN        8A         TEXT('System name')
+     A            WOSDRGN        8A         TEXT('System group')
+     A            WOSDUSRP      10A         TEXT('User profile')

@@ -1,0 +1,127 @@
+.* ============================================================ *
+.* Object:    HSUSACTF        *PNLGRP                           *
+.*            Help text for the HSUSACTF command.               *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000410 FK  Initial delivery                                *
+.* 20020627 FK  Allow generic files                             *
+.* 20030605 FK  Enable for iCluster                             *
+.* 20111222 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HSUSACTF'.Suspend or activate file - Help
+:P.
+The HSUSACTF (Suspend or activate file) command allows you to
+suspend or activate a file in iCluster. This is useful
+when files are being replaced in one of the mirrored libraries or
+when journalling is to be ended.
+:P.
+You can suspend and activate individual files or activate all files
+that are currently suspended in iCluster. Furthermore, the command
+allows you to activate all files or a generic set of files in a
+certain library.
+:P.
+The HAMOBJ file is read to determine which target(s) and group(s)
+process the file. For each entry, the DMACTOBJ or
+DMSUSOBJ command is executed.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter FILE
+:HELP NAME='HSUSACTF/FILE'.File - Help
+:XH3.File (FILE)
+:P.
+Specify the file or generic file that must be suspended or activated.
+:P.
+The possible file values are:
+:P.
+:PARML.
+:PT.generic*-file-name
+:PD.
+Specify the name of the file that must be suspended or activated.
+:PT.*ALL
+:PD.
+All files in the specified library will be suspended or activated.
+The target definition and group must be specified for this operation.
+:PT.*ALLSUS
+:PD.
+All suspended files will be activated, regardless of their target
+and group. The target definition and group must be *SEARCH for this
+operation.
+:EPARML.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter ACTION
+:HELP NAME='HSUSACTF/ACTION'.Action - Help
+:XH3.Action (ACTION)
+:P.
+Specifies which action must be performed on the file in combination
+with the target and group.
+:P.
+The possible action values are:
+:P.
+:PARML.
+:PT.:PK def.*ACT:EPK.
+:PD.
+The ACTHAOBJ command is executed against the file to activate it
+again and refresh it.
+:PT.*SUS
+:PD.
+The SUSHAOBJ command is executed against the file.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RFSH
+:HELP NAME='HSUSACTF/RFSH'.Refresh file - Help
+:XH3.Refresh file (RFSH)
+:P.
+Specifies whether the specified files will be refreshed when
+activated.
+:P.
+The possible refresh-file values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The files will be refreshed upon activation.
+:PT.*NO
+:PD.
+Files will not be refreshed but just activated.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ICGROUP
+:HELP NAME='HSUSACTF/ICGROUP'.Group or resilient application -  Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the iCluster group or resilient application for which the file(s)
+will be suspended or activated.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.:PK def.*SEARCH:EPK.
+:PD.
+The HAMOBJ file will be searched for the specified file and the name
+of the replication group is retrieved from the HAMOBJ record(s).
+If this value is specified, *SEARCH must also be specified for the
+target definition.
+:PT.group-or-resilient-application
+:PD.
+Specify the name of a group or resilient application for which the file(s)
+will be suspended or activated.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

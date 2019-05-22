@@ -1,0 +1,95 @@
+     A*%%TS  SD  20111222  170852  FKETELAARS  REL-V5R4M0  5722-WDS
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      CHGINPDFT
+     A                                      PRINT
+     A                                      ALTHELP
+     A                                      HELP
+     A          R PNLRCD
+     A*%%TS  SD  20111222  170852  FKETELAARS  REL-V5R4M0  5722-WDS
+     A                                      CA03(03 'Exit')
+     A                                      CA05(05 'Reload')
+     A                                      CA12(12 'Cancel')
+     A                                      HOME(25)
+     A  29                                  CSRLOC(#ROW       #COL)
+     A                                      OVERLAY
+     A            #RRN           4S 0H
+     A            #ROW           3S 0H
+     A            #COL           3S 0H
+     A                                  1  2'HWRKALR2'
+     A                                      COLOR(BLU)
+     A                                  1 23'Add alert destination'
+     A                                      DSPATR(HI)
+     A                                  1 63DATE
+     A                                      EDTCDE(Y)
+     A                                  1 72TIME
+     A                                  5  2'Type values and press Enter'
+     A                                      COLOR(BLU)
+     A                                  7  2'Utility ID . . . .'
+     A                                      DSPATR(HI)
+     A            UTLIDRC   R        B  7 23REFFLD(HMONALRR/ALUTLID *LIBL/HMONA-
+     A                                      LR)
+     A                                      DSPATR(UL)
+     A                                  7 41'*ALL, HMONHA, HCHKSYNTGT, ...'
+     A                                  9  2'Utility alert  . .'
+     A                                      DSPATR(HI)
+     A            UTLALRRC  R        B  9 23REFFLD(HMONALRR/ALUTLALR *LIBL/HMON-
+     A                                      ALR)
+     A                                      DSPATR(UL)
+     A                                  9 41'*ALL, *EVT, *SUS'
+     A                                 10  2'Destination type .'
+     A                                      DSPATR(HI)
+     A            DSTTYPRC  R        B 10 23REFFLD(HMONALRR/ALDSTTYP *LIBL/HMON-
+     A                                      ALR)
+     A                                      VALUES('*MSGQ' '*EMAIL')
+     A                                      DSPATR(UL)
+     A                                 10 41'*MSGQ, *EMAIL'
+     A                                 12  2'Message queue  . .'
+     A                                      DSPATR(HI)
+     A            MSGQRC        10A  B 12 23DSPATR(UL)
+     A                                      TEXT('Message queue')
+     A  41                                  DSPATR(RI)
+     A  41                                  DSPATR(PC)
+     A                                 12 41'Name, QSYSOPR'
+     A                                 13  2'  Library  . . . .'
+     A                                      DSPATR(HI)
+     A            MSGQLRC       10A  B 13 25DSPATR(UL)
+     A                                      TEXT('Message queue library')
+     A                                 13 41'Name, *LIBL'
+     A                                 15  2'E-Mail address . .'
+     A                                      DSPATR(HI)
+     A            EMAILRC   R        B 15 23REFFLD(HMONALRR/ALALRDST *LIBL/HMON-
+     A                                      ALR)
+     A                                      DSPATR(UL)
+     A  42                                  DSPATR(RI)
+     A  42                                  DSPATR(PC)
+     A                                      CHECK(LC)
+     A                                 18  2'Character set  . .'
+     A                                      DSPATR(HI)
+     A            EMLCHRRC  R        B 18 23REFFLD(HMONALRR/ALEMLCHR *LIBL/HMON-
+     A                                      ALR)
+     A                                      DSPATR(UL)
+     A                                 18 55'us-ascii, UTF-8, ...'
+     A                                 19  2'Cont. Transfer Enc'
+     A                                      DSPATR(HI)
+     A            EMLCTERC  R        B 19 23REFFLD(HMONALRR/ALEMLCTE *LIBL/HMON-
+     A                                      ALR)
+     A                                      DSPATR(UL)
+     A                                 19 55'7bit, base64, ...'
+     A                                 23  2'F3=Exit   F12=Cancel'
+     A                                      COLOR(BLU)
+     A          R #MSGRCD                   TEXT('Program messages')
+     A                                      SFL SFLMSGRCD(24)
+     A            MSGKEY                    SFLMSGKEY
+     A            ##PGM                     SFLPGMQ
+     A*=========================================================================
+     A          R #MSGCTL                   SFLCTL(#MSGRCD)
+     A                                      TEXT('Program messages')
+     A                                      OVERLAY
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      SFLINZ
+     A N30                                  SFLEND
+     A                                      SFLSIZ(0003)
+     A                                      SFLPAG(0001)
+     A            ##PGM                     SFLPGMQ

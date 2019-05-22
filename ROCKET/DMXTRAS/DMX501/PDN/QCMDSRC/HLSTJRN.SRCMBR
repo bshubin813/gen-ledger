@@ -1,0 +1,53 @@
+/* ================================================================= */
+/* Object:         HLSTJRN         *CMD                              */
+/*                 Lists journals and journal receivers for product  */
+/*                 or qualified object                               */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HLSTJRN) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Assistance command called by various utilities    */
+/*                 to generate a list of journals and journal        */
+/*                 receivers in an output file.                      */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20070422 FK  Initial delivery                                     */
+/* 20111217 FK  Remove HA and CDC                                    */
+/* ================================================================= */
+             CMD        PROMPT('List journals & receivers')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JRN) TYPE(QUALJRN) MIN(1) PROMPT('Journal')
+             PARM       KWD(CHKIC) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Check iCluster')
+             PARM       KWD(LSTRCV) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('List journal receivers')
+             PARM       KWD(OUTFILE) TYPE(QUALOUTF) PMTCTL(*PMTRQS) +
+                          PROMPT('Output file prefix')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJRN:    QUAL       TYPE(*GENERIC) SPCVAL((*ALL) (*ALLDTA) +
+                          (QAUDJRN))
+             QUAL       TYPE(*NAME) DFT(*PRD) SPCVAL((*PRD) +
+                          (*USRLIBL) (*ALLUSR)) PROMPT('Library')
+ QUALOUTF:   QUAL       TYPE(*NAME) LEN(9) DFT(HLSTJRN)
+             QUAL       TYPE(*NAME) DFT(QTEMP) SPCVAL((QTEMP)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

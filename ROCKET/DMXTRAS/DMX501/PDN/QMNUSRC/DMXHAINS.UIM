@@ -1,0 +1,88 @@
+.im #HDR
+
+:import       name  = 'HAAANEW'
+              pnlgrp = 'HAAANEW'.
+:import       name  = 'HDSPSYSINF'
+              pnlgrp = HDSPSYSINF.
+:import       name  = 'RUNCFGWZD'
+              pnlgrp = RUNCFGWZD.
+:import       name  = 'WRKJOBD'
+              pnlgrp = QHMNCMD.
+:import       name  = 'HCFGAJE'
+              pnlgrp = HCFGAJE.
+
+.im #VAR
+:cond         name=caaanew
+              expr='chkobj("HAAANEW", "*CMD", "*UPD")'.
+:cond         name=cdspsysinf
+              expr='chkobj("HDSPSYSINF", "*CMD")'.
+:cond         name=cruncfgwzd
+              expr='chkobj("RUNCFGWZD", "*CMD")'.
+:cond         name=ccfgaje
+              expr='chkobj("HCFGAJE", "*CMD")'.
+.im #KEY
+:ekeyl.
+.im #TTL
+DMXtras High Availability Installation menu
+.im #OPT
+
+:menugrp.     Installation and initial setup
+:menui        option=11
+              cond=caaanew
+              help='HAAANEW'
+              action='cmd ?haaanew'
+              .Upgrade DMXtras Utilities to new version         HAAANEW    (S/T)
+:menui        option=13
+              cond=cdspsysinf
+              help='HDSPSYSINF'
+              action='cmd ?hdspsysinf'
+              .Display system information                       HDSPSYSINF (S/T)
+:menui        option=15
+              cond=cruncfgwzd
+              help='RUNCFGWZD'
+              action='cmd ?runcfgwzd'
+              .Run configuration wizard for HA                  RUNCFGWZD  (S/T)
+:menui        option=16
+              help='WRKJOBD'
+              action='cmd wrkjobd &zmnulib./*all'
+              .Work with DMXtras job descriptions               WRKJOBD    (S/T)
+:menui        option=17
+              cond=ccfgaje
+              help='HCFGAJE'
+              action='cmd ?hcfgaje'
+              .Configure autostart job entries                  HCFGAJE    (S/T)
+:emenugrp.
+
+:menugrp.     Add autostart job entries
+:menui        option=21
+              cond=ccfgaje
+              help='HCFGAJE'
+              action='cmd ?hcfgaje jobd(HDLTJRNRCV) JOB(*JOBD)'
+              .Add AJE for HDLTJRNRCV                           HCFGAJE    (S/T)
+:menui        option=22
+              cond=ccfgaje
+              help='HCFGAJE'
+              action='cmd ?hcfgaje jobd(HMONHA) JOB(*JOBD)'
+              .Add AJE for HMONHA                               HCFGAJE    (S/T)
+:menui        option=24
+              cond=ccfgaje
+              help='HCFGAJE'
+              action='cmd ?hcfgaje jobd(HSTRHA) JOB(*JOBD)'
+              .Add AJE for HSTRHA                               HCFGAJE    (S/T)
+:emenugrp.
+
+.im #DMXHAHA
+
+:emenu.
+.im #CMDL
+
+.im #HLP
+
+:help         name='menu/help'.
+DMXtras High Availability Installation menu - Help
+:p.
+This menu shows the tools related to the installation and initial setup of
+your high availability solution.
+:ehelp.
+
+:epnlgrp.

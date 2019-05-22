@@ -1,0 +1,77 @@
+/* ================================================================= */
+/* Object:         HCHGUSRSTS      *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) HLPPNLGRP(HCHGUSRSTS)         */
+/*                 HLPID(*CMD)                                       */
+/*                                                                   */
+/* Synopsis:       Changes the status of the specified (generic)     */
+/*                 user profile(s) to the new value: *ENABLED or     */
+/*                 *DISABLED.                                        */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HCHGUSRSTS *PGM     CPP                                           */
+/* HCHGUSRSTS *PNLGRP  Help text for the command.                    */
+/* HCHGUSRSTS *FILE    Temporary file to keep the user profile list  */
+/* HAUMSG     *MSGF    Message file with all messages issued         */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000321 FK  Initial delivery                                     */
+/* 20001204 FK  Allow reset of password in case of enable            */
+/* 20010328 FK  Alternatively use file as input                      */
+/* 20010328 FK  Do not allow reset of password if enable             */
+/* 20011128 FK  Exclude Q* user profiles by default                  */
+/* 20020508 FK  Include selection for user class                     */
+/* ================================================================= */
+             CMD        PROMPT('Change user profile status')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(USRPRF) TYPE(*GENERIC) SPCVAL((*ALL) +
+                          (*FILE)) MIN(1) PROMPT('User profile')
+             PARM       KWD(USRCLS) TYPE(*CHAR) LEN(10) RSTD(*YES) +
+                          DFT(*ALL) SPCVAL((*ALL) (*USER) (*SYSOPR) +
+                          (*PGMR) (*SECADM) (*SECOFR)) PROMPT('User +
+                          class')
+             PARM       KWD(EXCQPRF) TYPE(*CHAR) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Exclude Q* user profiles')
+             PARM       KWD(STATUS) TYPE(*CHAR) LEN(10) RSTD(*YES) +
+                          DFT(*ENABLED) SPCVAL((*ENABLED) +
+                          (*DISABLED)) PMTCTL(NOTFILE) PROMPT('New +
+                          user profile status')
+             PARM       KWD(RSTPWD) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(ENABLE) PROMPT('Reset password')
+             PARM       KWD(FILE) TYPE(QUALFILE) PMTCTL(FILE) +
+                          PROMPT('Input file for profiles')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&USRPRF *EQ '*FILE') PARM((&FILE *NE ' +
+                          ')) MSGID(CUS0004)
+             DEP        CTL(&RSTPWD *EQ '*YES') PARM((&STATUS *EQ +
+                          '*ENABLED')) MSGID(CUS0005)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ ENABLE:     PMTCTL     CTL(STATUS) COND((*EQ '*ENABLED'))
+
+ NOTFILE:    PMTCTL     CTL(USRPRF) COND((*NE '*FILE'))
+ FILE:       PMTCTL     CTL(USRPRF) COND((*EQ '*FILE'))

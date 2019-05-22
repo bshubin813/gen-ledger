@@ -1,0 +1,31 @@
+      * ============================================================ *
+      * Object:    HUTMOBSO        *FILE LF                          *
+      *            Logical file over HATMOBJ by Object name, Object  *
+      *            library.                                          *
+      *                                                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20040224 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUTMOBSO@                 PFILE(HATMOBJ)
+     A            TGTID
+     A            GRPID
+     A            OBJNAME                   RENAME(NAME)
+     A            OBJLIB                    RENAME(LIB)
+     A            OBJTYPE
+     A            OBJATTR
+     A            JRN
+     A            JRNLIB
+     A            STATE
+     A            REASON
+     A            CHKPOINT
+      *
+     A          K OBJNAME
+     A          K OBJLIB
+      * Omit records that have STATE=ACT
+     A          O STATE                     COMP(EQ 'ACT')

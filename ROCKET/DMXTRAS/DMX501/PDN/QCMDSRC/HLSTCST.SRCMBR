@@ -1,0 +1,61 @@
+/* ================================================================= */
+/* Object:         HLSTCST         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(HLSTCST) HLPID(*CMD)                */
+/*                                                                   */
+/* Synopsis:       Lists, removes, restores or changes constraints   */
+/*                 for physical files.                               */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000726 MW  Initial delivery                                     */
+/* 20000801 MW  Add support for running on target flag               */
+/* 20020708 FK  Remove network dependencies                          */
+/*              Allow remove/restore by library                      */
+/*              Allow variable output file and selection by group    */
+/* 20030506 FK  Add iCluster support                                 */
+/* 20030710 FK  Only prompt group/icgroup dependent on target        */
+/* 20050203 FK  Allow change of constraint (status)                  */
+/* 20080208 FK  Allow change to state specified in file              */
+/* 20111217 FK  REMOVE HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('List/Manipulate Constraint')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ACTION) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*LST) SPCVAL((*LST) (*RMV) (*RST) +
+                          (*CHG)) PROMPT('Action')
+             PARM       KWD(CSTFILE) TYPE(QUALFILE) MIN(1) +
+                          PROMPT('File with constraints')
+             PARM       KWD(ICGROUP) TYPE(*NAME) LEN(10) DFT(*NONE) +
+                          SPCVAL((*ALL *N) (*NONE *N)) PMTCTL(LIST) +
+                          PROMPT('Group or resilient application')
+             PARM       KWD(STATE) TYPE(*CHAR) LEN(10) RSTD(*YES) +
+                          DFT(*ENABLED) SPCVAL((*ENABLED) +
+                          (*DISABLED) (*FILESTATE)) PMTCTL(CHANGE) +
+                          PROMPT('Constraint state')
+             PARM       KWD(LIB) TYPE(*NAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PMTCTL(NOTLST) +
+                          PROMPT('Library for constraint')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME) DFT(HLSTCST)
+             QUAL       TYPE(*NAME) DFT(HASYSOBJ) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ LIST:       PMTCTL     CTL(ACTION) COND((*EQ '*LST'))
+ NOTLST:     PMTCTL     CTL(ACTION) COND((*NE '*LST'))
+ CHANGE:     PMTCTL     CTL(ACTION) COND((*EQ '*CHG'))

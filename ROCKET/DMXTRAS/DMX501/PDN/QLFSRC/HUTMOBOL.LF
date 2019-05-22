@@ -1,0 +1,29 @@
+      * ============================================================ *
+      * Object:    HUTMOBOL        *FILE LF                          *
+      *            Logical file over HATMOBJ by Object name, Object  *
+      *            library.                                          *
+      *                                                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20010101 FK  Initial delivery                                *
+      * 20050226 FK  Changed access path (added object type)         *
+      * 20060324 FK  Changed record format name                      *
+      * ============================================================ *
+     A          R HUTMOBOL@                 PFILE(HATMOBJ)
+     A            TGTID
+     A            GRPID
+     A            OBJNAME                   RENAME(NAME)
+     A            OBJLIB                    RENAME(LIB)
+     A            OBJTYPE
+     A            OBJATTR
+     A            JRN
+     A            JRNLIB
+      *
+     A          K OBJNAME
+     A          K OBJLIB
+     A          K OBJTYPE

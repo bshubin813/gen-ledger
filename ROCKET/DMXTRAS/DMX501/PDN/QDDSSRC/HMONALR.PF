@@ -1,0 +1,33 @@
+      * ============================================================ *
+      * Object:    HMONALR         *FILE PF                          *
+      *            Holds the alert destinations (e-mail and msgq)    *
+      *            for various conditions.                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20041216 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HMONALRR
+     A            ALUTLID       10A         TEXT('Utility ID')
+     A                                      COLHDG('Utility' 'ID')
+     A            ALUTLALR       4A         TEXT('Utility alert type')
+     A                                      COLHDG('Utility' 'alert' 'type')
+     A            ALDSTTYP      10A         TEXT('Alert destination type')
+     A                                      COLHDG('Alert' 'destination' 'type')
+     A                                      VALUES('*MSGQ' '*EMAIL')
+     A            ALALRDST     100A         TEXT('Alert destination')
+     A                                      COLHDG('Alert' 'Destination')
+     A                                      VARLEN
+     A            ALEMLCHR      30A         TEXT('E-Mail Character set')
+     A                                      COLHDG('E-Mail' 'Character set')
+     A                                      DFT('us-ascii')
+     A            ALEMLCTE      30A         TEXT('E-Mail Content Transfer -
+     A                                      Encoding')
+     A                                      COLHDG('E-Mail' 'Transfer' -
+     A                                      'Encoding')
+     A                                      DFT('7bit')
+      *

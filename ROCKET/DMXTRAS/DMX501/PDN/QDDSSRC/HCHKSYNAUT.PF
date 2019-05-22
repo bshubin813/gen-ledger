@@ -1,0 +1,113 @@
+      * ============================================================ *
+      * Object:    HCHKSYNAUT      *FILE PF                          *
+      *            Authority differences found.                      *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020925 FK  Initial delivery (rebuild of sync check)        *
+      * 20021119 FK  Include target/group                            *
+      * 20060327 FK  Include original object name                    *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNAUT@
+     A            OAGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            OACMPL        10A         TEXT('Original library')
+     A                                      COLHDG('Original' 'library')
+     A            OACMPO        10A         TEXT('Original object')
+     A                                      COLHDG('Original' 'object')
+     A            OALIB         10A         TEXT('Object library')
+     A                                      COLHDG('Object' 'library')
+     A            OANAME        10A         TEXT('Object name')
+     A                                      COLHDG('Object' 'name')
+     A            OATYPE         8A         TEXT('Object type')
+     A                                      COLHDG('Object' 'type')
+     A            OATGTL        10A         TEXT('Target library')
+     A                                      COLHDG('Target' 'library')
+     A            OAUSR         10A         TEXT('User profile')
+     A                                      COLHDG('User' 'profile')
+     A            OAMAT          1A         TEXT('Missing authority target')
+     A                                      COLHDG('Missing' 'Authority' -
+     A                                      'Target')
+     A                                      DFT('N')
+     A            OAMAS          1A         TEXT('Obsolete authority target')
+     A                                      COLHDG('Obsolete' 'Authority' -
+     A                                      'Target')
+     A                                      DFT('N')
+     A            OAAD           1A         TEXT('Authority difference')
+     A                                      COLHDG('Authority' 'difference')
+     A                                      DFT('N')
+     A            OAOD           1A         TEXT('Owner difference')
+     A                                      COLHDG('Owner' 'difference')
+     A                                      DFT('N')
+     A            OAFIX          1A         TEXT('Authority fixed')
+     A                                      COLHDG('Authority' 'fixed')
+     A                                      DFT('N')
+     A            SAOWN         10A         TEXT('Src Owner')
+     A                                      COLHDG('Source' 'Owner')
+     A            TAOWN         10A         TEXT('Tgt Owner')
+     A                                      COLHDG('Target' 'Owner')
+     A            SAOBJA         8A         TEXT('Src Object authority')
+     A                                      COLHDG('Source' 'Authority')
+     A            TAOBJA         8A         TEXT('Tgt Object authority')
+     A                                      COLHDG('Target' 'Authority')
+     A            SAANAM        10A         TEXT('Src Authorisation list')
+     A                                      COLHDG('Source' 'Auth. List')
+     A            TAANAM        10A         TEXT('Tgt Authorisation list')
+     A                                      COLHDG('Target' 'Auth. List')
+     A            SAOPR          1A         TEXT('Src Object operational auth')
+     A                                      COLHDG('Source' 'Opr')
+     A            TAOPR          1A         TEXT('Tgt Object operational auth')
+     A                                      COLHDG('Target' 'Opr')
+     A            SAOMGT         1A         TEXT('Src Object management auth')
+     A                                      COLHDG('Source' 'Obj' 'Mgt')
+     A            TAOMGT         1A         TEXT('Tgt Object management auth')
+     A                                      COLHDG('Target' 'Obj' 'Mgt')
+     A            SAEXS          1A         TEXT('Src Object existence auth')
+     A                                      COLHDG('Source' 'Obj' 'Exs')
+     A            TAEXS          1A         TEXT('Tgt Object existence auth')
+     A                                      COLHDG('Target' 'Obj' 'Exs')
+     A            SAREAD         1A         TEXT('Src Read authority')
+     A                                      COLHDG('Source' 'Read')
+     A            TAREAD         1A         TEXT('Tgt Read authority')
+     A                                      COLHDG('Target' 'Read')
+     A            SAADD          1A         TEXT('Src Add authority')
+     A                                      COLHDG('Source' 'Add')
+     A            TAADD          1A         TEXT('Tgt Add authority')
+     A                                      COLHDG('Target' 'Add')
+     A            SAUPD          1A         TEXT('Src Update authority')
+     A                                      COLHDG('Source' 'Update')
+     A            TAUPD          1A         TEXT('Tgt Update authority')
+     A                                      COLHDG('Target' 'Update')
+     A            SADLT          1A         TEXT('Src Delete authority')
+     A                                      COLHDG('Source' 'Delete')
+     A            TADLT          1A         TEXT('Tgt Delete authority')
+     A                                      COLHDG('Target' 'Delete')
+     A            SAEXEC         1A         TEXT('Src Execute authority')
+     A                                      COLHDG('Source' 'Execute')
+     A            TAEXEC         1A         TEXT('Tgt Execute authority')
+     A                                      COLHDG('Target' 'Execute')
+     A            SAALT          1A         TEXT('Src Object alter authority')
+     A                                      COLHDG('Source' 'Obj' 'Alter')
+     A            TAALT          1A         TEXT('Tgt Object alter authority')
+     A                                      COLHDG('Target' 'Obj' 'Alter')
+     A            SAREF          1A         TEXT('Src Object reference auth')
+     A                                      COLHDG('Source' 'Obj' 'Ref')
+     A            TAREF          1A         TEXT('Tgt Object reference auth')
+     A                                      COLHDG('Target' 'Obj' 'Ref')
+     A            SAAMGT         1A         TEXT('Src Auth. list mgt auth')
+     A                                      COLHDG('Source' 'Autl.' 'Mgt')
+     A            TAAMGT         1A         TEXT('Tgt Auth. list mgt auth')
+     A                                      COLHDG('Target' 'Autl.' 'Mgt')
+      *
+     A          K OAGRPN
+     A          K OACMPL
+     A          K OACMPO
+     A          K OATYPE
+     A          K OAUSR

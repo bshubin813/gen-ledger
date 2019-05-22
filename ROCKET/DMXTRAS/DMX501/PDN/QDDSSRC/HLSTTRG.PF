@@ -1,0 +1,65 @@
+      * ============================================================ *
+      * Object:    HLSTTRG         *FILE PF                          *
+      *            File to hold triggers listed by the HLSTTRG       *
+      *            command.                                          *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020709 FK  Initial delivery                                *
+      * 20030114 FK  Add target/group name to file                   *
+      * 20061110 FK  Add state, status, trigger name and library     *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R HLSTTRG@
+     A            TRSYSN         8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            TRGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'name')
+     A            TRFILE        10A         TEXT('File')
+     A                                      COLHDG('File')
+     A            TRLIB         10A         TEXT('File library')
+     A                                      COLHDG('Library')
+     A            TRFTYP         1A         TEXT('File type')
+     A                                      COLHDG('File' 'Type')
+     A            TRTRTM         1A         TEXT('Trigger time +
+     A                                      B=Before, A=After')
+     A                                      COLHDG('Trigger' 'time')
+     A            TRTREV         1A         TEXT('Trigger event +
+     A                                      I=Insert, D=Delete, U=Update')
+     A                                      COLHDG('Trigger' 'event')
+     A            TRTRCN         1A         TEXT('Trigger Update Condition +
+     A                                      A=Always, C=Change')
+     A                                      COLHDG('Trigger' 'update' 'cond.')
+     A            TRTRIG        10A         TEXT('Trigger Program')
+     A                                      COLHDG('Trigger' 'program')
+     A            TRTRLB        10A         TEXT('Program Library')
+     A                                      COLHDG('Program' 'library')
+     A            TRTARC         1A         TEXT('Allow repeated change +
+     A                                      Y=Yes, N=No')
+     A                                      COLHDG('Allow' 'repeated' 'change')
+     A            TRTTSF         1A         TEXT('Threadsafe U=*UNKNOWN +
+     A                                      N=*NO, Y=*YES')
+     A                                      COLHDG('Thread-' 'safe')
+     A            TRTMJA         1A         TEXT('Multithread Job action +
+     A                                      S=*SYSVAL, M=*MSG, N=*NORUN, +
+                                            R=*RUN')
+     A                                      COLHDG('Multi-' 'thread' 'action')
+     A            TRST           1A         TEXT('Trigger State +
+     A                                      E=*ENABLED, D=*DISABLED')
+     A                                      COLHDG('Trigger' 'State')
+     A            TRSTAT         1A         TEXT('Trigger Status +
+     A                                      O=*OPERATIVE, I=*INOPERATIVE')
+     A                                      COLHDG('Trigger' 'Status')
+     A            TRNAM        258A         TEXT('Trigger Name')
+     A                                      VARLEN
+     A                                      COLHDG('Trigger' 'Name')
+     A            TRLB          10A         TEXT('Trigger Library')
+     A                                      COLHDG('Trigger' 'Library')
+      *
+     A          K TRGRPN
+     A          K TRLIB
+     A          K TRFILE

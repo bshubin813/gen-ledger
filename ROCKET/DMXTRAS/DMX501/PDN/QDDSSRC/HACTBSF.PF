@@ -1,0 +1,29 @@
+      * ============================================================ *
+      * Object:    HACTBSF         *FILE PF                          *
+      *            Holds the journal positions for the QAUDJRN       *
+      *            scraper(s)                                        *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20080213 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R ACTBSFR
+     A            ABGROUP       10A         TEXT('iCluster group')
+     A                                      COLHDG('iCluster' 'group')
+     A            ABRCV         10A         TEXT('Journal receiver')
+     A                                      COLHDG('Journal' 'receiver')
+     A            ABRCVL        10A         TEXT('Receiver library')
+     A                                      COLHDG('Receiver' 'library')
+     A            ABSEQ         20A         TEXT('Sequence')
+     A                                      COLHDG('Sequence')
+     A            ABDTS           Z         TEXT('Sequence timestamp')
+     A                                      COLHDG('Sequence' 'timestamp')
+     A            ABUPDDTS        Z         TEXT('Update timestamp')
+     A                                      COLHDG('Update' 'timestamp')
+
+                K ABGROUP

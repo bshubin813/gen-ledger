@@ -1,0 +1,86 @@
+.* ============================================================ *
+.* Object:    HRTVPRDLIB         *PNLGRP                        *
+.*            Help text for the HRTVPRDLIB command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020513 FK  Initial delivery                                *
+.* 20061208 FK  Allow retrieval of all TS libraries in libl     *
+.* 20070504 FK  Allow retrieval of iCluster user & sbsd         *
+.* 20111217 FK  Remove HA and CDC                               *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRTVPRDLIB'.Retrieve product libraries - Help
+:P.
+The HRTVPRDLIB (Retrieve product libraries) command allows you to
+retrieve the library into which any all or some of the following
+products are installed:
+:P.
+iCluster
+DMXtras
+:P.
+The program searches for the specific product library in the current
+job's library list.
+:P.
+Additionally, iCluster user profile and subsystem are retrieved if
+iCluster was found in the library list.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter UTILLIB
+:HELP NAME='HRTVPRDLIB/UTILLIB'.DMXtras library - Help
+:XH3.DMXtras library (UTILLIB)
+:P.
+Returns the library in which the menu DMXHA is found.
+:P.
+:NT.
+If the menu DMXHA is not found in the library list *NONE is
+returned to the calling program.
+:ENT.
+:EHELP.
+
+.* Help for parameter ICPRODLIB
+:HELP NAME='HRTVPRDLIB/ICPRODLIB'.iCluster library - help
+:XH3.iCluster library (ICPRODLIB)
+:P.
+Returns the library in which the DMCLUSTER data area is found.
+:P.
+:NT.
+If the data area DMCLUSTER is not found in the library list *NONE is
+returend to the calling program.
+:ENT.
+:EHELP.
+
+.* Help for parameter ICUSER
+:HELP NAME='HRTVPRDLIB/ICUSER'.iCluster user - help
+:XH3.iCluster user (ICUSER)
+:P.
+Returns the iCluster user that owns the instance of iCluster found in the
+library list. This value is retrieved from the iCluster registry under key
+DM_DEFMGR.
+:P.
+If the registry was not found in the iCluster library or if the key DM_DEFMGR
+doesn't exist in the registry, the default user DMCLUSTER is assumed.
+:EHELP.
+
+.* Help for parameter ICSBSD
+:HELP NAME='HRTVPRDLIB/ICSBSD'.iCluster subsystem - help
+:XH3.iCluster subsystem (ICSBSD)
+:P.
+Returns the iCluster subsystem that is part of the iCluster instance found in
+the library list. This value is retrieved from the iCluster registry under key
+DM_SBSD.
+:P.
+If the registry was not found in the iCluster library or if the key DM_SBSD
+doesn't exist in the registry, the default subsystem XDMCLUSTER is assumed.
+:EHELP.
+
+:EPNLGRP.

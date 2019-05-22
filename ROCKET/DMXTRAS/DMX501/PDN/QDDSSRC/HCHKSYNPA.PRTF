@@ -1,0 +1,708 @@
+     A*%%***********************************************************************
+     A*%%TS  RD  20111217  143955  FKETELAARS  REL-V5R4M0  5722-WDS
+     A*%%FI+10661100000000000000000000100000000000000000000000000000
+     A*%%FI       0000000000000000000000000000000000000000000000000
+     A*%%***********************************************************************
+      *CP: CPI(16.7) PAGESIZE(*N 198 *N)
+      * ============================================================ *
+      * Object:    HCHKSYNPA       *FILE PRTF                        *
+      *            Printer file to report authority differences.     *
+      *                                                              *
+      * Create remarks: CRTPRTF PAGESIZE(66 198) CPI(16.7)           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20021203 FK  Initial delivery                                *
+      * 20030414 FK  Remove additional page skips                    *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R @AUTHDR
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                      SKIPB(001)
+     A                                    51
+     A                                      'Authority Differences'
+     A                                      SPACEB(001)
+     A                                   155
+     A                                      DATE(*SYS *YY)
+     A                                      EDTCDE(Y)
+     A                                   166
+     A                                      TIME
+     A                                      EDTWRD('  :  :  ')
+     A                                   161
+     A                                      'Page'
+     A                                      SPACEB(001)
+     A            PAGENBR        7S 0O   167
+     A                                      EDTCDE(4)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTH1P
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                    64
+     A                                      'Ignore interval . . . :'
+     A                                      SPACEB(002)
+     A            IGNIH1         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      'Group . . . . . . . . :'
+     A                                      SPACEB(001)
+     A            GRPNH1        10A  O    +3
+     A  21        MRKSH1         4A  O    +1
+     A                                   +22
+     A                                      'Output file . . . . . :'
+     A            OUTFPA         4A  O    +3
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTMATH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Missing authorities on Target'
+     A                                      SPACEB(001)
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(002)
+     A                                    +6
+     A                                      'DT'
+     A                                    15
+     A                                      'Library   '
+     A                                    26
+     A                                      'Object'
+     A                                    37
+     A                                      'Type'
+     A                                    46
+     A                                      'User'
+     A                                    57
+     A                                      'Fix'
+     A                                    61
+     A                                      'Aut'
+     A                                    70
+     A                                      'AutLst'
+     A                                    81
+     A                                      'OprMgtExsAltRefExc RAUD AM'
+     A                                    +1
+     A                                      'Target lib'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    +1
+     A                                      '--'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '--------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '---'
+     A                                    +1
+     A                                      '--------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '--------------------------'
+     A                                    +1
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTMATD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            OAGRPN    R        O     1
+     A                                      REFFLD(SYNAUT@/OAGRPN *LIBL/HCHKSYN-
+     A                                      AUT)
+     A                                      SPACEB(001)
+     A            DIFTWY         1A  O    +1
+     A            OACMPL    R        O    15
+     A                                      REFFLD(SYNAUT@/OACMPL *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OACMPO    R        O    26
+     A                                      REFFLD(SYNAUT@/OACMPO *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OATYPE    R        O    37
+     A                                      REFFLD(SYNAUT@/OATYPE *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OAUSR     R        O    46
+     A                                      REFFLD(SYNAUT@/OAUSR *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            OAFIX     R        O    58
+     A                                      REFFLD(SYNAUT@/OAFIX *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAOBJA    R        O    61
+     A                                      REFFLD(SYNAUT@/SAOBJA *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAANAM    R        O    70
+     A                                      REFFLD(SYNAUT@/SAANAM *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAOPR     R        O    82
+     A                                      REFFLD(SYNAUT@/SAOPR *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAOMGT    R        O    85
+     A                                      REFFLD(SYNAUT@/SAOMGT *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAEXS     R        O    88
+     A                                      REFFLD(SYNAUT@/SAEXS *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAALT     R        O    91
+     A                                      REFFLD(SYNAUT@/SAALT *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAREF     R        O    94
+     A                                      REFFLD(SYNAUT@/SAREF *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAEXEC    R        O    97
+     A                                      REFFLD(SYNAUT@/SAEXEC *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAREAD    R        O   100
+     A                                      REFFLD(SYNAUT@/SAREAD *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAADD     R        O   101
+     A                                      REFFLD(SYNAUT@/SAADD *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAUPD     R        O   102
+     A                                      REFFLD(SYNAUT@/SAUPD *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SADLT     R        O   103
+     A                                      REFFLD(SYNAUT@/SADLT *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAAMGT    R        O   105
+     A                                      REFFLD(SYNAUT@/SAAMGT *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OATGTL    R        O    +2
+     A                                      REFFLD(SYNAUT@/OATGTL *LIBL/HCHKSYN-
+     A                                      AUT)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTMATF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of missing authorities  . .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRMAT         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTMASH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Obsolete authorities on Target'
+     A                                      SPACEB(001)
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(002)
+     A                                    +6
+     A                                      'DT'
+     A                                    15
+     A                                      'Library   '
+     A                                    26
+     A                                      'Object'
+     A                                    37
+     A                                      'Type'
+     A                                    46
+     A                                      'User'
+     A                                    57
+     A                                      'Fix'
+     A                                    61
+     A                                      'Aut'
+     A                                    70
+     A                                      'AutLst'
+     A                                    81
+     A                                      'OprMgtExsAltRefExc RAUD AM'
+     A                                    +1
+     A                                      'Orig. lib.'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    +1
+     A                                      '--'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '--------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '---'
+     A                                    +1
+     A                                      '--------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '--------------------------'
+     A                                    +1
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTMASD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            OAGRPN    R        O     1
+     A                                      REFFLD(SYNAUT@/OAGRPN *LIBL/HCHKSYN-
+     A                                      AUT)
+     A                                      SPACEB(001)
+     A            DIFTWY         1A  O    +1
+     A            OALIB     R        O    15
+     A                                      REFFLD(SYNAUT@/OALIB *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            OANAME    R        O    26
+     A                                      REFFLD(SYNAUT@/OANAME *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OATYPE    R        O    37
+     A                                      REFFLD(SYNAUT@/OATYPE *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OAUSR     R        O    46
+     A                                      REFFLD(SYNAUT@/OAUSR *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            OAFIX     R        O    58
+     A                                      REFFLD(SYNAUT@/OAFIX *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAOBJA    R        O    61
+     A                                      REFFLD(SYNAUT@/TAOBJA *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAANAM    R        O    70
+     A                                      REFFLD(SYNAUT@/TAANAM *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAOPR     R        O    82
+     A                                      REFFLD(SYNAUT@/TAOPR *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAOMGT    R        O    85
+     A                                      REFFLD(SYNAUT@/TAOMGT *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAEXS     R        O    88
+     A                                      REFFLD(SYNAUT@/TAEXS *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAALT     R        O    91
+     A                                      REFFLD(SYNAUT@/TAALT *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAREF     R        O    94
+     A                                      REFFLD(SYNAUT@/TAREF *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAEXEC    R        O    97
+     A                                      REFFLD(SYNAUT@/TAEXEC *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAREAD    R        O   100
+     A                                      REFFLD(SYNAUT@/TAREAD *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAADD     R        O   101
+     A                                      REFFLD(SYNAUT@/TAADD *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAUPD     R        O   102
+     A                                      REFFLD(SYNAUT@/TAUPD *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TADLT     R        O   103
+     A                                      REFFLD(SYNAUT@/TADLT *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAAMGT    R        O   105
+     A                                      REFFLD(SYNAUT@/TAAMGT *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OACMPL    R        O    +2
+     A                                      REFFLD(SYNAUT@/OACMPL *LIBL/HCHKSYN-
+     A                                      AUT)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTMASF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of obsolete authorities . .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRMAS         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTADH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Authority Differences'
+     A                                      SPACEB(001)
+     A                                    61
+     A                                      'Source'
+     A                                      SPACEB(001)
+     A                                    70
+     A                                      'Target'
+     A                                    79
+     A                                      'Source'
+     A                                    90
+     A                                      'Target'
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(001)
+     A                                    +6
+     A                                      'DT'
+     A                                    15
+     A                                      'Library'
+     A                                    26
+     A                                      'Object'
+     A                                    37
+     A                                      'Type'
+     A                                    46
+     A                                      'User'
+     A                                    57
+     A                                      'Fix'
+     A                                    61
+     A                                      'Aut'
+     A                                    70
+     A                                      'Aut'
+     A                                    79
+     A                                      'AutLst'
+     A                                    90
+     A                                      'AutLst'
+     A                                   101
+     A                                      'OprMgtExsAltRefExc RAUD AM'
+     A                                   128
+     A                                      'OprMgtExsAltRefExc RAUD AM'
+     A                                    +1
+     A                                      'Target lib'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    +1
+     A                                      '--'
+     A                                    15
+     A                                      '----------'
+     A                                    26
+     A                                      '----------'
+     A                                    37
+     A                                      '--------'
+     A                                    46
+     A                                      '----------'
+     A                                    57
+     A                                      '---'
+     A                                    61
+     A                                      '--------'
+     A                                    70
+     A                                      '--------'
+     A                                    79
+     A                                      '----------'
+     A                                    90
+     A                                      '----------'
+     A                                   101
+     A                                      '--------------------------'
+     A                                   128
+     A                                      '--------------------------'
+     A                                    +1
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTADD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            OAGRPN    R        O     1
+     A                                      REFFLD(SYNAUT@/OAGRPN *LIBL/HCHKSYN-
+     A                                      AUT)
+     A                                      SPACEB(001)
+     A            DIFTWY         1A  O    +1
+     A            OACMPL    R        O    15
+     A                                      REFFLD(SYNAUT@/OACMPL *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OACMPO    R        O    26
+     A                                      REFFLD(SYNAUT@/OACMPO *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OATYPE    R        O    37
+     A                                      REFFLD(SYNAUT@/OATYPE *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OAUSR     R        O    46
+     A                                      REFFLD(SYNAUT@/OAUSR *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            OAFIX     R        O    58
+     A                                      REFFLD(SYNAUT@/OAFIX *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAOBJA    R        O    61
+     A                                      REFFLD(SYNAUT@/SAOBJA *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAOBJA    R        O    70
+     A                                      REFFLD(SYNAUT@/TAOBJA *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAANAM    R        O    79
+     A                                      REFFLD(SYNAUT@/SAANAM *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAANAM    R        O    90
+     A                                      REFFLD(SYNAUT@/TAANAM *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAOPR     R        O   102
+     A                                      REFFLD(SYNAUT@/SAOPR *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAOMGT    R        O   105
+     A                                      REFFLD(SYNAUT@/SAOMGT *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAEXS     R        O   108
+     A                                      REFFLD(SYNAUT@/SAEXS *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAALT     R        O   111
+     A                                      REFFLD(SYNAUT@/SAALT *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAREF     R        O   114
+     A                                      REFFLD(SYNAUT@/SAREF *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAEXEC    R        O   117
+     A                                      REFFLD(SYNAUT@/SAEXEC *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAREAD    R        O   120
+     A                                      REFFLD(SYNAUT@/SAREAD *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            SAADD     R        O   121
+     A                                      REFFLD(SYNAUT@/SAADD *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAUPD     R        O   122
+     A                                      REFFLD(SYNAUT@/SAUPD *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SADLT     R        O   123
+     A                                      REFFLD(SYNAUT@/SADLT *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAAMGT    R        O   125
+     A                                      REFFLD(SYNAUT@/SAAMGT *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAOPR     R        O   129
+     A                                      REFFLD(SYNAUT@/TAOPR *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAOMGT    R        O   132
+     A                                      REFFLD(SYNAUT@/TAOMGT *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAEXS     R        O   135
+     A                                      REFFLD(SYNAUT@/TAEXS *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAALT     R        O   138
+     A                                      REFFLD(SYNAUT@/TAALT *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAREF     R        O   141
+     A                                      REFFLD(SYNAUT@/TAREF *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAEXEC    R        O   144
+     A                                      REFFLD(SYNAUT@/TAEXEC *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAREAD    R        O   147
+     A                                      REFFLD(SYNAUT@/TAREAD *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            TAADD     R        O   148
+     A                                      REFFLD(SYNAUT@/TAADD *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAUPD     R        O   149
+     A                                      REFFLD(SYNAUT@/TAUPD *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TADLT     R        O   150
+     A                                      REFFLD(SYNAUT@/TADLT *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAAMGT    R        O   152
+     A                                      REFFLD(SYNAUT@/TAAMGT *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OATGTL    R        O    +2
+     A                                      REFFLD(SYNAUT@/OATGTL *LIBL/HCHKSYN-
+     A                                      AUT)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTADF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of authority differences  .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRAD          5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTODH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Owner Differences'
+     A                                      SPACEB(001)
+     A                                    50
+     A                                      'Source'
+     A                                      SPACEB(001)
+     A                                    61
+     A                                      'Target'
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(001)
+     A                                    +6
+     A                                      'DT'
+     A                                    15
+     A                                      'Library'
+     A                                    26
+     A                                      'Object'
+     A                                    37
+     A                                      'Type'
+     A                                    46
+     A                                      'Fix'
+     A                                    50
+     A                                      'Owner'
+     A                                    61
+     A                                      'Owner '
+     A                                    +5
+     A                                      'Target lib'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    +1
+     A                                      '--'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '--------'
+     A                                    +1
+     A                                      '---'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '----------'
+     A                                    +1
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTODD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            OAGRPN    R        O     1
+     A                                      REFFLD(SYNAUT@/OAGRPN *LIBL/HCHKSYN-
+     A                                      AUT)
+     A                                      SPACEB(001)
+     A            DIFTWY         1A  O    +1
+     A            OACMPL    R        O    15
+     A                                      REFFLD(SYNAUT@/OACMPL *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OACMPO    R        O    26
+     A                                      REFFLD(SYNAUT@/OACMPO *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OATYPE    R        O    37
+     A                                      REFFLD(SYNAUT@/OATYPE *LIBL/HCHKSYN-
+     A                                      AUT)
+     A            OAFIX     R        O    47
+     A                                      REFFLD(SYNAUT@/OAFIX *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            SAOWN     R        O    50
+     A                                      REFFLD(SYNAUT@/SAOWN *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            TAOWN     R        O    61
+     A                                      REFFLD(SYNAUT@/TAOWN *LIBL/HCHKSYNA-
+     A                                      UT)
+     A            OATGTL    R        O    +1
+     A                                      REFFLD(SYNAUT@/OATGTL *LIBL/HCHKSYN-
+     A                                      AUT)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @AUTODF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of owner differences  . . .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBROD          5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%CP+999CRTPRTF
+     A*%%CP+    CPI(16.7)
+     A*%%CP+    MAXRCDS(*NOMAX)
+     A*%%CP+    FILE(DMXTRASDEV/HCHKSYNPA)
+     A*%%CP+    DEVTYPE(*SCS)
+     A*%%CP     PAGESIZE(*N       198      *N     )
+     A*%%***********************************************************************

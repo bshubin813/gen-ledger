@@ -1,0 +1,213 @@
+.* ============================================================ *
+.* Object:    ANZJRNDLT       *PNLGRP                           *
+.*            Help text for the ANZJRNDLT command.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* 20021024 FK  Allow *ALLHA for journal parameter              *
+.* 20060127 FK  New parameters                                  *
+.* 20060203 FK  Include IFS object analysis                     *
+.* 20070504 FK  Help text of some parameters not visible        *
+.* 20111217 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='ANZJRNDLT'.Analyze Journals & Delete Receivers - Help
+:P.
+This command analyzes the specified data journal and optionally cleans up
+the attached receivers after analysis.
+:P.
+Journal receivers will be analyzed and transactions are output to file
+ANZJRNPF in the DMXtras customer library. In this file, transactions are
+gathered per date, hour and object so they can be analyzed further. Once all
+transactions have been gathered in the ANZJRNPF file, totals are calculated
+automatically and output to files ANZTOT1 through ANZTOT6.
+:P.
+The journal analysis utility will analyse entries for physical files, data
+areas, data queues and stream files (IFS).
+:P.
+:UL.
+:LI.ANZTOT1 - Totals per date and hour (for bandwidth analysis)
+:LI.ANZTOT2 - Totals per object and date/hour
+:LI.ANZTOT3 - Totals per program and date/hour
+:LI.ANZTOT4 - Totals per job and date/hour
+:LI.ANZTOT5 - Totals per object, entry type and date/hour
+:LI.ANZTOT6 - Totals per journal and date/hour
+:EUL.
+:P.
+We recommend that you analyze data for a couple of normal days and a couple
+of days around a critical heavy period such as month-end processing. Make
+sure that you monitor the deletion of journal receivers so that they do not
+clog your system's DASD.
+:P.
+:NT. If not already a batch job, this job will be submitted to batch
+automatically. This may be a long running job depending on how much data
+is being collected and analyzed.:ENT.
+:EHELP.
+
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter JOURNAL
+:HELP NAME='ANZJRNDLT/JOURNAL'.Journal Name (JOURNAL) - Help
+:XH3.Journal (JOURNAL)
+:P.
+Specify the fully qualified name of the journal for which you want to
+analyze data.
+:PARML.
+:PT.*ALLIC
+:PD.
+Process all data journals defined in iCluster.
+:PT.journal-name
+:PD.
+Specify a valid journal name and library.
+:EPARML.
+:EHELP.
+
+.* Help for parameter DELETEREC
+:HELP NAME='ANZJRNDLT/DELETEREC'.Delete Receivers (DELETEREC) - Help
+:XH3.Delete Receivers (DELETEREC)
+:P.
+Specify whether or not you want this command to automatically delete
+receivers once the data is analyzed.
+:P.
+The possible delete-receivers values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Do not delete receivers after analysis for the receiver in question is
+completed.
+:PT.*YES
+:PD.
+Delete the journal receiver for this journal once the data
+has been analyzed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STRJRNRCV
+:HELP NAME='ANZJRNDLT/STRJRNRCV'.Starting journal receiver - Help
+:XH3.Starting journal receiver (STRJRNRCV)
+:P.
+Specify the fully qualified name of the journal receiver to start processing
+the journal entries. This allows you to limit the number of receivers that
+have to be processed.
+:P.
+The possible starting-journal-receiver values are:
+:PARML.
+:PT.:PK def.*CURCHAIN:EPK.
+:PD.
+Starts processing the journal entries from the beginning of the journal receiver
+chain.
+:PT.receiver-name
+:PD.
+Type the name of the receiver that you want to start processing with. Any
+receiver in the chain that comes before the specified receiver will not
+be processed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ENDJRNRCV
+:HELP NAME='ANZJRNDLT/ENDJRNRCV'.Ending journal receiver - Help
+:XH3.Ending journal receiver (ENDJRNRCV)
+:P.
+Specify the fully qualified name of the journal receiver until which the entries
+must be processed. This allows you to limit the number of receivers that
+have to be processed.
+:P.
+The possible ending-journal-receiver values are:
+:PARML.
+:PT.:PK def.*CURRENT:EPK.
+:PD.
+Journal entries will be processed until the currently attached journal receiver.
+:PT.receiver-name
+:PD.
+Type the name of the receiver until which you want to process the journal
+entries. Any receiver coming after the specified receiver will not be processed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STRDAT
+:HELP NAME='ANZJRNDLT/STRDAT'.Starting date - Help
+:XH3.Starting date (STRDAT)
+:P.
+Specify the date in YYYYMMDD format from which the journal entries must be
+processed. Any journal entry before the specified date will not be processed.
+:P.
+The possible starting-date values are:
+:PARML.
+:PT.:PK def.*START:EPK.
+:PD.
+All journal entries will be processed, regardless of their date-time.
+:PT.date
+:PD.
+Specify the date from which journal entries must be processed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ENDDAT
+:HELP NAME='ANZJRNDLT/ENDDAT'.Ending date - Help
+:XH3.Ending date (ENDDAT)
+:P.
+Specify the date in YYYYMMDD format until which the journal entries must be
+processed. Any journal entry after the specified date will not be processed.
+:P.
+The possible ending-date values are:
+:PARML.
+:PT.:PK def.*END:EPK.
+:PD.
+All journal entries will be processed, regardless of their date-time.
+:PT.date
+:PD.
+Specify the date until which journal entries must be processed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CLRANZ
+:HELP NAME='ANZJRNDLT/CLRANZ'.Clear analysis file - Help
+:XH3.Clear analysis file (CLRANZ)
+:P.
+Specify whether or not you wish to clear the existing analysis file ANZJRNPF
+before running this analysis.
+:P.
+The possible clear-analysis-file values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Do not clear the existing ANZJRNPF analysis file; results will be appended to
+the existing file.
+:PT.*YES
+:PD.
+Clear the existing analysis file before adding this data.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SBMHLD
+:HELP NAME='ANZJRNDLT/SBMHLD'.Submit job on hold - Help
+:XH3.Submit job on hold (SBMHLD)
+:P.
+Specify whether or not you wish to submit the analysis job on hold in the
+job queue. You may want to do this to reschedule the analysis to a later
+time.
+:P.
+The possible submit-on-hold values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+The journal analysis will not be held on the job queue.
+:PT.*YES
+:PD.
+The journal analysis will be submitted on hold in the job queue.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

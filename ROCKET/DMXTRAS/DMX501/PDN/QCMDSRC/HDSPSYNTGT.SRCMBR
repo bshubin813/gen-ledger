@@ -1,0 +1,41 @@
+/* ================================================================= */
+/* Object:         HDSPSYNTGT      *CMD                              */
+/*                 Display synchronisation check output.             */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HDSPSYNTGT) HLPID(*CMD)*/
+/*                                                                   */
+/* Synopsis:       Displays the output for the synchronisation check */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020508 FK  Initial delivery                                     */
+/* 20040405 FK  Enable for iCluster                                  */
+/* 20111217 FK  REMOVE HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Display sync check output')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ICGROUP) TYPE(*NAME) LEN(10) +
+                          SPCVAL((*ALL *N)) MIN(1) PROMPT('Group or +
+                          resilient application')
+             PARM       KWD(SYNID) TYPE(*NAME) LEN(5) DFT(*TGT) +
+                          SPCVAL((*TGT)) PMTCTL(*PMTRQS) +
+                          PROMPT('Sync. check identifier')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

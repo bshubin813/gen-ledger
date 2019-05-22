@@ -1,0 +1,81 @@
+.* ============================================================ *
+.* Object:    PRTANZFIL       *PNLGRP                           *
+.*            Help text for the PRTANZFIL command.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='PRTANZFIL'.Print Analyzed File Attributes - Help
+:P.
+This command is similar to HA Tools 2000 Option 13 (Display File
+Analysis) but instead of an interactive display, it prints the report.
+It prompts for a library name, whether to include only uniquely keyed
+files, non keyed files are all files, and whther to include information
+on the file keys (if uinquely keyed).
+:P.
+This option will submit an immediate batch job called PRTANZFILS to
+produce the report.
+:P.
+:NT. HA Tools 2000 option 12 (Submit File Analysis) must be run before
+this menu option. :ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter LIBRARY
+:HELP NAME='PRTANZFIL/LIBRARY'.Library (LIBRARY) - Help
+:XH3.Library (LIBRARY)
+:P.
+Specify the name of the library for which you want to print an analysis
+report.
+:P.
+:EHELP.
+.* Help for parameter TYPE
+:HELP NAME='PRTANZFIL/TYPE'.Type (TYPE) - Help
+:XH3.Type (TYPE)
+:P.
+Specify whether to include uniquely keyed, non uniquely keyed or all
+files in the analysis report.
+:P.
+The possible type values are:
+:P.
+:PARML.
+:PT.:PK def.A:EPK.
+:PD.
+Include all files in the report, whether or not they are uniquely keyed.
+:PT.U
+:PD.
+Only include uniquely keyed files in the analysis report.
+:PT.N
+:PD.
+Only include non-uniquely keyed files in the analysis report.
+:EPARML.
+:EHELP.
+.* Help for parameter KEYS
+:HELP NAME='PRTANZFIL/KEYS'.Include Key Fields (KEYS) - Help
+:XH3.Include Key Fields (KEYS)
+:P.
+Specify whether key information should be included for uniquely keyed
+files.
+:P.
+The possible values for Keys are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Do not include key filed information for uniquely keyed files.
+:PT.*YES
+:PD.
+Include key field information for uniquely keyed files.
+:EPARML.
+:EHELP.
+:EPNLGRP.

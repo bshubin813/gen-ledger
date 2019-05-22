@@ -1,0 +1,81 @@
+.* ============================================================ *
+.* Object:    HCHGJSESTS      *PNLGRP                           *
+.*            Help text for the HCHGJSESTS command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20030711 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HCHGJSESTS'.Change job schedule entry status - Help
+:P.
+The HCHGJSESTS (Change job schedule entry status) command allows you
+to store the current status of job schedule entries in a user space
+and to hold them, or retrieve the stored status of job schedule entries
+and apply that status to the current job schedule entries. This is particularly
+useful prior to performing a switchover from the current primary system.
+:P.
+Just before the switchover is done, you should run this command with the
+*HLD (hold) action to retrieve the job schedule entries into a user space
+and hold them; this way no jobs will be submitted while the system does
+not have the primary role.
+:P.
+After control is returned to the current system, you can run the same command
+with the *RST (restore) action to read the user space and release any job
+schedule entry that was not held prior to performing the switchover.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter JOB
+:HELP NAME='HCHGJSESTS/ACTION'.Action to perform - Help
+:XH3.Action to perform (ACTION)
+:P.
+Specifies what action will be performed on the current system's job schedule
+entries.
+:P.
+This is a required parameter.
+:P.
+The possible action-to-perform values are:
+:PARML.
+:PT.*HLD
+:PD.
+Job schedule entries are retrieved in the specified user space (USRSPC
+parameter) and subsequently all job schedule entries are held. The HRTVJSE
+command is used to retrieve the job schedule entries.
+:PT.*RST
+:PD.
+The specified user space (USRSPC parameter) is read and any entry in the
+user space that wasn't held at the time of running the *HLD action will
+be released.
+:EPARML.
+:EHELP.
+
+.* Help for parameter USRSPC
+:HELP NAME='HCHGJSESTS/USRSPC'.User space - Help
+:XH3.User space (USRSPC)
+:P.
+Specify the name of the user space to which the job schedule entries must be
+output (*HLD action) or from which the job schedule entries must be read
+(*RST action).
+:P.
+The possible user-space values are:
+:PARML.
+:PT.*SYSNAME
+:PD.
+The name of the user space is the same as the name of the current system
+(node).
+:PT.user-space-name
+:PD.
+Specify a valid name for the user space.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

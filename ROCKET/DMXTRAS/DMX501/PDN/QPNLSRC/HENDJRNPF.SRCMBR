@@ -1,0 +1,113 @@
+.* ============================================================ *
+.* Object:    HENDJRNPF       *PNLGRP                           *
+.*            Help text for the HENDJRNPF command.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20010808 FK  Initial delivery                                *
+.* 20050715 FK  Allow for *DTAQ and *DTAARA                     *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HENDJRNPF'.End journaling - Help
+:P.
+The HENDJRNPF (End journaling) command allows you to
+end journaling for selective number of data objects in a library. Also, one
+can use this command to only end journaling for data objects currently attached
+to a certain journal.
+:P.
+When a library must be excluded from mirroring, typically journaling
+is stopped on the primary system.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter FILE
+:HELP NAME='HENDJRNPF/FILE'.Object - Help
+:XH3.Object (FILE)
+:P.
+Specify for which objects journaling must be ended. The name of the
+library in which the objects reside is mandatory and must exist.
+:P.
+The possible object values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Journaling is ended for all data objects in the specified library.
+:PT.generic*-object-name
+:PD.
+Specify the generic name of the data objects for which journaling must be
+ended.
+:PT.object-name
+:PD.
+Specify the name of the data object for which journaling must be ended.
+:EPARML.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.library-name
+:PD.
+Specify the name of the library which holds the data objects for which
+journaling must be ended
+:EPARML.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter OBJTYPE
+:HELP NAME='HENDJRNPF/OBJTYPE'.Object type - Help
+:XH3.Object type (OBJTYPE)
+:P.
+Specify the type of object for which journaling must be stopped.
+:P.
+The possible object-type values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Journaling is ended for all data objects (PF-DTA, *DTAARA and *DTAQ) which
+fall in selection of objects.
+:PT.*DTAARA
+:PD.
+Journaling is ended for data areas which fall in the selection of objects.
+:PT.*DTAQ
+:PD.
+Journaling is ended for data queues which fall in the selection of objects.
+:PT.*FILE
+:PD.
+Journaling is ended for physical data files (PF-DTA) which fall in the
+selection of objects.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JRN
+:HELP NAME='HENDJRNPF/JRN'.Journal - Help
+:XH3.Journal (JRN)
+:P.
+Specify the name of the journal object (*JRN) to which the data objects are
+currently attached. Only data objects attached to the specified journal will
+be selected to stop journaling.
+:P.
+The possible journal values are:
+:P.
+:PARML.
+:PT.:PK def.*OBJECT:EPK.
+:PD.
+Journaling is ended for all selected objects, regardless of the journal
+to which they are attached.
+:PT.journal-name
+:PD.
+Journaling is only ended if the journal to which the data object is attached
+matches this parameter.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

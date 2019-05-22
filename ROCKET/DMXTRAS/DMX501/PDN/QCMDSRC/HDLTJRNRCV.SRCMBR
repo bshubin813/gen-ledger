@@ -1,0 +1,111 @@
+/* ================================================================= */
+/* Object:         HDLTJRNRCV      *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HDLTJRNRCV) HLPID(*CMD)*/
+/*                                                                   */
+/* Synopsis:       Manages the journal receivers that are connected  */
+/*                 to the specified journal and deletes those which  */
+/*                 are no longer needed for HA Suite or              */
+/*                 Transformation Server.                            */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 19990721 FK  Initial delivery                                     */
+/* 19990801 FK  Allow *TGTROL for DLTHAUNP                           */
+/* 19991220 FK  Include TS support                                   */
+/*              Change DLTHAUNP parameter to CHKHA                   */
+/* 20000305 FK  Allow staying active, alerts                         */
+/* 20000523 FK  Exit point to retrieve external position             */
+/* 20000613 FK  Delete log                                           */
+/* 20020116 FK  Check RJP file for journal                           */
+/* 20020222 FK  Allow checking for all journals in a library         */
+/* 20020515 FK  Also allow for checking iCluster                     */
+/* 20050510 FK  Remove CHKRJP parameter                              */
+/* 20050527 FK  Extra qualifier statement for POSEXIT                */
+/* 20060203 FK  Special value *IGNINQMSG                             */
+/* 20060421 FK  Command default for CHKHA set to *NO                 */
+/* 20070108 FK  Allow instrumental mode (no deletes)                 */
+/* 20070112 FK  Allow checking of multiple TS libraries              */
+/* 20111220 FK  Remove CDC/HA                                        */
+/* ================================================================= */
+             CMD        PROMPT('Delete journal receivers')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JRN) TYPE(QUALJRN) MIN(1) PROMPT('Journal')
+             PARM       KWD(DAYS) TYPE(*DEC) LEN(3) DFT(*NONE) +
+                          SPCVAL((*NONE -1)) PROMPT('Keep receivers +
+                          for (days)')
+             PARM       KWD(NBRRCV) TYPE(*DEC) LEN(3) DFT(*NONE) +
+                          RANGE(2 999) SPCVAL((*NONE -1)) +
+                          PROMPT('Number of receivers to keep')
+             PARM       KWD(DLTUNSRCV) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Delete unsaved receivers')
+             PARM       KWD(CHKIC) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Check iCluster')
+             PARM       KWD(MAXRCVJRN) TYPE(*DEC) LEN(5) DFT(*NOCHK) +
+                          SPCVAL((*NOCHK 0)) PROMPT('Maximum +
+                          receivers per journal')
+             PARM       KWD(MAXSIZ) TYPE(*DEC) LEN(6) DFT(*NOCHK) +
+                          SPCVAL((*NOCHK 0)) CHOICE('Size in MB, +
+                          *NOCHK') PROMPT('Maximum size of all +
+                          receivers')
+             PARM       KWD(ALRMSGQ) TYPE(QUALMSGQ) PROMPT('Alert +
+                          message queue')
+             PARM       KWD(CHKITV) TYPE(*DEC) LEN(3) DFT(*ONCE) +
+                          RANGE(1 277) SPCVAL((*ONCE 0) (*HOUR 1) +
+                          (*HALFDAY 12) (*DAY 24) (*WEEK 168)) +
+                          PROMPT('Check interval in hours')
+             PARM       KWD(LOGDLT) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) PROMPT('Log +
+                          receiver deletions')
+             PARM       KWD(RPYSEQ) TYPE(*DEC) LEN(4) DFT(*NONE) +
+                          RANGE(1 9999) SPCVAL((*NONE -1) +
+                          (*IGNINQMSG -2)) PMTCTL(UNSRCV) +
+                          PROMPT('Reply list entry for CPA7025')
+             PARM       KWD(RCVEXIT) TYPE(QUALEXIT) PMTCTL(*PMTRQS) +
+                          PROMPT('Receiver check exit program')
+             PARM       KWD(POSEXIT) TYPE(QUALPOSX) PMTCTL(*PMTRQS) +
+                          PROMPT('Retrieve external pos. exit')
+             PARM       KWD(DLTRCV) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Delete journal +
+                          receivers')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJRN:    QUAL       TYPE(*GENERIC) SPCVAL((*ALL) (*ALLDTA) +
+                          (QAUDJRN))
+             QUAL       TYPE(*NAME) DFT(*PRD) SPCVAL((*USRLIBL) +
+                          (*PRD)) PROMPT('Library')
+ QUALMSGQ:   QUAL       TYPE(*NAME) DFT(QSYSOPR) SPCVAL((QSYSOPR))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+ QUALEXIT:   QUAL       TYPE(*NAME) DFT(*NONE) SPCVAL((*NONE))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+ QUALPOSX:   QUAL       TYPE(*NAME) DFT(*NONE) SPCVAL((*NONE))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&DLTUNSRCV *EQ '*YES') PARM((&RPYSEQ *NE +
+                          -1)) MSGID(DJR0001)
+             DEP        CTL(&MAXRCVJRN *NE 0) PARM((&MAXRCVJRN *GE +
+                          &NBRRCV)) MSGID(DJR0018)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ UNSRCV:     PMTCTL     CTL(DLTUNSRCV) COND((*EQ '*YES'))

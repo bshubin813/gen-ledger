@@ -1,0 +1,49 @@
+/* ================================================================= */
+/* Object:         TPUTDTS         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(TPUTDTS) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Puts the current date/time into the TPUTDTS       */
+/*                 file in the designated library.                   */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010531 FK  Initial delivery                                     */
+/* 20051115 FK  Allow to specify file name                           */
+/* ================================================================= */
+             CMD        PROMPT('Put date-time stamp')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(LIB) TYPE(*NAME) MIN(1) PROMPT('Time +
+                          stamp file library')
+             PARM       KWD(PUTITV) TYPE(*DEC) LEN(5) RSTD(*NO) +
+                          DFT(*MIN5) SPCVAL((*MIN5 300) (*MIN1 60) +
+                          (*HOUR 3600) (*ONCE 0)) PROMPT('Write +
+                          interval')
+             PARM       KWD(KEY) TYPE(*NAME) DFT(DATETIME) +
+                          PROMPT('Key value for record')
+             PARM       KWD(FILE) TYPE(*NAME) DFT(TPUTDTS) +
+                          PROMPT('Time stamp file name' 1)
+             PARM       KWD(JRN) TYPE(QUALJRN) PROMPT('Journal')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJRN:    QUAL       TYPE(*NAME) DFT(*NOCHG) SPCVAL((*NOCHG))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

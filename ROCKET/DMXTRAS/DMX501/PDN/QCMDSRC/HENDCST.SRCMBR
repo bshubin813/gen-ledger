@@ -1,0 +1,68 @@
+/* ================================================================= */
+/* Object:         HENDCST         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Synopsis:       This command can be used before powering down     */
+/*                 the system to automatically end all groups and    */
+/*                 stop the nodes.                                   */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20050507 FK  Initial delivery                                     */
+/* 20040524 FK  Default message queue is *CURRENT                    */
+/* 20051006 FK  Wait for end of subsystem parameter                  */
+/* 20070504 FK  Change description for parameter ENDSBS              */
+/* 20080212 FK  Allow stopping groups without stopping node          */
+/* ================================================================= */
+             CMD        PROMPT('End iCluster processes')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(OPTION) TYPE(*CHAR) LEN(7) RSTD(*YES) +
+                          DFT(*CNTRLD) SPCVAL((*CNTRLD) (*IMMED)) +
+                          PROMPT('End option for groups')
+             PARM       KWD(DELAY) TYPE(*DEC) LEN(5) DFT(600) +
+                          CHOICE('Number of seconds') PROMPT('End +
+                          delay time')
+             PARM       KWD(STSMSGQ) TYPE(MSGQQ) PROMPT('Status/Alert +
+                          message queue')
+             PARM       KWD(MAXWAITGRP) TYPE(*DEC) LEN(3) DFT(30) +
+                          CHOICE('Number of minutes') +
+                          PMTCTL(*PMTRQS) PROMPT('Max. wait until +
+                          groups ended')
+             PARM       KWD(ENDNOD) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Stop node')
+             PARM       KWD(MAXWAITNOD) TYPE(*DEC) LEN(3) DFT(5) +
+                          CHOICE('Number of minutes') +
+                          PMTCTL(*PMTRQS) PROMPT('Max. wait until +
+                          node ended')
+             PARM       KWD(ENDSBS) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('End iCluster +
+                          subsystem')
+             PARM       KWD(WAITSBS) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Wait until +
+                          subsystem ended')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ MSGQQ:      QUAL       TYPE(*NAME) DFT(*CURRENT) SPCVAL((*CURRENT) +
+                          (QSYSOPR) (*NONE))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL) +
+                          (*CURLIB)) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

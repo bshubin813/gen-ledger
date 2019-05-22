@@ -1,0 +1,49 @@
+/* ================================================================= */
+/* Object:         HENDAPY         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(HENDAPY) HLPID(*CMD)                */
+/*                                                                   */
+/* Synopsis:       Lists the HA Suite object configuration.          */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HENDAPY    *PGM     Command processing program                    */
+/* HENDAPY    *PNLGRP  Help for command                              */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20030505 FK  Initial delivery                                     */
+/* 20111217 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('End iCluster apply jobs')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ICGROUP) TYPE(*NAME) LEN(10) +
+                          SPCVAL((*ALL *N)) MIN(1) PROMPT('Group or +
+                          resilient application')
+             PARM       KWD(WAIT) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Wait for completion')
+             PARM       KWD(MAXWAIT) TYPE(*DEC) LEN(5 0) DFT(*NOMAX) +
+                          SPCVAL((*NOMAX -1)) CHOICE('*NOMAX, +
+                          Number of minutes') PMTCTL(WAITYES) +
+                          PROMPT('Maximum wait time')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ WAITYES:    PMTCTL     CTL(WAIT) COND((*EQ '*YES'))

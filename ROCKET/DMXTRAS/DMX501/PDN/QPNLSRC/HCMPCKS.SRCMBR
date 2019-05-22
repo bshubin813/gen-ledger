@@ -1,0 +1,65 @@
+.* ============================================================ *
+.* Object:    HCMPCKS         *PNLGRP                           *
+.*            Help text for the command.                        *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20050504 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HCMPCKS'.Compare checksum files - Help
+:P.
+The HCMPCKS (Compare checksum files) command processes input files generated
+by the HRTVCKS command and compares the checksums for all files and record
+blocks.
+:P.
+Output can be done to a spooled file or screen.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter OUTF01
+:HELP NAME='HRTVCKS/OUTF01'.HRTVCKS output file 1 - Help
+:XH3.HRTVCKS output file 1 (OUTF01)
+:P.
+Specify the file and library of the HRTVCKS output file that was composed on
+the primary node (production system). This file holds the checksum records
+for all files that have been processed by the HRTVCKS command.
+:EHELP.
+
+.* Help for parameter OUTF02
+:HELP NAME='HRTVCKS/OUTF02'.HRTVCKS output file 2 - Help
+:XH3.HRTVCKS output file 2 (OUTF02)
+:P.
+Specify the file and library of the HRTVCKS output file that was composed on
+the backup node (recovery system). This file holds the checksum records
+for all files that have been processed by the HRTVCKS command.
+:EHELP.
+
+.* Help for parameter OUTPUT
+:HELP NAME='HRTVCKS/OUTPUT'.Output - Help
+:XH3.Output (OUTPUT)
+:P.
+Specifies whether the output from the command is displayed at the requesting
+work station or printed with the job's spooled output.
+:P.
+The possible output values are:
+:P.
+:PARML.
+:PT.:PK def.*:EPK.
+:PD.
+The output is displayed at the requesting work station.
+:PT.*PRINT
+:PD.
+The output is printed with the job's spooled output.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

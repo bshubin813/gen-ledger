@@ -1,0 +1,57 @@
+/* ================================================================= */
+/* Object:         HSNDFTP         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HSNDFTP) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Sends a save file to a remote computer through    */
+/*                 FTP. It automatically generates an FTP script     */
+/*                 and sends the file.                               */
+/*                                                                   */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HSNDFTP    *PGM     CPP                                           */
+/* HSNDFTP    *PNLGRP  Help for HSNDFTP command                      */
+/* HSNDFTP1   *PGM     Program to generate FTP script                */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010624 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Send save file through FTP')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(SAVF) TYPE(QUALSAVF) MIN(1) PROMPT('Save +
+                          file to be sent' 1)
+             PARM       KWD(RMTHOST) TYPE(*CHAR) LEN(100) MIN(1) +
+                          PROMPT('Remote host name' 2)
+             PARM       KWD(PASSWORD) TYPE(*NAME) MIN(1) +
+                          DSPINPUT(*NO) PROMPT('Password' 4)
+             PARM       KWD(USRPRF) TYPE(*NAME) DFT(*CURRENT) +
+                          SPCVAL((*CURRENT)) PROMPT('User name on +
+                          remote machine' 3)
+             PARM       KWD(BATCH) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Submit to batch')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALSAVF:   QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

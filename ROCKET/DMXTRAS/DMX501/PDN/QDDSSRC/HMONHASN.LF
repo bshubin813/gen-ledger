@@ -1,0 +1,38 @@
+      * ============================================================ *
+      * Object:    HMONEVLS        *FILE PF                          *
+      *            Holds the suspended native objects received by    *
+      *            the listener program to be sent to the message    *
+      *            queues or e-mail addresses.                       *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20041117 FK  Initial delivery                                *
+      * 20111220 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R HMONHASNR                 PFILE(HMONHAS)
+     A            MSORGSYS
+     A            MSSUSTYP
+     A            MSGRPNAM
+     A            MSOBJNAM
+     A            MSOBJLIB
+     A            MSOBJMBR
+     A            MSOBJTYP
+     A            MSOBJATR
+     A            MSRSNCDE
+     A            MSSUSDTS
+     A            MSUPDDTS
+
+      * Keys
+     A          K MSORGSYS
+     A          K MSSUSTYP
+     A          K MSGRPNAM
+     A          K MSOBJNAM
+     A          K MSOBJLIB
+     A          K MSOBJMBR
+     A          K MSOBJTYP
+      * Select only Native records
+     A          S MSSUSTYP                  COMP(EQ '*NTV')

@@ -1,0 +1,332 @@
+.* ============================================================ *
+.* Object:    HSNDCMD         *PNLGRP                           *
+.*            Help text for the HSNDCMD command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 19990729 FK  Initial delivery                                *
+.* 20020506 FK  Allow to submit to batch                        *
+.*              Enable for iCluster                             *
+.* 20030114 FK  Remove PRD parameter                            *
+.* 20050210 FK  Specify backup node                             *
+.*              Allow to specify job name for SBMJOB            *
+.* 20050422 FK  Non-active groups not processed                 *
+.* 20071024 FK  Allow to select library list for submitted job  *
+.* 20080509 FK  Allow groups to await completion of sbm job     *
+.*              Restart apply jobs automatically                *
+.* 20111223 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HSNDCMD'.Send command - Help
+:P.
+The HSNDCMD (Send command) command allows you to
+issue a command through the iCluster mirroring process.
+:P.
+Through the DMSETSYNC API, checkpoints are placed into the
+data journals associated with the target and group(s) that you specify.
+As the group jobs for the specified target reach the checkpoint,
+a user exit program, HSNDCMD2, is invoked which takes care of the
+execution of the command that was entered.
+:P.
+It is important to note how the checkpoints will be reached and
+the command is executed. A checkpoint for a group is reached when ALL
+journals associated with the group in question (including the security audit
+journal) have reached their checkpoint.
+:P.
+:NT.When the command is run for all groups in the iCluster configuration,
+the checkpoint handling is done by
+DMXtras. In the latter scenario, DMXtras creates a data area HC<sysnam> in the
+utilities library on the node that must run the command (BCKNOD parameter)
+Each group that
+reaches the checkpoint increments the number of groups for which the
+checkpoint has been reached by 1. When the total number of replication groups
+have been reached, the specified command is run.:ENT.
+:NT.Only active groups will be taken into account when adding the checkpoint,
+non-active groups are skipped.:ENT.
+:P.
+Some examples of parameters that may be specified:
+:PARML.
+:PT.ICGROUP(*ALL) BCKNOD(TORONTO) ENDMIR(*YES) BATCH(*YES)
+RESTART(*YES)
+:PD.
+The command is submitted to batch when all active replication groups targeting
+the TORONTO node have reached the checkpoint. Apply processes will stop when
+the checkpoint has been reached. Upon completion of the submitted job the apply
+jobs will be restarted.
+:EPARML.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter CMD
+:HELP NAME='HSNDCMD/CMD'.Command - Help
+:XH3.Command (CMD)
+:P.
+Specify the command that you want have executed by the target
+group job.
+:P.
+:NT.Ensure that the command that you execute does not abnormally end;
+this could interrupt the specified process.:ENT.
+:P.
+:NT.The validity of the syntax of the command is checked on the local
+system. Should you want to execute a command that does not exist on
+the local system, we recommend that you work through a CL program.:ENT.
+:EHELP.
+
+.* Help for parameter ICGROUP
+:HELP NAME='HSNDCMD/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specifies the name of the iCluster group or resilient application
+to synchronise at a checkpoint journal entry.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+Identifies all active replication groups going from the current system to the
+specified backup node (BCKNOD). The checkpoint is set for every active group
+and the command is run when all groups have reached their checkpoint.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the command
+must be sent.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BCKNOD
+:HELP NAME='HSNDCMD/BCKNOD'.Groups for backup node - Help
+:XH3.Groups for backup node (BCKNOD)
+:P.
+In case of ICGROUP(*ALL), specifies the groups for which the command must be
+run. Only groups for which the backup node is the specified value will be
+selected for running the command.
+:P.
+The possible groups-for-backup-node values are:
+:P.
+:PARML.
+:PT.:PK def.*FIRST:EPK.
+:PD.
+Groups for which the backup node is the same as the first found group
+(alphabetical) will be selected to run the command. A message in the job log
+indicates the backup node that was selected (SCM0008).
+:PT.backup node
+:PD.
+Specify the name of the backup node to determine which groups will be
+selected to run the command.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SCRAPE
+:HELP NAME='HSNDCMD/SCRAPE'.Execute command for scrape - Help
+:XH3.Execute command for scrape (SCRAPE)
+:P.
+Indicates whether you want to execute the command when journal
+entries are scraped in the source environment.
+:P.
+At this synchronisation point, the command specified on the CMD
+parameter will be invoked when all active group jobs for the source
+scrape process synchronise at the checkpoint journal entry.
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Group jobs are not synchronised at checkpoint entry and the command
+is not invoked.
+:PT.*YES
+:PD.
+The command is invoked when all journal scrape group jobs reach
+the checkpoint entry.
+:EPARML.
+:EHELP.
+
+.* Help for parameter APPLY
+:HELP NAME='HSNDCMD/APPLY'.Execute command for apply - Help
+:XH3.Execute command for apply (APPLY)
+:P.
+Indicates whether you want to execute the command when journal
+entries are applied in the target environment.
+:P.
+At this synchronisation point, the command specified on the CMD
+parameter will be invoked when all active group jobs for the target
+apply process synchronise at the checkpoint journal entry.
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The command is invoked when all target apply process group jobs reach
+the checkpoint entry.
+:PT.*NO
+:PD.
+Group jobs are not synchronised at checkpoint entry and the command
+is not invoked.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ENDMIR
+:HELP NAME='HSNDCMD/ENDMIR'.End executing process - Help
+:XH3.End executing process (ENDMIR)
+:P.
+Specify whether or not you want to stop the specified process(es)
+after the command has been executed.
+:P.
+:NT.If you end mirroring for the journal scrape (SCRAPE)
+process, both the scrape and receive will
+end. Ending the mirroring process for the apply (APPLY) only affects
+the apply processes on the receiving system.:ENT.
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+The executing process is not ended.
+:PT.*YES
+:PD.
+After the command has been executed, the mirroring process in question
+is stopped.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BATCH
+:HELP NAME='HSNDCMD/BATCH'.Submit command to batch - Help
+:XH3.Submit command to batch (BATCH)
+:P.
+Specify whether or not you want the command to be submitted to batch
+when the checkpoint user entry is reached by all groups. This is
+particularily useful when automating the save to run on the target
+computer. By submitting the command to batch, it will not be executed
+within the apply process.
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+The specified command will be executed by the iCluster
+process. No further actions will take place until the command
+returns control to the iCluster process.
+:PT.*YES
+:PD.
+The specified command will be submitted to batch using the job
+description and user specified.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JOBD
+:HELP NAME='HSNDCMD/JOBD'.Job description for SBMJOB - Help
+:XH3.Job description for SBMJOB (JOBD)
+:P.
+Specify the job description to be used when the job is submitted by
+the iCluster process. This primarily determines the job queue
+in which the submitted job is placed.
+:EHELP.
+
+.* Help for parameter JOB
+:HELP NAME='HSNDCMD/JOB'.Job name for SBMJOB - Help
+:XH3.Job name for SBMJOB (JOB)
+:P.
+Specify the name by which the job is submitted.
+:P.
+:PARML.
+:PT.:PK def.HSNDCMD:EPK.
+:PD.
+The job submitted will be named HSNDCMD.
+:PT.job-name
+:PD.
+Specify the name of the job that must be submitted.
+:EPARML.
+:EHELP.
+
+.* Help for parameter USER
+:HELP NAME='HSNDCMD/USER'.User for SBMJOB - Help
+:XH3.User for SBMJOB (USER)
+:P.
+Specify the user for which the job is submitted.
+:P.
+:NT.Please note that the iCluster user (DMCLUSTER)
+must have authority for the user profile and that some IBM-supplied user
+profiles such as QSECOFR are not allowed.:ENT.
+:P.
+:PARML.
+:PT.:PK def.*CURRENT:EPK.
+:PD.
+The job is submitted for the current user (user running the HSNDCMD
+command).
+:PT.user-name
+:PD.
+Specify name of the user profile for which the command is submitted.
+:EPARML.
+:EHELP.
+
+.* Help for parameter INLLIBL
+:HELP NAME='HSNDCMD/INLLIBL'.Library list for submitted job - Help
+:XH3.Library list for submitted job (INLLIBL)
+:P.
+Depicts which library list will be used for the job submitted to batch
+when the apply jobs of the specified group(s) reach the synchronisation point.
+:P.
+:PARML.
+:PT.:PK def.*APPLYJOB:EPK.
+:PD.
+The apply job will run the SBMJOB command with INLLIBL(*CURRENT), meaning that
+the submitted job will inherit the library list of the apply job in question.
+:PT.*JOBD
+:PD.
+The apply job will run the SBMJOB command with INLLIBL(*JOBD), meaning that
+the submitted job will inherit the library list of the job description specified
+on the JOBD parameter.
+:P.
+:NT.Please note that if the INLLIBL of the job description holds an invalid
+library, the SBMJOB will fail and an error will only be shown in the job log
+of the submitting apply job.:ENT.
+:EPARML.
+:EHELP.
+
+.* Help for parameter WAITCOMP
+:HELP NAME='HSNDCMD/WAITCOMP'.Await completion of command - Help
+:XH3.Await completion of command (WAITCOMP)
+:P.
+Specify whether or not the apply processes must wait for the completion of the
+command before resuming processing.
+:P.
+:NT.This parameter is only valid in combination with ENDMIR(*NO).:ENT.
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Once the checkpoint is reached by all groups, the apply job that reached the
+checkpoint last will run the command. All other apply jobs will resume
+processing immediately.
+:PT.*YES
+:PD.
+All apply job(s) will wait for completion of the command. If the command was
+submitted to batch, apply jobs will wait for the submitted job to finish.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RESTART
+:HELP NAME='HSNDCMD/RESTART'.Restart process after job - Help
+:XH3.Restart process after job (RESTART)
+:P.
+Specify whether or not the processes that were stopped as part of the checkpoint
+must be restarted when the submitted job has finished.
+:P.
+:NT.This parameter is only valid in combination with BATCH(*YES) ENDMIR(*YES).
+:ENT.
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Processes will not be restarted when the submitted batch job has completed.
+:PT.*YES
+:PD.
+Processes will be restarted when the submitted batch job has completed.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

@@ -1,0 +1,68 @@
+:keyl         name=menukeys
+              help=keyl.
+
+:keyi         key=F1
+              help=helpf1
+              action=help.
+
+:keyi         key=F3
+              help=exit
+              action='exit set'
+              varupd=no.
+F3=Exit
+
+:keyi         key=F4
+              help=prompt
+              action=prompt.
+F4=Prompt
+
+:keyi         key=F6
+              help=dspmsg
+              action='cmd dspmsg'.
+F6=Display messages
+
+:keyi         key=F9
+              help=retrieve
+              action=retrieve.
+F9=Retrieve
+
+:keyi         key=F12
+              help=cancel
+              action='cancel set'
+              varupd=no.
+F12=Cancel
+
+:keyi         key=F14
+              help=wrksbmjob
+              action='cmd wrksbmjob'.
+F14=Work with submitted jobs
+
+:keyi         key=F21
+              help=helpf21
+              action='cmd call qcmd'.
+F21=Command entry
+
+:keyi         key=F22
+              help=helpf22
+              action='cmd sltcmd &zmnulib/*all'.
+F22=DMXtras commands
+
+:keyi         key=enter
+              help=enter
+              action=enter.
+
+:keyi         key=help
+              help=help
+              action=help.
+
+:keyi         key=pagedown
+              help=pagedown
+              action=pagedown.
+
+:keyi         key=pageup
+              help=pageup
+              action=pageup.
+
+:keyi         key=print
+              help=print
+              action=print.

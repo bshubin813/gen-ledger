@@ -1,0 +1,171 @@
+.* ============================================================ *
+.* Object:    HLSTCST         *PNLGRP                           *
+.*            Help text for the HLSTCST command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020709 FK  Initial delivery                                *
+.* 20020916 FK  List constraints according to object specifiers *
+.* 20030506 FK  Add iCluster support                            *
+.* 20050203 FK  New parameter STATE                             *
+.* 20080208 FK  Allow change to state in file                   *
+.* 20111217 FK  REMOVE HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HLSTCST'.List/Manipulate Constraints - Help
+:P.
+This option will allow you to list all of the constraints on files
+for a certain iCluster group or
+resilient application.
+:P.
+You may also optionally manipulate constraints using actions (*RMV, *RST
+or *CHG). When running any of these actions, the specified file (CSTFILE
+parameter) will be read and the actions processed per constraint. See help
+text for the ACTION parameter for more details.
+:NT.Please note that the *RMV and *CHG actions only process Referential
+Integrity (RI) constraints.:ENT.
+:P.
+The procedure for handling files with RI constraints is:
+:OL.
+:LI.Run the HLSTCST *LST command on the source system
+:LI.iCluster: DMSETPOS or DMMRKPOS for group or resilient application
+:LI.Save the group's libraries on the source system
+:LI.Restore the group's libraries onto the target system
+:LI.Transfer output file (default HASYSOBJ/HLSTCST) to the target system
+:LI.Run the HLSTCST *CHG STATE(*DISABLED) on the backup system to disable
+referential integrity constraints
+:LI.Start iCluster replication
+:EOL.
+:P.
+Furthermore, the command allows you to periodically output all constraints
+to an output file mirrored by iCluster so that even constraints
+added along the way (file not replaced) are taken into account and can
+be restored (*RST) in the switchover process.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ACTION
+:HELP NAME='HLSTCST/ACTION'.Action - Help
+:XH3.Action (ACTION
+:P.
+Specifies the action to perform for the constraints.
+:P.
+The possible values for action are:
+:P.
+:PARML.
+:PT.:PK def.*LST:EPK.
+:PD.
+Constraints are listed and output to the specified output file. The
+iCluster configuration on the HLSTCST command is processed.
+Constraints for every selected physical file will
+be output to the specified constraints file.
+:P.
+:NT.Only object specifiers for non-idle groups are processed.:ENT.
+:PT.*RMV
+:PD.
+The constraints file will be processed and all Referential Integrity
+constraints removed.
+:NT.This option should only be executed on the target system!:ENT.
+:PT.*CHG
+:PD.
+The constraints file will be processed and all Referential Integrity
+constraints will be changed to the state specified in the STATE parameter.
+:NT.This option should only be executed on the target system!:ENT.
+:PT.*RST
+:PD.
+The constraints file will be processed and all constraints will be added
+to the files on the current system.
+:NT.This option should only be executed on the target system!:ENT.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CSTFILE
+:HELP NAME='HLSTCST/CSTFILE'.File with constraints - Help
+:XH3.File with constraints (CSTFILE)
+:P.
+Specifies the name of the file that holds (*RMV, *RST) or will hold (*LST)
+the constraints for the physical files.
+:P.
+If - in case of action *LST - the file already exists, it will first be
+deleted and than rebuilt from scratch.
+:EHELP.
+
+.* Help for parameter ICGROUP
+:HELP NAME='HLSTCST/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the constraints must be listed.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+All object specifiers, regardless of the associated group or resilient
+application will be used to retrieve the constraints.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the
+constraints must be listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STATE
+:HELP NAME='HLSTCST/STATE'.Constraint state - Help
+:XH3.Constraint state (STATE)
+:P.
+Specifies the state to which the referential integrity (RI) constraints
+are being changed. Typically, you want to disable RI constraints after a
+restore on the backup system and enable RI constraints after a switchover to
+the backup system.
+:P.
+The possible constraint-state values are:
+:P.
+:PARML.
+:PT.:PK def.*ENABLED:EPK.
+:PD.
+Any RI constraint that was disabled will be started again. Please note that
+enabling constraints may be a long-running process.
+:PT.*DISABLED
+:PD.
+RI constraints will stop checking.
+:PT.*FILESTATE
+:PD.
+RI constraints will be changed to the state as recorded in the file specified
+on the CSTFILE parameter. If this file was populated on the primary server and
+replicated to the current server, the state will be changed to the current
+value on the primary server.
+:EPARML.
+:EHELP.
+
+.* Help for parameter LIB
+:HELP NAME='HLSTCST/LIB'.Library to restore/remove cst - Help
+:XH3.Library to restore/remove cst (LIB)
+:P.
+Allows you to restrict restoring or removing constraints to the
+specified library. Only constraints for the specified library will be
+removed or restored.
+:P.
+The possible library-to-restore/remove-cst values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+All constraints in the specified constraints file will be removed or
+restored, regardless of their library.
+:PT.library-name
+:PD.
+Only constraints for the specified library will be remove or restored.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

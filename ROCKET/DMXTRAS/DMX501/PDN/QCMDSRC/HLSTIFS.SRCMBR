@@ -1,0 +1,43 @@
+/* ================================================================= */
+/* Object:         HLSTIFS         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(HLSTIFS) HLPID(*CMD)                */
+/*                                                                   */
+/* Synopsis:       Lists the contents of the specified path          */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20050712 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('List folder contents')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(PATH) TYPE(*PNAME) LEN(1000) MIN(1) +
+                          VARY(*YES *INT2) CASE(*MIXED) +
+                          PROMPT('Path name')
+             PARM       KWD(OUTFILE) TYPE(QUALFILE) MIN(1) +
+                          PROMPT('Output file')
+             PARM       KWD(OPTION) TYPE(*CHAR) LEN(8) RSTD(*YES) +
+                          DFT(*REPLACE) SPCVAL((*REPLACE) (*ADD)) +
+                          PROMPT('Replace or add records')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

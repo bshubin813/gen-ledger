@@ -1,0 +1,390 @@
+.* ============================================================ *
+.* Object:    HRTVCKS         *PNLGRP                           *
+.*            Help text for the command.                        *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20050421 FK  Initial delivery                                *
+.* 20050425 FK  New field: ENDRCD                               *
+.* 20050502 FK  Support for IFS object                          *
+.* 20050509 FK  If only 1 block, block details are left out     *
+.* 20050523 FK  Automatically run HRTVCKS on backup             *
+.* 20060425 FK  Allow for different target library              *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRTVCKS'.Retrieve checksum - Help
+:P.
+The HRTVCKS (Retrieve checksum) command retrieves the MD5-hash count of records
+in the specified file so that the contents of the file on the primary system
+can more easily be compared with the contents on the backup system.
+:P.
+Besides retrieving the hash count of all records in the specified file
+(or member), specific blocks of records can be calculated as well. If an
+output file is entered on the command (OUTFILE), the records are divided
+into blocks (default 10000 records per block) for better comparison.
+:P.
+The record length is automatically retrieved from any database file that is
+specified. If an the checksum for an IFS file is to be retrieved, the tool
+automatically determines the optimal size for reading the IFS file and converts
+this into a record length. Normally, this should result in record lengths of
+32kB.
+:P.
+The procedure to compare the files between primary and backup is:
+:OL.
+:LI.Choose a time when there is no activity on the file in question
+:LI.Run the HRTVCKS command on the primary and specify output file A. Make
+sure that the output file (A) is replicated to the backup system by
+iCluster
+:LI.On the HRTVCKS, also specify the TARGET, GROUP and ICGROUP parameters to
+run the checksum retrieval on the backup machine using the HSNDCMD command,
+specify a different output file (B) on the backup
+:LI.When both checksum retrievals have finshed (or at a convenient time), use
+the HCMPCKS command on the backup system to compare the checksum records,
+specify input files A (replicated from the production) and B (generated on
+the backup)
+:EOL.
+:P.
+:NT.If the physical file on the backup machine resides in a different library,
+use the TGTLIB and RUNSYS parameters to specify respectively the library
+of the file on the backup system and the system the HRTVCKS command is
+running on.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+
+.* Help for parameter FILSYS
+:HELP NAME='HRTVCKS/FILSYS'.File system for object - Help
+:XH3.File system for object (FILSYS)
+:P.
+Specify the file system in which the file to be checked is to be found.
+Either native (*NTV) file system or IFS (*IFS) is allowed.
+:P.
+The possible file-system-for-object values are:
+:P.
+:PARML.
+:PT.:PK def.*NTV:EPK.
+:PD.
+The input file resides in the native file system. HRTVCKS expects a physical
+file (or member) to be used as the input file (FILE parameter).
+:PT.*IFS
+:PD.
+The input file resides in the IFS file system. HRTVCKS expects the path for an
+IFS file to be used as the input file (PATH parameter).
+:EPARML.
+:EHELP.
+
+.* Help for parameter FILE
+:HELP NAME='HRTVCKS/FILE'.File to check - Help
+:XH3.File to check (FILE)
+:P.
+Identifies the file for which the checksum(s) must be retrieved. This file
+will be used as the input file. If the record length of the file in question
+is more than 32000, the remainder of the record is truncated.
+:EHELP.
+
+.* Help for parameter MBR
+:HELP NAME='HRTVCKS/MBR'.Member - Help
+:XH3.Member (MBR)
+:P.
+Specify the member that you want to retrieve the checksum for, should the file
+hold more than 1 member.
+:P.
+The possible member values are:
+:P.
+:PARML.
+:PT.:PK def.*FIRST:EPK.
+:PD.
+Use the first member in the specified file. If the file doesn't hold any
+member, an error will be issued.
+:PT.member-name
+:PD.
+Specify the member of the file. If the member does not exist, an error will
+be issued.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PATH
+:HELP NAME='HRTVCKS/PATH'.Object path - Help
+:XH3.Object path (PATH)
+:P.
+Specify the full path of the IFS file for which the checksum must be retrieved.
+:EHELP.
+
+.* Help for parameter OUTFILE
+:HELP NAME='HRTVCKS/OUTFILE'.Output file on current system - Help
+:XH3.Output file on current system (OUTFILE)
+:P.
+Identifies the output file that will hold checksum for the entire file and
+(if divided into multiple blocks of records), the checksum for each block.
+Make sure that you have iCluster replicate the generated output file
+on the primary system to the backup system so that you can compare the
+checksums between primary and backup.
+:P.
+The possible output-file-on-current-system values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+No records will be written to an output file. A completion message with the
+checksum of the file (member) will be issued to the caller. If the HRTVCKS
+command is run in batch, a message will be sent to the user for whom the job
+was submitted.
+:PT.file-name
+:PD.
+Specify the file and library that will hold the checksum output. If the file
+does not exist yet, it will be created based on the HRTVCKS template file. The
+library of the output file must not match the DMXtras customer library.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ICGROUP
+:HELP NAME='HRTVCKS/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specifies the name of the iCluster group or resilient application
+to run the HSNDCMD command against.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+The checksum retrieval will not be run automatically on the backup system.
+:PT.group or resilient applicaton
+:PD.
+The checksum retrieval will be run automatically on the backup system when the
+apply job for the specified group reaches the checkpoint.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BCKOUTF
+:HELP NAME='HRTVCKS/BCKOUTF'.Output file on backup system - Help
+:XH3.Output file on backup system (BCKOUTF)
+:P.
+If the command is also to be run on the backup system (target system, backup
+node), this parameter identifies the checksum output file on that system. This
+parameter must only be specified if TARGET is not *NONE. By specifying the
+TARGET parameter, the checksum retrieval is submitted on the backup system
+and output is written to the output file specified on this parameter.
+:P.
+The possible output-file-on-backup-system values are:
+:P.
+:PARML.
+:PT.file-name
+:PD.
+Specify the file and library that will hold the checksum output on the backup
+system. If the output file does not exist yet, it will be created.
+:EPARML.
+:EHELP.
+
+.* Help for parameter NBRRCD
+:HELP NAME='HRTVCKS/NBRRCD'.Number of records to check - Help
+:XH3.Number of records to check (NBRRCD)
+:P.
+Specify how many records of the file in question must be included in the
+checksum. This is particularily useful if the file to be checked has too many
+records and most updates typically occur on a specific part of the file,
+for instance a transaction file.
+:P.
+Which records are checked is dependent on the STRRCD parameter. By specifying
+NBRRCD(1000) STRRCD(*LAST), the last 1000 records in the file (member) are
+retrieved for checksum determination; if you specify NBRRCD(100) STRRCD(340)
+a block of 100 records, starting with record number 340 will be retrieved.
+By specifying *BLOCK for the NBRRCD parameter, you can specify the starting-
+and ending record for the block that you wish to check.
+:P.
+The possible number-of-records-to-check values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+All records in the file are checked.
+:PT.*BLOCK
+:PD.
+The block of records to check is specified by the STRRCD and ENDRCD parameters.
+:PT.number-of-records
+:PD.
+Specify the number of records to be included in the checksum, starting at the
+record number entered at the STRRCD parameter.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STRRCD
+:HELP NAME='HRTVCKS/STRRCD'.Check block starting record - Help
+:XH3.Check block starting record (STRRCD)
+:P.
+Specify the starting point of the of the block of records to check.
+By entering *FIRST, the NBRRCD number of
+records will be read from the start of the file (member). By entering *LAST,
+the last record number minus the specified number of records (NBRRCD)
+will be used as the starting point.
+:P.
+The possible check-block-starting-record values are:
+:P.
+:PARML.
+:PT.:PK def.*FIRST:EPK.
+:PD.
+The block of records will be read from the first record in the file (member).
+:PT.*LAST
+:PD.
+The starting point is calculated by subtracting the number of records from
+the last record number. Records are read from the starting point forward. This
+value is not allowed when NBRRCD(*BLOCK) is specified.
+:PT.record-number
+:PD.
+Specify the starting point for the block of records.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ENDRCD
+:HELP NAME='HRTVCKS/ENDRCD'.Check block ending record - Help
+:XH3.Check block ending record (ENDRCD)
+:P.
+Specify the ending record number of the block of records to check.
+:P.
+The possible check-block-ending-record values are:
+:P.
+:PARML.
+:PT.:PK def.*LAST:EPK.
+:PD.
+The last record in the file is used as the ending record for the block to
+check.
+:PT.record-number
+:PD.
+Specify the ending point for the block of records.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BLKSIZ
+:HELP NAME='HRTVCKS/BLKSIZ'.Block size (records) - Help
+:XH3.Block size (records) (BLKSIZ)
+:P.
+Determines the block size (if any) by which the input file is divided. By
+entering a small block size (for instance, 10 records), the output file
+holds more records but it is more helpful if you need to investigate the
+exact location of the discrepancy.
+:P.
+:NT.This value only applies if you specify an output file.:ENT.
+:P.
+:NT.Block totals will only be written if the input file can be split into
+more than 1 block. If the block size is greater than or equal to the last
+record number, only the total checksum for the file (block number 0) will
+be written.:ENT.
+:P.
+The possible block-size values are:
+:P.
+:PARML.
+:PT.:PK def.10000:EPK.
+:PD.
+The input file will be divided into chunks of 10000 records. Block 1 contains
+records 1 through 10000, block 2 contains records 10001 through 20000. If a
+block holds deleted records, the division of the blocks will not be affected
+by this and stick to the pre-defined starting point. This to not distort the
+comparison of other record blocks.
+:PT.*ALL
+:PD.
+No division will be made as to the number of records per block. The output
+file contains only 1 record, the checksum of all records in the file (member).
+:PT.number-of-records
+:PD.
+Specify the number of records in a block.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RCDLEN
+:HELP NAME='HRTVCKS/RCDLEN'.Record length (IFS) - Help
+:XH3.Record length (IFS) (RCDLEN)
+:P.
+Determines the record length to be used for an IFS file. If you specify *AUTO,
+the record length is automatically calculated based on the size of a disk
+block.
+:P.
+:NT.The record length specified is only taken into consideration if the
+checksum is retrieved for an IFS file. For database files in the native file
+system, the record length is retrieved from the file description.:ENT.
+:P.
+The possible record-length values are:
+:P.
+:PARML.
+:PT.:PK def.*AUTO:EPK.
+:PD.
+Record length of the IFS file is calculated based on the disk block size,
+normally the calculated record length will be 32kB.
+:PT.record-length-in-bytes
+:PD.
+Specify the record length which you want to use for calculating the checksum.
+:EPARML.
+:EHELP.
+
+.* Help for parameter TGTLIB
+:HELP NAME='HRTVCKS/TGTLIB'.Library on backup system - Help
+:XH3.Library on backup system (TGTLIB)
+:P.
+If the physical file resides in a different library on the backup system, you
+must specify this library here. This ensures that the checksum is retrieved
+for the proper file on the backup system, yet the comparison can be done
+using the original file name and library.
+:P.
+The possible library-on-backup-system values are:
+:P.
+:PARML.
+:PT.:PK def.*FILELIB:EPK.
+:PD.
+Library on the backup system is the same as on the primary system.
+:PT.library-name
+:PD.
+Specify name of the library on the backup system. If you specify a library here
+you must also specify RUNSYS(*BACKUP) when running the command on the backup
+system.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RUNSYS
+:HELP NAME='HRTVCKS/RUNSYS'.Running system - Help
+:XH3.Running system (RUNSYS)
+:P.
+This parameter must be used when the library in which the physical file resides
+is different on the backup system. In this case, you must run the command with
+RUNSYS(*PRIMARY) on the primary system and RUNSYS(*BACKUP) on the backup
+system. If the target/group has been specified, the HRTVCKS will automatically
+take care of this.
+:P.
+The possible running-system values are:
+:P.
+:PARML.
+:PT.:PK def.*PRIMARY:EPK.
+:PD.
+Command is running on the primary system.
+:PT.*BACKUP
+:PD.
+Command is running on the backup system.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CKSTYP
+:HELP NAME='HRTVCKS/CKSTYP'.Checksum type - Help
+:XH3.Checksum type (CKSTYP)
+:P.
+Specify the method that will be used to retrieve the checksum. For now, the
+only method supported is *HASH.
+:P.
+The possible checksum-type values are:
+:P.
+:PARML.
+:PT.:PK def.*HASH:EPK.
+:PD.
+Input records are converted via the MD-5 algorithm which comes with the
+operating system. MI function _CIPHER is employed to generate the checksum
+based on the input records.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

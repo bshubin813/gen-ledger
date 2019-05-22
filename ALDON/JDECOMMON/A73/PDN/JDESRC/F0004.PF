@@ -1,0 +1,41 @@
+     A****************************************************************
+     A*    (JDE) File Design Aid                                     *
+     A*                                                              *
+     A*    Created By : MP483735                                     *
+     A*    Date       : 02/25/94                                     *
+     A*    Time       : 074427                                       *
+     A*                                                              *
+     A*    File       : Descriptive Title Record Types
+     A****************************************************************
+     A                                      UNIQUE
+     A          R I0004
+     A                                      TEXT('Descriptive Title Record +
+     A                                      Types                    ')
+     A            DTSY      R               REFFLD(SY         F98FRFS          )
+     A                                      CCSID(65535)
+     A            DTRT      R               REFFLD(RT         F98FRFR          )
+     A                                      CCSID(65535)
+     A            DTDL01    R               REFFLD(DL01       F98FRFD          )
+     A                                      CCSID(00037)
+     A            DTUSEQ    R               REFFLD(USEQ       F98FRFU          )
+     A            DTUCD1    R               REFFLD(UCD1       F98FRFU          )
+     A                                      CCSID(65535)
+     A            DTCDL     R               REFFLD(CDL        F98FRFC          )
+     A            DTLN2     R               REFFLD(LN2        F98FRFL          )
+     A                                      CCSID(65535)
+     A            DTCNUM    R               REFFLD(CNUM       F98FRFC          )
+     A                                      CCSID(65535)
+     A            DTMRCT    R               REFFLD(MRCT       F98FRFM          )
+     A                                      CCSID(65535)
+     A            DTMRTY    R               REFFLD(MRTY       F98FRFM          )
+     A                                      CCSID(65535)
+     A            DTUSER    R               REFFLD(USER       F98FRFU          )
+     A                                      CCSID(65535)
+     A            DTPID     R               REFFLD(PID        F98FRFP          )
+     A                                      CCSID(65535)
+     A            DTUPMJ    R               REFFLD(UPMJ       F98FRFU          )
+     A            DTJOBN    R               REFFLD(JOBN       F98FRFJ          )
+     A                                      CCSID(65535)
+     A            DTUPMT    R               REFFLD(UPMT       F98FRFU          )
+     A          K DTSY
+     A          K DTRT

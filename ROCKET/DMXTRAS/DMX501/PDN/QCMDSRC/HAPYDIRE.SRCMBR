@@ -1,0 +1,69 @@
+/* ================================================================= */
+/* Object:         HAPYDIRE        *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HAPYDIRE) HLPID(*CMD)  */
+/*                                                                   */
+/* Synopsis:       Inserts the retrieved directory entries into the  */
+/*                 current system's list.                            */
+/*                                                                   */
+/* Note:           Directory entries must have been generated with   */
+/*                 *FULL option.                                     */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HAPYDIRE   *PGM     CPP                                           */
+/* HAPYDIRE   *PNLGRP  Help for HAPYDIRE command                     */
+/* HAPYDIRE   PF       Temporary file for directory entries          */
+/* HAUMSG     *MSGF    Messages                                      */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010719 FK  Initial delivery                                     */
+/* 20050128 FK  New parameter: Originating system name               */
+/*              New parameter: Originating address                   */
+/*              New parameter: New system name                       */
+/*              New parameter: New address                           */
+/*              New parameter: Add user-less entries                 */
+/* ================================================================= */
+             CMD        PROMPT('Apply directory entries')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(DIREFILE) TYPE(QUALFILE) MIN(1) +
+                          PROMPT('File with directory entries')
+             PARM       KWD(ORGSYS) TYPE(*CNAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Select entries +
+                          from system')
+             PARM       KWD(ORGADR) TYPE(*CNAME) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Select entries +
+                          from address')
+             PARM       KWD(NEWSYS) TYPE(*CNAME) DFT(*CURRENT) +
+                          SPCVAL((*ORGSYS) (*CURRENT)) PROMPT('New +
+                          system name')
+             PARM       KWD(NEWADR) TYPE(*CNAME) DFT(*ORGADR) +
+                          SPCVAL((*ORGADR) (*CURRENT)) PROMPT('New +
+                          address')
+             PARM       KWD(USRLESS) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*NO) (*YES)) +
+                          PROMPT('Add user-less entries')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

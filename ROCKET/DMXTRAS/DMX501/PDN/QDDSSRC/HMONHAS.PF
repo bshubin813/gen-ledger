@@ -1,0 +1,49 @@
+      * ============================================================ *
+      * Object:    HMONHAS         *FILE PF                          *
+      *            Holds the suspended objects received by the       *
+      *            listener program to be sent to the message queues *
+      *            or e-mail addresses.                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20041117 FK  Initial delivery                                *
+      * 20111220 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R HMONHASR
+     A            MSORGSYS       8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            MSSUSTYP       4A         TEXT('Suspend object type')
+     A                                      COLHDG('Suspend' 'Object' 'Type')
+     A            MSGRPNAM      10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'Name')
+     A            MSOBJNAM      10A         TEXT('Object name')
+     A                                      COLHDG('Object' 'Name')
+     A            MSOBJLIB      10A         TEXT('Library name')
+     A                                      COLHDG('Library' 'Name')
+     A            MSOBJMBR      10A         TEXT('Member name')
+     A                                      COLHDG('Member' 'Name')
+     A            MSOBJTYP      10A         TEXT('Object type')
+     A                                      COLHDG('Object' 'Type')
+     A            MSOBJATR      10A         TEXT('Object attribute')
+     A                                      COLHDG('Object' 'Attribute')
+     A            MSRSNCDE       3A         TEXT('Reason code')
+     A                                      COLHDG('Suspend' 'Reason' 'Code')
+     A            MSSUSDTS        Z         TEXT('Suspension date-time')
+     A                                      COLHDG('Suspension' 'date-time')
+     A            MSUPDDTS        Z         TEXT('Suspend update date-time')
+     A                                      COLHDG('Suspend update' 'date-time')
+     A            MSIFSTYP      10A         TEXT('IFS Object type')
+     A                                      COLHDG('IFS Object' 'Type')
+     A            MSIFSKEY     500A         VARLEN TEXT('Object IFS key')
+     A                                      COLHDG('IFS Object' 'Key')
+     A            MSIFSPTH    5001A         TEXT('Object IFS path')
+     A                                      COLHDG('IFS Object')
+     A                                      VARLEN
+
+      * Keys
+     A          K MSORGSYS
+     A          K MSSUSDTS

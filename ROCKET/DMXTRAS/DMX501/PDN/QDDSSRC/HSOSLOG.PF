@@ -1,0 +1,48 @@
+      * ============================================================ *
+      * Object:    HSOSLOG         *FILE PF                          *
+      *            Output file to contain the job log for the        *
+      *            switchover procedure on source / target           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20030205 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HSOSLOG@
+     A            SLSYS          4A         TEXT('System *SRC/*TGT')
+     A                                      COLHDG('System' '*SRC/*TGT')
+     A            QMHSYS         8A         TEXT('System name')
+     A                                      COLHDG('System name')
+     A            QMHDAT          L         TEXT('Message sent date')
+     A                                      COLHDG('Message' 'sent date')
+     A            QMHTIM          T         TEXT('Message sent time')
+     A                                      COLHDG('Message' 'sent time')
+     A            QMHMID         7A         TEXT('Message ID')
+     A                                      COLHDG('Message' 'ID')
+     A            QMHSEV         5B 0       TEXT('Message severity')
+     A                                      COLHDG('Message' 'severity')
+     A            QMHTYP        10A         TEXT('Message type')
+     A                                      COLHDG('Message' 'Type')
+     A            QMHMF         20A         TEXT('Message file')
+     A                                      COLHDG('Message' 'file')
+     A            QMHRQS         1A         TEXT('Request status')
+     A                                      COLHDG('Request' 'status')
+     A            QMHSPG        12A         TEXT('Sender program name')
+     A                                      COLHDG('Sender' 'program' 'name')
+     A            QMHSLB        10A         TEXT('Sender library name')
+     A                                      COLHDG('Sender' 'library' 'name')
+     A            QMHRPG        10A         TEXT('Receiver program name')
+     A                                      COLHDG('Receiver' 'program' 'name')
+     A            QMHRLB        10A         TEXT('Receiver library name')
+     A                                      COLHDG('Receiver' 'library' 'name')
+     A            QMHMDT      3000A         TEXT('Message data')
+     A                                      COLHDG('Message data')
+     A                                      VARLEN
+      *
+     A          K SLSYS
+     A          K QMHSYS
+     A          K QMHDAT
+     A          K QMHTIM

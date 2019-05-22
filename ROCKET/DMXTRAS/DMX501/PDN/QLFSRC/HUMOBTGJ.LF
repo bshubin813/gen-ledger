@@ -1,0 +1,28 @@
+      * ============================================================ *
+      * Object:    HUMOBTGJ        *FILE LF                          *
+      *            Logical file over HAMOBJ by Target ID, Group ID   *
+      *            Journal name, Journal library                     *
+      *                                                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUMOBTG@                  PFILE(HAMOBJ)
+     A            TGTID
+     A            GRPID
+     A            OBJNAME                   RENAME(NAME)
+     A            OBJLIB                    RENAME(LIB)
+     A            OBJTYPE
+     A            OBJATTR
+     A            JRN
+     A            JRNLIB
+      *
+     A          K TGTID
+     A          K GRPID
+     A          K JRN
+     A          K JRNLIB

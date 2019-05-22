@@ -1,0 +1,116 @@
+.* ============================================================ *
+.* Object:    HPRTXLF         *PNLGRP                           *
+.*            Help text for the HPRTXLF command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020510 FK  Initial delivery                                *
+.* 20020627 FK  Also work from logical files                    *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HPRTXLF'.Display cross-library LFs - Help
+:P.
+The HPRTXLF (Display cross-library LFs) command allows you to
+produce a list of physical files and their based-on logical files.
+Only physical files and logical files that do not reside in the same
+library are listed; this to avoid suspended files in the
+iCluster products. Physical files and their referencing logical
+files should be replicated in the same group.
+:P.
+There are two reports which are produced by this command:
+:UL.
+:LI.HPRTXLF   - Physical files with x-library logicals
+:LI.HPRTXLFLF - Logical files x-library physicals
+:EUL.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter LIB
+:HELP NAME='HPRTXLF/LIB'.Library - Help
+:XH3.Library (LIB)
+:P.
+Specify the library(ies) for which database relations must be
+verified. All files in the library are verified.
+:P.
+A maximum of 100 library entries can be made.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.library-name
+:PD.
+Database relations are printed for the specified library.
+:PT.*ALLUSR
+:PD.
+Database relations are printed for all user libraries on the system.
+:PT.*ALL
+:PD.
+Database relations are printed for all libraries on the system,
+including system libraries.
+:PT.*LIBL
+:PD.
+Database relations are printed for all libraries in the current
+library list, including system libraries.
+:PT.*USRLIBL
+:PD.
+Database relations are printed for all user libraries in the current
+library list.
+:EPARML.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter OUTFILLIB
+:HELP NAME='HPRTXLF/OUTFILLIB'.Library for output file - Help
+:XH3.Library for output file (OUTFILLIB)
+:P.
+Specify the name of the library that holds the output files for the
+database relations and file descriptions.
+The output files HPRTXLF and HPRTXLFLF will be placed in this
+library.
+:P.
+:NT.The output file library cannot be utilities library as this contains
+the base versions of the HPRTXLF and HPRTXLFLF files.:ENT.
+:P.
+The possible library-for-output-file values are:
+:P.
+:PARML.
+:PT.:PK def.QTEMP:EPK.
+:PD.
+The output files will be held in QTEMP. After completion of
+the job they are automatically deleted.
+:PT.library-name
+:PD.
+Specify an existing library that will contain the output files after
+completion of the job.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BATCH
+:HELP NAME='HPRTXLF/BATCH'.Submit to batch - Help
+:XH3.Submit to batch (BATCH)
+:P.
+Determines whether or not the retrieval of cross-library logical files
+must be submitted to batch.
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The retrieval is submitted to batch. The utilities' HAUTILS
+job description is used to submit the job and the job name is HPRTXLF.
+:PT.*NO
+:PD.
+The retrieval is run interactively. Please note that this can take
+a long time if a big library must be processed.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

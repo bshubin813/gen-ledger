@@ -1,0 +1,32 @@
+      * ============================================================ *
+      * Object:    HUMOBTGJ        *FILE LF                          *
+      *            Logical file over HAMOBJ by Object name, Object   *
+      *            library.                                          *
+      *                                                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20040224 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUMOBSO@                  PFILE(HAMOBJ)
+     A            TGTID
+     A            GRPID
+     A            OBJNAME                   RENAME(NAME)
+     A            OBJLIB                    RENAME(LIB)
+     A            OBJTYPE
+     A            OBJATTR
+     A            JRN
+     A            JRNLIB
+     A            STATE
+     A            DBSTATE
+     A            REASON
+     A            CHKPOINT
+      *
+     A          K OBJNAME
+     A          K OBJLIB
+      * Omit records that have STATE=ACT
+     A          O STATE                     COMP(EQ 'ACT')

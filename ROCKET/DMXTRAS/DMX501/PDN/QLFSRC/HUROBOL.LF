@@ -1,0 +1,30 @@
+      * ============================================================ *
+      * Object:    HUROBOL         *FILE LF                          *
+      *            Logical file over HAROBJ by Object name, Object   *
+      *            library.                                          *
+      *                                                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20070420 FK  Initial delivery (copy from HAXMOBJ)            *
+      * ============================================================ *
+     A          R HUROBOL@                  PFILE(HAROBJ)
+     A            TGTID
+     A            GRPID
+     A            OBJNAME                   RENAME(NAME)
+     A            OBJLIB                    RENAME(LIB)
+     A            OBJTYPE
+     A            OBJATTR
+     A            JRN
+     A            JRNLIB
+     A            STATE
+     A            DBSTATE
+     A            REASON
+      *
+     A          K OBJNAME
+     A          K OBJLIB
+     A          K OBJTYPE

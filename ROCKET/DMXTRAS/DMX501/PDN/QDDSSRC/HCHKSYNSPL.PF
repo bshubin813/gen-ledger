@@ -1,0 +1,16 @@
+      * ============================================================ *
+      * Object:    HCHKSYNSPL      *FILE PF                          *
+      *            Output file to hold the spooled file              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20070919 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R CHKSYNSPLR
+     A            SFLINE       198A         TEXT('Spooled file line')
+     A                                      COLHDG('Spooled file line')
+      *

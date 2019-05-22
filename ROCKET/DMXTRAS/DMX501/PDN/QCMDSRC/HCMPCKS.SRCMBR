@@ -1,0 +1,45 @@
+/* ================================================================= */
+/* Object:         HCMPCKS         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks:                                                   */
+/*                                                                   */
+/* Synopsis: Compares the checksums for the input files specified    */
+/*           and prints a report or shows it on screen.              */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20050503 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Compare checksum files')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(OUTF01) TYPE(QUALOUTF) MIN(1) +
+                          PROMPT('HRTVCKS output file 1')
+             PARM       KWD(OUTF02) TYPE(QUALOUTF) MIN(1) +
+                          PROMPT('HRTVCKS output file 2')
+             PARM       KWD(RECORDS) TYPE(*CHAR) LEN(10) RSTD(*YES) +
+                          DFT(*MISMATCH) SPCVAL((*MISMATCH) (*ALL)) +
+                          PROMPT('Records to display')
+             PARM       KWD(OUTPUT) TYPE(*CHAR) LEN(6) RSTD(*YES) +
+                          DFT(*) SPCVAL((*) (*PRINT)) PROMPT('Output')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALOUTF:   QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

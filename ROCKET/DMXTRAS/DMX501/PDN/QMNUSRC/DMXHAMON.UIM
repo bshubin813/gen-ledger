@@ -1,0 +1,194 @@
+.im #HDR
+
+:import       name  = 'HWRKJRN'
+              pnlgrp = HWRKJRN.
+:import       name  = 'HDLTJRNRCV'
+              pnlgrp = HDLTJRNRCV.
+:import       name  = 'HDLTJRNDSP'
+              pnlgrp = HDLTJRNDSP.
+:import       name  = 'HMONHA'
+              pnlgrp = HMONHA.
+:import       name  = 'HWRKALR'
+              pnlgrp = HWRKALR.
+:import       name  = 'HMONJOB'
+              pnlgrp = HMONJOB.
+:import       name  = 'HMONJOBADD'
+              pnlgrp = HMONJOBADD.
+:import       name  = 'WRKREGINF'
+              pnlgrp = QHUSCMD.
+:import       name  = 'HMONJRNLAG'
+              pnlgrp = HMONJRNLAG.
+:import       name  = 'HMONNETTFC'
+              pnlgrp = HMONNETTFC.
+:import       name  = 'HRTVNETTFC'
+              pnlgrp = HRTVNETTFC.
+:import       name  = 'HCHKSYNTGT'
+              pnlgrp = HCHKSYNTGT.
+:import       name  = 'HDSPSYNTGT'
+              pnlgrp = HDSPSYNTGT.
+:import       name  = 'HDSPBSFSC'
+              pnlgrp = HDSPBSFSC.
+:import       name  = 'HRTVCKS'
+              pnlgrp = HRTVCKS.
+:import       name  = 'HCMPCKS'
+              pnlgrp = HCMPCKS.
+:import       name  = 'HSETAUT'
+              pnlgrp = HSETAUT.
+:import       name  = 'HPRTSAJ'
+              pnlgrp = HPRTSAJ.
+:import       name  = 'HSUSACTF'
+              pnlgrp = HSUSACTF.
+
+.im #VAR
+:cond         name=cwrkjrn
+              expr='chkobj("HWRKJRN", "*CMD")'.
+:cond         name=cdltjrnrcv
+              expr='chkobj("HDLTJRNRCV", "*CMD")'.
+:cond         name=cdltjrndsp
+              expr='chkobj("HDLTJRNDSP", "*CMD")'.
+:cond         name=cmonha
+              expr='chkobj("HMONHA", "*CMD")'.
+:cond         name=cwrkalr
+              expr='chkobj("HWRKALR", "*CMD")'.
+:cond         name=cmonjob
+              expr='chkobj("HMONJOB", "*CMD")'.
+:cond         name=cmonjobadd
+              expr='chkobj("HMONJOBADD", "*CMD")'.
+:cond         name=cmonjrnlag
+              expr='chkobj("HMONJRNLAG", "*CMD")'.
+:cond         name=cmonnettfc
+              expr='chkobj("HMONNETTFC", "*CMD")'.
+:cond         name=crtvnettfc
+              expr='chkobj("HRTVNETTFC", "*CMD")'.
+:cond         name=cchksyntgt
+              expr='chkobj("HCHKSYNTGT", "*CMD")'.
+:cond         name=cdspsyntgt
+              expr='chkobj("HDSPSYNTGT", "*CMD")'.
+:cond         name=csetaut
+              expr='chkobj("HSETAUT", "*CMD")'.
+:cond         name=cdspbsfsc
+              expr='chkobj("HDSPBSFSC", "*CMD")'.
+:cond         name=crtvcks
+              expr='chkobj("HRTVCKS", "*CMD")'.
+:cond         name=ccmpcks
+              expr='chkobj("HCMPCKS", "*CMD")'.
+:cond         name=cprtsaj
+              expr='chkobj("HPRTSAJ", "*CMD")'.
+:cond         name=csusactf
+              expr='chkobj("HSUSACTF", "*CMD")'.
+.im #KEY
+:ekeyl.
+.im #TTL
+DMXtras High Availability Monitoring menu
+.im #OPT
+
+:menugrp.     Clean-up
+:menui        option=11
+              cond=cwrkjrn
+              help='HWRKJRN'
+              action='cmd ?hwrkjrn'
+              .Work with journals                               HWRKJRN    (P/B)
+:menui        option=12
+              cond=cdltjrnrcv
+              help='HDLTJRNRCV'
+              action='cmd ?hdltjrnrcv'
+              .Delete journal receivers                         HDLTJRNRCV (P/B)
+:menui        option=13
+              cond=cdltjrndsp
+              help='HDLTJRNDSP'
+              action='cmd ?hdltjrndsp'
+              .Display journal use for product                  HDLTJRNDSP (P/B)
+:emenugrp.
+
+:menugrp.     High availability monitoring and adjustment
+:menui        option=21
+              cond=cmonha
+              help='HMONHA'
+              action='cmd ?hmonha'
+              .Monitor HA Suite/iCluster                        HMONHA     (P/B)
+:menui        option=22
+              cond=cwrkalr
+              help='HWRKALR'
+              action='cmd hwrkalr'
+              .Work with alert destinations for HMONHA          HWRKALR    (P/B)
+:menui        option=25
+              cond=cmonjob
+              help='HMONJOB'
+              action='cmd ?hmonjob'
+              .Monitor and log active jobs in system            HMONJOB    (P)
+:menui        option=26
+              cond=cmonjobadd
+              help='HMONJOBADD'
+              action='cmd ?hmonjobadd'
+              .Add monitored jobs subsystem                     HMONJOBADD (P)
+:menui        option=27
+              help='WRKREGINF'
+              action='cmd wrkreginf EXITPNT(QIBM_QWT_JOBNOTIFY)'
+              .Work with registration information               WRKREGINF  (P)
+:menui        option=30
+              cond=cmonjrnlag
+              help='HMONJRNLAG'
+              action='cmd ?hmonjrnlag'
+              .Monitor journal replication lag                  HMONJRNLAG (P)
+:menui        option=35
+              cond=cmonnettfc
+              help='HMONNETTFC'
+              action='cmd ?hmonnettfc'
+              .Monitor network traffic                          HMONNETTFC (S/T)
+:menui        option=36
+              cond=crtvnettfc
+              help='HRTVNETTFC'
+              action='cmd ?hrtvnettfc'
+              .Retrieve network traffic output                  HRTVNETTFC (S/T)
+:menui        option=41
+              cond=cchksyntgt
+              help='HCHKSYNTGT'
+              action='cmd ?hchksyntgt'
+              .Synchronisation check for objects and members    HCHKSYNTGT (P)
+:menui        option=42
+              cond=cdspsyntgt
+              help='HDSPSYNTGT'
+              action='cmd ?hdspsyntgt'
+              .Display synchronisation check reports            HDSPSYNTGT (P/B)
+:menui        option=43
+              cond=csetaut
+              help='HSETAUT'
+              action='cmd ?hsetaut'
+              .Adjust object authorities                        HSETAUT    (B)
+:menui        option=45
+              cond=crtvcks
+              help='HRTVCKS'
+              action='cmd ?hrtvcks'
+              .Retrieve checksum for file                       HRTVCKS    (P/B)
+:menui        option=46
+              cond=ccmpcks
+              help='HCMPCKS'
+              action='cmd ?hcmpcks'
+              .Compare checksum files                           HCMPCKS    (B)
+:menui        option=50
+              cond=cprtsaj
+              help='HPRTSAJ'
+              action='cmd ?hprtsaj'
+              .Display security audit journal                   HPRTSAJ    (P/B)
+:menui        option=55
+              cond=csusactf
+              help='HSUSACTF'
+              action='cmd ?hsusactf'
+              .Activate or suspend a file                       HSUSACTF   (P)
+:emenugrp.
+
+.im #DMXHAHA
+
+:emenu.
+.im #CMDL
+
+.im #HLP
+
+:help         name='menu/help'.
+DMXtras High Availability Monitoring Menu - Help
+:p.
+This menu shows the tools related to the monitoring of your high availability
+solution.
+:ehelp.
+
+:epnlgrp.

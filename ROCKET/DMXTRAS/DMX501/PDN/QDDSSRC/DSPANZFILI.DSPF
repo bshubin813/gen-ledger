@@ -1,0 +1,86 @@
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      PRINT
+     A                                      INDARA
+     A          R SFLRCD                    SFL
+     A            SELECTION      1A  B 10  2
+     A            FILN          10A  O 10  4
+     A            LIBN          10A  O 10 15
+     A            FILA           4A  O 10 26
+     A            MBRS           1A  O 10 32
+     A            UNIQ           1A  O 10 36
+     A            REUSE          1A  O 10 41
+     A            JOINF          1A  O 10 47
+     A            RECS          10Y 0O 10 50EDTCDE(Z)
+     A            JRNN          10A  O 10 62
+     A            JRNI           1A  O 10 74
+     A            JRN            1A  H
+     A            PFFIL         10A  H
+     A            PFLIB         10A  H
+     A            KEYYES         1A  H
+     A            FILSEQ         4S 0H
+     A            HIDEFLD       50A  H
+     A          R SFLCTL                    SFLCTL(SFLRCD)
+     A                                      SFLSIZ(0012)
+     A                                      SFLPAG(0011)
+     A                                      CA03(03 'Exit')
+     A                                      CA12(12 'Cancel')
+     A                                      OVERLAY
+     A  40N70                               SFLDSP
+     A N70                                  SFLDSPCTL
+     A  70                                  SFLCLR
+     A N79                                  SFLEND(*MORE)
+     A            DSPREC         4S 0H      SFLRCDNBR(CURSOR)
+     A                                  1 72DATE
+     A                                      EDTWRD('0 /  /  ')
+     A                                  2 72TIME
+     A                                  1 30'Rocket Software, Inc. '
+     A                                      COLOR(BLU)
+     A                                  2 29'Display File Attributes'
+     A                                      COLOR(WHT)
+     A                                  6  2'Type options, press Enter.'
+     A                                      COLOR(BLU)
+     A                                  7  2'5=Display Key Fields'
+     A                                      COLOR(BLU)
+     A                                  8  4'File'
+     A                                      COLOR(WHT)
+     A                                  8 15'Library'
+     A                                      COLOR(WHT)
+     A                                  8 26'Type'
+     A                                      COLOR(WHT)
+     A                                  8 31'Mbr'
+     A                                      COLOR(WHT)
+     A                                  8 35'Unq'
+     A                                      COLOR(WHT)
+     A                                  8 39'Reuse'
+     A                                      COLOR(WHT)
+     A                                  8 45'Join'
+     A                                      COLOR(WHT)
+     A                                  8 53'Records'
+     A                                      COLOR(WHT)
+     A                                  8 62'Journal'
+     A                                      COLOR(WHT)
+     A                                  8 74'Img'
+     A                                      COLOR(WHT)
+     A                                  9 62'Name'
+     A                                      COLOR(WHT)
+     A          R CMDKEY
+     A                                      OVERLAY
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 16'F12=Cancel'
+     A                                      COLOR(BLU)
+     A          R MSGSFL                    SFL
+     A                                      SFLMSGRCD(24)
+     A            KEYFLD                    SFLMSGKEY
+     A            PGMFLD                    SFLPGMQ
+     A
+     A          R MSGCTL                    SFLCTL(MSGSFL)
+     A  40                                  OVERLAY
+     A  98                                  SFLCLR
+     A N98                                  SFLDSP
+     A N98                                  SFLDSPCTL
+     A  99                                  SFLEND
+     A  99                                  SFLINZ
+     A                                      SFLSIZ(0020)
+     A                                      SFLPAG(0001)
+     A            PGMFLD                    SFLPGMQ

@@ -1,0 +1,24 @@
+      * ============================================================ *
+      * Object:    HUPID           *FILE LF                          *
+      *            Logical file over HAPID, no index                 *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUPID@                    PFILE(HAPID)
+     A            TGTNAME
+     A            GRPNAME
+     A            JRNNAME
+     A            JRNLIB
+     A            PIDPRC                    RENAME(PROCE00001)
+     A            PID
+     A            PIDSTS                    RENAME(STATUS)
+     A            CHECKDONE
+     A            CHECKWAIT
+     A            CHECKID
+      *

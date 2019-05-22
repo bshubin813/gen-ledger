@@ -1,0 +1,31 @@
+      * ============================================================ *
+      * Object:    HUPIDTGJR       *FILE LF                          *
+      *            Logical file over HAPID, by target/group/journal, *
+      *            includes remote journal info                      *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20070423 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUPIDTGJR@                PFILE(HAPID)
+     A            TGTNAME
+     A            GRPNAME
+     A            JRNNAME
+     A            JRNLIB
+     A            PIDPRC                    RENAME(PROCE00001)
+     A            PID
+     A            RCVNAME
+     A            RCVLIB
+     A            RMTJRN
+     A            RMTJRNLIB
+     A            RMTRCVLIB
+      *
+     A          K TGTNAME
+     A          K GRPNAME
+     A          K JRNLIB
+     A          K JRNNAME
+     A          K PIDPRC

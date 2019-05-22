@@ -1,0 +1,34 @@
+      * ============================================================ *
+      * Object:    HMONHAE         *FILE PF                          *
+      *            Holds the event log messages received by the      *
+      *            listener program to be sent to the message queues *
+      *            or e-mail addresses.                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20041112 FK  Initial delivery                                *
+      * 20111220 FK  Remove HA                                       *
+      * ============================================================ *
+     A          R HMONHAER
+     A            MEORGSYS       8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            MEMSGDTS        Z         TEXT('Message date-time')
+     A                                      COLHDG('Message' 'date-time')
+     A            MEGRPNAM      10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'Name')
+     A            MEMSGORG       1A         TEXT('Message origin')
+     A                                      COLHDG('Message' 'Origin')
+     A            MEMSGID        7A         TEXT('Message ID')
+     A                                      COLHDG('Message' 'ID')
+     A            MEMSGF        10A         TEXT('Message file')
+     A                                      COLHDG('Message' 'File')
+     A            MEMSGDTA     500A         TEXT('Message data')
+     A                                      COLHDG('Message' 'data')
+     A                                      VARLEN
+      *
+     A          K MEORGSYS
+     A          K MEMSGDTS

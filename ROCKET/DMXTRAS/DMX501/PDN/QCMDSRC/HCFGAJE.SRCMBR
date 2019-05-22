@@ -1,0 +1,63 @@
+/* ================================================================= */
+/* Object:         HCFGAJE         *CMD                              */
+/*                 Configure an autostart job entry.                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HCFGAJE) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Allows the user to change the request data of a   */
+/*                 job description and add this job description as   */
+/*                 an AJE to a subsystem.                            */
+/*                                                                   */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HCFGAJE    *PGM     CPP                                           */
+/* HCFGAJE    *PNLGRP  Help for HSNDFTP command                      */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020514 FK  Initial delivery                                     */
+/* 20030116 FK  Allow start of AJE                                   */
+/* 20050202 FK  Remove HMONEVL entry                                 */
+/* 20070125 FK  Default for JOBD changed                             */
+/* 20111217 FK  Remove HA and CDC                                    */
+/* ================================================================= */
+             CMD        PROMPT('Configure autostart job entry')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JOBD) TYPE(QUALJOBD) MIN(1) PROMPT('Job +
+                          description')
+             PARM       KWD(JOB) TYPE(*NAME) DFT(*JOBD) +
+                          SPCVAL((*NONE) (*JOBD)) PROMPT('Job name +
+                          in subsystem')
+             PARM       KWD(SBSD) TYPE(QUALSBSD) PMTCTL(JOB) +
+                          PROMPT('Subsystem description')
+             PARM       KWD(STRAJE) TYPE(*CHAR) RSTD(*YES) DFT(*NO) +
+                          SPCVAL((*YES) (*NO)) PMTCTL(JOB) +
+                          PROMPT('Start autostart job entry')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJOBD:   QUAL       TYPE(*NAME) SPCVAL((HMONHA *N) (HDLTJRNRCV *N))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+ QUALSBSD:   QUAL       TYPE(*NAME) DFT(XDMCLUSTER) +
+                          SPCVAL((XDMCLUSTER *N))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ JOB:        PMTCTL     CTL(JOB) COND((*NE '*NONE'))

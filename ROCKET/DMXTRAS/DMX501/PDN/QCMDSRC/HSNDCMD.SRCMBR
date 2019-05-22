@@ -1,0 +1,96 @@
+/* ================================================================= */
+/* Object:         HSNDCMD         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HSNDCMD) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Allows the user to send a command through the     */
+/*                 iCluster mirroring process to be exe-             */
+/*                 cuted by the following processes:                 */
+/*                 1. Scrape                                         */
+/*                 2. Apply                                          */
+/*                                                                   */
+/*                 After the execution of the command, the mirroring */
+/*                 process may be ended.                             */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 19990729 FK  Initial delivery                                     */
+/* 20010822 FK  Remove ability for receive                           */
+/* 20020506 FK  Allow submit to batch                                */
+/*              Enable for iCluster                                  */
+/* 20040207 FK  Remove utilities library parameter                   */
+/* 20050210 FK  Specify backup node (iCluster)                       */
+/*              Allow to specify submitted job's name                */
+/* 20050521 FK  Allow GROUP(*NONE)                                   */
+/* 20070125 FK  Default target is *ICLUSTER                          */
+/* 20071024 FK  Allow to choose library list on target               */
+/* 20080509 FK  Allow groups to await completion of submitted job    */
+/*              Restart apply jobs automatically                     */
+/* 20111217 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Send command')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(CMD) TYPE(*CMDSTR) LEN(256) MIN(1) +
+                          PROMPT('Command to be executed')
+             PARM       KWD(ICGROUP) TYPE(*NAME) SPCVAL((*ALL *N)) +
+                          MIN(1) PROMPT('Group or resilient +
+                          application')
+             PARM       KWD(BCKNOD) TYPE(*NAME) LEN(8) DFT(*FIRST) +
+                          SPCVAL((*FIRST)) PMTCTL(ICALLGRP) +
+                          PROMPT('Groups for backup node')
+             PARM       KWD(SCRAPE) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Execute command for scrape')
+             PARM       KWD(APPLY) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Execute command for apply')
+             PARM       KWD(ENDMIR) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) PROMPT('End +
+                          executing process')
+             PARM       KWD(BATCH) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Submit command to batch')
+             PARM       KWD(JOBD) TYPE(QUALJOBD) PMTCTL(BATCH) +
+                          PROMPT('Job description for SBMJOB')
+             PARM       KWD(JOB) TYPE(*NAME) DFT(HSNDCMD) +
+                          SPCVAL((HSNDCMD)) PMTCTL(BATCH) +
+                          PROMPT('Job name for SBMJOB')
+             PARM       KWD(USER) TYPE(*NAME) DFT(*CURRENT) +
+                          SPCVAL((*CURRENT)) PMTCTL(BATCH) +
+                          PROMPT('User for SBMJOB')
+             PARM       KWD(INLLIBL) TYPE(*CHAR) LEN(10) RSTD(*YES) +
+                          DFT(*APPLYJOB) SPCVAL((*APPLYJOB) +
+                          (*JOBD)) PMTCTL(BATCH) PROMPT('Library +
+                          list for submitted job')
+             PARM       KWD(WAITCOMP) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Await completion of command')
+             PARM       KWD(RESTART) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Restart process after job')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJOBD:   QUAL       TYPE(*NAME) DFT(HAUTILS)
+             QUAL       TYPE(*NAME) DFT(*UTLLIB) SPCVAL((*UTLLIB)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&SCRAPE *EQ '*NO') PARM((&APPLY *EQ +
+                          '*YES')) MSGID(SCM0002)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ BATCH:      PMTCTL     CTL(BATCH) COND((*EQ '*YES'))
+ ICALLGRP:   PMTCTL     CTL(ICGROUP) COND((*EQ '*ALL'))

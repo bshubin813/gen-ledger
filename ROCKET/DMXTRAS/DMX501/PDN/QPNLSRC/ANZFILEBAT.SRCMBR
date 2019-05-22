@@ -1,0 +1,56 @@
+.* ============================================================ *
+.* Object:    ANZFILEBAT      *PNLGRP                           *
+.*            Help text for the ANZFILEBAT option.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='ANZFILEBAT'.Analyze File Attributes in Batch - Help
+:P.
+This option will submit an immediate batch job called ANZFILES which
+will analyze all files in the specified library and populate ANZFILA
+and ANZFILC. These files will then be used in subsequent HA Tools 2000
+options to display or print the results.
+:P.
+:NT. This option must be run before HA Tools 2000 menu options to
+Display File Analysis, Print Analyzed File Analysis or Interactive
+File Analysis.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter FNAM
+:HELP NAME='FNAM'.File Name (FNAM) - Help
+:XH3.File Name (FNAM)
+:P.
+Specify the name of the file to analyze. This can be a specific file
+name, a generic or all files in the specified library.
+:P.
+The possible values for File Name are:
+:P.
+:PARML.
+:PT.Name
+:PD.
+Specify the file name to be analyzed.
+:PT.Generic*
+:PD.
+Specify a generic file name where * is a wildcard. As an example, to
+analyze files PAYROLL, PAYPROD and PAYTMP specify PAY*.
+:EPARML.
+:EHELP.
+.* Help for parameter FLIB
+:HELP NAME='FLIB'.File Name (FLIB) - Help
+:XH3.File Library (FLIB)
+:P.
+Specify the library containing the existing files to be analyzed.
+:EHELP.
+:EPNLGRP.

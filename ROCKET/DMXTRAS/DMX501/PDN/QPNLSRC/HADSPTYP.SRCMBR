@@ -1,0 +1,69 @@
+.* ============================================================ *
+.* Object:    HADSPTYP        *PNLGRP                           *
+.*            Help text for the HADSPTYP program.               *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HADSPTYP'.Monitored Journal Entry Types - Help
+:P.
+This option allows you to modify the standard journal entry types that
+the HATOOLS 2000 Analyze Journal Receivers options and commands will
+monitor. Normally the defaults are sufficient for most shops.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Display level help                                           *
+.* ------------------------------------------------------------ *
+.* Help for Option 4 Remove Journal Entry
+:HELP NAME='RMVE'.Remove Journal Entry Help
+:XH3.Remove Journal Entry
+:P.
+Type option 4 next to the journal entry type that you would like to
+remove from analysis by HA Tools 2000.
+:P.
+:EHELP.
+.* Help for Type field
+:HELP NAME='CODE'.Code - Help
+:XH3.Code
+:P.
+This is the journal code. Standard codes are C (commitment control), F
+(database file member operation), J (journal or receiver operation), R
+(record level operation) and T (audit trail entry). For more informtaion
+on all of the journal codes, please see the IBM OS/400 Backup and Recovery
+manual.
+:EHELP.
+:HELP NAME='TYPE'.Type - Help
+:XH3.Type
+:P.
+This is the journal entry type. The description of each type is displayed
+under the Description field on this display. For more informtaion on
+all of the journal entry types, please see the IBM OS/400 Backup and Recovery
+manual.
+:EHELP.
+.* Help for Description field
+:HELP NAME='DESC'.Description - Help
+:XH3.Description
+:P.
+This is a description of each of the journal entry types that are
+currently being analyzed by HA Tools 2000.
+:EHELP.
+.* Help for PF6 Add Journal Entry
+:HELP NAME='ADDE'.Add Journal Entry Help
+:XH3.Add Journal Entry
+:P.
+Use PF6 to add a new journal entry type to the set of entries that will
+be analyzed by HA Tools 2000 Journal Analysis options and commands. Once
+PF6 is hit, a second screen will be displayed with the currently selected
+types highlighted. To add a new type use Option 1.
+:P.
+:EHELP.
+:EPNLGRP.

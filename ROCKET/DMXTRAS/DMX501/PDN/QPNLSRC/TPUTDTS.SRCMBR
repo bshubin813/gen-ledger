@@ -1,0 +1,136 @@
+.* ============================================================ *
+.* Object:    TPUTDTS         *PNLGRP                           *
+.*            Help text for the TPUTDTS command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20010531 FK  Initial delivery                                *
+.* 20051115 FK  File will be created if not existing            *
+.*              File name can be specified                      *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='TPUTDTS'.Put date-time stamp - Help
+:P.
+The TPUTDTS (Put date-time stamp) command allows you to
+write the current date-time together with key information into the
+a file in the designated library.
+:P.
+The file that contains the date-time stamp can be journaled and mirrored
+through Transformation Server to the target system. This way, the
+replication lag and/or proper functioning of the replication
+may be verified.
+:P.
+:NT.It is best to create the time stamp file in a production data library
+so that it is kept with the data it represents.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter LIB
+:HELP NAME='TPUTDTS/LIB'.Library for TPUTDTS file - Help
+:XH3.Library for TPUTDTS file (LIB)
+:P.
+Specify the library that contains the time stamp file. If the time stamp
+file does not exist yet, it will be created (empty).
+:P.
+The possible library-for-TPUTDTS-file values are:
+:P.
+:PARML.
+:PT.library-name
+:PD.
+Specify the library to hold the time stamp file that must be updated.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PUTITV
+:HELP NAME='TPUTDTS/PUTITV'.Write interval - Help
+:XH3.Write interval (PUTITV)
+:P.
+Specify the interval in seconds between writing/updating the time stamp
+in the TPUTDTS file.
+:P.
+If you specify an interval other than *ONCE and the command is executed
+interactively, a job is submitted with the TPUTDTS job description
+to handle writing/updating the date-time stamps.
+:P.
+The possible write-interval values are:
+:P.
+:PARML.
+:PT.:PK def.*MIN5:EPK.
+:PD.
+There are 5 minutes (300 seconds) between two subsequent updates.
+:PT.*ONCE
+:PD.
+The date-time stamp is only written/updated once.
+:PT.*HOUR
+:PD.
+There are 60 minutes (3600 seconds) between two subsequent updates.
+:PT.number of seconds
+:PD.
+Specify the number of seconds between two subsequent updates.
+:EPARML.
+:EHELP.
+
+.* Help for parameter KEY
+:HELP NAME='TPUTDTS/KEY'.Key value for record - Help
+:XH3.Key value for record (KEY)
+:P.
+Specify the key that identifies the date-time record. If the record
+already exists in the file, the date-time stamp will be updated.
+Otherwise a new record with the specified key value and the current
+date-time stamp is written.
+:EHELP.
+
+.* Help for parameter FILE
+:HELP NAME='TPUTDTS/FILE'.Time stamp file name - Help
+:XH3.Time stamp file name (FILE)
+:P.
+Specify the name of the file that should hold the time stamps. If the
+file does not exist yet, it is created in the library you specified on
+the command.
+:P.
+The possible time-stamp-file-name values are:
+:P.
+:PARML.
+:PT.:PK def.TPUTDTS:EPK.
+:PD.
+Time stamps will be put in the TPUTDTS file residing in the specified library.
+:PT.file-name
+:PD.
+Time stamps will be put in the specified file name.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JRN
+:HELP NAME='TPUTDTS/JRN'.Journal - Help
+:XH3.Journal (JRN)
+:P.
+Specify the name and library of the journal to which the file in question
+must be journalled. If the file is currently not journalled or if the current
+journal of the file is different from the one specified, an attempt will
+be made to (re)start journaling for the file.
+:P.
+The possible journal values are:
+:P.
+:PARML.
+:PT.:PK def.*NOCHG:EPK.
+:PD.
+The journal of the file will not be verified, nor will journaling be started if
+it is currently not active for the file.
+:PT.journal-name
+:PD.
+Specify the name and the library of the journal in which you wish to log
+transactions for this file. If the file is currently not journalled or if it
+is journalled to a different journal, an attempt will be made to (re)journal
+the file in question.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

@@ -1,0 +1,59 @@
+/* ================================================================= */
+/* Object:         HSUSACTF        *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD                                            */
+/*                                                                   */
+/* Synopsis:       Suspends or activates a file for all targets      */
+/*                 and groups to which it is defined.                */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HSUSACTF   *CMD     Command                                       */
+/* HSUSACTF   *PGM     CPP                                           */
+/* HSUSACT1   *PGM     Reads records in HAMOBJ                       */
+/* HSUSACT2   *PGM     Suspends or activates the file                */
+/* HAUMSG     *MSGF    Message file with all messages issued         */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000410 FK  Initial delivery                                     */
+/* 20020626 FK  Allow generic names for file                         */
+/* 20111222 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Suspend or Activate file')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(FILE) TYPE(QUALFILE) MIN(1) PROMPT('File')
+             PARM       KWD(ACTION) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*ACT) SPCVAL((*SUS) (*ACT)) +
+                          PROMPT('Action')
+             PARM       KWD(RFSH) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(ACT) PROMPT('Refresh file')
+             PARM       KWD(ICGROUP) TYPE(*NAME) LEN(10) +
+                          DFT(*SEARCH) SPCVAL((*SEARCH *N)) +
+                          PROMPT('Group or resilient application')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*GENERIC) SPCVAL((*ALL) (*ALLSUS)) MIN(1)
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&FILE *EQ '*ALLSUS') PARM((&ICGROUP *EQ +
+                          '*SEARCH')) MSGID(SAF0007)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ ACT:        PMTCTL     CTL(ACTION) COND((*EQ '*ACT'))

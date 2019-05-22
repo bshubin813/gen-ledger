@@ -1,0 +1,39 @@
+.* ============================================================ *
+.* Object:    HDSPLIB         *PNLGRP                           *
+.*            Help text for the command.                        *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20060102 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HDSPLIB'.Display library attributes - Help
+:P.
+The HDSPLIB (Display library attributes) can be used to quickly determine
+some basic attributes of the specified library:
+:UL.
+:LI.Number of objects in the library
+:LI.Total size of the library (in MB)
+:EUL.
+:P.
+HDSPLIB employs the QLIRLIBD API to retrieve these basic attributes.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+
+.* Help for parameter LIB
+:HELP NAME='HDSPLIB/LIB'.Library - Help
+:XH3.Library (LIB)
+:P.
+Specify the library for which the basic attributes must be displayed.
+:EHELP.
+
+:EPNLGRP.

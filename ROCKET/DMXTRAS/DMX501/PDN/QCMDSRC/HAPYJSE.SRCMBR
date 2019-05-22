@@ -1,0 +1,57 @@
+/* ================================================================= */
+/* Object:         HAPYJSE         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HAPYJSE) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Applies the job schedule entries that were        */
+/*                 retrieved in the specified user space to the      */
+/*                 current system's job scheduler.                   */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HAPYJSE    *PGM     CPP                                           */
+/* HCHKAPS    *PGM     Check for apostrophes                         */
+/* HAPYJSE    *PNLGRP  Help for HAPYJSE command                      */
+/* HPRSAPS    *PGM     Parse apostrophes                             */
+/* HAUMSG     *MSGF    Messages                                      */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 19990809 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Apply job schedule entries')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(USRSPC) TYPE(QUALUSP) MIN(1) +
+                          PROMPT('User space')
+             PARM       KWD(JSEID) TYPE(*NAME) DFT(*USRSPC) +
+                          SPCVAL((*USRSPC)) PROMPT('Job schedule +
+                          entry ID')
+             PARM       KWD(HOLD) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Hold job schedule entries')
+             PARM       KWD(SKPEXP) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Skip expired entries')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALUSP:    QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

@@ -1,0 +1,31 @@
+      * ============================================================ *
+      * Object:    HUFHLTS         *FILE LF                          *
+      *            Logical file over OMFHLOG by Record timestamp     *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20030926 FK  Initial delivery                                *
+      * 20070319 FK  Facilitate 20-digit journal positions           *
+      * ============================================================ *
+     A          R HUFHLTS@                  PFILE(OMFHLOG)
+     A            TGTSYS
+     A            GROUP
+     A            JRN
+     A            JRNLIB
+     A            RCDTIMSTMP
+     A            RCDTYP
+     A            LASTJRCV
+     A            LASTJRLIB
+     A            LASTJPOS      20  0
+     A            SRCJRCV
+     A            SRCJRLIB
+     A            SRCJPOS       20  0
+     A            TGTJRCV
+     A            TGTJRLIB
+     A            TGTJPOS       20  0
+      *
+     A          K RCDTIMSTMP

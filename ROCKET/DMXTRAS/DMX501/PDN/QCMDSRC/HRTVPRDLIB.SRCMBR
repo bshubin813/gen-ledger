@@ -1,0 +1,49 @@
+/*CP: ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD *IMOD)                   */
+/* ================================================================= */
+/* Object:         HRTVPRDLIB      *CMD                              */
+/*                 Retrieve product library                          */
+/*                                                                   */
+/* Create remarks: CRTCMD .... ALLOW(*IPGM  *BPGM)                   */
+/*                                                                   */
+/* Synopsis:                                                         */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010513 RP  Initial delivery                                     */
+/* 20061208 FK  Support for multiple TS libraries                    */
+/* 20111217 FK  Remove HA and CDC                                    */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve product settings')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(UTILLIB) TYPE(*CHAR) LEN(10) +
+                          RTNVAL(*YES) MIN(0) CHOICE('CHAR(10)') +
+                          KEYPARM(*NO) PROMPT('Utilities library +
+                          found')
+             PARM       KWD(ICPRODLIB) TYPE(*CHAR) LEN(10) +
+                          RTNVAL(*YES) MIN(0) CHOICE('CHAR(10)') +
+                          KEYPARM(*NO) PROMPT('iCluster product +
+                          library found')
+             PARM       KWD(ICUSER) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          CHOICE('CHAR(10)') PROMPT('iCluster user')
+             PARM       KWD(ICSBSD) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          CHOICE('CHAR(10)') PROMPT('iCluster +
+                          subsystem')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

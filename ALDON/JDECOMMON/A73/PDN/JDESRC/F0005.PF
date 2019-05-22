@@ -1,0 +1,40 @@
+     A****************************************************************
+     A*    (JDE) File Design Aid                                     *
+     A*                                                              *
+     A*    Created By : MP483735                                     *
+     A*    Date       : 01/27/94                                     *
+     A*    Time       : 075402                                       *
+     A*                                                              *
+     A*    File       : User Defined Codes Values
+     A****************************************************************
+     A                                      UNIQUE
+     A          R I0005
+     A                                      TEXT('User Defined Codes Values+
+     A                                                               ')
+     A            DRSY      R               REFFLD(SY         F98FRFS          )
+     A                                      CCSID(65535)
+     A            DRRT      R               REFFLD(RT         F98FRFR          )
+     A                                      CCSID(65535)
+     A            DRKY      R               REFFLD(KY         F98FRFK          )
+     A                                      CCSID(65535)
+     A            DRDL01    R               REFFLD(DL01       F98FRFD          )
+     A                                      CCSID(00037)
+     A            DRDL02    R               REFFLD(DL02       F98FRFD          )
+     A                                      CCSID(00037)
+     A            DRSPHD    R               REFFLD(SPHD       F98FRFS          )
+     A                                      CCSID(65535)
+     A            DRUDCO    R               REFFLD(UDCO       F98FRFU          )
+     A                                      CCSID(65535)
+     A            DRHRDC    R               REFFLD(HRDC       F98FRFH          )
+     A                                      CCSID(65535)
+     A            DRUSER    R               REFFLD(USER       F98FRFU          )
+     A                                      CCSID(65535)
+     A            DRPID     R               REFFLD(PID        F98FRFP          )
+     A                                      CCSID(65535)
+     A            DRUPMJ    R               REFFLD(UPMJ       F98FRFU          )
+     A            DRJOBN    R               REFFLD(JOBN       F98FRFJ          )
+     A                                      CCSID(65535)
+     A            DRUPMT    R               REFFLD(UPMT       F98FRFU          )
+     A          K DRSY
+     A          K DRRT
+     A          K DRKY

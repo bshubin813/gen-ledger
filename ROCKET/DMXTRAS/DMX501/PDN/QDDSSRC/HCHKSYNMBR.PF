@@ -1,0 +1,81 @@
+      * ============================================================ *
+      * Object:    HCHKSYNMD       *FILE PF                          *
+      *            Holds the retrieved member descriptions.          *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20021119 FK  Initial delivery (rebuild sync check)           *
+      * 20050214 FK  Remove journal information                      *
+      * 20060327 FK  Include original file name                      *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNMBR@
+     A            MBGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            MBCMPL        10A         TEXT('Original library')
+     A                                      COLHDG('Original' 'library')
+     A            MBCMPF        10A         TEXT('Original file')
+     A                                      COLHDG('Original' 'file')
+     A            MBLIB         10A         TEXT('File library')
+     A                                      COLHDG('File' 'library')
+     A            MBFILE        10A         TEXT('File name')
+     A                                      COLHDG('File' 'name')
+     A            MBNAME        10A         TEXT('Member name')
+     A                                      COLHDG('Member' 'name')
+     A            MBTGTL        10A         TEXT('Target library')
+     A                                      COLHDG('Target' 'library')
+     A            MBFTYP         1A         TEXT('File type')
+     A                                      COLHDG('File' 'type')
+     A            MBDTAT         1A         TEXT('Data or Source file')
+     A                                      COLHDG('Data/' 'Source')
+     A            MBMMT          1A         TEXT('Missing member target')
+     A                                      COLHDG('Missing' 'Member' -
+     A                                             'Target')
+     A                                      DFT('N')
+     A            MBMMS          1A         TEXT('Obsolete member target')
+     A                                      COLHDG('Obsolete' 'Member' -
+     A                                             'Target')
+     A                                      DFT('N')
+     A            MBMD           1A         TEXT('Member difference')
+     A                                      COLHDG('Member' -
+     A                                             'Difference')
+     A                                      DFT('N')
+     A            SMCDTS          Z         TEXT('Src Creation DTS')
+     A                                      COLHDG('Source' 'Create' -
+     A                                             'date/time')
+     A            TMCDTS          Z         TEXT('Tgt Creation DTS')
+     A                                      COLHDG('Target' 'Create' -
+     A                                             'date/time')
+     A            SMCHDT          Z         TEXT('Src Change DTS')
+     A                                      COLHDG('Source' 'Change' -
+     A                                             'date/time')
+     A            TMCHDT          Z         TEXT('Tgt Change DTS')
+     A                                      COLHDG('Target' 'Change' -
+     A                                             'date/time')
+     A            SMNRCD        10P 0       TEXT('Src Current # records')
+     A                                      COLHDG('Source' '# of Records')
+     A            TMNRCD        10P 0       TEXT('Tgt Current # records')
+     A                                      COLHDG('Target' '# of Records')
+     A            SMNDTR        10P 0       TEXT('Src Deleted # records')
+     A                                      COLHDG('Source' '# Deleted')
+     A            TMNDTR        10P 0       TEXT('Tgt Deleted # records')
+     A                                      COLHDG('Target' '# Deleted')
+     A            SMDSZ2        15P 0       TEXT('Src Data space size')
+     A                                      COLHDG('Source' 'Data space')
+     A            TMDSZ2        15P 0       TEXT('Tgt Data space size')
+     A                                      COLHDG('Target' 'Data space')
+     A            SMLOCK         1A         TEXT('Src Member locked?')
+     A                                      COLHDG('Source' 'Member' 'Locked')
+     A            TMLOCK         1A         TEXT('Tgt Member locked?')
+     A                                      COLHDG('Target' 'Member' 'Locked')
+      *
+     A          K MBGRPN
+     A          K MBCMPL
+     A          K MBFILE
+     A          K MBNAME

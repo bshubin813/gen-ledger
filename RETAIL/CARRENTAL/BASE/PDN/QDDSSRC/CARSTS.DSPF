@@ -1,0 +1,34 @@
+     A* Free Form Menu: CARSTS
+     A*%%TS  SD  19970422  152157  QSECOFR     REL-V3R7M0  5716-PW1
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A                                      CHGINPDFT
+     A                                      INDARA
+     A                                      PRINT(*LIBL/QSYSPRT)
+     A          R CARSTS
+     A*%%TS  SD  19940314  151311  JERRY       REL-V2R2M0  5738-PW1
+     A                                      DSPMOD(*DS3)
+     A                                      LOCK
+     A                                      SLNO(01)
+     A                                      CLRL(*ALL)
+     A                                      ALWROL
+     A                                      CF03
+     A                                      HELP
+     A                                      HOME
+     A                                      HLPRTN
+     A                                  1  2'CARSTS'
+     A                                      COLOR(BLU)
+     A                                  1 35'Statistics'
+     A                                      DSPATR(HI)
+     A                                  3  2'Select one of the following:'
+     A                                      COLOR(BLU)
+     A                                  5  7'1. Add data'
+     A                                  7  7'2. Retrieve data'
+     A* CMDPROMPT  Do not delete this DDS spec.
+     A                                020  2'Selection or Command              -
+     A                                          '
+     A                                  2 60TIME
+     A                                  2 70DATE
+     A                                      EDTCDE(Y)
+     A                                  1 70SYSNAME

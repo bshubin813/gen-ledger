@@ -1,0 +1,44 @@
+      * ============================================================ *
+      * Object:    HNETTFCSUM      *FILE PF                          *
+      *            File that holds the output of the HRTVNETTFC      *
+      *            command. This is the template output file.        *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060216 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HSUMTFCR
+     A            NSSYSN         8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            NSADRL        15A         TEXT('Local IP address')
+     A                                      COLHDG('Local IP' 'Address')
+     A            NSADRR        15A         TEXT('Remote IP address')
+     A                                      COLHDG('Remote IP' 'Address')
+     A            NSPORT         5S 0       TEXT('Port number')
+     A                                      COLHDG('Port' 'Number')
+     A            NSDATE        10A         TEXT('Date')
+     A                                      COLHDG('Date')
+     A            NSHOUR         2A         TEXT('Hour')
+     A                                      COLHDG('Hour')
+     A            NSBPSAVG      15S 0       TEXT('Average bandwidth (bits/s)')
+     A                                      COLHDG('Average' 'Bandwidth' -
+     A                                      '(bits/s)')
+     A            NSBPSPK       15S 0       TEXT('Peak bandwidth (bits/s)')
+     A                                      COLHDG('Peak' 'Bandwidth' -
+     A                                      '(bits/s)')
+     A            NSDTSPK         Z         TEXT('Peak date/time')
+     A                                      COLHDG('Date/time of' 'peak')
+     A            NSNBRMSM      15S 0       TEXT('Number of measurements')
+     A                                      COLHDG('Number of' -
+     A                                      'measurements')
+      *
+     A          K NSSYSN
+     A          K NSDATE
+     A          K NSHOUR
+     A          K NSADRL
+     A          K NSADRR
+     A          K NSPORT

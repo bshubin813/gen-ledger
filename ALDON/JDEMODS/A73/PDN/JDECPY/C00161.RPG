@@ -1,0 +1,9 @@
+     CSR         C00161    BEGSR
+     C*
+     CSR                   MOVE *ON       *INLR
+     CSR                   EXFMTV01200S
+     CSR                   READ F01800LA                 LR
+     CSR                   WRITEHEADING1
+     CSR                   WRITEDETAIL1
+     C*
+     CSR                   ENDSR

@@ -1,0 +1,112 @@
+.* ============================================================ *
+.* Object:    HRTVJRNANZ      *PNLGRP                           *
+.*            Help text for the HRTVJRNANZ command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020610 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRTVJRNANZ'.Retrieve journal analysis - Help
+:P.
+The HRTVJRNANZ command (Retrieve journal analysis) command is used
+to retrieve a subset of the ANZTOT1 file to another output file.
+This file can than be used for retrieval into an Excel spreadsheet
+or for other reporting purposes.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter OUTFILE
+:HELP NAME='HRTVJRNANZ/OUTFILE'.Output file - Help
+:XH3.Output file (OUTFILE)
+:P.
+Specify the name of the file that will contain the subset of ANZTOT1
+records. If the file does not exist, it will be created automatically.
+:P.
+:NT.If the output file already exists, it will be replaced.:ENT.
+:P.
+The possible output-file values are:
+:PARML.
+:PT.:PK def.ANZTOT1:EPK.
+:PD.
+The output file is named ANZTOT1, the same name as the original file.
+:PT.file-name
+:PD.
+Specify the name of the output file to contain the subset of records.
+:EPARML.
+:P.
+The possible library values are:
+:PARML.
+:PT.:PK def.HATEMP:EPK.
+:PD.
+The output file will be placed in library HATEMP.
+:PT.library-name
+:PD.
+Specify the library in which the output file will be created.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MONTHS
+:HELP NAME='HRTVJRNANZ/MONTHS'.Number of months - Help
+:XH3.Number of months (MONTHS)
+:P.
+Specify the number of months to retrieve from the ANZTOT1 file.
+:P.
+The possible number-of-months values are:
+:P.
+:PARML.
+:PT.:PK def.1:EPK.
+:PD.
+One month worth of records will be retrieved from the ANZTOT1 file.
+:PT.number-of-months
+:PD.
+Specify the number of months to retrieve.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RELDATE
+:HELP NAME='HRTVJRNANZ/RELDATE'.Relative to date - Help
+:XH3.Relative to date (RELDATE)
+:P.
+Specifies the date that the date interval is relatieve to. Analsys
+data will be retrieve from this date forward the number of months
+specified.
+:P.
+The possible relative-to-date values are:
+:PARML.
+:PT.:PK def.*STRPRV:EPK.
+:PD.
+Information will be retrieved starting from the 1st day of the
+previous month.
+:PT.*STRCUR
+:PD.
+Information will be retrieved starting from the 1st day of this
+month.
+:PT.date
+:PD.
+Specify a date from which the information will be retrieved.
+month.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CLNHST
+:HELP NAME='HRTVJRNANZ/CLNHST'.Clean history older than - Help
+:XH3.Clean history older than (CLNHST)
+:P.
+Specified the maximum number of months to retain journal analysis
+history. Journal analysis records older than the specified number
+of months will be purged from the ANZTOT1 file.
+:P.
+:NT.Records from the ANZTOT1 file older than the specified number
+of months relative to the current date will be purged.:ENT.
+:EHELP.
+
+:EPNLGRP.

@@ -1,0 +1,118 @@
+.* ============================================================ *
+.* Object:    DSPANZFIL       *PNLGRP                           *
+.*            Help text for the DSPANZFIL program.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='DSPANZFIL'.Display File Attributes - Help
+:P.
+This option allows you to display file attributes for all files within
+a library. The Analyze File Attributes in Batch option of HA Tools 2000
+must be run before this option.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Display level help                                           *
+.* ------------------------------------------------------------ *
+.* Help for Source PF/Library
+:HELP NAME='SPFL'.Source PF/Library Help
+:XH3.Source PF/Library
+:P.
+This field allows you to filter the display to only show the file and
+library specified. To see all files again, blank out both fields. It
+is only necessary to enter the file name.
+:P.
+:EHELP.
+.* Help for Type field
+:HELP NAME='TYPEU'.Type(U, N, A) - Help
+:XH3.Type(U, N, A)
+:P.
+The type field allows you to filter the display to only show uniquely
+keyed files, non uniquely keyed files only or all files.
+:EHELP.
+.* Help for Option 5 Display Key Fields
+:HELP NAME='DSPK'.Display Key Fields - Help
+:XH3.Display Key Fields
+:P.
+This option can only be used against a uniquely keyed file and will
+display all the keys for this file.
+:EHELP.
+.* Help for File
+:HELP NAME='FILE'.File Help
+:XH3.File
+:P.
+This is the file name. Only data files (both logicals and physicals are
+shown in this display. The display can be filtered using the Source/PF
+Library and Type filters at the top of the screen.
+:EHELP.
+.* Help for Library
+:HELP NAME='LIBR'.Library Help
+:XH3.Library
+:P.
+This is the library that contains the file. It is the library that was
+analyzed using the Analyze File Attributes in Batch option of HA Tools
+2000.
+:EHELP.
+.* Help for Type
+:HELP NAME='TYPE'.Type Help
+:XH3.Type
+:P.
+The type of file is displayed here - with PF indicating a physical file
+and LF indicating a logical file.
+:EHELP.
+.* Help for Mbr
+:HELP NAME='MBR'.Mbr Help
+:XH3.Mbr
+:P.
+This indicates whether or not the file is a multi-member file. A Y in
+this field indicates a multi-member file, while a blank indicates a
+single member file.
+:EHELP.
+:HELP NAME='UNQ'.Unq Help
+:XH3.Unq
+:P.
+This indicates whether or not the file is uniquely keyed. A Y in
+this field indicates a uniquely keyed file, while a blank means there
+is no unique key. It looks for the "Unique key values required" = Yes
+value in the file description.
+:EHELP.
+:HELP NAME='REUSE'.Reuse Help
+:XH3.Reuse
+:P.
+This indicates whether the Reuse Deleted Records value in the file
+description is set to Yes. A Y indicates yes, otherwise this field is
+blank.
+:EHELP.
+:HELP NAME='JOIN'.Join Help
+:XH3.Join
+:P.
+This indicates whether a file has joins. A Y means the file has joins.
+:EHELP.
+:HELP NAME='RECRD'.Records Help
+:XH3.Records
+:P.
+This field indicates the number of records currently in the file for
+all members.
+:EHELP.
+:HELP NAME='JRNL'.Journal Name Help
+:XH3.Journal
+:P.
+This field shows the name of the journal (if the file is currently
+being journalled. A blank means the file is not currently journalled.
+:EHELP.
+:HELP NAME='IMAGE'.Image Help
+:XH3.Image
+:P.
+This field indicates whether after images only (A) or both before
+and after images (B) are being captured for this journalled file.
+:EHELP.
+:EPNLGRP.

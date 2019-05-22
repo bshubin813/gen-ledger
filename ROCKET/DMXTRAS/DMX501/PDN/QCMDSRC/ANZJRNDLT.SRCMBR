@@ -1,0 +1,67 @@
+/* ================================================================= */
+/* Object:         ANZJRNDLT       *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(ANZJRNDLT) HLPID(*CMD)              */
+/*                                                                   */
+/* Synopsis:       Runs a journal analysis for the passed journal(s) */
+/*                 and fills the ANZJRNPF file.                      */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000204 MW  Added these comments and modified the journal parm   */
+/*              to be fully qualified                                */
+/* 20021024 FK  Allow for *ALLHA journals to be processed            */
+/*              Allow for search journal in library list             */
+/* 20060127 FK  Extra parameters for date-time & journal receivers   */
+/* 20111217 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Analyze Journals & Delete Rcv')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JOURNAL) TYPE(QUALJRN) MIN(1) +
+                          PROMPT('Journal Name')
+             PARM       KWD(DELETEREC) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Delete Receivers')
+             PARM       KWD(STRJRNRCV) TYPE(QUALRCV1) +
+                          PMTCTL(*PMTRQS) PROMPT('Starting journal +
+                          receiver')
+             PARM       KWD(ENDJRNRCV) TYPE(QUALRCV2) +
+                          PMTCTL(*PMTRQS) PROMPT('Ending journal +
+                          receiver')
+             PARM       KWD(STRDAT) TYPE(*CHAR) LEN(8) DFT(*START) +
+                          SPCVAL((*START)) CHOICE('YYYYMMDD, +
+                          *START') PMTCTL(*PMTRQS) PROMPT('Starting +
+                          date (YYYYMMDD)')
+             PARM       KWD(ENDDAT) TYPE(*CHAR) LEN(8) DFT(*END) +
+                          SPCVAL((*END)) CHOICE('YYYYMMDD, *END') +
+                          PMTCTL(*PMTRQS) PROMPT('Ending date +
+                          (YYYYMMDD)')
+             PARM       KWD(CLRANZ) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Clear analysis file')
+             PARM       KWD(SBMHLD) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Submit job on hold')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJRN:    QUAL       TYPE(*NAME) LEN(10) SPCVAL((*ALLIC *N)) +
+                          MIN(1) EXPR(*YES)
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          EXPR(*YES) PROMPT('Journal Library')
+ QUALRCV1:   QUAL       TYPE(*NAME) DFT(*CURCHAIN) SPCVAL((*CURCHAIN))
+             QUAL       TYPE(*NAME) PROMPT('Library')
+ QUALRCV2:   QUAL       TYPE(*NAME) DFT(*CURRENT) SPCVAL((*CURRENT))
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

@@ -1,0 +1,27 @@
+      * ============================================================ *
+      * Object:    HIOBJGL         *FILE LF                          *
+      *            Logical file over DMGROUPS by GROUP|LIB           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20030424 FK  Initial delivery                                *
+      * 20040319 FK  Add target library                              *
+      * 20080107 FK  Add indicator to mirror contents                *
+      * ============================================================ *
+     A          R HIOBJGL50@                PFILE(DMOBJECTS)
+     A            GROUP
+     A            OBJ
+     A            LIB
+     A            TYPE
+     A            ATTR
+     A            INCLUDE
+     A            DESC
+     A            OBJTGTLIB                 RENAME(TGTLIB)
+     A            MIRRCNTS
+      *
+     A          K GROUP
+     A          K LIB

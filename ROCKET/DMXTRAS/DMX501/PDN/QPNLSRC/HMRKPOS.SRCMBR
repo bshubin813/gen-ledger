@@ -1,0 +1,107 @@
+.* ============================================================ *
+.* Object:    HMRKPOS         *PNLGRP                           *
+.*            Help text for the HMRKPOS command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20030604 FK  Initial delivery                                *
+.* 20111222 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HMRKPOS'.Mark journal positions parallel - Help
+:P.
+The HMRKPOS (Mark journal positions parallel) command allows you to
+have iCluster mark journal positions for multiple groups in
+concurrent jobs. This will speed up the process of marking journal
+positions dramatically as various groups will run the MRKHAPOS
+commands parallelly.
+:P.
+For every group that is selected, a job will be submitted to the specified
+job queue. Typically, this is a job queue that has an activity level of greater
+than 1, or even *NOMAX (such as QSYSNOMAX).
+The job description used to sumit the job is HAUTILS. By submitting the marking
+of journal positions in parallel, the marking will take less time than running
+the MRKHAPOS command for a target definition or all groups subsequently
+because each job processes its own group. By specifying WAIT(*YES),
+the command will not return until all mark-position jobs have finished.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ICGROUP
+:HELP NAME='HMRKPOS/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the journal positions must be marked.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+Journal positions will be marked for all groups.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which journal
+positions must be marked.
+:EPARML.
+:EHELP.
+
+.* Help for parameter WAIT
+:HELP NAME='HMRKPOS/WAIT'.Wait for completion - Help
+:XH3.Wait for completion (WAIT)
+:P.
+Determine whether or not the command awaits the completion of all submitted
+jobs before returning.
+:P.
+The possible wait-for-completion values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The command submits a job for every group that journal positions must be
+marked for and waits until all jobs have finished.
+:PT.*NO
+:PD.
+The command submits a job for every group that journal positions must be
+marked for and returns.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JOBQ
+:HELP NAME='HMRKPOS/JOBQ'.Job queue for submitted jobs - Help
+:XH3.Job queue for submitted jobs (JOBQ)
+:P.
+Specify the job queue that will be used for submitting the mark-position
+jobs. Typically, this is a job queue that has an activity level of greater
+than 1 to allow for multiple jobs to run concurrently.
+:P.
+The possible job-queue-for-submitted-jobs values are:
+:P.
+:PARML.
+:PT.:PK def.*JOBD:EPK.
+:PD.
+The job queue as specified in the HAUTILS job description will be used
+to submit the mark-positions jobs. Typically, the job queue referenced
+in this job description is DMCLUSTER (for iCluster).
+:PT.QSYSNOMAX
+:PD.
+The QSYSNOMAX job queue is used for submitting the mark-positions jobs. This
+is a system-supplied job queue attached to the QSYSWRK subsystem that allows
+for an unlimited number of jobs to run concurrently.
+:PT.job-queue-name
+:PD.
+Specify the name and library of the job queue to which the mark-positions
+jobs will be submitted.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

@@ -1,0 +1,118 @@
+.* ============================================================ *
+.* Object:    HMONJOBADD      *PNLGRP                           *
+.*            Help text for the HMONJOBADD command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20050708 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HMONJOBADD'.Add monitored jobs subsystem - Help
+:P.
+The HMONJOBADD (Add monitored jobs subsystem) provides an interface
+to add a subsystem to the registration facility for exit point
+QIBM_QWT_JOBNOTIFY. Adding an exit point for a specific subsystem enables the
+subsystem to start sending job notification messages to the specified data
+queue so that they can be picked up by the HMONJOB tool.
+:P.
+Rather than a program being run in a certain event, the QIBM_QWT_JOBNOTIFY
+exit point registers a data queue to which job notification messages are
+being sent.
+:P.
+The HMONJOBADD command adds an exit point for the specified subsystem and logs
+any jobs which have been placed on job queue, become active or finished.
+:P.
+Please note that a subsystem picks up the registry exit point when it is
+started. When you add an exit point for an active subsystem (or all subsystems)
+job notification will not take place until the next time the subsystem is
+started.
+:P.
+If you need to remove a registered data queue, please use the
+WRKREGINF EXITPNT(QIBM_QWT_JOBNOTIFY) command and option 8 to find the entry
+you wish to remove.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter SBSD
+:HELP NAME='HMONJOBADD/SBSD'.Subsystem description - Help
+:XH3.Subsystem description (SBSD)
+:P.
+Specify the name of the subsystem for which job notification messages must be
+sent to a data queue. By using special value *ANY, notification messages can be
+sent for any subsystem or for a specific subsystem in any library.
+:P.
+Job notification messages for active subsystems will only be sent when the
+subsystem is restarted.
+:P.
+The possible subsystem-description values are:
+:PARML.
+:PT.subsystem-name
+:PD.
+Specify the name of the subsystem for which notification messages must be sent.
+:PT.*ANY
+:PD.
+Job notification messages will be sent for any subsystem. The library
+is ignored if this value is specified.
+:PT.QINTER
+:PD.
+Job notification messages will be sent for the QINTER subsystem.
+:PT.QBATCH
+:PD.
+Job notification messages will be sent for the QBATCH subsystem.
+:EPARML.
+:P.
+The possible library values are:
+:PARML.
+:PT.:PK def.*ANY:EPK.
+:PD.
+Job notification messages will be sent for the subsystem, regardless in which
+library it exists. This is the recommended value to avoid specifying the wrong
+value for the subsystem library.
+:PT.library-name
+:PD.
+Specify the name of the library that holds the subsystem description.
+:EPARML.
+:EHELP.
+
+.* Help for parameter DTAQ
+:HELP NAME='HMONJOBADD/DTAQ'.Job notification data queue - Help
+:XH3.Job notification data queue (DTAQ)
+:P.
+Specify the name of the data queue into which the operating system registration
+facility places the job notification messages.
+:P.
+If the data queue does not exist, it will be created automatically.
+:P.
+The possible job-notification-data-queue-file values are:
+:PARML.
+:PT.:PK def.HMONJOB:EPK.
+:PD.
+Job notification messages are sent to the HMONJOB data queue in the specified
+library.
+:PT.data-queue-name
+:PD.
+Specify the name of the data queue into which the operating system places
+the job notification messages.
+:EPARML.
+:P.
+The possible library values are:
+:PARML.
+:PT.:PK def.DMSYSOBJ:EPK.
+:PD.
+The data queue is contained in library DMSYSOBJ. If it doesn't
+exist yet, it will be created into this library.
+:PT.library-name
+:PD.
+Specify the library in which the data queue is located or placed.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

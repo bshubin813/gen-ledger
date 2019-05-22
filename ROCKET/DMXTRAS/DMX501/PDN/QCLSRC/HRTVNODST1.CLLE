@@ -1,0 +1,169 @@
+/* ================================================================= */
+/* Object:         HRTVNODST1      *PGM CLP                          */
+/*                 Retrieves the status of the passed node.          */
+/*                                                                   */
+/* Synopsis:       The status of the specified node is retrieved     */
+/*                 using the QcstListClusterInfo API.                */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20040429 FK  Initial delivery                                     */
+/* 20050223 FK  Read HINODNN file to determine remote port           */
+/* ================================================================= */
+             PGM        PARM(&UTLLIB &ICLIB &P_NODE &STATUS &LSTSTS +
+                          &LSNACT)
+
+/*           Declare parameter variables                              */
+             DCL        VAR(&UTLLIB) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ICLIB) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&P_NODE) TYPE(*CHAR) LEN(8)
+             DCL        VAR(&STATUS) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LSTSTS) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LSNACT) TYPE(*CHAR) LEN(4)
+
+/*           Declare constants                                        */
+
+/*           Declare program variables                                */
+             DCL        VAR(&APIERR) TYPE(*CHAR) LEN(8)
+             DCL        VAR(&ERROR) TYPE(*LGL) VALUE('0')
+
+             DCL        VAR(&USRSPC) TYPE(*CHAR) LEN(20)
+             DCL        VAR(&LSTHDR) TYPE(*CHAR) LEN(140)
+             DCL        VAR(&STRHDR) TYPE(*DEC) LEN(7 0)
+             DCL        VAR(&HDRSIZ) TYPE(*DEC) LEN(7 0)
+             DCL        VAR(&HDRSIZ@) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&STRLST) TYPE(*DEC) LEN(7 0)
+             DCL        VAR(&NBRENT) TYPE(*DEC) LEN(5 0)
+             DCL        VAR(&STRPOS@) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&HDRENT) TYPE(*CHAR) LEN(12)
+             DCL        VAR(&LSTENT) TYPE(*CHAR) LEN(200)
+
+             DCL        VAR(&CSTINFSTS) TYPE(*CHAR) LEN(1)
+             DCL        VAR(&CSTCURVER) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&CSTCURMOD) TYPE(*CHAR) LEN(4)
+
+             DCL        VAR(&NODID) TYPE(*CHAR) LEN(8)
+             DCL        VAR(&NODSTS@) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&NODSTS) TYPE(*DEC) LEN(7 0)
+
+/*           Declare file                                             */
+             DCLF       FILE(HINODNN)
+
+/*           Global monitor                                           */
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(ERROR))
+
+/* ----------------------------------------------------------------- */
+/*           Main line                                               */
+/* ----------------------------------------------------------------- */
+
+/*           Create file in QTEMP                                    */
+             CALL       PGM(HCRTLF) PARM(HINODNN)
+             OVRDBF     FILE(HINODNN) TOFILE(QTEMP/HINODNN)
+
+/*           Read all nodes to determine matching node               */
+ LOOP:       RCVF
+             MONMSG     MSGID(CPF0864) EXEC(DO)
+              RCVMSG     MSGTYPE(*LAST)
+              GOTO       CMDLBL(ELOOP)
+             ENDDO
+
+/*           If node retrieved, get status                           */
+             IF         COND(&NODE *EQ &P_NODE) THEN(DO)
+/*            Create user space that holds information               */
+              CHGVAR     VAR(&USRSPC) VALUE('HRTVNODSTS' || &UTLLIB)
+              CALL       PGM(QUSCRTUS) PARM(&USRSPC 'HRTVNODSTS' +
+                          X'00001000' ' ' '*ALL' 'HRTVNODSTS - +
+                          Retrieve node status' '*YES' X'00000000')
+/*            Retrieve status of passed node                         */
+              CHGVAR     VAR(&APIERR) VALUE(X'00080000')
+              CALLPRC    PRC('QcstListClusterInfo') PARM(&USRSPC +
+                          'DM_CLUSTER' 'LCTI0100' &NODE &APIERR)
+/*            When error while running API                           */
+              IF         COND(%BIN(&APIERR 5 4) *NE 0) THEN(SNDPGMMSG +
+                          MSGID(RNS0001) MSGF(HAUMSG) MSGDTA(&NODE) +
+                          MSGTYPE(*ESCAPE))
+/*            Retrieve list information                              */
+              CHGVAR     VAR(&APIERR) VALUE(X'00000000')
+              CALL       PGM(QUSRTVUS) PARM(&USRSPC X'00000001' +
+                          X'0000008C' &LSTHDR &APIERR)
+              CHGVAR     VAR(&STRHDR) VALUE(%BIN(&LSTHDR 117 4) + 1)
+              CHGVAR     VAR(&HDRSIZ) VALUE(%BIN(&LSTHDR 121 4))
+              CHGVAR     VAR(&HDRSIZ@) VALUE(%SST(&LSTHDR 121 4))
+              CHGVAR     VAR(&STRLST) VALUE(%BIN(&LSTHDR 125 4) + 1)
+              CHGVAR     VAR(&NBRENT) VALUE(%BIN(&LSTHDR 133 4))
+/*            No objects retrieved --> error                         */
+              IF         COND(&NBRENT *EQ 0) THEN(SNDPGMMSG +
+                          MSGID(RNS0001) MSGF(HAUMSG) MSGDTA(&NODE) +
+                          MSGTYPE(*ESCAPE))
+/*            Retrieve header information                            */
+              CHGVAR     VAR(%BIN(&STRPOS@)) VALUE(&STRHDR)
+              CHGVAR     VAR(&APIERR) VALUE(X'00000000')
+              CALL       PGM(QUSRTVUS) PARM(&USRSPC &STRPOS@ &HDRSIZ@ +
+                          &HDRENT &APIERR)
+/*            Extract header variables                               */
+              CHGVAR     VAR(&CSTINFSTS) VALUE(%SST(&HDRENT 1 1))
+              CHGVAR     VAR(&CSTCURVER) VALUE(%SST(&HDRENT 5 4))
+              CHGVAR     VAR(&CSTCURMOD) VALUE(%SST(&HDRENT 9 4))
+/*            Retrieve list entry (there is only 1)                  */
+              CHGVAR     VAR(%BIN(&STRPOS@)) VALUE(&STRLST)
+              CHGVAR     VAR(&APIERR) VALUE(X'00000000')
+              CALL       PGM(QUSRTVUS) PARM(&USRSPC &STRPOS@ +
+                          X'0000008C' &LSTENT &APIERR)
+/*            Extract list entry variables                           */
+              CHGVAR     VAR(&NODID) VALUE(%SST(&LSTENT 5 8))
+              CHGVAR     VAR(&NODSTS@) VALUE(%SST(&LSTENT 13 4))
+              CHGVAR     VAR(&NODSTS) VALUE(%BIN(&NODSTS@))
+/*            If cluster information not consistent --> *UNKNOWN     */
+              IF         COND(&CSTINFSTS *NE '0') THEN(CHGVAR +
+                          VAR(&STATUS) VALUE('*UNKNOWN'))
+              IF         COND(&NODSTS *EQ 1) THEN(CHGVAR VAR(&LSTSTS) +
+                          VALUE('*NEW'))
+              IF         COND(&NODSTS *EQ 2) THEN(CHGVAR VAR(&LSTSTS) +
+                          VALUE('*ACTIVE'))
+              IF         COND(&NODSTS *EQ 3) THEN(CHGVAR VAR(&LSTSTS) +
+                          VALUE('*RMV_PEND'))
+              IF         COND(&NODSTS *EQ 4) THEN(CHGVAR VAR(&LSTSTS) +
+                          VALUE('*ACT_PEND'))
+              IF         COND(&NODSTS *EQ 5) THEN(CHGVAR VAR(&LSTSTS) +
+                          VALUE('*INACT_PND'))
+              IF         COND(&NODSTS *EQ 6) THEN(CHGVAR VAR(&LSTSTS) +
+                          VALUE('*INACTIVE'))
+              IF         COND(&NODSTS *EQ 7) THEN(CHGVAR VAR(&LSTSTS) +
+                          VALUE('*FAILED'))
+              IF         COND(&NODSTS *EQ 8) THEN(CHGVAR VAR(&LSTSTS) +
+                          VALUE('*PARTITION'))
+              IF         COND(&STATUS *NE '*UNKNOWN') THEN(CHGVAR +
+                          VAR(&STATUS) VALUE(&LSTSTS))
+/*            Delete user space                                       */
+              CHGVAR     VAR(&USRSPC) VALUE('HRTVNODSTS' || &UTLLIB)
+              CALL       PGM(QUSDLTUS) PARM(&USRSPC X'00000000')
+              MONMSG     MSGID(CPF0000)
+/*            Get status of listener                                  */
+              CALL       PGM(HRTVNODST3) PARM(&NODE &LOCNAME &PORT +
+                          &LSNACT)
+             ENDDO
+             GOTO       CMDLBL(LOOP)
+
+ ELOOP:      GOTO       CMDLBL(END)
+
+/* ----------------------------------------------------------------- */
+/*           Error handling                                          */
+/* ----------------------------------------------------------------- */
+/*           Ensure that the program does not loop when error        */
+ ERROR:      IF         COND(&ERROR) THEN(GOTO CMDLBL(END))
+             CHGVAR     VAR(&ERROR) VALUE('1')
+
+/*           Move all *DIAG messages to the previous queue           */
+             CHGVAR     VAR(&APIERR) VALUE(X'00000000')
+             CALL       PGM(QMHMOVPM) PARM(' ' '*DIAG' X'00000001' +
+                          '*' X'00000001' &APIERR)
+
+/*           Resend last escape message                              */
+             CHGVAR     VAR(&APIERR) VALUE(X'00000000')
+             CALL       PGM(QMHRSNEM) PARM(' ' &APIERR)
+
+ END:        ENDPGM

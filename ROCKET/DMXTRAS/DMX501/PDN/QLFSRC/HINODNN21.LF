@@ -1,0 +1,23 @@
+      * ============================================================ *
+      * Object:    HINODNN21       *FILE LF                          *
+      *            Logical file over DMNODES (iCluster 2.1+)         *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050216 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HINODNN@                  PFILE(DMNODES)
+     A            NODE
+     A            LOCNAME
+     A            LOCNAME2
+     A            IPADDR
+     A            IPADDR2
+     A            DESC
+     A            PORT
+     A            STATUS
+      *
+     A          K NODE

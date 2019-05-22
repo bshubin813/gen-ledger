@@ -1,0 +1,16 @@
+      * ============================================================ *
+      * Object:    ANZTOTL4        *FILE PF                          *
+      *            Holds the totals per job and date/hour            *
+      *            descending by # of transactions (D)               *
+      *                                                              *
+      * Create remarks:                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060127 FK  Comments                                        *
+      * ============================================================ *
+     A          R ANZTR4                    PFILE(ANZTOT4)
+     A          K TOTENT                    DESCEND

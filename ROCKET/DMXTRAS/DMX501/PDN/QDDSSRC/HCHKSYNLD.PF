@@ -1,0 +1,50 @@
+      * ============================================================ *
+      * Object:    HCHKSYNLD       *FILE PF                          *
+      *            Holds all libraries on the source system.         *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20010809 FK  Initial delivery                                *
+      * 20050215 FK  Add retrieve date-time                          *
+      * 20061025 FK  Add system name                                 *
+      * ============================================================ *
+     A          R SYNLD@
+     A            ODOBNM        10A         TEXT('Library name')
+     A                                      COLHDG('Library' 'Name')
+     A            ODOBAT        10A         TEXT('Library attribute')
+     A                                      COLHDG('Library' 'Attribute')
+     A            ODCCEN         1A         TEXT('Creation century')
+     A                                      COLHDG('Create' 'Century')
+     A            ODCDAT         6A         TEXT('Creation date')
+     A                                      COLHDG('Create' 'Date')
+     A            ODCTIM         6A         TEXT('Creation time')
+     A                                      COLHDG('Create' 'Time')
+     A            ODOBTX        50A         TEXT('Description')
+     A                                      COLHDG('Library description')
+     A            ODOBOW        10A         TEXT('Library owner')
+     A                                      COLHDG('Library' 'Owner')
+     A            LDGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'Name')
+     A            LDLREF         4A         TEXT('Library configured')
+     A                                      COLHDG('Library' -
+     A                                      'Configured?')
+     A                                      DFT('*NO')
+     A            LDLEXS         4A         TEXT('Library exists')
+     A                                      COLHDG('Library' 'Exists?')
+     A                                      DFT('*YES')
+     A            ODDCEN         1A         TEXT('Retrieve century')
+     A                                      COLHDG('Retrieve' 'Century')
+     A            ODDDAT         6A         TEXT('Retrieve date')
+     A                                      COLHDG('Retrieve' 'Date')
+     A            ODDTIM         6A         TEXT('Retrieve time')
+     A                                      COLHDG('Retrieve' 'Time')
+     A            ODOBSY         8A         TEXT('System name')
+     A                                      COLHDG('System' 'Name')
+      *
+     A          K ODOBNM

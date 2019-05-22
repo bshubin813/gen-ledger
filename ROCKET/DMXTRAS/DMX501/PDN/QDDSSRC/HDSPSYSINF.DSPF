@@ -1,0 +1,64 @@
+     A*%%TS  SD  20111217  162657  FKETELAARS  REL-V5R4M0  5722-WDS
+     A* ============================================================ *
+     A* Object:    HDSPSYSINF      *FILE DSPF                        *
+     A*            Display file for system information               *
+     A*                                                              *
+     A* ------------------------------------------------------------ *
+     A*             Changes made to this source                      *
+     A*             ---------------------------                      *
+     A*                                                              *
+     A* Date     Who Description                                     *
+     A* -------- --- ----------------------------------------------- *
+     A* 20020508 RP  Initial delivery                                *
+     A* 20070102 FK  Add additional info                             *
+     A* ============================================================ *
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      CA03(03 'Exit')
+     A                                      CA12(12 'Cancel')
+     A                                      PRINT
+     A          R HDSPSYSINF
+     A*%%TS  SD  20111217  162657  FKETELAARS  REL-V5R4M0  5722-WDS
+     A                                  1  3SYSNAME
+     A                                      DSPATR(HI)
+     A                                  1 28'Display system information'
+     A                                      COLOR(WHT)
+     A                                  1 73TIME
+     A                                      DSPATR(HI)
+     A                                  3  3'System name . . . . :'
+     A            SYSNAME       10A  O  3 26
+     A                                  5  3'Operating system  . :'
+     A            OSPRDID        7A  O  5 26
+     A            OSVRM          6A  O  5 34
+     A                                  6  3'Number of LPARs . . :'
+     A            LPARNBR        2A  O  6 26
+     A                                  6 44'Current :'
+     A            LPARSRLNBR    10A  O  6 55
+     A                                  7  3'Max. # of processors:'
+     A            CUODMAX        4A  O  7 26
+     A                                  7 44'Active  :'
+     A            CUODACT        4A  O  7 55
+     A                                  9  3'Serial number . . . :'
+     A            SRLNBR        10A  O  9 26
+     A                                 10  3'System model  . . . :'
+     A            MODEL          4A  O 10 26
+     A                                 11  3'Feature code  . . . :'
+     A            PRCFEAT        4A  O 11 26
+     A            INTFEAT        4A  O 11 32
+     A                                 12  3'Processor group . . :'
+     A            PRCGRP         4A  O 12 26
+     A                                 14  3'DMXtras library . . . :'
+     A            UTLLIB        10A  O 14 28
+     A                                 14 44'Version :'
+     A            UTLVER        25A  O 14 55
+     A                                 15 44'Date  . :'
+     A            UTLDATE        8A  O 15 55
+     A  21                             16  3'iCluster  . . . . . . :'
+     A  21        ICLIB         10A  O 16 28
+     A  21                             18  3'Version . . . . . . . :'
+     A  21        ICVER         50A  O 18 28
+     A  21                             17  3'iCluster node . . . . :'
+     A            NODE           8A  O 17 28
+     A                                 23  3'F3=Exit   F12=Cancel'
+     A                                      COLOR(BLU)
+     A                                 23 27' '

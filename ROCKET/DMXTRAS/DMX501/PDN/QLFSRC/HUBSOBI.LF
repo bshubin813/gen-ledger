@@ -1,0 +1,19 @@
+      * ============================================================ *
+      * Object:    HUBSOBI         *FILE LF                          *
+      *            Logical file over HABSFOBJ by BSFID               *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020517 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUBSOBI@                  PFILE(HABSFOBJ)
+     A            BSFID                     RENAME(ID)
+     A            BSFDESC                   RENAME(DESC)
+     A            OBJBASID
+     A            OBJRELID
+      *
+     A          K BSFID

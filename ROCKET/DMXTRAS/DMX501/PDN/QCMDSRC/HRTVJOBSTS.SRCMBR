@@ -1,0 +1,47 @@
+/*CP: ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD *IMOD)                   */
+/* ================================================================= */
+/* Object:         HRTVJOBSTS      *CMD                              */
+/*                 Retrieves the status of the specified job on the  */
+/*                 AS/400.                                           */
+/*                                                                   */
+/* Create remarks: CRTCMD ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD      */
+/*                 *IMOD)                                            */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HRTVJOBSTS *CMD     Command                                       */
+/* HRTVJOBSTS *PGM     CPP                                           */
+/* HRTVJOBSTS *PNLGRP  Command help text                             */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020930 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve job status')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JOB) TYPE(JOBQUAL) MIN(1) PROMPT('Job')
+             PARM       KWD(STATUS) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          MIN(1) PROMPT('Status of job (10)')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ JOBQUAL:    QUAL       TYPE(*NAME) MIN(1)
+             QUAL       TYPE(*NAME) MIN(1) PROMPT('User')
+             QUAL       TYPE(*CHAR) LEN(6) RANGE('000000' '999999') +
+                          MIN(1) PROMPT('Number')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

@@ -1,0 +1,166 @@
+.* ============================================================ *
+.* Object:    HLSTTRG         *PNLGRP                           *
+.*            Help text for the HLSTTRG command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020711 FK  Initial delivery                                *
+.* 20020916 FK  List triggers according to object specifiers    *
+.* 20030506 FK  Add iCluster support                            *
+.* 20050203 FK  New parameter STATE                             *
+.* 20080208 FK  Allow change to state in file                   *
+.* 20111223 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HLSTTRG'.List/Manipulate - Help
+:P.
+This option will allow you to list all of the triggers on files
+for a certain target definition and group or for an iCluster group or
+resilient application.
+:P.
+You may also optionally manipulate triggers using actions (*RMV, *RST
+or *CHG). When running any of these actions, the specified file (TRGFILE
+parameter) will be read and the actions processed per trigger. See help text
+for ACTION parameter for more details.
+:P.
+The procedure for handling an initial restore is:
+:OL.
+:LI.Run the HLSTTRG *LST command on the source system
+:LI.iCluster: DMSETPOS or DMMRKPOS for group or resilient application
+:LI.Save the group's libraries on the source system
+:LI.Restore the group's libraries onto the backup system
+:LI.Transfer output file (default HASYSOBJ/HLSTTRG) to the backup system
+:LI.Run the HLSTTRG *CHG STATE(*DISABLED) on the backup system to disable
+the triggers
+:LI.Start iCluster replication
+:EOL.
+:P.
+Furthermore, the command allows you to periodically output all triggers
+to an output file mirrored by iCluster so that even triggers
+added along the way (file not replaced) are taken into account and can
+be restored in the switchover process.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ACTION
+:HELP NAME='HLSTTRG/ACTION'.Action - Help
+:XH3.Action (ACTION
+:P.
+Specifies the action to perform for the triggers.
+:P.
+The possible values for action are:
+:P.
+:PARML.
+:PT.:PK def.*LST:EPK.
+:PD.
+Triggers are listed and output to the specified output file. The
+group specified
+on the HLSTTRG command is processed. Triggers for every selected physical file
+will be output to the specified triggers file.
+:P.
+:NT.Only object specifiers for non-idle groups are processed.:ENT.
+:PT.*RMV
+:PD.
+The triggers file will be processed and all triggers removed.
+:NT.This option should only be executed on the target system!:ENT.
+:PT.*CHG
+:PD.
+The triggers file will be processed and all
+triggers will be changed to the state specified in the STATE parameter.
+:NT.This option should only be executed on the target system!:ENT.
+:PT.*RST
+:PD.
+The triggers file will be processed and all triggers will be added
+to the files on the current system.
+:NT.This option should only be executed on the target system!:ENT.
+:EPARML.
+:EHELP.
+
+.* Help for parameter TRGFILE
+:HELP NAME='HLSTTRG/TRGFILE'.File with triggers - Help
+:XH3.File with triggers (TRGFILE)
+:P.
+Specifies the name of the file that holds (*RMV, *RST) or will hold (*LST)
+the triggers for the physical files.
+:P.
+If - in case of action *LST - the file already exists, it will first be
+deleted and than rebuilt from scratch.
+:EHELP.
+
+.* Help for parameter ICGROUP
+:HELP NAME='HLSTTRG/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the triggers must be listed.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+All object specifiers, regardless of the associated group or resilient
+application will be used to retrieve the triggers.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the
+triggers must be listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STATE
+:HELP NAME='HLSTTRG/STATE'.Trigger state - Help
+:XH3.Trigger state (STATE)
+:P.
+Specifies the state to which the triggers are being changed. Typically, you
+want to disable triggers after a restore on the backup system and enable
+triggers after a switchover to the backup system.
+:P.
+The possible trigger-state values are:
+:P.
+:PARML.
+:PT.:PK def.*ENABLED:EPK.
+:PD.
+Any trigger that was disabled will be enabled again.
+:PT.*DISABLED
+:PD.
+Triggers are disabled.
+:PT.*FILESTATE
+:PD.
+Triggers will be changed to the state as recorded in the file specified
+on the TRGFILE parameter. If this file was populated on the primary server and
+replicated to the current server, the state will be changed to the current
+value on the primary server.
+:EPARML.
+:EHELP.
+
+.* Help for parameter LIB
+:HELP NAME='HLSTTRG/LIB'.Library to restore/remove TRG - Help
+:XH3.Library to restore/remove TRG (LIB)
+:P.
+Allows you to restrict restoring or removing triggers to the
+specified library. Only triggers for the specified library will be
+removed or restored.
+:P.
+The possible library-to-restore/remove-TRG values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+All triggers in the specified triggers file will be removed or
+restored, regardless of their library.
+:PT.library-name
+:PD.
+Only triggers for the specified library will be remove or restored.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

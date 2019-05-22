@@ -1,0 +1,196 @@
+.* ============================================================ *
+.* Object:    HMONJOB         *PNLGRP                           *
+.*            Help text for the HMONJOB command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20050708 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HMONJOB'.Monitor active jobs - Help
+:P.
+The HMONJOB (Monitor active jobs) keeps record of jobs on the system which
+are in the job queue, started or ended. Job status information is logged
+into a job status output file which can be mirrored to the backup machine by
+iCluster. In the event of a failover, this log file may be used to
+determine which jobs were active just before failure of the primary system.
+:P.
+For every monitored job, the following information is recorded in the
+specified job status output file (specified on the FILE parameter):
+:UL.
+:LI.System name
+:LI.Job Name
+:LI.Job User
+:LI.Job Number
+:LI.Job Status, *JOBQ, *ACTIVE or *OUTQ
+:LI.Change date-time of record
+:LI.Job queue + library
+:LI.Date-time when placed on job queue (*JOBQ)
+:LI.Date-time when job entered subsystem (*ACTIVE)
+:LI.Date-time when job finished (*OUTQ)
+:LI.Job End severity (*OUTQ)
+:LI.Job Processing time in ms (*OUTQ)
+:EUL.
+:P.
+:NT.The status of the monitor job itself is also recorded in the job status
+file to verify that job monitoring was active when the primary system
+failed. The job number of the monitor job has special value '******'.:ENT.
+:P.
+The monitor job employs the operating system's registration facility for
+job notification. Specifically, exit point QIBM_QWT_JOBNOTIFY is used to set
+up a data queue that receives job notification messages. When these messages
+are placed in the specified data queue by the exit point, the monitor receives
+the entry and updates the job status file accordingly.
+:P.
+:NT.With APAR SE06696, IBM have added the status date-time information
+to the job notification message. We recommend that you install the appropriate
+PTFs (SI05200 for OS/400 V5R2, SI05213 for OS/400 V5R1) to make use of this
+feature. If the date-time information is not passed on in the message, the
+date-time fields will be filled with the date-time the data queue entry
+was retrieved.:ENT.
+:P.
+Job notification messages can be activated per individual subsystem or for
+all subsystems. Please note that if you activate notification messages for all
+subsystems, system jobs and services will also logged!! To start the job
+notification for a subsystem, use the HMONJOBADD command. See this command
+for more details.
+:P.
+If a job is placed in a job queue that is not assigned to an active subsystem,
+a notification message is written to data queue QSYS/QSYSDTAQ. If you want to
+monitor for jobs in job queues not allocated to an active subsystem, you must
+specify *YES for the SYSDTAQ parameter. If the QSYS/QSYSDTAQ data queue does
+not exist yet, it will be created automatically. An extra job, <curjob>Q is
+submitted with job description HMONJOB to receive entries from this data queue.
+:P.
+Every hour, the data queue receival process is suspended to check if a new
+day has broken. If this is the case, a purge job is submitted to purge all
+*OUTQ job status records older than the specified number of days.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter FILE
+:HELP NAME='HMONJOB/FILE'.Job status output file - Help
+:XH3.Job status output file (FILE)
+:P.
+Specify the name of the file that holds the job status information for every
+job that is recorded through the registration facility. This file should be
+in a library that is replicated by iCluster to have it available
+on the backup system in the event of a failover.
+:P.
+If the file does not exist, it will be created automatically.
+:P.
+The possible job-status-output-file values are:
+:PARML.
+:PT.:PK def.HMONJOB:EPK.
+:PD.
+Job status information is recorded in file HMONJOB in the specified library.
+:PT.file-name
+:PD.
+Specify the name of the file that should hold the job status information. If
+the file does not exist, it will be created based on the HMONJOB template file
+in the DMXtras customer library.
+:EPARML.
+:P.
+The possible library values are:
+:PARML.
+:PT.:PK def.DMSYSOBJ:EPK.
+:PD.
+The job status output file is contained in library DMSYSOBJ. If it doesn't
+exist yet, it will be created into this library.
+:PT.library-name
+:PD.
+Specify the library in which the job status output file is located or placed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter DTAQ
+:HELP NAME='HMONJOB/DTAQ'.Job notification data queue - Help
+:XH3.Job notification data queue (DTAQ)
+:P.
+Specify the name of the data queue into which the operating system registration
+facility places the job notification messages. This is the data queue that
+the job monitor reads entries from to update the job status output file as
+specified on the FILE parameter. This is the data queue that was specified
+on the HMONJOBADD command to add the exit point exit program.
+:P.
+If the data queue does not exist, it will be created automatically.
+:P.
+The possible job-notification-data-queue-file values are:
+:PARML.
+:PT.:PK def.HMONJOB:EPK.
+:PD.
+Job notification messages are sent to the HMONJOB data queue in the specified
+library.
+:PT.data-queue-name
+:PD.
+Specify the name of the data queue into which the operating system places
+the job notification messages.
+:EPARML.
+:P.
+The possible library values are:
+:PARML.
+:PT.:PK def.DMSYSOBJ:EPK.
+:PD.
+The data queue is contained in library DMSYSOBJ. If it doesn't
+exist yet, it will be created into this library.
+:PT.library-name
+:PD.
+Specify the library in which the data queue is located or placed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PRGAGE
+:HELP NAME='HMONJOB/PRGAGE'.Purge ended jobs older than - Help
+:XH3.Purge ended jobs older than (PRGAGE)
+:P.
+Every day, a purge job is automatically kicked off by the monitoring mechanism
+to purge any job entries with status *OUTQ which are older than the specified
+number of days. This is, jobs which have not undergone a status change in the
+past number of days.
+:P.
+The possible purge-ended-jobs-older-than values are:
+:PARML.
+:PT.:PK def.7:EPK.
+:PD.
+Records for jobs with status *OUTQ which have reached this status more than
+7 days ago are deleted from the job status output file.
+:PT.*NONE
+:PD.
+No records will be purge from the job status file.
+:PT.number-of-days
+:PD.
+Specify the number of days to retain the *OUTQ job entries.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SYSDTAQ
+:HELP NAME='HMONJOB/SYSDTAQ'.Monitor system data queue - Help
+:XH3.Monitor system data queue (SYSDTAQ)
+:P.
+Determines whether an extra job will be kicked off for monitoring the
+QSYS/QSYSDTAQ data queue. This data queue holds notification messages for
+jobs placed on a job queue which is not assigned to an active subsystem.
+:P.
+The possible monitor-system-data-queue values are:
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Notification messages placed in the QSYS/QSYSDTAQ data queue will be
+received and the job status file is updated accordingly.
+:PT.*NO
+:PD.
+The QSYS/QSYSDTAQ data queue is not monitored. Jobs which are placed in a
+job queue not assigned to an active subsystem will not be registered in the
+job status file.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

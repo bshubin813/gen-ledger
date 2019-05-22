@@ -1,0 +1,89 @@
+.* ============================================================ *
+.* Object:    HENDAPY         *PNLGRP                           *
+.*            Help text for the HENDAPY command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20030506 FK  Initial delivery                                *
+.* 20111217 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HENDAPY'.End iCluster apply jobs - Help
+:P.
+The HENDAPY (End iCluster apply jobs) command allows you to
+end iCluster apply jobs, dependent on the parameters
+specified. Also, the command can wait until the apply jobs have finished.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ICGROUP
+:HELP NAME='HENDAPY/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the apply jobs must be stopped.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+Apply jobs for all groups or resilient applications will be stopped.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the apply
+jobs must be stopped.
+:EPARML.
+:EHELP.
+
+.* Help for parameter WAIT
+:HELP NAME='HENDAPY/WAIT'.Wait for completion - Help
+:XH3.Wait for completion (WAIT)
+:P.
+Determine whether or not the command awaits the completion of the apply
+jobs before returning.
+:P.
+The possible wait-for-completion values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+The command ends the specified apply jobs and returns immediately without
+waiting for the apply jobs to complete.
+:PT.*YES
+:PD.
+The command ends the specified apply jobs and waits until all apply jobs
+have finished.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MAXWAIT
+:HELP NAME='HENDAPY/MAXWAIT'.Maximum wait time - Help
+:XH3.Maximum wait time (MAXWAIT)
+:P.
+Specify how many minutes is allowed to wait for completion of the apply jobs.
+:P.
+The possible maximum-wait-time values are:
+:P.
+:PARML.
+:PT.:PK def.*NOMAX:EPK.
+:PD.
+The command waits until the apply jobs have finished, no matter how long this
+takes.
+:PT.Number of minutes
+:PD.
+The command waits until the apply jobs have finished, or returns if the
+specified number of minutes have been reached. A message is issued to indicate
+that not all apply jobs had finished upon completion.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

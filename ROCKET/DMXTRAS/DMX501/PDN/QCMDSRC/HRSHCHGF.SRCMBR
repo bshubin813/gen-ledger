@@ -1,0 +1,81 @@
+/* ================================================================= */
+/* Object:         HRSHCHGF        *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) HLPPNLGRP(HRSHCHGF)           */
+/*                 HLPID(*CMD)                                       */
+/*                                                                   */
+/* Synopsis:       Refreshes a set of objects (or an entire library) */
+/*                 through a save file.                              */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HRSHCHGF   *PGM     CPP                                           */
+/* HRSHCHGF   *PNLGRP  Help for command                              */
+/* HRSHCHGF   *FILE    Temporary file that holds file descriptions   */
+/* HRSHCHGF1  *PGM     Build list of objects to be saved             */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010914 FK  Initial delivery                                     */
+/* 20010919 FK  Allow another refresh method                         */
+/* 20020305 FK  Allow for delay time in executing command            */
+/* 20020306 FK  Possible to send save file using SNDHAOBJ            */
+/* 20111222 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Refresh changed objects')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(OBJ) TYPE(QUALOBJ) MIN(1) +
+                          PROMPT('Objects to be saved')
+             PARM       KWD(RSHMTH) TYPE(*CHAR) LEN(5) RSTD(*YES) +
+                          DFT(*SAVF) SPCVAL((*SAVF) (*ACT)) +
+                          PROMPT('Refresh method')
+             PARM       KWD(SAVF) TYPE(QUALSAVF) PMTCTL(MTHSAVF) +
+                          PROMPT('Save file')
+             PARM       KWD(CMD) TYPE(*CMDSTR) LEN(256) +
+                          PMTCTL(MTHSAVF) PROMPT('Command after +
+                          restore')
+             PARM       KWD(CMDDLY) TYPE(*DEC) LEN(5 0) DFT(*NONE) +
+                          RANGE(1 16666) SPCVAL((*NONE -1)) +
+                          PMTCTL(MTHSAVF) PROMPT('Delay before +
+                          executing command')
+             PARM       KWD(MBRDBFR) TYPE(QUALFD) PMTCTL(OBJCHG) +
+                          PROMPT('Member descriptions (before)')
+             PARM       KWD(MBRDAFT) TYPE(QUALFD) PMTCTL(OBJCHG) +
+                          PROMPT('Member descriptions (after)')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALSAVF:   QUAL       TYPE(*NAME) MIN(1)
+             QUAL       TYPE(*NAME) MIN(1) PROMPT('Library')
+ QUALOBJ:    QUAL       TYPE(*NAME) LEN(10) RSTD(*YES) SPCVAL((*ALL) +
+                          (*CHG)) MIN(1)
+             QUAL       TYPE(*NAME) MIN(1) PROMPT('Library')
+ QUALFD:     QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&OBJ *EQ '*CHG') PARM((&MBRDBFR *NE ' +
+                          ')) MSGID(RCF0004)
+             DEP        CTL(&OBJ *EQ '*CHG') PARM((&MBRDAFT *NE ' +
+                          ')) MSGID(RCF0004)
+             DEP        CTL(&OBJ *EQ '*ALL') PARM((&RSHMTH *EQ +
+                          '*SAVF')) MSGID(RCF0006)
+             DEP        CTL(&RSHMTH *EQ '*SAVF') PARM((&SAVF *NE ' +
+                          ')) MSGID(RCF0007)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ OBJCHG:     PMTCTL     CTL(OBJ) COND((*EQ '*CHG'))
+ MTHSAVF:    PMTCTL     CTL(RSHMTH) COND((*EQ '*SAVF'))

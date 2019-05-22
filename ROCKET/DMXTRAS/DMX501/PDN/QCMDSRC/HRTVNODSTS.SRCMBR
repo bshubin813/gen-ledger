@@ -1,0 +1,41 @@
+/*CP: ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD *IMOD)                   */
+/* ================================================================= */
+/* Object:         HRTVNODSTS      *CMD                              */
+/*                 Retrieves the status of the specified node.       */
+/*                                                                   */
+/* Create remarks: CRTCMD ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD      */
+/*                 *IMOD)                                            */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20040429 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve iCluster node status')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(NODE) TYPE(*NAME) LEN(8) DFT(*CURRENT) +
+                          SPCVAL((*CURRENT)) PROMPT('Node')
+             PARM       KWD(STATUS) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Node status')
+             PARM       KWD(LSTSTS) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Last known status')
+             PARM       KWD(LSNACT) TYPE(*CHAR) LEN(4) RTNVAL(*YES) +
+                          PROMPT('Listener port active on node')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

@@ -1,0 +1,26 @@
+      * ============================================================ *
+      * Object:    HMONALRUR       *FILE LF                          *
+      *            Alert destinations by UTLID, UTLALR, DSTTYP,      *
+      *            ALRDST                                            *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20041216 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R HMONALRUR                 PFILE(HMONALR)
+     A            ALUTLID
+     A            ALUTLALR
+     A            ALDSTTYP
+     A            ALALRDST
+     A            ALEMLCHR
+     A            ALEMLCTE
+      *
+     A          K ALUTLID
+     A          K ALUTLALR
+     A          K ALDSTTYP
+     A          K ALALRDST

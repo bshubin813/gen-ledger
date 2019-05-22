@@ -1,0 +1,62 @@
+     A****************************************************************
+     A*    (JDE) File Design Aid                                     *
+     A*                                                              *
+     A*    Created By : LM857127                                     *
+     A*    Date       : 02/18/93                                     *
+     A*    Time       : 085006                                       *
+     A*                                                              *
+     A*    File       : Screen/Report Text File
+     A****************************************************************
+     A                                      UNIQUE
+     A          R I9220
+     A                                      TEXT('Screen/Report Text File  +
+     A                                                               ')
+     A            VTVSCR    R               REFFLD(VSCR       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTVTXT    R               REFFLD(VTXT       F98FRFV          )
+     A                                      CCSID(00037)
+     A            VTVTOV    R               REFFLD(VTOV       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTVDTA    R               REFFLD(VDTA       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTVTDF    R               REFFLD(VTDF       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTVNXT    R               REFFLD(VNXT       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTVTCH    R               REFFLD(VTCH       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTL24E    R               REFFLD(L24E       F98FRFL          )
+     A                                      CCSID(00037)
+     A            VTL24M    R               REFFLD(L24M       F98FRFL          )
+     A                                      CCSID(00037)
+     A            VTTTL@    R               REFFLD(TTL@       F98FRFT          )
+     A                                      CCSID(00037)
+     A            VTHLPS    R               REFFLD(HLPS       F98FRFH          )
+     A                                      CCSID(65535)
+     A            VTHLPE    R               REFFLD(HLPE       F98FRFH          )
+     A                                      CCSID(65535)
+     A            VTUSER    R               REFFLD(USER       F98FRFU          )
+     A                                      CCSID(65535)
+     A            VTJPID    R               REFFLD(JPID       F98FRFJ          )
+     A                                      CCSID(65535)
+     A            VTUPMJ    R               REFFLD(UPMJ       F98FRFU          )
+     A            VTJOBN    R               REFFLD(JOBN       F98FRFJ          )
+     A                                      CCSID(65535)
+     A            VTUPMT    R               REFFLD(UPMT       F98FRFU          )
+     A            VTVSYR    R               REFFLD(VSYR       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTLNGP    R               REFFLD(LNGP       F98FRFL          )
+     A                                      CCSID(65535)
+     A            VTSYR     R               REFFLD(SYR        F98FRFS          )
+     A                                      CCSID(65535)
+     A            VTPID     R               REFFLD(PID        F98FRFP          )
+     A                                      CCSID(65535)
+     A            VTVERS    R               REFFLD(VERS       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTVOSP    R               REFFLD(VOSP       F98FRFV          )
+     A                                      CCSID(65535)
+     A            VTVTAS    R               REFFLD(VTAS       F98FRFV          )
+     A                                      CCSID(65535)
+     A          K VTVSCR
+     A          K VTLNGP
+     A          K VTSYR

@@ -1,0 +1,42 @@
+.* ============================================================ *
+.* Object:    ANZFILEINT      *PNLGRP                           *
+.*            Help text for the ANZFILEINT option.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='ANZFILEINT'.Interactive File Analysis - Help
+:P.
+This option is identical to the Display File Analysis option but can
+only be run for one file. It runs interactively and displays file
+attributes for the specified file.
+:P.
+:NT. This menu option does NOT require the HA Tools 2000 Analyze
+File Attributes in Batch to be run first.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter FNAM
+:HELP NAME='FNAM'.File Name (FNAM) - Help
+:XH3.File Name (FNAM)
+:P.
+Specify the name of the file to be analyzed. This must be a specific file
+name, it cannot be a generic.
+:EHELP.
+.* Help for parameter FLIB
+:HELP NAME='FLIB'.File Name (FLIB) - Help
+:XH3.File Library (FLIB)
+:P.
+Specify the library containing the existing file to be analyzed.
+:EHELP.
+:EPNLGRP.

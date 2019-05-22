@@ -1,0 +1,275 @@
+.* ============================================================ *
+.* Object:    HRTVNETTFC      *PNLGRP                           *
+.*            Help text for the HRTVNETTFC command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20060307 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRTVNETTFC'.Retrieve network traffic - Help
+:P.
+The HRTVNETTFC (Retrieve network traffic) summarises traffic entries that
+have been logged by the HMONNETTFC utility so that they can be used as input
+for queries or an excel spreadsheet. Alternatively, you can use the command
+to print an overview of every day of measurement.
+:P.
+An output file that was produced by the HMONNETTFC is used as an input file
+and a summary output file is produced which summarises the measurements
+on an hourly or daily basis.
+:P.
+Format for the generated output file is:
+:UL.
+:LI.System name
+:LI.Local IP address
+:LI.Remote IP address
+:LI.Port number
+:LI.Measurement date
+:LI.Measurement hour
+:LI.Average bandwidth (bps)
+:LI.Peak bandwidth (bps)
+:LI.Date-time of peak
+:LI.Number of measurements included in average
+:EUL.
+:P.
+Numeric columns in the output file are defined as "Zoned" so that they are
+easy to use for input in an Excel spreadsheet. A default spreadsheet for
+bandwidth consumption calculation has been included on the DMXtras product
+CD.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter TFCFILE
+:HELP NAME='HRTVNETTFC/TFCFILE'.Traffic input file - Help
+:XH3.Traffic input file (TFCFILE)
+:P.
+Specify the name of the file that holds the network traffic statistics
+to be summarised. This file must have been created earlier by the HMONNETTFC
+utility and have the same format as the HNETTFC template file in the DMXtras
+customer library.
+:P.
+The possible traffic-input-file values are:
+:PARML.
+:PT.file-name
+:PD.
+Specify the name of the file that holds the network traffic statistics.
+:EPARML.
+:P.
+The possible library values are:
+:PARML.
+:PT.library-name
+:PD.
+Specify the library in which the network traffic input file is located.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SUMOUTF
+:HELP NAME='HRTVNETTFC/SUMOUTF'.Summary output file - Help
+:XH3.Summary output file (SUMOUTF)
+:P.
+Specify the name of the file that should hold the summary of the gathered
+network statistics. If the file does not exist yet, it will be created from the
+template HNETTFCSUM file in the DMXtras customer library.
+:P.
+Alternatively, you can have the command print the summary to a spooled file.
+:P.
+The possible summary-output-file values are:
+:PARML.
+:PT.file-name
+:PD.
+Specify the name of the file that should hold the summary of the network traffic
+statistics.
+:PT.*PRINT
+:PD.
+Network traffic summary statistics will be output to a spooled file. Name of
+the spooled file is HRTVTFCP.
+:EPARML.
+:P.
+The possible library values are:
+:PARML.
+:PT.library-name
+:PD.
+Specify the library in which the traffic summary output file is located or
+placed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SUMUNIT
+:HELP NAME='HRTVNETTFC/SUMUNIT'.Summarise by unit of - Help
+:XH3.Summarise by unit of (SUMUNIT)
+:P.
+Specify the granularisation of the records in the summary output file. Summary
+records can be calculated by hour or by day.
+:P.
+The possible summarise-by-unit-of values are:
+:PARML.
+:PT.:PK def.*HOUR:EPK.
+:PD.
+Records in the traffic input file are summarised by hour, there will be 24
+summary records, each holding the average and peak traffic for the hour.
+:PT.*DAY
+:PD.
+Records in the traffic input file are summarised by day, there will be 1
+summary record holding the average and peak traffic for that day.
+:EPARML.
+:EHELP.
+
+.* Help for parameter NBRUNIT
+:HELP NAME='HRTVNETTFC/NBRUNIT'.Number of units - Help
+:XH3.Number of units (NBRUNIT)
+:P.
+Determines how many units will be output to the summary file.
+:P.
+The possible number-of-units values are:
+:PARML.
+:PT.:PK def.*DFT:EPK.
+:PD.
+If *HOUR was selected as the unit, the output file will hold 31 days and 24
+hour records per day; in total there are 31*24 records in the summary file. If
+*DAY was selected for the unit, the output file will hold 31 records.
+:PT.number-of-units
+:PD.
+Specify the number of units to output to the summary file.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RELDATE
+:HELP NAME='HRTVNETTFC/RELDATE'.Relative to date - Help
+:XH3.Relative to date (RELDATE)
+:P.
+Specifies the starting date of the measurement period to summarise. Date must
+be specified in YYYYMMDD format.
+:P.
+The possible relative-to-date values are:
+:PARML.
+:PT.:PK def.*STRPRV:EPK.
+:PD.
+Network traffic entries will be read starting with the 1st day of the previous
+month.
+:PT.*STRCUR
+:PD.
+Network traffic entries will be read starting with the 1st day of the current
+month.
+:PT.date-YYYYMMDD
+:PD.
+Specify the date from which the network traffic entries must be read.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CLNHST
+:HELP NAME='HRTVNETTFC/CLNHST'.Clean history older than - Help
+:XH3.Clean history older than (CLNHST)
+:P.
+Specifies the number of months that the network traffic history must be
+retained in the input file that was selected for the command. History records
+older than the specified number of months and matching the remaining selections
+of system name, port and IP addresses will be deleted from the input file.
+:P.
+The possible clean-history-older-than values are:
+:PARML.
+:PT.:PK def.2:EPK.
+:PD.
+History older than 2 months will be removed from the traffic input file.
+:PT.number-of-months
+:PD.
+Specify the number of months for which network traffic history must be kept in
+the traffic input file.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PORT
+:HELP NAME='HRTVNETTFC/PORT'.Port number - Help
+:XH3.Port number (PORT)
+:P.
+Specify the port number for which the network traffic must be summarised. If you
+want to summarise network traffic more more than 1 port, you may want to run
+the command more than once (with different summary output files).
+:P.
+The possible port-number values are:
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Traffic of all ports will be summarised in the summary output file.
+:PT.port-number
+:PD.
+Specify the port number for which network traffic must be summarised. This
+parameter is particularily used if you have monitored for multiple ports and
+logged it to the same network traffic file.
+:PT.4545
+:PD.
+This is the default iCluster port on iSeries.
+:EPARML.
+:EHELP.
+
+.* Help for parameter LCLADR
+:HELP NAME='HRTVNETTFC/LCLADR'.Local IP address - Help
+:XH3.Local IP address (LCLADR)
+:P.
+Specify the local IP address for which network traffic must be summarised. This
+parameter is particularily used if you want to check network traffic coming
+from a certain address.
+:P.
+The possible local-IP-address values are:
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Traffic for all local IP addresses will be summarised.
+:PT.IP-address
+:PD.
+Specify an IP address in dotted decimal format (i.e. 192.168.1.2) to identify
+for which local IP addresses traffic must be summarised.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RMTADR
+:HELP NAME='HRTVNETTFC/RMTADR'.Remote IP address - Help
+:XH3.Remote IP address (RMTADR)
+:P.
+Specify the remote IP address for which network traffic must be summarised. This
+parameter is particularily used if you want to check network traffic going to a
+specific address.
+:P.
+The possible remote-IP-address values are:
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Traffic for all remote IP addresses will be summarised.
+:PT.IP-address
+:PD.
+Specify an IP address in dotted decimal format (i.e. 192.168.1.2) to identify
+for which remote IP addresses traffic must be summarised.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SYSNAM
+:HELP NAME='HRTVNETTFC/SYSNAM'.System name - Help
+:XH3.System name (SYSNAM)
+:P.
+Use this parameter if you have consolidated network traffic measurements from
+multiple systems into one file and want to summarise traffic per system or
+for all systems at the same time.
+:P.
+The possible system-name values are:
+:PARML.
+:PT.:PK def.*CURRENT:EPK.
+:PD.
+Traffic that was monitored on the current system will be summarised.
+:PT.*ALL
+:PD.
+Network traffic that was monitored on any system will be summarised. Please
+note that only records in the specified input file will be summarised.
+:PT.system-name
+:PD.
+Specify the system name for which network traffic must be summarised.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

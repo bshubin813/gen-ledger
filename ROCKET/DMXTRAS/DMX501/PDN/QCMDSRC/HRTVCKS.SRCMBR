@@ -1,0 +1,100 @@
+/* ================================================================= */
+/* Object:         HRTVCKS         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks:                                                   */
+/*                                                                   */
+/* Synopsis:                                                         */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20050420 FK  Initial delivery                                     */
+/* 20050425 FK  Add ending record                                    */
+/* 20050727 FK  Specify record length for IFS record                 */
+/* 20060425 FK  Allow different target library for file              */
+/*              Specify running system                               */
+/* 20111217 FK  Remove HA Suite                                      */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve checksum')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(FILSYS) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NTV) SPCVAL((*NTV) (*IFS)) +
+                          PROMPT('File system for object')
+             PARM       KWD(FILE) TYPE(QUALFILE) PMTCTL(NATIVE) +
+                          PROMPT('File to check')
+             PARM       KWD(MBR) TYPE(*NAME) DFT(*FIRST) +
+                          SPCVAL((*FIRST)) PMTCTL(NATIVE) +
+                          PROMPT('Member')
+             PARM       KWD(PATH) TYPE(*PNAME) LEN(5000) VARY(*YES +
+                          *INT2) CASE(*MIXED) PMTCTL(IFS) +
+                          PROMPT('Object path')
+             PARM       KWD(OUTFILE) TYPE(QUALOUTF) PROMPT('Output +
+                          file on current system')
+             PARM       KWD(ICGROUP) TYPE(*NAME) DFT(*NONE) +
+                          SPCVAL((*NONE *N)) PROMPT('Group or +
+                          resilient application')
+             PARM       KWD(BCKOUTF) TYPE(QUALBCKF) PMTCTL(IC) +
+                          PROMPT('Output file on backup system')
+             PARM       KWD(NBRRCD) TYPE(*DEC) LEN(9 0) DFT(*ALL) +
+                          SPCVAL((*ALL 999999999) (*BLOCK 0)) +
+                          PROMPT('Number of records to check')
+             PARM       KWD(STRRCD) TYPE(*DEC) LEN(9 0) DFT(*FIRST) +
+                          SPCVAL((*FIRST 1) (*LAST 999999999)) +
+                          PMTCTL(NOTALL) PROMPT('Check block +
+                          starting record')
+             PARM       KWD(ENDRCD) TYPE(*DEC) LEN(9 0) DFT(*LAST) +
+                          SPCVAL((*LAST 999999999)) PMTCTL(BLOCK) +
+                          PROMPT('Check block ending record')
+             PARM       KWD(BLKSIZ) TYPE(*DEC) LEN(9 0) DFT(10000) +
+                          SPCVAL((*ALL 0)) PMTCTL(*PMTRQS) +
+                          PROMPT('Block size (records)')
+             PARM       KWD(RCDLEN) TYPE(*DEC) LEN(5 0) DFT(*AUTO) +
+                          SPCVAL((*AUTO 0)) PMTCTL(*PMTRQS) +
+                          PROMPT('Record length (IFS)')
+             PARM       KWD(RUNSYS) TYPE(*CHAR) RSTD(*YES) +
+                          DFT(*PRIMARY) SPCVAL((*PRIMARY) +
+                          (*BACKUP)) PMTCTL(*PMTRQS) +
+                          PROMPT('Running system')
+             PARM       KWD(TGTLIB) TYPE(*NAME) DFT(*FILELIB) +
+                          SPCVAL((*FILELIB)) PMTCTL(*PMTRQS) +
+                          PROMPT('Library on backup system')
+             PARM       KWD(CKSTYP) TYPE(*CHAR) LEN(5) RSTD(*YES) +
+                          DFT(*HASH) SPCVAL((*HASH)) +
+                          PMTCTL(*PMTRQS) PROMPT('Checksum type')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+ QUALOUTF:   QUAL       TYPE(*NAME) DFT(*NONE) SPCVAL((*NONE))
+             QUAL       TYPE(*NAME) PROMPT('Library')
+ QUALBCKF:   QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&FILSYS *EQ '*NTV') PARM((&FILE *NE ' +
+                          ')) MSGID(RCK0005)
+             DEP        CTL(&FILSYS *EQ '*IFS') PARM((&PATH *NE ' +
+                          ')) MSGID(RCK0006)
+             DEP        CTL(&ICGROUP *NE '*NONE') PARM((&BCKOUTF *NE +
+                          ' ')) MSGID(RCK0007)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ NOTALL:     PMTCTL     CTL(NBRRCD) COND((*NE 999999999))
+ BLOCK:      PMTCTL     CTL(NBRRCD) COND((*EQ 0))
+ NATIVE:     PMTCTL     CTL(FILSYS) COND((*EQ '*NTV'))
+ IFS:        PMTCTL     CTL(FILSYS) COND((*EQ '*IFS'))
+ IC:         PMTCTL     CTL(ICGROUP) COND((*NE '*NONE'))

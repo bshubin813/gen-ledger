@@ -1,0 +1,78 @@
+/* ================================================================= */
+/* Object:         HMONJRNLAG      *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HMONJRNLAG) HLPID(*CMD)*/
+/*                                                                   */
+/* Synopsis:       Monitors the replication lag for all journals in  */
+/*                 the HADGT file and issues messages if the replic- */
+/*                 ation lag becomes too big.                        */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HMONJRNLAG *PGM     CPP                                           */
+/* HMONJRNLAG *PNLGRP  Help for HMONJRNLAG command                   */
+/* HMONJRN    *FILE    Temporary file to keep journals               */
+/* HJRNLAG    *FILE    Journal lag output file                       */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020911 FK  Initial delivery                                     */
+/* 20021024 FK  Allow purge after number of days                     */
+/* 20031002 FK  Measurement type specification                       */
+/*              Multiple lag measurements, send, apply               */
+/* ================================================================= */
+             CMD        PROMPT('Monitor journal repl. lag')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(MSMTYP) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*ADH) SPCVAL((*ADH) (*HST)) +
+                          PROMPT('Method of measurement')
+             PARM       KWD(LAGFILEL) TYPE(*NAME) DFT(HASYSOBJ) +
+                          PROMPT('Library for lag output file')
+             PARM       KWD(CHKITV) TYPE(*DEC) LEN(4 0) DFT(30) +
+                          RANGE(1 1665) SPCVAL((*HOUR 60) (*HALFDAY +
+                          240) (*DAY 1440)) PROMPT('Check interval +
+                          in minutes')
+             PARM       KWD(ALRMSGQ) TYPE(QUALMSGQ) PROMPT('Alert +
+                          message queue')
+             PARM       KWD(ALWLAG) TYPE(*DEC) LEN(4 0) DFT(30) +
+                          RANGE(1 1665) SPCVAL((*HOUR 60) (*HALFDAY +
+                          240) (*DAY 1440)) PROMPT('Allowed total +
+                          lag in minutes')
+             PARM       KWD(PRGHST) TYPE(*DEC) LEN(4 0) DFT(7) +
+                          SPCVAL((*NONE 0)) CHOICE('*NONE, Number +
+                          of days') PROMPT('Purge history older than')
+             PARM       KWD(ALWSNDLAG) TYPE(*DEC) LEN(4 0) +
+                          DFT(*ALWLAG) RANGE(0 1665) SPCVAL((*HOUR +
+                          60) (*HALFDAY 240) (*DAY 1440) (*ALWLAG +
+                          0)) PMTCTL(HSTMSM) PROMPT('Allowed send +
+                          lag in minutes')
+             PARM       KWD(ALWAPYLAG) TYPE(*DEC) LEN(4 0) +
+                          DFT(*ALWLAG) RANGE(0 1665) SPCVAL((*HOUR +
+                          60) (*HALFDAY 240) (*DAY 1440) (*ALWLAG +
+                          0)) PMTCTL(HSTMSM) PROMPT('Allowed apply +
+                          lag in minutes')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALMSGQ:   QUAL       TYPE(*NAME) DFT(QSYSOPR) SPCVAL((QSYSOPR) +
+                          (*NONE))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ HSTMSM:     PMTCTL     CTL(MSMTYP) COND((*EQ '*HST'))

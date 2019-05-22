@@ -1,0 +1,99 @@
+     A*%%TS  SD  20050217  204800  FKETELAARS  REL-V5R2M0  5722-WDS
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      PRINT
+     A                                      INDARA
+     A                                      CA03(03 'Exit')
+     A                                      CA12(12 'Cancel')
+     A                                      HELP
+     A                                      ALTHELP
+     A                                      HLPPNLGRP(ANZAUDRCV ANZAUDRCV)
+     A                                      HLPTITLE('Audit Journal Analysis - -
+     A                                      Help')
+     A          R ANZJRN
+     A*%%TS  SD  20050217  204800  FKETELAARS  REL-V5R2M0  5722-WDS
+     A          H                           HLPPNLGRP(JNAM ANZAUDRCV)
+     A                                      HLPARA(06 003 06 044)
+     A          H                           HLPPNLGRP(JLIB ANZAUDRCV)
+     A                                      HLPARA(07 003 07 044)
+     A          H                           HLPPNLGRP(JRCV ANZAUDRCV)
+     A                                      HLPARA(08 003 08 044)
+     A          H                           HLPPNLGRP(JRCL ANZAUDRCV)
+     A                                      HLPARA(09 003 09 044)
+     A          H                           HLPPNLGRP(STRSEQ ANZAUDRCV)
+     A                                      HLPARA(11 003 11 048)
+     A          H                           HLPPNLGRP(ENDSEQ ANZAUDRCV)
+     A                                      HLPARA(12 003 12 048)
+     A          H                           HLPPNLGRP(STRDTE ANZAUDRCV)
+     A                                      HLPARA(14 003 14 042)
+     A          H                           HLPPNLGRP(ENDDTE ANZAUDRCV)
+     A                                      HLPARA(15 003 15 042)
+     A          H                           HLPPNLGRP(APDANZ ANZAUDRCV)
+     A                                      HLPARA(17 003 17 038)
+     A          H                           HLPPNLGRP(CLRANZ ANZAUDRCV)
+     A                                      HLPARA(18 003 18 038)
+     A          H                           HLPPNLGRP(ARCANZ ANZAUDRCV)
+     A                                      HLPARA(19 003 19 038)
+     A          H                           HLPPNLGRP(SBMHLD ANZJRNRCV)
+     A                                      HLPARA(20 003 20 038)
+     A                                  1 29'Rocket Software, Inc. '
+     A                                      COLOR(BLU)
+     A                                  1 72DATE
+     A                                      EDTCDE(Y)
+     A                                  2 29'Audit Journal Analysis '
+     A                                      COLOR(WHT)
+     A                                  2 72TIME
+     A                                  4  3'Type choices, press Enter'
+     A                                      COLOR(BLU)
+     A                                  6  3'Journal Name . . . . . . . :'
+     A            JNAM          10A  B  6 35COLOR(WHT)
+     A                                  6 52'Name'
+     A                                  7  5'Library  . . . . . . . . :'
+     A            JLIB          10A  B  7 35COLOR(WHT)
+     A                                  7 52'Name'
+     A                                  8  3'Journal Receiver Name. . . :'
+     A            JRCV          10A  B  8 35COLOR(WHT)
+     A                                  8 52'Name, *CURCHAIN, *CURRENT'
+     A                                      COLOR(GRN)
+     A                                  9  5'Receiver Library . :'
+     A            JRCL          10A  B  9 35COLOR(WHT)
+     A                                 11  5'Starting Date  . . . . . :'
+     A            STRDTE         6A  B 11 37COLOR(GRN)
+     A                                 11 52'Date, Blank'
+     A                                      COLOR(GRN)
+     A                                 12  5'Ending Date  . . . . . . :'
+     A            ENDDTE         6A  B 12 37COLOR(GRN)
+     A                                 12 52'Date, Blank'
+     A                                      COLOR(GRN)
+     A                                 14  3'Append to Analysis File. . :'
+     A            APDANZ         4A  B 14 35COLOR(WHT)
+     A                                 14 52'*YES, *NO'
+     A                                 15  3'Clear Analysis File. . . . :'
+     A            CLRANZ         4A  B 15 35COLOR(WHT)
+     A                                 15 52'*YES, *NO'
+     A                                 16  3'Archive Analysis and Clear :'
+     A            ARCANZ         4A  B 16 35COLOR(WHT)
+     A                                 16 52'*YES, *NO'
+     A                                 17  3'Submit on hold . . . . . . :'
+     A            SBMHLD         4A  B 17 35COLOR(WHT)
+     A                                 17 52'*YES, *NO'
+     A            DMERROR       70A  O 23  2COLOR(WHT)
+     A                                 22  3'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 21'F12=Cancel'
+     A                                      COLOR(BLU)
+     A                                  9 52'Name, *LIBL'
+     ******************************************************************
+     A          R MSGRCD                    SFL
+     A                                      SFLMSGRCD(24)
+     A            MSGKEY                    SFLMSGKEY
+     A            PGM                       SFLPGMQ
+     A          R MSGCTL                    SFLCTL(MSGRCD)
+     A                                      OVERLAY
+     A                                      SFLSIZ(  10)
+     A                                      SFLPAG(   1)
+     A                                      SFLDSPCTL
+     A                                      SFLDSP
+     A                                      SFLINZ
+     A N99                                  SFLEND
+     A            PGM                       SFLPGMQ

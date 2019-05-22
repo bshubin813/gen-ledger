@@ -1,0 +1,53 @@
+.* ============================================================ *
+.* Object:    ANZSAV2         *PNLGRP                           *
+.*            Help text for the ANZSAV2 command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='ANZSAV2'.Save Journal Analysis Data - Help
+:P.
+This option allows you to save the journal analysis data that is
+produced by HA Tools 2000 Options 7 or 8 (or the ANZJRNRCV or ANZJRNDLT)
+commands into a user specified savefile and library.
+:P.
+Specify the name of the savefile that you wish to create and the library
+that should contain the savefile.
+:P.
+:NT.If the file name and library are left blank, the file name will
+be ANZhhmmss where hh = hours, mm = minutes, and ss =seconds and the
+library that is used will be the HA Tools 2000 product library.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter FILE
+:HELP NAME='ANZSAV2/FILE'.Save File Name (FILE) - Help
+:XH3.Save File Name (FILE)
+:P.
+Specify the name of the savefile that should be created to contain the
+journal analysis data from HA Tools 2000 options 7 or 8 (or the ANZJRNRCV
+or ANZJRNDLT commands. If this field is left blank, the name used will
+be ANZhhmmss where hh = hours, mm = minutes, ss = seconds at the time this
+option is issued.
+:P.
+:EHELP.
+.* Help for parameter LIB
+:HELP NAME='ANZSAV2/LIB'.Library Name (LIB) - Help
+:XH3.Library Name (LIB)
+:P.
+Specify the name of the library to contain the savefile with journal
+analysis data. If this field is left blank, the library used will be
+the HA Tools 2000 product library.
+:P.
+:EHELP.
+:EPNLGRP.

@@ -1,0 +1,155 @@
+.* ============================================================ *
+.* Object:    HLSTCFG         *PNLGRP                           *
+.*            Help text for the HLSTCFG command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020916 FK  Initial delivery                                *
+.* 20021104 FK  Allow for IFS configuration                     *
+.* 20030425 FK  Enable for iCluster                             *
+.* 20030506 FK  Adjust parameters for new values                *
+.* 20040201 FK  New parameter: BCKNOD                           *
+.* 20111223 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HLSTCFG'.List iCluster Obj/IFS config - Help
+:P.
+The HLSTCFG (List iCluster config) command allows you to
+output the object specifiers for an iCluster
+group or resilient application to a specified output file.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter OUTLIB
+:HELP NAME='HLSTCFG/OUTLIB'.Library for output files - Help
+:XH3.Library for output files (OUTLIB)
+:P.
+Specify the name of the library where the output files, respectively
+HLSTCFGO and HLSTCFGI, must be placed.
+:P.
+:NT.The library must exist.:ENT.
+:P.
+The possible values for library-for-output-file
+:P.
+:PARML.
+:PT.:PK def.QTEMP:EPK.
+:PD.
+The HLSTCFGO/HLSTCFGI output file is placed in library QTEMP.
+:PT.library-name
+:PD.
+The HLSTCFGO/HLSTCFGI output file is placed in the specified library.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ICGROUP
+:HELP NAME='HLSTCFG/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the object specifiers must be retrieved.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+All object specifiers, regardless of the associated group or resilient
+application will be retrieved.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the object
+specifiers must be retrieved.
+:PT.generic*-group-name
+:PD.
+Specify a generic name. Configurtion is listed for all groups whose names begin
+with the specified characters.
+:PT.*MRKSTR
+:PD.
+Only groups which have the string specified on the MRKSTR parameter in their
+descriptions will be listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BCKNOD
+:HELP NAME='HLSTCFG/BCKNOD'.Groups for backup node - Help
+:XH3.Groups for backup node (BCKNOD)
+:P.
+Select only groups for which the specified node is the backup node. This allows
+you to list the configuration only for those groups which replicate to a
+certain machine, especially useful in 1 to many situations.
+:P.
+The possible groups-for-backup-node values are:
+:P.
+:PARML.
+:PT.:PK def.*FIRST:EPK.
+:PD.
+iCluster groups which have the same backup node as the first group selected
+(alphabetically) will be listed.
+:PT.*ALL
+:PD.
+All iCluster groups will be listed, regardless of their backup node.
+:PT.backup node
+:PD.
+Specify the name of the backup node to limit the selected groups. Only groups
+having the specified backup node will be selected.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CFGTYP
+:HELP NAME='HLSTCFG/CFGTYP'.Configuration to retrieve - Help
+:XH3.Configuration to retrieve (CFGTYP)
+:P.
+Specify the type of configuration that must be retrieved. Dependent on the
+type of configuration, output files will be created:
+:UL.
+:LI.HLSTCFGO - Library object specifiers
+:LI.HLSTCFGI - IFS object specifiers
+:EUL.
+:P.
+The possible configuration-to-retrieve values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Both library- and IFS object specifiers will be retrieved for the selected
+target/group.
+:PT.*OBJ
+:PD.
+Only library object specifiers will be retrieved.
+:PT.*IFS
+:PD.
+Only IFS object specifiers will be retrieved.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MRKSTR
+:HELP NAME='HLSTCFG/MRKSTR'.Group selection string - Help
+:XH3.Group selection string (MRKSTR)
+:P.
+Specify the selection string that was put in the groups' descriptions to
+identify which groups should be listed. This parameter is only eligible when
+specifying *MRKSTR for the ICGROUP parameter. If any other value
+is specified for the ICGROUP parameter, this parameter is ignored.
+:P.
+The possible group-selection-string values are:
+:P.
+:PARML.
+:PT.:PK def.*S:EPK.
+:PD.
+All groups which have the string "*S" in their descriptions will be listed.
+:PT.string
+:PD.
+Specify any string (for instance "*S01") which identifies the groups to be
+listed.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

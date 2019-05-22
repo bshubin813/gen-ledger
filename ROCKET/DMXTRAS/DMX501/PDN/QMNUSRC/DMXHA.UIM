@@ -1,0 +1,157 @@
+.im #HDR
+.im #VAR
+:cond         name=cmxhaopr
+              expr='chkobj("DMXHAOPR", "*MENU")'.
+:cond         name=cmxhamon
+              expr='chkobj("DMXHAMON", "*MENU")'.
+:cond         name=cmxhacfg
+              expr='chkobj("DMXHACFG", "*MENU")'.
+:cond         name=cmxhaanz
+              expr='chkobj("DMXHAANZ", "*MENU")'.
+:cond         name=cmxhasos
+              expr='chkobj("DMXHASOS", "*MENU")'.
+:cond         name=cmxhains
+              expr='chkobj("DMXHAINS", "*MENU")'.
+:cond         name=cmxhapgm
+              expr='chkobj("DMXHAPGM", "*MENU")'.
+:cond         name=cmxts
+              expr='chkobj("DMXTS", "*MENU")'.
+.im #KEY
+:ekeyl.
+.im #TTL
+DMXtras High Availability menu
+.im #OPT
+
+:menugrp.     HA Menus
+:menui        option=1
+              cond=cmxhaopr
+              help='menu/option1'
+              action='cmd go DMXHAOPR'
+              .HA Operations menu
+:menui        option=2
+              cond=cmxhamon
+              help='menu/option2'
+              action='cmd go DMXHAMON'
+              .HA Monitoring menu
+:menui        option=3
+              cond=cmxhacfg
+              help='menu/option3'
+              action='cmd go DMXHACFG'
+              .HA Configuration menu
+:menui        option=4
+              cond=cmxhaanz
+              help='menu/option4'
+              action='cmd go DMXHAANZ'
+              .HA Analysis menu
+:menui        option=7
+              cond=cmxhasos
+              help='menu/option7'
+              action='cmd go DMXHASOS'
+              .HA Switchover menu
+:menui        option=9
+              cond=cmxhains
+              help='menu/option9'
+              action='cmd go DMXHAINS'
+              .HA Installation and initial setup menu
+:menui        option=50
+              cond=cmxhapgm
+              help='menu/option50'
+              action='cmd go DMXHAPGM'
+              .DMXtras programming menu
+:menui        option=70
+              cond=cmxts
+              help='menu/option70'
+              action='cmd go DMXTS'
+              .DMXtras Transformation Server menu
+:emenugrp.
+
+.im #DMXHAHA
+
+:emenu.
+.im #CMDL
+
+.im #HLP
+
+:help         name='menu/help'.
+DMXtras High Availability Menu - Help
+:p.
+The DMXtras High Availability menu allows you to access the tools available
+to control your high availability implementation.
+:ehelp.
+
+:help         name='menu/option1'.
+:parml.
+:pt.1. HA Operations Menu
+:pd.
+Select this option to work with typical operation tasks for the high
+availability solution implemented. The shown menu will hold options to start,
+stop iCluster and/or HA Suite and various other operations tools.
+:eparml.
+:ehelp.
+
+:help         name='menu/option2'.
+:parml.
+:pt.2. HA Monitoring Menu
+:pd.
+Select this option to work with typical monitoring tasks for the high
+availability solution implemented. The shown menu holds options to work with
+journals, manage journal receivers and monitor HA Suite and iCluster.
+:eparml.
+:ehelp.
+
+:help         name='menu/option3'.
+:parml.
+:pt.3. HA Configuration Menu
+:pd.
+Select this option to work with configuration tools for the high
+availability solution implemented.
+:eparml.
+:ehelp.
+
+:help         name='menu/option4'.
+:parml.
+:pt.4. HA Analysis Menu
+:pd.
+Select this option to work with analysis tools for the high availability
+solution implemented. Amongst others, you can analyse journal receivers from
+this menu.
+:eparml.
+:ehelp.
+
+:help         name='menu/option7'.
+:parml.
+:pt.7. HA Switchover Menu
+:pd.
+Select this option to work with switchover tools for the high availability
+solution implemented. The menu holds options to disable/enable users, triggers,
+constraints and other tasks you may want to use at switchover time.
+:eparml.
+:ehelp.
+
+:help         name='menu/option9'.
+:parml.
+:pt.9. HA Installation and initial setup menu
+:pd.
+Select this option to set up the high availability solution or display
+information about the installation (version, pack, etc.).
+:eparml.
+:ehelp.
+
+:help         name='menu/option50'.
+:parml.
+:pt.50. DMXtras programming menu
+:pd.
+This menu holds options to start the Program Development Manager and work with
+source files holding example sources delivered with the DMXtras tools.
+:eparml.
+:ehelp.
+
+:help         name='menu/option70'.
+:parml.
+:pt.70. DMXtras Transformation Server menu
+:pd.
+This menu displays the DMXtras options for Transformation Server.
+:eparml.
+:ehelp.
+
+:epnlgrp.

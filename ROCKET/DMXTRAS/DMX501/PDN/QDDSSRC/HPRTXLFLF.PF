@@ -1,0 +1,22 @@
+      * ============================================================ *
+      * Object:    HPRTXLFLF       *FILE PF                          *
+      *            File that holds the output for DSPFD              *
+      *            *MBR. This file is used to determine x-library    *
+      *            logical files from the logical file.              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020627 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HPRTXLFLF@
+     A            MBFILE        10A         TEXT('File')
+     A            MBLIB         10A         TEXT('File library')
+     A            MBNAME        10A         TEXT('Member name')
+     A            MBFTYP         1A         TEXT('File type')
+     A            MBBOF         10A         TEXT('Based-on Physical file')
+     A            MBBOL         10A         TEXT('Based-on Library')
+     A            MBBOM         10A         TEXT('Based-on Member')

@@ -1,0 +1,20 @@
+      * ============================================================ *
+      * Object:    HCHGUSRSTTS     *FILE PF                          *
+      *            Temporary file that holds the output for          *
+      *            DSPUSRPRF *BASIC. This file is placed in QTEMP at *
+      *            the time the HCHGUSRSTS command is run.           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000321 FK  Initial delivery                                *
+      * 20020508 FK  Include user class                              *
+      * ============================================================ *
+     A          R HCHGUSR@
+     A            UPUPRF        10A         TEXT('User profile')
+     A            UPUSCL        10A         TEXT('User class')
+     A            UPTEXT        50A         TEXT('User profile description')
+     A            UPSTAT        10A         TEXT('User profile status')

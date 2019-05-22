@@ -1,0 +1,5 @@
+     A                                      UNIQUE
+     A          R ANZFILR                   PFILE(*LIBL/ANZFILPF)
+     A          K PFLIB
+     A          K PFFIL
+     A          K FILSEQ

@@ -1,0 +1,45 @@
+/* ================================================================= */
+/* Object:         HRTVJRNANZ      *CMD                              */
+/*                 Retrieve journal analysis to output file          */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010731 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve journal analysis')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(OUTFILE) TYPE(QUALFILE) PROMPT('Output +
+                          file')
+             PARM       KWD(MONTHS) TYPE(*DEC) LEN(3) DFT(1) +
+                          PROMPT('Number of months to retrieve')
+             PARM       KWD(RELDATE) TYPE(*DATE) DFT(*STRPRV) +
+                          SPCVAL((*STRPRV 0000827) (*STRCUR +
+                          0680827)) PROMPT('Relative to date')
+             PARM       KWD(CLNHST) TYPE(*DEC) LEN(3) DFT(2) +
+                          CHOICE('Number of months') PROMPT('Clean +
+                          history older than')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME) DFT(ANZTOT1)
+             QUAL       TYPE(*NAME) DFT(HATEMP) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

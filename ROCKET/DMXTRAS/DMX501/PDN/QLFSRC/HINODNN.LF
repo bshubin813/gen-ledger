@@ -1,0 +1,20 @@
+      * ============================================================ *
+      * Object:    HINODNN         *FILE LF                          *
+      *            Logical file over DMNODES by NODE                 *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20030424 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HINODNN@                  PFILE(DMNODES)
+     A            NODE
+     A            LOCNAME
+     A            LOCNAME2
+     A            DESC
+     A            PORT
+      *
+     A          K NODE

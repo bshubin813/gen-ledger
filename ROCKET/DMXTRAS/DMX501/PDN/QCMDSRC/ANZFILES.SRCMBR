@@ -1,0 +1,7 @@
+             CMD        PROMPT('Determine File Attributes')
+             PARM       KWD(FILE) TYPE(*CHAR) LEN(10) MIN(1) +
+                          ALWUNPRT(*NO) ALWVAR(*NO) PROMPT('File +
+                          (Name, Generic*, *ALL)')
+             PARM       KWD(LIBRARY) TYPE(*CHAR) LEN(10) MIN(1) +
+                          ALWUNPRT(*NO) ALWVAR(*NO) PROMPT('Library +
+                          Name')

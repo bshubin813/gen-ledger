@@ -1,0 +1,50 @@
+      *CP: SIZE(*NOMAX) REUSEDLT(*YES)
+      * ============================================================ *
+      * Object:    HMONJOB         *FILE PF                          *
+      *            Holds the status of the jobs being monitored by   *
+      *            the HMONJOB job.                                  *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050401 FK  Initial delivery                                *
+      * 20050707 FK  Add end severity and processing time            *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R MONJOB@
+     A            MJSYSN         8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            MJJNAM        10A         TEXT('Job name')
+     A                                      COLHDG('Job name')
+     A            MJJUSR        10A         TEXT('Job user')
+     A                                      COLHDG('Job user')
+     A            MJJNBR         6A         TEXT('Job number')
+     A                                      COLHDG('Job' 'number')
+     A            MJJSTS        10A         TEXT('Job status')
+     A                                      COLHDG('Job' 'status')
+     A            MJRCHG          Z         TEXT('Date-time record changed')
+     A                                      COLHDG('Record changed' 'date-time')
+     A            MJJBQN        10A         TEXT('Job queue name')
+     A                                      COLHDG('Job' 'queue')
+     A            MJJBQL        10A         TEXT('Job queue library')
+     A                                      COLHDG('Jobq' 'library')
+     A            MJJJBQ          Z         TEXT('Date-time of *JOBQ')
+     A                                      COLHDG('*JOBQ' 'date-time')
+     A            MJJACT          Z         TEXT('Date-time of *ACTIVE')
+     A                                      COLHDG('*ACTIVE' 'date-time')
+     A            MJJEND          Z         TEXT('Date-time of *END')
+     A                                      COLHDG('*END' 'date-time')
+     A            MJESEV        10P 0       TEXT('Job end severity')
+     A                                      COLHDG('Job end' 'severity')
+     A            MJPTIM        20P 0       TEXT('Job processing time')
+     A                                      COLHDG('Job process' 'time')
+      *
+     A          K MJSYSN
+     A          K MJJNAM
+     A          K MJJUSR
+     A          K MJJNBR

@@ -1,0 +1,664 @@
+     A*%%***********************************************************************
+     A*%%TS  RD  20111217  145952  FKETELAARS  REL-V5R4M0  5722-WDS
+     A*%%FI+10661100000000000000000000100000000000000000000000000000
+     A*%%FI       0000000000000000000000000000000000000000000000000
+     A*%%***********************************************************************
+      *CP: CPI(16.7) PAGESIZE(*N 198 *N)
+      * ============================================================ *
+      * Object:    HCHKSYNPO       *FILE PRTF                        *
+      *            Printer file to report object differences.        *
+      *                                                              *
+      * Create remarks: CRTPRTF PAGESIZE(66 198) CPI(16.7)           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20021202 FK  Initial delivery                                *
+      * 20030414 FK  Remove additional page skips                    *
+      * ============================================================ *
+     A          R @OBJHDR
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                      SKIPB(001)
+     A                                    51
+     A                                      'Object Differences'
+     A                                      SPACEB(001)
+     A                                   155
+     A                                      DATE(*SYS *YY)
+     A                                      EDTCDE(Y)
+     A                                   166
+     A                                      TIME
+     A                                      EDTWRD('  :  :  ')
+     A                                   161
+     A                                      'Page'
+     A                                      SPACEB(001)
+     A            PAGENBR        7S 0O   167
+     A                                      EDTCDE(4)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJH1P
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                    64
+     A                                      'Ignore interval . . . :'
+     A                                      SPACEB(002)
+     A            IGNIH1         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      'Group . . . . . . . . :'
+     A                                      SPACEB(001)
+     A            GRPNH1        10A  O    +3
+     A  21        MRKSH1         4A  O    +1
+     A                                   +22
+     A                                      'Output file . . . . . :'
+     A            OUTFPA         4A  O    +3
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL+001
+     A*%%CL      Ig
+     A*%%CL+001
+     A*%%CL      Out
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJMOTH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Missing objects on Target'
+     A                                      SPACEB(001)
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(002)
+     A                                    12
+     A                                      'DT'
+     A                                    15
+     A                                      'Library   '
+     A                                    26
+     A                                      'Object'
+     A                                    37
+     A                                      'Type'
+     A                                    46
+     A                                      'Attribute'
+     A                                    57
+     A                                      'Created'
+     A                                    84
+     A                                      'Size'
+     A                                    95
+     A                                      'Description'
+     A                                   146
+     A                                      'Target lib'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '--'
+     A                                    15
+     A                                      '----------'
+     A                                    26
+     A                                      '----------'
+     A                                    37
+     A                                      '--------'
+     A                                    46
+     A                                      '----------'
+     A                                    57
+     A                                      '--------------------------'
+     A                                    84
+     A                                      '----------'
+     A                                    95
+     A                                      '-----------------------------------
+     A                                      ----------------'
+     A                                   146
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJMOTD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            ODGRPN    R        O     1
+     A                                      REFFLD(SYNOBJ@/ODGRPN *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A                                      SPACEB(001)
+     A            DIFTWY         1A  O    12
+     A            ODCMPL    R        O    15
+     A                                      REFFLD(SYNOBJ@/ODCMPL *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODCMPO    R        O    26
+     A                                      REFFLD(SYNOBJ@/ODCMPO *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBTP    R        O    37
+     A                                      REFFLD(SYNOBJ@/ODOBTP *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBAT    R        O    46
+     A                                      REFFLD(SYNOBJ@/ODOBAT *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            SOCDTS    R        O    57
+     A                                      REFFLD(SYNOBJ@/SOCDTS *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            SOOBSZ    R        O    84
+     A                                      REFFLD(SYNOBJ@/SOOBSZ *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A                                      EDTCDE(3)
+     A            SOOBTX    R        O    95
+     A                                      REFFLD(SYNOBJ@/SOOBTX *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODTGTL    R        O   146
+     A                                      REFFLD(SYNOBJ@/ODTGTL *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJMOTF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of missing objects  . . . .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRMOT         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001                            . . . . :
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJMOSH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Obsolete objects on Target'
+     A                                      SPACEB(001)
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(002)
+     A                                    12
+     A                                      'DT'
+     A                                    15
+     A                                      'Library   '
+     A                                    26
+     A                                      'Object'
+     A                                    37
+     A                                      'Type'
+     A                                    46
+     A                                      'Attribute'
+     A                                    57
+     A                                      'Created'
+     A                                    84
+     A                                      'Size'
+     A                                    95
+     A                                      'Description'
+     A                                   146
+     A                                      'Org lib'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '--'
+     A                                    15
+     A                                      '----------'
+     A                                    26
+     A                                      '----------'
+     A                                    37
+     A                                      '--------'
+     A                                    46
+     A                                      '----------'
+     A                                    57
+     A                                      '--------------------------'
+     A                                    84
+     A                                      '----------'
+     A                                    95
+     A                                      '-----------------------------------
+     A                                      ----------------'
+     A                                   146
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJMOSD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            ODGRPN    R        O     1
+     A                                      REFFLD(SYNOBJ@/ODGRPN *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A                                      SPACEB(001)
+     A            DIFTWY         1A  O    12
+     A            ODLBNM    R        O    15
+     A                                      REFFLD(SYNOBJ@/ODLBNM *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODCMPO    R        O    26
+     A                                      REFFLD(SYNOBJ@/ODCMPO *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBTP    R        O    37
+     A                                      REFFLD(SYNOBJ@/ODOBTP *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBAT    R        O    46
+     A                                      REFFLD(SYNOBJ@/ODOBAT *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            TOCDTS    R        O    57
+     A                                      REFFLD(SYNOBJ@/TOCDTS *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            TOOBSZ    R        O    84
+     A                                      REFFLD(SYNOBJ@/TOOBSZ *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A                                      EDTCDE(3)
+     A            TOOBTX    R        O    95
+     A                                      REFFLD(SYNOBJ@/TOOBTX *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODCMPL    R        O   146
+     A                                      REFFLD(SYNOBJ@/ODCMPL *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJMOSF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of obsolete objects . . . .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRMOS         5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJJDH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Journal differences'
+     A                                      SPACEB(001)
+     A                                    57
+     A                                      'Source'
+     A                                      SPACEB(001)
+     A                                    65
+     A                                      'Target'
+     A                                    72
+     A                                      'Source'
+     A                                    94
+     A                                      'Target'
+     A                                   116
+     A                                      'Source'
+     A                                   124
+     A                                      'Target'
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      'DT'
+     A                                    15
+     A                                      'Library   '
+     A                                    26
+     A                                      'Object'
+     A                                    37
+     A                                      'Type'
+     A                                    46
+     A                                      'Attribute'
+     A                                    57
+     A                                      'Journal Status'
+     A                                    72
+     A                                      'Journal Library/Name'
+     A                                    94
+     A                                      'Journal Library/Name'
+     A                                   116
+     A                                      'Journal Images'
+     A                                   131
+     A                                      'Target lib'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '--'
+     A                                    15
+     A                                      '----------'
+     A                                    26
+     A                                      '----------'
+     A                                    37
+     A                                      '--------'
+     A                                    46
+     A                                      '----------'
+     A                                    57
+     A                                      '--------------'
+     A                                    72
+     A                                      '-----------------------------------
+     A                                      ---------'
+     A                                   116
+     A                                      '--------------'
+     A                                   131
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJJDD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            ODGRPN    R        O     1
+     A                                      REFFLD(SYNOBJ@/ODGRPN *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A                                      SPACEB(001)
+     A            DIFTWY         1A  O    12
+     A            ODCMPL    R        O    15
+     A                                      REFFLD(SYNOBJ@/ODCMPL *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODCMPO    R        O    26
+     A                                      REFFLD(SYNOBJ@/ODCMPO *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBTP    R        O    37
+     A                                      REFFLD(SYNOBJ@/ODOBTP *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBAT    R        O    46
+     A                                      REFFLD(SYNOBJ@/ODOBAT *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            SOJRST@        5   O    57
+     A                                      TEXT('Source Journal status')
+     A            TOJRST@        5   O    65
+     A                                      TEXT('Target Journal status')
+     A            SOJRLB    R        O    72
+     A                                      REFFLD(SYNOBJ@/SOJRLB *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            SOJRNM    R        O    83
+     A                                      REFFLD(SYNOBJ@/SOJRNM *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            TOJRLB    R        O    94
+     A                                      REFFLD(SYNOBJ@/TOJRLB *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            TOJRNM    R        O   105
+     A                                      REFFLD(SYNOBJ@/TOJRNM *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            SOJRIM@        6   O   116
+     A                                      TEXT('Source Journal images')
+     A            TOJRIM@        6   O   124
+     A                                      TEXT('Target Journal images')
+     A            ODTGTL    R        O   131
+     A                                      REFFLD(SYNOBJ@/ODTGTL *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJJDF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of journal differences  . .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRJD          5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJNJH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Non-journalled objects on source'
+     A                                      SPACEB(001)
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(002)
+     A                                    12
+     A                                      'Library   '
+     A                                    23
+     A                                      'Object'
+     A                                    34
+     A                                      'Type'
+     A                                    43
+     A                                      'Attribute'
+     A                                    54
+     A                                      'Status'
+     A                                    61
+     A                                      'Old Journal'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '----------'
+     A                                    23
+     A                                      '----------'
+     A                                    34
+     A                                      '-------- ----------'
+     A                                    54
+     A                                      '------'
+     A                                    61
+     A                                      '------------------------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJNJD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            ODGRPN    R        O     1
+     A                                      REFFLD(SYNOBJ@/ODGRPN *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A                                      SPACEB(001)
+     A            ODCMPL    R        O    12
+     A                                      REFFLD(SYNOBJ@/ODCMPL *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODCMPO    R        O    23
+     A                                      REFFLD(SYNOBJ@/ODCMPO *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBTP    R        O    34
+     A                                      REFFLD(SYNOBJ@/ODOBTP *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBAT    R        O    43
+     A                                      REFFLD(SYNOBJ@/ODOBAT *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            SOJRST@        5   O    54
+     A                                      TEXT('Source Journal status')
+     A            SOJRLB    R        O    61
+     A                                      REFFLD(SYNOBJ@/SOJRLB *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            SOJRNM    R        O    72
+     A                                      REFFLD(SYNOBJ@/SOJRNM *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJNJF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of non-journalled objects .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRNJ          5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJNMH
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Non-mirrored objects'
+     A                                      SPACEB(001)
+     A                                     1
+     A                                      'Group'
+     A                                      SPACEB(002)
+     A                                    12
+     A                                      'DT'
+     A                                    15
+     A                                      'Library   '
+     A                                    26
+     A                                      'Object'
+     A                                    37
+     A                                      'Type'
+     A                                    46
+     A                                      'Attribute'
+     A                                    57
+     A                                      'Journalled'
+     A                                    68
+     A                                      'Library'
+     A                                    79
+     A                                      'Jrn name'
+     A                                    90
+     A                                      'Target lib'
+     A                                     1
+     A                                      '----------'
+     A                                      SPACEB(001)
+     A                                    12
+     A                                      '--'
+     A                                    15
+     A                                      '----------'
+     A                                    26
+     A                                      '----------'
+     A                                    37
+     A                                      '-------- ----------'
+     A                                    57
+     A                                      '----------'
+     A                                    68
+     A                                      '----------'
+     A                                    79
+     A                                      '----------'
+     A                                    90
+     A                                      '----------'
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%CL 002
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJNMD
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A            ODGRPN    R        O     1
+     A                                      REFFLD(SYNOD@/ODGRPN *LIBL/HCHKSYNO-
+     A                                      D)
+     A                                      SPACEB(001)
+     A            DIFTWY         1A  O    12
+     A            ODCMPL    R        O    15
+     A                                      REFFLD(SYNOD@/ODCMPL *LIBL/HCHKSYNO-
+     A                                      D)
+     A            ODCMPO    R        O    26
+     A                                      REFFLD(SYNOD@/ODCMPO *LIBL/HCHKSYNO-
+     A                                      D)
+     A            ODOBTP    R        O    37
+     A                                      REFFLD(SYNOBJ@/ODOBTP *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODOBAT    R        O    46
+     A                                      REFFLD(SYNOBJ@/ODOBAT *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A            ODJRST@        4   O    57
+     A                                      TEXT('Journal status')
+     A            ODJRLB    R        O    68
+     A                                      REFFLD(SYNOD@/ODJRLB *LIBL/HCHKSYNO-
+     A                                      D)
+     A            ODJRNM    R        O    79
+     A                                      REFFLD(SYNOD@/ODJRNM *LIBL/HCHKSYNO-
+     A                                      D)
+     A            ODTGTL    R        O    90
+     A                                      REFFLD(SYNOBJ@/ODTGTL *LIBL/HCHKSYN-
+     A                                      OBJ)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 001
+     A*%%***********************************************************************
+     A          R @OBJNMF
+     A*%%***********************************************************************
+     A*%%RI 00000
+     A*%%***********************************************************************
+     A                                     1
+     A                                      'Number of non-mirrored objects . .-
+     A                                       :'
+     A                                      SPACEB(002)
+     A            NBRNM          5S 0O    +3
+     A                                      EDTCDE(3)
+     A                                     1
+     A                                      '-----------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------------------------'
+     A                                      SPACEB(001)
+     A*%%***********************************************************************
+     A*%%SS
+     A*%%CL 002
+     A*%%CL 001
+     A*%%CP+999CRTPRTF
+     A*%%CP+    CPI(16.7)
+     A*%%CP+    MAXRCDS(*NOMAX)
+     A*%%CP+    FILE(DMXTRASDEV/HCHKSYNPO)
+     A*%%CP+    DEVTYPE(*SCS)
+     A*%%CP     PAGESIZE(*N       198      *N     )
+     A*%%***********************************************************************

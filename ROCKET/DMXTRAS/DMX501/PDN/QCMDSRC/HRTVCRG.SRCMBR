@@ -1,0 +1,58 @@
+/*CP: ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD *IMOD)                   */
+/* ================================================================= */
+/* Object:         HRTVCRG         *CMD                              */
+/*                 Retrieves the cluster resource group              */
+/*                                                                   */
+/* Create remarks: CRTCMD ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD      */
+/*                 *IMOD)                                            */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HRTVCRG    *CMD     Command                                       */
+/* HRTVCRG    *PNLGRP  Help text                                     */
+/* HRTVCRG    *PGM     CPP                                           */
+/* HRTVCRG1   *PGM                                                   */
+/* HRTVCRG1   *MODULE                                                */
+/* HAUMSG     *MSGF    Message file with all messages issued         */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20040520 FK  Initial delivery                                     */
+/* 20040526 FK  Removed parameters PRISTT and BCKSTS                 */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve Cluster Resource Grp')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(CRG) TYPE(*NAME) SPCVAL((DM_INTGRP)) +
+                          MIN(1) PROMPT('Cluster Resource Group')
+             PARM       KWD(INFVLD) TYPE(*CHAR) LEN(4) RTNVAL(*YES) +
+                          CHOICE('*YES, *NO') PROMPT('Information +
+                          valid (4)')
+             PARM       KWD(CRGTYP) TYPE(*CHAR) LEN(5) RTNVAL(*YES) +
+                          CHOICE('*DATA, *APPL, *DEV') PROMPT('Cl. +
+                          Resource Group type (5)')
+             PARM       KWD(CRGSTS) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          CHOICE('*ACTIVE, *INACTIVE, ...') +
+                          PROMPT('Cl. Resource Group status (10)')
+             PARM       KWD(PRINOD) TYPE(*CHAR) LEN(8) RTNVAL(*YES) +
+                          PROMPT('Primary node (8)')
+             PARM       KWD(BCKNOD) TYPE(*CHAR) LEN(8) RTNVAL(*YES) +
+                          PROMPT('Backup node (8)')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

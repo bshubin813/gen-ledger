@@ -1,0 +1,488 @@
+.* ============================================================ *
+.* Object:    HCHKSYNTGT         *PNLGRP                        *
+.*            Help text for the command.                        *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020524 FK  Initial delivery                                *
+.* 20030115 FK  Also check DMXtras DLS mirroring when CHKIFS    *
+.* 20030501 FK  New parameter for iCluster group                *
+.* 20030512 FK  Library report is optional                      *
+.* 20031010 FK  Include target release                          *
+.* 20050224 FK  Backup node parameter                           *
+.* 20050518 FK  IFS authorities                                 *
+.* 20070919 FK  E-mail reports                                  *
+.* 20111217 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HCHKSYNTGT'.Run iCluster sync. check - Help
+:P.
+The HCHKSYNTGT (Run iCluster sync. check) allows you to perform
+a rough and fast synchronisation check based on object specifiers
+for an iCluster group or
+resilient application.
+:P.
+The synchronisation check is executed against:
+:UL.
+:LI.Object descriptions
+:LI.Member descriptions
+:LI.Object authorities
+:LI.IFS Object descriptions
+:LI.IFS authorities
+:LI.Libraries in the configuration
+:EUL.
+:P.
+The HCHKSYNTGT command is run from the source machine and will not run
+properly if executed on the target machine. It gathers configuration
+information based on the (BSF) object specifiers associated with the
+target definition and group selected. Subsequently, it sends the
+configuration information to the target machine in a save file.
+When the save file arrives, the differences between the source and
+target are determined and reported.
+:P.
+Name of the synchronisation job on both systems is HS<SynID>.
+:P.
+Synchronisation check jobs retrieve objects, members, IFS objects and
+authorities into files in the DMXtras utilities library. Files are called
+HS<SynID>xx, where <SynID> stands for the synchronisation ID given at the
+command prompt and xx indicates the type of information and on which machine.
+For instance, HSTOOLSI would contains source IFS object information for the
+synchronisation ID TOOL.
+:P.
+When the retrieval is finished on the source, the HS<SyndID>S* files are
+saved into a save file and sent to the target machine using the SNDHAOBJ
+command or by the replicaton procss. On the target
+machine the synchronisation check job awaits the arrival of the HS<SynID>S*
+files and runs the queries to compare the retrieved information.
+:P.
+When finished, the following reports are produced on the target machine:
+:UL.
+:LI.HS<SynID>OBJ - Object discrepancies
+:LI.HS<SynID>MBR - Member or file discrepancies
+:LI.HS<SynID>AUT - Authority discrepancies
+:LI.HS<SynID>IFS - IFS discrepancies
+:LI.HS<SynID>IFA - IFS authority discrepancies
+:EUL.
+:NT.If there are no discrepancies to report, the detail reports are
+automatically deleted from the system.:ENT.
+:P.
+On the source, the following reports are produced:
+:UL.
+:LI.HS<SynID>LIB - Library reports
+:LI.HS<SynID>MBR - Non-mirrored files on the source system
+:EUL.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ICGROUP
+:HELP NAME='HCHKSYNTGT/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the synchronisation check must be run.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+The synchronisation check will be run for all iCluster groups or resilient
+applications.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the
+synchronisation check must be run.
+:PT.generic*-group-name
+:PD.
+Specify a generic name. Sync check is run for all groups whose names begin
+with the specified characters.
+:PT.*MRKSTR
+:PD.
+If you have a large environment and wish to check different groups at
+different times, you can mark groups you want to check as a unit by including
+a certain string in the group's description (for instance "*S01") and specify
+*MRKSTR for the group name. Only groups which have the specified string it their
+descriptions will be included in the sync check.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SAVFLIB
+:HELP NAME='HCHKSYNTGT/SAVFLIB'.Save file library - Help
+:XH3.Save file library (SAVFLIB)
+:P.
+Specify the name of the library in which the save files used for submitting
+the sync check on the target and sending over the output files. Save files
+placed in this library must be in the scope of iCluster
+for the sync check to run successfully.
+:P.
+The possible save-file-library values are:
+:P.
+:PARML.
+:PT.*SNDOBJ
+:PD.
+The save files in question will be sent by the DMSNDOBJ command.
+:PT.library-name
+:PD.
+Specify the name of a library included in the object specifiers and for
+which save files will be replicated.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BCKNOD
+:HELP NAME='HCHKSYNTGT/BCKNOD'.Groups for backup node - Help
+:XH3.Groups for backup node (BCKNOD)
+:P.
+Select only groups for which the specified node is the backup node. This allows
+you to check synchronisation only for those iCluster groups which replicate to a
+certain machine, especially useful in 1 to many situations. Also, if *SNDOBJ
+was specified for the SAVFLIB parameter, this is the node that the sync check
+files will be sent to.
+:P.
+The possible groups-for-backup-node values are:
+:P.
+:PARML.
+:PT.:PK def.*FIRST:EPK.
+:PD.
+iCluster groups which have the same backup node as the first group selected
+(alphabetically) will be included in the sync check.
+:PT.backup node
+:PD.
+Specify the name of the backup node to limit the selected groups. Only groups
+having the specified backup node will be selected for the sync check.
+:EPARML.
+:EHELP.
+
+.* Help for parameter EMLRPT
+:HELP NAME='HCHKSYNTGT/EMLRPT'.Send reports by e-mail - Help
+:XH3.Send reports by e-mail (EMLRPT)
+:P.
+Specify whether or not the generated reports on the backup node must be sent
+by e-mail. If reports are to be sent by e-mail, addresses are picked up from
+the HMONALR file which is maintained through the HWRKALR utility. Utility ID
+for the e-mail destination is HCHKSYNTGT.
+:P.
+The possible send-reports-by-e-mail values are:
+:P.
+:PARML.
+:PT.:PK def.*ERROR:EPK.
+:PD.
+Reports are only e-mailed if any discrepancies have been found. If there are
+no discrepancies, no e-mail will be sent.
+:PT.*YES
+:PD.
+Reports are always sent by e-mail.
+:PT.*NO
+:PD.
+Reports are not e-mailed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter OUTFILE
+:HELP NAME='HCHKSYNTGT/OUTFILE'.Create query output files - Help
+:XH3.Create query output files (OUTFILE)
+:P.
+By generating query output files with the differences detected, you can
+run your own reports against the data or use the HSETAUT command to
+adjust the authorities on the target machine.
+:P.
+The possible create-query-output-files values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Query output files are produced in the DMXtras utilities on the
+target system. The name of the files will be HS<SynID>xxx where xxx
+represents the last 2/3 characters of the report name.
+:PT.*NO
+:PD.
+Only printable query reports are produced.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SETAUT
+:HELP NAME='HCHKSYNTGT/SETAUT'.Adjust authorities on target - Help
+:XH3.Adjust authorities on target (SETAUT)
+:P.
+This parameter allows you to automatically adjust the authority
+differences on the target machine. You can only adjust authorities
+if output files are produced (OUTFILE(*YES)).
+:P.
+When the output files for authorities have been generated, the HSETAUT
+command is run on the target machine to alter the following:
+:UL.
+:LI.Differences in object ownership
+:LI.Missing authorities
+:LI.Obsolete authorities
+:LI.Authority differences
+:EUL.
+:P.
+:NT.When authorities are adjusted, the apply job are temporarily
+suspended to release the locks from objects. The HSETAUT command waits
+for a maximum of 1 hour until the apply jobs have stopped and then continues
+to set authorities. If the apply jobs have not been stopped within the hour
+not all authorities may be set; this is reflected in the report.:ENT.
+:P.
+The possible adjust-authorities-on-target values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+No authorities are adjusted on the target machine.
+:PT.*YES
+:PD.
+The HSETAUT command is run to adjust authorities on the target machine.
+:EPARML.
+:EHELP.
+
+.* Help for parameter IGNITV
+:HELP NAME='HCHKSYNTGT/IGNITV'.Ignore differences within - Help
+:XH3.Ignore differences within (IGNITV)
+:P.
+As both the source- and target machine are queried for object-, member-
+and IFS object descriptions independent of each other, discrepancies may
+be found because there is a slight difference in the moment of measurement.
+:P.
+By setting this value, object-, member- and IFS object discrepancies are
+not reported when the change date of either of the items (source and target)
+lies within the number of minutes of the retrieval date/time.
+:P.
+Example: Member ABC in file DEF is changed on the source on 2002-12-03 at
+13:35:40. The same member is replicated to the target machine and changed
+by the replication process on 2002-12-03 at 13:40:12. Both on the source and
+on the target, the member is retrieved on 2002-12-03 at 13:38:00. The ignore
+interval is set to 30 minutes. When the member description was retrieved,
+the change made on the source had not yet been replicated to the target
+machine and might therefore show up as a discrepancy. Because the ignore
+interval was set to 20 minutes, this discrepancy is not reported.
+:P.
+The possible ignore-differences-within values are:
+:P.
+:PARML.
+:PT.:PK def.30:EPK.
+:PD.
+Discrepancies for items within 30 minutes of the retrieval time are
+ignored.
+:PT.*NONE
+:PD.
+No discrepancies are ignored.
+:PT.number of minutes
+:PD.
+Discrepancies for items within the specified number of minutes from the
+retrieval time are ignored.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SYNID
+:HELP NAME='HCHKSYNTGT/SYNID'.Sync. check identifier - Help
+:XH3.Sync. check identifier (SYNID)
+:P.
+Name that identifies the files composed during the sync. check.
+:P.
+The possible sync-check-identifier values are:
+:P.
+:PARML.
+:PT.:PK def.*TGT:EPK.
+:PD.
+The first 5 characters of the target definition name identify the
+synchronisation job and output files. If the sync. check is run for
+iCluster, the first 5 characters of the ICGROUP parameter determine
+this parameter. If ICGROUP(*ALL) is specified, the synchronisation ID
+is 'CLUST'.
+:PT.identifier
+:PD.
+Specify the 5-character name that identifies the synchronisation check
+job name and output files.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKMBR
+:HELP NAME='HCHKSYNTGT/CHKMBR'.Check members - Help
+:XH3.Check members (CHKMBR)
+:P.
+Determines whether the synchronisation check must check member attributes such
+as current number of records and deleted records. Not checking the members
+could drastically bring down the duration of the sync check.
+:P.
+The possible check-members values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Members will be retrieved and compared.
+:PT.*NO
+:PD.
+No members will be retrieved or compared.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKIFS
+:HELP NAME='HCHKSYNTGT/CHKIFS'.Check IFS object specifiers - Help
+:XH3.Check IFS object specifiers (CHKIFS)
+:P.
+Determines whether the synchronisation check must also be executed
+against objects in the IFS directory structure. BSF object specifiers
+will be expanded and object descriptions retrieved.
+:P.
+The possible check-IFS-object-specifiers values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+IFS object specifiers (if existing) will be retrieved and objects
+are compared.
+:PT.*NO
+:PD.
+No IFS object specifiers are included in the synchronisation check.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKAUT
+:HELP NAME='HCHKSYNTGT/CHKAUT'.Check authorities - Help
+:XH3.Check authorities (CHKAUT)
+:P.
+Determines whether the authorities of (IFS) objects are retrieved and
+checked for synchronisation. Please note that this will cause the
+synchronisation check to run significantly longer.
+:P.
+The possible check-authorities values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Object- and IFS authorities are retrieved and compared.
+:PT.*NO
+:PD.
+No object- or IFS authorities are retrieved or compared.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKLIB
+:HELP NAME='HCHKSYNTGT/CHKLIB'.Check libraries - Help
+:XH3.Check libraries (CHKLIB)
+:P.
+Determines whether the libraries report is produced on the source
+machine.
+:P.
+The possible check-libraries values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The libraries report is produced.
+:PT.*NO
+:PD.
+No libraries report is not produced.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SUSAPY
+:HELP NAME='HCHKSYNTGT/SUSAPY'.Suspend apply job - Help
+:XH3.Suspend apply job (SUSAPY)
+:P.
+Determines whether the apply jobs must be stopped prior to retrieving the
+object- and member descriptions on the target machine. In some instances,
+this will give a better representation of the differences between the two
+systems.
+:P.
+When the synchronisation check completes, the apply jobs are restarted
+automatically.
+:P.
+The possible suspend-apply-job values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+If apply jobs are active, they will not be stopped prior to running the
+synchronisation check on the target machine.
+:PT.*YES
+:PD.
+If the apply jobs are active prior to running the synchronisation check,
+they are stopped. After completion, the apply jobs are started again.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SNDDLY
+:HELP NAME='HCHKSYNTGT/SNDDLY'.Delay minutes before sending - Help
+:XH3.Delay minutes before sending (SNDDLY)
+:P.
+Specifies the number of minutes to wait before sending the retrieved
+object- and member descriptions files to the target system. This is
+useful if target definitions/groups are compared that only represent
+a very small number of objects. In those cases, the source output files
+may be sent before the target job has had the chance to delete the
+existing files first.
+:P.
+The possible delay-minutes-before-sending values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+There is no delay in sending the source output files.
+:PT.number-of-minutes
+:PD.
+Specify the number of minutes to wait before sending the source output
+files.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MRKSTR
+:HELP NAME='HCHKSYNTGT/MRKSTR'.Group selection string - Help
+:XH3.Group selection string (MRKSTR)
+:P.
+Specify the selection string that was put in the groups' descriptions to
+identify which groups should be checked. This parameter is only eligible when
+specifying *MRKSTR for the GRPNAM or ICGROUP parameters. If any other value
+is specified for the GRPNAM or ICGROUP parameters, this parameter is ignored.
+:P.
+The possible group-selection-string values are:
+:P.
+:PARML.
+:PT.:PK def.*S:EPK.
+:PD.
+All groups which have the string "*S" in their descriptions will be included
+in the sync check.
+:PT.string
+:PD.
+Specify any string (for instance "*S01") which identifies the groups to be
+included in the sync check.
+:EPARML.
+:EHELP.
+
+.* Help for parameter TGTRLS
+:HELP NAME='HCHKSYNTGT/TGTRLS'.Target release - Help
+:XH3.Target release (TGTRLS)
+:P.
+Specifies the release level of the operating system of the target machine. The
+HCHKSYNTGT command uses the save file exit on the target machine to unpack
+the configuration and run the sync check.
+:P.
+The possible target-release values are:
+:P.
+:PARML.
+:PT.:PK def.*PRV:EPK.
+:PD.
+The objects are to be restored to the previous release with
+modification level 0 of the operating system. For example if V4R4M0
+is running on your system, *PRV means you intend to restore the
+objects to a system with V4R3M0 installed.
+:PT.*CURRENT
+:PD.
+The objects are to be restored to, and used on, the operating system
+release currently running on your system. For example if V4R4M0 is running
+on the system, *CURRENT means that you intend to restore the saved
+saved objects to a system with V4R4M0 or later installed.
+:PT.target release
+:PD.
+Specify the release in format VxRxMx.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

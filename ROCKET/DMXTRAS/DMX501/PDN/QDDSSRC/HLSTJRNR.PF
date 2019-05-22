@@ -1,0 +1,41 @@
+      * ============================================================ *
+      * Object:    HLSTJRNR        *FILE PF                          *
+      *            File holding the journal receivers and their      *
+      *            attributes.                                       *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20070423 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R LSTJRNRR
+     A            LRJRN         10A         TEXT('Journal name')
+     A                                      COLHDG('Journal' 'name')
+     A            LRJRNL        10A         TEXT('Journal library')
+     A                                      COLHDG('Journal' 'library')
+     A            LRSEQ          5A         TEXT('Receiver number')
+     A                                      COLHDG('Receiver' 'number')
+     A            LRRCV         10A         TEXT('Journal receiver name')
+     A                                      COLHDG('Receiver' 'name')
+     A            LRRCVL        10A         TEXT('Journal receiver library')
+     A                                      COLHDG('Receiver' 'library')
+     A            LRATTD        13A         TEXT('Receiver attach date-time')
+     A                                      COLHDG('Attach' 'date-time')
+     A            LRCHGD        13A         TEXT('Receiver change date-time')
+     A                                      COLHDG('Change' 'date-time')
+     A            LRSAVD        13A         TEXT('Receiver save date-time')
+     A                                      COLHDG('Save' 'date-time')
+     A            LRSTS          8A         TEXT('Receiver status')
+     A                                      COLHDG('Receiver' 'status')
+     A            LRSIZE        10  0       TEXT('Receiver size kB')
+     A                                      COLHDG('Receiver' 'size kB')
+     A            LRRTVDTS        Z         TEXT('Retrieve timestamp')
+     A                                      COLHDG('Retrieve' 'timestamp')
+      *
+     A          K LRJRNL
+     A          K LRJRN
+     A          K LRSEQ

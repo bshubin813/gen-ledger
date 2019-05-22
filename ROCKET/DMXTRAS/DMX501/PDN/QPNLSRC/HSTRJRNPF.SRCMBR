@@ -1,0 +1,154 @@
+.* ============================================================ *
+.* Object:    HSTRJRNPF       *PNLGRP                           *
+.*            Help text for the HSTRJRNPF command.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 19990823 FK  Initial delivery                                *
+.* 20020502 FK  Allow for maximum of 100 libraries              *
+.*              Submit to batch                                 *
+.* 20050715 FK  Allow for *DTAQ and *DTAARA                     *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HSTRJRNPF'.Start journaling - Help
+:P.
+The HSTRJRNPF (Start journaling) command allows you to
+start journaling for all or a selective number of data objects in a library.
+:P.
+When a new library is enrolled in iCluster, typically you want
+to start journaling of data objects on the primary system before doing the
+save or to perform the bandwidth measurement.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter FILE
+:HELP NAME='HSTRJRNPF/FILE'.Object - Help
+:XH3.Object (FILE)
+:P.
+Specify for which objects journaling must be started. The name of the
+libraries in which the objects reside is mandatory and must exist.
+:P.
+A maximum of 100 object entries can be made.
+:P.
+The possible object values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Journaling is started for all data objects in the specified library
+:PT.generic*-object-name
+:PD.
+Specify the generic name of the data objects for which journaling must be
+started.
+:PT.object-name
+:PD.
+Specify the name of the data object for which journaling must be started
+:EPARML.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.library-name
+:PD.
+Specify the name of the library which holds the data objects for which
+journaling must be started
+:EPARML.
+:P.
+The possible object-type-to-journal values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Journaling is started for all data objects (PF-DTA, *DTAARA and *DTAQ) which
+fall in selection of objects.
+:PT.*DTAARA
+:PD.
+Journaling is started for data areas which fall in the selection of objects.
+:PT.*DTAQ
+:PD.
+Journaling is started for data queues which fall in the selection of objects.
+:PT.*FILE
+:PD.
+Journaling is started for physical data files (PF-DTA) which fall in the
+selection of objects.
+:EPARML.
+:P.
+This is a required parameter.
+:EHELP.
+
+.* Help for parameter JRN
+:HELP NAME='HSTRJRNPF/JRN'.Journal - Help
+:XH3.Journal (JRN)
+:P.
+Specify the name of the journal object (*JRN) to which the data objects
+must be journaled. The journal must exist.
+:EHELP.
+
+.* Help for parameter IMAGES
+:HELP NAME='HSTRJRNPF/IMAGES'.Journal images - Help
+:XH3.Journal images (IMAGES)
+:P.
+Specify the kinds of record images written to the journal for changes
+to the contents of the data objects
+:P.
+The possible journal-images values are:
+:P.
+:PARML.
+:PT.:PK def.*BOTH:EPK.
+:PD.
+Both the before- and after-images of changes are logged in the
+journal when contents are updated.
+:PT.*AFTER
+:PD.
+Only the after-image of the contents update is logged.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RESTART
+:HELP NAME='HSTRJRNPF/RESTART'.Restart journaling - Help
+:XH3.Restart journaling (RESTART)
+:P.
+If journaling has already been started for some data objects in the selection,
+this parameter controls whether journaling is first ended and then
+restarted.
+:P.
+The possible restart-journaling values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+If journaling is already active for a data object, journaling is
+first ended and then restarted with the specified parameters.
+:PT.*NO
+:PD.
+Data objects for which journaling is already active are skipped.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BATCH
+:HELP NAME='HSTRJRNPF/BATCH'.Submit to batch - Help
+:XH3.Submit to batch (BATCH)
+:P.
+Determines whether or not the start of journaling must be submitted to
+batch.
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The start of journaling is submitted to batch. The utilities' HAUTILS
+job description is used to submit the job.
+:PT.*NO
+:PD.
+The start of journaling is run interactively.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

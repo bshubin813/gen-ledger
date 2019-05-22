@@ -1,0 +1,33 @@
+      * ============================================================ *
+      * Object:    HUDGTTG         *FILE LF                          *
+      *            Logical file over HADGT by Target ID, Group ID    *
+      *            Journal name, Journal library                     *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUDGTTG@                  PFILE(HADGT)
+     A            TGTID
+     A            GRPID
+     A            JRNNAME
+     A            JRNLIB
+     A            SFPJOBID
+     A            DJSJOBID
+     A            AJRNRCVLIB
+     A            AJRNRCVNME
+     A            DJRNRCVLIB
+     A            DJRNRCVNME
+     A            JRNRSET
+     A            POSTIME
+     A            CHECKWAITD
+     A            CHECKDONE
+     A            CHECKID
+      *
+     A          K TGTID
+     A          K GRPID
+     A          K JRNNAME
+     A          K JRNLIB

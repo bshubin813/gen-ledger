@@ -1,0 +1,20 @@
+      * ============================================================ *
+      * Object:    HUFOGGI         *FILE LF                          *
+      *            Logical file over OMFOG Group ID                  *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUFOGGI@                  PFILE(OMFOG)
+     A            GRPID
+     A            OBJID
+     A            INCLUDE
+     A            BSFOBJ
+     A            OBJTGTL                   RENAME(TARGETLIB)
+      *
+     A          K GRPID

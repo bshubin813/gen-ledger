@@ -1,0 +1,23 @@
+      * ============================================================ *
+      * Object:    HRTVCKST        *FILE PF                          *
+      *            Output file for HRTVCKS command. Contains check-  *
+      *            sums for blocks of records                        *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050504 FK  LF over HRTVCKS (just for compilation)          *
+      * ============================================================ *
+     A          R RTVCKS@                   PFILE(HRTVCKS)
+      * Key fields
+     A          K CKLIB
+     A          K CKFILE
+     A          K CKMBR
+     A          K CKPTHKEY
+     A          K CKCKSTYP
+     A          K CKBLKNUM

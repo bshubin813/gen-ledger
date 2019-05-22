@@ -1,0 +1,52 @@
+.* ============================================================ *
+.* Object:    OBJCOUNTS       *PNLGRP                           *
+.*            Help text for the OBJCOUNTS command.              *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20000204 MW  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='OBJCOUNTS'.Object Counts Report - Help
+:P.
+This command will submit a batch job on hold called OBJCOUNTS. Once
+released, this job will produce a report listing for either the library
+specified or all user librarys, the number of physical files and their
+total size and the number of other objects and their total size.
+:P.
+:NT. If *ALLUSR is specified for the LIB parameter, this job could be
+a VERY LONG running batch job. Run this option during the high availability
+pre-Implementation planning to get an idea of what is in each
+library that the customer wants to replicate.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter LIB
+:HELP NAME='OBJCOUNTS/LIB'.Library (LIB) - Help
+:XH3.Library (LIBRARY)
+:P.
+Specify the name of the library for which you want to run an OBJCOUNTS
+report.
+:P.
+The possible values for library are:
+:P.
+:PARML.
+:PT.:PK def.*ALLUSR:EPK.
+:PD.
+All user libraries will be analyzed in the report. This will cause
+the batch job that is submitted on hold (OBJCOUNTS) to run for what
+could be a VERY LONG TIME depending on the number of libraries.
+:PT.Library name
+:PD.
+Only the library specified will be analyzed.
+:EPARML.
+:EHELP.
+:EPNLGRP.

@@ -1,0 +1,25 @@
+      * ============================================================ *
+      * Object:    HPRTXLF         *FILE PF                          *
+      *            File to hold database relations displayed by the  *
+      *            HPRTXLF command.                                  *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020510 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HPRTXLF@
+     A            WHRTYP         1A         TEXT('File type')
+     A            WHRFI         10A         TEXT('File')
+     A            WHRLI         10A         TEXT('File library')
+     A            WHRMB         10A         TEXT('Member name')
+     A            WHRNO          5  0       TEXT('Number of dependencies')
+     A            WHREFI        10A         TEXT('Dependent file')
+     A            WHRELI        10A         TEXT('Dependent file library')
+     A            WHREMB        10A         TEXT('Dependent file member')
+      *
+     A          K WHRLI
+     A          K WHRFI

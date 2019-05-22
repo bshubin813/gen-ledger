@@ -1,0 +1,25 @@
+      * ============================================================ *
+      * Object:    HUTGTTI         *FILE LF                          *
+      *            Logical file over OMFTGT by Target ID             *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * 20020531 FK  Include Role timestamp                          *
+      * ============================================================ *
+     A          R HUTGTTI@                  PFILE(OMFTGT)
+     A            TGTID                     RENAME(ID)
+     A            TGTNAME                   RENAME(NAME)
+     A            TGTDESC                   RENAME(DESC)
+     A            MONJOBID
+     A            HAROLE
+     A            PROTOCOL
+     A            LCLHOST                   RENAME(TCPLCLNAME)
+     A            RMTHOST                   RENAME(TCPRMTNAME)
+     A            SNALOCNAME
+      *
+     A          K TGTID

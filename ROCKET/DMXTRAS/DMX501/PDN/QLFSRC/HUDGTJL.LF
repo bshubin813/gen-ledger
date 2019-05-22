@@ -1,0 +1,23 @@
+      * ============================================================ *
+      * Object:    HUDGTJL         *FILE LF                          *
+      *            Logical file over HADGT by Journal + library.     *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUDGTJL@                  PFILE(HADGT)
+     A            TGTID
+     A            GRPID
+     A            JRNNAME
+     A            JRNLIB
+     A            SFPJOBID
+     A            DJSJOBID
+     A            JRNRSET
+      *
+     A          K JRNNAME
+     A          K JRNLIB

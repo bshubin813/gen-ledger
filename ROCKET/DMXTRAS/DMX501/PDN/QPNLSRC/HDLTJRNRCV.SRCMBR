@@ -1,0 +1,591 @@
+.* ============================================================ *
+.* Object:    HDLTJRNRCV      *PNLGRP                           *
+.*            Help text for the HDLTJRNRCV command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 19990723 FK  Initial delivery                                *
+.* 19990801 FK  Allow *TGTROL for DLTHAUNP                      *
+.* 19991221 FK  New parameters: CHKHA and CHKTS                 *
+.* 20000305 FK  New parameters: MAXRCVJRN, MAXSIZ, ALRMSGQ,     *
+.*              CHKITV and RCVEXIT.                             *
+.* 20000317 FK  Specify how CHKITV works                        *
+.* 20000523 FK  New parameter: POSEXIT                          *
+.* 20000614 FK  New parameter: LOGDLT                           *
+.* 20020116 FK  New parameter: CHKRJP                           *
+.* 20020222 FK  Allow specification of *PRD for library         *
+.* 20020515 FK  Add iCluster support                            *
+.* 20030714 FK  Maximum of receivers is 250 per run             *
+.* 20031208 FK  Ignore non-selected groups                      *
+.* 20040607 FK  Consider marked journal positions               *
+.* 20050420 FK  Maximum of receivers is 500 per run             *
+.* 20050510 FK  Remove CHKRJP parameter                         *
+.* 20060203 FK  New value *IGNINQMSG                            *
+.* 20060421 FK  Command default for CHKHA is *NO                *
+.* 20070108 FK  Allow instrumental mode (no deletion of rcv)    *
+.* 20070122 FK  Allow specification of TS libraries to check    *
+.* 20111220 FK  Remove HA/CDC                                   *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HDLTJRNRCV'.Delete journal receivers - Help
+:P.
+The HDLTJRNRCV (Delete journal receivers) command removes journal
+receivers based on the selection criteria specified on the command.
+:P.
+The command is particularily used in implementations to
+clean up journal receivers after they have been processed by iCluster.
+One can employ the journal receiver maintenance command on both the source
+and target machine for iCluster.
+:P.
+:NT.A maximum number of 500 receivers will be processed during one run. If more
+receivers are attached, a warning message is issued. Subsequent HDLTJRNRCV
+commands will have to be used to manage the receivers until the total number
+of receivers is less than or equal to 500.:ENT.
+:P.
+:NT.The currently attached receiver will never be deleted.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter JRN
+:HELP NAME='HDLTJRNRCV/JRN'.Journal - Help
+:XH3.Journal (JRN)
+:P.
+Specifies the journal for which obsolete receivers must be deleted from
+the system.
+:P.
+:NT.By specifying a library name other than *PRD, all journal objects
+complying to the specified (generic*) name and library will be
+retrieved for processing.:ENT.
+:P.
+The possible journal values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+All journals, including the security audit journal (!) will be checked
+for journal receiver deletion.
+:UL.
+:LI.If *PRD is specified for the library, all journals
+referenced by the selected product (iC), including the
+security audit journal will be retrieved for deletion
+:LI.If a library name is specified or *USRLIBL, all journals in that
+library (or user library list) will be retrieved for deletion
+processing. Also, the QSYS/QAUDJRN is selected.
+:EUL.
+:P.
+:NT.If you specify the library name, the security audit journal
+is included in the selection, even if QSYS is not in the library
+selection.:ENT.
+:PT.*ALLDTA
+:PD.
+All data journals are processed by the command. The security audit
+journal QSYS/QAUDJRN is not selected.
+:UL.
+:LI.If *PRD is specified for the library, all data journals
+referenced by iCluster
+will be retrieved for deletion processing.
+:LI.If a library name is specified or *USRLIBL, all journals in that
+library (or user library list) will be retrieved for deletion
+processing.
+:EUL.
+:PT.QAUDJRN
+:PD.
+Security audit journal QSYS/QAUDJRN is processed for obsolete receivers.
+:PT.journal
+:PD.
+Specify the name of an existing journal.
+:EPARML.
+:P.
+This is a required parameter.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.*PRD
+:PD.
+All journals processed by the product (iCluster)
+will be processed (if *ALL or *ALLDTA specified)
+for the journal name.
+:PT.*USRLIBL
+:PD.
+All libraries in the job's user library list are searched until the
+first match is found. Alternatively, if a generic name (or *ALL or
+*ALLDTA) is specified, all journals in the user library list
+complying to the generic name will be selected.
+:NT.If you specify *ALL or *ALLDTA, please ensure that only the
+required libraries are in the user library list.:ENT.
+:PT.library-name
+:PD.
+Specify the library where the journal is located.
+:EPARML.
+:EHELP.
+
+.* Help for parameter DAYS
+:HELP NAME='HDLTJRNRCV/DAYS'.Keep receivers for (days) - Help
+:XH3.Keep receivers for (days) (DAYS)
+:P.
+Specify how many days to keep the journal receivers. Only journal
+receivers that have not been changed since the entered number of
+days will be deleted.
+:P.
+:NT.You may use a combination of the Keep receivers for (days)
+and the Number of receivers to keep parameters.:ENT.
+:EHELP.
+
+.* Help for parameter NBRRCV
+:HELP NAME='HDLTJRNRCV/NBRRCV'.Number of receivers to keep - Help
+:XH3.Number of receivers to keep (NBRRCV)
+:P.
+Specify how many receivers (including the currently attached
+receiver) will be kept on the system.
+:P.
+:NT.You may use a combination of the Keep receivers for (days)
+and the Number of receivers to keep parameters.:ENT.
+:EHELP.
+
+.* Help for parameter DLTUNSRCV
+:HELP NAME='HDLTJRNRCV/DLTUNSRCV'.Delete unsaved receivers - Help
+:XH3.Delete unsaved receivers (DLTUNSRCV)
+:P.
+Specify whether or not receivers that have never been fully saved must
+be deleted.
+:P.
+The possible delete-unsaved-receivers values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Receivers will be deleted, regardless whether they have been fully saved
+or not.
+:P.
+In order to be able to delete the unsaved journal receivers, message
+CPA7025 is added to the system reply list (WRKRPYLE) every time before
+a receiver is deleted. The sequence number number for the reply list entry
+is specified on the RPYSEQ parameter.
+:PT.*NO
+:PD.
+Only receivers that have been fully saved (status SAVED or FREED) are deleted.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKIC
+:HELP NAME='HDLTJRNRCV/CHKIC'.Check iCluster - Help
+:XH3.Check iCluster (CHKIC)
+:P.
+Specify whether iCluster must be checked for processing of journal receivers.
+Receivers will only be deleted once fully processed by iCluster groups.
+:P.
+Typically you will want to delete receivers which have been processed
+by all groups which have the current system as their primary node.
+:P.
+The following rules are applied when determining the journal receiver still
+to be scraped by iCluster:
+:UL.
+:LI.The a group's primary node is the current node, determine the receiver
+still to be scraped
+:LI.If a DMMRKPOS has run for the journal and the group has not been
+activated since the marking, the marked journal position determines which
+journal receiver is still scaped by iCluster. A message will be sent
+to indicate that the marked journal position is used
+:LI.If no DMMRKPOS has run or the group has been activated since the
+marking, the RTVHAPOS command is used to retrieve the journal receiver
+still scraped by iCluster
+:EUL.
+:P.
+:NT.In case there is a group without a data journal (objects only) for
+which journal positions have been marked, the HDLTJRNRCV command cannot
+determine whether marked or active journal positions are to be used. In
+those cases, to prevent unintentional deletion, the marked journal position
+is used. If the marked journal position is not to be used, remove the
+record(s) in question from the HADSAVJRN file.:ENT.
+:P.
+:P.
+The possible check-iCluster values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Receivers are deleted, regardless whether they have been processed or not.
+:PT.*YES
+:PD.
+Receivers will only be deleted after they have been processed by all
+groups.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MAXRCVJRN
+:HELP NAME='HDLTJRNRCV/MAXRCVJRN'.Maximum receivers per journal - Help
+:XH3.Maximum receivers per journal (MAXRCVJRN)
+:P.
+Specify the number of journal receivers per journal that may exist
+after running the HDLTJRNRCV command. If the number of receivers
+left exceeds this value, a message will be sent to the specified
+ALRMSGQ message queue.
+:P.
+:NT.The MAXRCVJRN value may not be lower than the NBRRCV value to
+prevent alerts being sent every time the command is issued.:ENT.
+:P.
+The possible maximum-receivers-per-journal values are:
+:P.
+:PARML.
+:PT.:PK def.*NOCHK:EPK.
+:PD.
+No checks will be done for the number of receivers kept on the system
+after executing the HDLTJRNRCV command.
+:PT.number-of-receivers
+:PD.
+If the number of receivers retained exceeds the specified number of
+receivers, a message will be sent.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MAXSIZ
+:HELP NAME='HDLTJRNRCV/MAXSIZ'.Maximum size of all receivers - Help
+:XH3.Maximum size of all receivers (MAXSIZ)
+:P.
+Specify the total size of all journal receivers that may remain on
+the system after running the HDLTJRNRCV command. If the total size
+of all receivers (for all checked journals) exceeds the specified
+value, a message will be issued to the ALRMSGQ message queue.
+:P.
+The possible maximum-size-of-all-receivers values are:
+:P.
+:PARML.
+:PT.:PK def.*NOCHK:EPK.
+:PD.
+No checks will be done for the total size of all receivers kept on the
+system after executing the HDLTJRNRCV command.
+:PT.size-in-MB
+:PD.
+Specify the maximum total size of all receivers in megabytes.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ALRMSGQ
+:HELP NAME='HDLTJRNRCV/ALRMSGQ'.Alert message queue - Help
+:XH3.Alert message queue (ALRMSGQ)
+:P.
+Specifies the message queue to which errors or warnings encountered
+during the HDLTJRNRCV command will be sent. If mirroring positions
+for iCluster cannot be retrieved, or if the
+number of receivers per journal or the total size of journal
+receivers exceeds the maximum set, messages will be issued to this
+message queue.
+:P.
+:NT.We recommend letting the HDLTJRNRCV command send messages to the
+QSYSOPR message queue, as this will also generate system alerts and
+log entries in the history log.:ENT.
+:P.
+The possible alert-message-queue values are:
+:P.
+:PARML.
+:PT.:PK def.QSYSOPR:EPK.
+:PD.
+Diagnostic messages will be sent to the system operator message
+queue and loggings will be made in the system's history log.
+:PT.message-queue
+:PD.
+Diagnostic messages will be sent to the specified message queue.
+:EPARML.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.*LIBL
+:PD.
+All libraries in the job's library list are searched until the first
+match is found.
+:PT.library-name
+:PD.
+Specify the library where the message queue is located.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKITV
+:HELP NAME='HDLTJRNRCV/CHKITV'.Check interval in hours - Help
+:XH3.Check interval in hours (CHKITV)
+:P.
+Specify the frequency with which the HDLTJRNRCV command is run. This is
+particularily useful if the HDLTJRNRCV command is issued via an
+autostart job entry (AJE) for the iCluster
+subsystem, XDMCLUSTER.
+:P.
+As part of the DMXtras utilities, the HDLTJRNRCV and HDLTJRNTS
+ob descriptions have been supplied. These job descriptions can be used
+as an autostart job entry to periodically clean-up journal receivers.
+:P.
+:NT.If a value other than *ONCE is specified for the interval, the
+command must be executed in batch. When iniated, the job will first
+await the specified check interval before starting to process the
+journal management.:ENT.
+:P.
+The possible check-interval-in-hours values are:
+:P.
+:PARML.
+:PT.:PK def.*ONCE:EPK.
+:PD.
+The journal receiver clean-up utility will only be run once and not
+stay active after completion.
+:PT.*HOUR
+:PD.
+The utility remains resident and checks for obsolete receivers every
+hour.
+:PT.*HALFDAY
+:PD.
+The utility remains resident and checks for obsolete receivers every
+12 hours.
+:PT.*DAY
+:PD.
+The utility remains resident and checks for obsolete receivers every
+24 hours.
+:PT.*WEEK
+:PD.
+The utility remains resident and checks for obsolete receivers every
+week.
+:EPARML.
+:EHELP.
+
+.* Help for parameter LOGDLT
+:HELP NAME='HDLTJRNRCV/LOGDLT'.Log receiver deletions - Help
+:XH3.Log receiver deletions (LOGDLT)
+:P.
+Specify whether or not receiver deletions will be logged in the
+HDLTLOG file in the DMXtras utilities library.
+:P.
+If logging is activated, the following information will be stored:
+:SL.
+:LI.Journal
+:LI.Receiver
+:LI.Job performing the delete
+:LI.Delete date/time
+:LI.Receiver size at time of delete
+:ESL.
+:P.
+The possible log-receiver-deletions values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Receivers will be deleted without writing a log entry in the HDLTLOG
+file.
+:PT.*YES
+:PD.
+Whenever a receiver has been deleted, a record is written in the
+HDLTLOG file.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RPYSEQ
+:HELP NAME='HDLTJRNRCV/RPYSEQ'.Reply list entry for CPA7025
+:XH3.Reply list entry for CPA7025 (RPYSEQ)
+:P.
+If journal receivers are to be deleted, regardless whether they have
+been fully saved or not, inquiry messages may be sent to the job trying to
+delete a journal receiver that has not been fully saved yet. To automatically
+answer these inquiry messages a value has to be added to the system reply
+list (WRKRPYLE).
+:P.
+Alternatively, inquiry messages can be suppressed by using the *IGNINQMSG
+special value (starting from OS/400 V5R1).
+:P.
+The possible reply-list-entry-for-CPA7025 values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+No reply list entry will be added to the system reply list. This value can
+only be used if DLTUNSRCV(*NO) has been specified.
+:PT.*IGNINQMSG
+:PD.
+Inquiry message CPA7025 is not sent to the user, even if the receiver being
+deleted has not been fully saved.
+:PT.reply-list-entry-sequence-number
+:PD.
+Specify the sequence number of the reply list entry being added to the system
+reply list. The reply list entry must not exist yet. Also, when assigning
+a reply list entry, please note that the system matches the message CPA7025
+against the reply list entries in order of sequence number. When the first
+match is found, the reply given there is taken for the inquiry message. We
+recommend choosing a low value for the reply list entry.
+:EPARML.
+:EHELP.
+
+.* Help for parameter TSLIBCHK
+:HELP NAME='HDLTJRNRCV/TSLIBCHK'.TS libraries to check - help
+:XH3.TS libraries to check (TSLIBCHK)
+:P.
+Specifies whether the command should check the first TS library found
+in the library list (*FIRST) or all libraries in the library list (*LIBL).
+:P.
+The possible ts-libraries-to-check values are:
+:P.
+:PARML.
+:PT.:PK def.*FIRST:EPK.
+:PD.
+The first TS library found in the library list is checked for usage of the
+journal.
+:PT.*LIBL
+:PD.
+All TS libraries found in the library list are checked for usage
+of the journal. The oldest journal receiver used by any of the products is
+retained by the HDLTJRNRCV command.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RCVEXIT
+:HELP NAME='HDLTJRNRCV/RCVEXIT'.Receiver check exit program - Help
+:XH3.Receiver check exit program (RCVEXIT)
+:P.
+Specifies the user-defined exit program that will be invoked when
+a journal receiver is about to be deleted by the HDLTJRNRCV command.
+First, the command will check that a journal receiver matches all the
+specified selection criteria, such as number of days to keep or fully
+processed by iCluster.
+:P.
+When the journal receiver applies to all default selection criteria,
+the specified exit program is called with the following parameters:
+:UL.
+:LI.Journal name     (10) (I)
+:LI.Journal library  (10) (I)
+:LI.Receiver name    (10) (I)
+:LI.Receiver library (10) (I)
+:LI.Delete receiver  (1)  (O)
+:EUL.
+:P.
+If the receiver may be deleted, a '1' must be returned in the
+Delete receiver parameter. All other values cause the receiver not
+to be deleted.
+:P.
+A sample program can be found in member XDLTRCVDLT in file HEXMCLP in the
+DMXtras product library.
+:P.
+The possible receiver-check-exit-program values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+No exit program will be invoked before a journal receiver is deleted.
+:PT.exit-program
+:PD.
+Specify the name of an existing exit program that will be invoked,
+just before a journal receiver is about to be deleted.
+:EPARML.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.*LIBL
+:PD.
+All libraries in the job's library list are searched until the first
+match is found.
+:PT.library-name
+:PD.
+Specify the library where the program is located.
+:EPARML.
+:EHELP.
+
+.* Help for parameter POSEXIT
+:HELP NAME='HDLTJRNRCV/POSEXIT'.Retrieve external pos. exit - Help
+:XH3.Retrieve external pos. exit (POSEXIT)
+:P.
+Specifies the user-defined exit program that will be invoked when
+determining the currently processed receiver by an external product
+(other than iCluster). Some customers have
+other applications processing the data journals or security audit
+journal. By returning the receiver that is currently being processed
+by the applicaton in question, deletion of receivers will only be
+done up to the receiver currently read by the external application.
+:P.
+In order to retrieve the currently processed journal receiver,
+the specified exit program is called with the following parameters:
+:UL.
+:LI.Journal name     (10) (I)
+:LI.Journal library  (10) (I)
+:LI.Receiver name    (10) (O)
+:LI.Receiver library (10) (O)
+:LI.Return code      (7)  (O)
+:EUL.
+:P.
+The program must return the receiver currently being processed in
+the Receiver name and Receiver library parameters.
+:P.
+Action is taken based on the return code:
+:P.
+:PARML.
+:PT.<Blanks>
+:PD.
+The receiver was returned to the calling program. Receivers in
+the chain older than the returned receiver have already been
+processed by the external product.
+:PT.*IGNORE
+:PD.
+The journal in question is not used by the external product;
+the returned receiver (if any) will not be taken into account
+when deleting journal receivers.
+:PT.Any other value
+:PD.
+There was an error when retrieving the external product's
+current receiver. No receivers will be deleted for the passed
+journal.
+:EPARML.
+:P.
+A sample program can be found in member XDLTRCVPOS in file HEXMCLP in the
+DMXtras product library.
+:P.
+The possible retrieve-external-pos.-exit values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+No exit program will be invoked to retrieve the current journal
+receiver.
+:PT.exit-program
+:PD.
+Specify the name of an existing exit program that will be invoked,
+to retrieve an external journal receiver position.
+:EPARML.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.*LIBL
+:PD.
+All libraries in the job's library list are searched until the first
+match is found.
+:PT.library-name
+:PD.
+Specify the library where the program is located.
+:EPARML.
+:EHELP.
+
+.* Help for parameter DLTRCV
+:HELP NAME='HDLTJRNRCV/DLTRCV'.Delete journal receivers - Help
+:XH3.Delete journal receivers (DLTRCV)
+:P.
+Special parameter that allows you to run HDLTJRNRCV and check journal positions
+without actually deleting journal receivers. The command will indicate which
+which journal receivers WOULD be deleted.
+:P.
+The possible delete-journal-receivers values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Journal receivers will be deleted when no longer necessary according to the
+specified parameters.
+:PT.*NO
+:PD.
+Journal receivers will no actually be deleted, instead a message will be issued
+for every journal receiver that would be deleted if DLTRCV(*YES) is specified.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

@@ -1,0 +1,55 @@
+/* ================================================================= */
+/* Object:         HACTBSF         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(HACTBSF) HLPID(*CMD)                */
+/*                                                                   */
+/* Synopsis:       Monitors the QAUDJRN for BSF object changes in    */
+/*                 scope and acts upon the entries                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20080212 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Activate changed BSF objects')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ICGROUP) TYPE(*NAME) MIN(1) +
+                          PROMPT('Group or resilient application')
+             PARM       KWD(ACTTZC) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Activate on T-ZC')
+             PARM       KWD(AUDTCO) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Change auditing on T-CO')
+             PARM       KWD(ACTTCO) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Activate on T-CO')
+             PARM       KWD(POSFILE) TYPE(QUALFILE) PROMPT('File for +
+                          journal positions')
+             PARM       KWD(DELAY) TYPE(*DEC) LEN(3 0) DFT(*NONE) +
+                          SPCVAL((*NONE 0)) CHOICE('Seconds, +
+                          *NONE') PMTCTL(*PMTRQS) PROMPT('Delay +
+                          before acting')
+             PARM       KWD(RESETPOS) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PMTCTL(*PMTRQS) PROMPT('Reset position')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*NAME) DFT(HACTBSF)
+             QUAL       TYPE(*NAME) DFT(DMSYSOBJ) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

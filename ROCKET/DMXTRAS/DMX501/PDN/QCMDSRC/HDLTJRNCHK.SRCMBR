@@ -1,0 +1,71 @@
+/*CP: ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD *IMOD)                   */
+/* ================================================================= */
+/* Object:         HDLTJRNCHK      *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Synopsis:       Checks if the specified journal is being used by  */
+/*                 the specified product. If used by product, *YES   */
+/*                 is returned, otherwise *NO.             ~         */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020226 FK  Initial delivery                                     */
+/* 20030512 FK  Add support for iCluster                             */
+/* 20030708 FK  Check how the journal is used by product (*LCL/*RMT) */
+/* 20030728 FK  Usage parameter is optional                          */
+/* 20040526 FK  New parameter: Processing type                       */
+/* 20070122 FK  New parameter: Journal receiver in use               */
+/* 20070511 FK  New parameter: Receiver attach date-time             */
+/*              Removed parameter USAGE                              */
+/*              New parameter: Journal type                          */
+/* 20111220 FK  Remove CDC                                           */
+/* ================================================================= */
+             CMD        PROMPT('Check journal used by iCluster')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JRN) TYPE(QUALJRN) MIN(1) PROMPT('Journal')
+             PARM       KWD(PRD) TYPE(*CHAR) LEN(3) RSTD(*YES) +
+                          DFT(*IC) SPCVAL((*IC *N)) PROMPT('Product +
+                          to check')
+             PARM       KWD(PRC) TYPE(*CHAR) LEN(4) RTNVAL(*YES) +
+                          CHOICE('*YES, *NO') PROMPT('Processed by +
+                          product (4)')
+             PARM       KWD(PRCTYP) TYPE(*CHAR) LEN(4) RTNVAL(*YES) +
+                          CHOICE('*ACT, *MRK, *N') +
+                          PROMPT('Processing type (4)')
+             PARM       KWD(JRNTYPE) TYPE(*CHAR) LEN(8) RTNVAL(*YES) +
+                          CHOICE('*LOCAL, *REMOTE') PROMPT('Journal +
+                          type (8)')
+             PARM       KWD(RCV) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Journal receiver (10)')
+             PARM       KWD(RCVLIB) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Journal receiver library (10)')
+             PARM       KWD(RCVATTDT) TYPE(*CHAR) LEN(13) +
+                          RTNVAL(*YES) PROMPT('Receiver attach +
+                          date-time (13)')
+             PARM       KWD(GRPNAM) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Group (10)')
+             PARM       KWD(PRDLIB) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          PROMPT('Product library (10)')
+             PARM       KWD(RTNCDE) TYPE(*CHAR) LEN(7) RTNVAL(*YES) +
+                          PROMPT('Return code (7)')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJRN:    QUAL       TYPE(*NAME) MIN(1)
+             QUAL       TYPE(*NAME) MIN(1) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

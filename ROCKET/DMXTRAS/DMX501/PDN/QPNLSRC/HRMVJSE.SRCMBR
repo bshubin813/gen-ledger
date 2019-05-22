@@ -1,0 +1,68 @@
+.* ============================================================ *
+.* Object:    HRMVJSE         *PNLGRP                           *
+.*            Help text for the HRMVJSE command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 19991101 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRMVJSE'.Remove job schedule entries - Help
+:P.
+The HRMVJSE (Remove job schedule entries) command removes entries
+from the QUSRSYS/QDFTJOBSCD job scheduler which comply to the
+specified identification (JSEID).
+:P.
+Usually, the command is executed when job schedule entries applied
+by the HAPYJSE command must be removed altogether. Only the entries
+for which the text 'description' starts with the specified
+identification are removed.
+:EHELP.
+
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter JOB
+:HELP NAME='HRMVJSE/JOB'.Job name - Help
+:XH3.Job name (JOB)
+:P.
+Specifies the job name of the job schedule entries which are to
+be removed.
+:P.
+The possible job-name values are:
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+All job schedule entries from job scheduler QUSRSYS/QDFTJOBSCD
+which also comply to the specified identification are removed.
+:PT.generic*-job-name
+:PD.
+All entries which comply to the specified generic name and the
+identification are removed.
+:PT.job-name
+:PD.
+Specify the name of the job schedule entries that you want
+to have removed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JSEID
+:HELP NAME='HRMVJSE/JSEID'.Job schedule entry ID - Help
+:XH3.Job schedul entry ID (JSEID)
+:P.
+Specifies the identification of the job schedule entries which must
+be selected for removal. Only those entries for which the text
+'description' starts with the given identification are removed.
+:P.
+:NT.The identification is the same as the one used with the HAPYJSE
+command when entries were inserted.:ENT.
+:EHELP.
+
+:EPNLGRP.

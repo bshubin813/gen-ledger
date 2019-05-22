@@ -1,0 +1,60 @@
+      * ============================================================ *
+      * Object:    HCHKSYNIAT      *FILE PF                          *
+      *            Holds the retrieved IFS object authorities.       *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050510 FK  Initial delivery                                *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNIA@
+     A            IAGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            IAOWN         10A         TEXT('IFS Object owner')
+     A                                      COLHDG('Object' 'Owner')
+     A            IAANAM        10A         TEXT('Authorisation list')
+     A                                      COLHDG('Auth.' 'List')
+     A            IAUSR         10A         TEXT('User profile')
+     A                                      COLHDG('User' 'profile')
+     A            IADTAA        10A         TEXT('Data authority')
+     A                                      COLHDG('Data' 'Authority')
+     A            IAOPR          1A         TEXT('Object operational auth')
+     A                                      COLHDG('Opr.')
+     A            IAOMGT         1A         TEXT('Object management auth')
+     A                                      COLHDG('Obj.' 'Mgt')
+     A            IAEXS          1A         TEXT('Object existence auth')
+     A                                      COLHDG('Obj.' 'Exs')
+     A            IAALT          1A         TEXT('Object alter authority')
+     A                                      COLHDG('Alter')
+     A            IAREF          1A         TEXT('Object reference auth')
+     A                                      COLHDG('Obj.' 'Ref.')
+     A            IAREAD         1A         TEXT('Read authority')
+     A                                      COLHDG('Read')
+     A            IAADD          1A         TEXT('Add authority')
+     A                                      COLHDG('Add')
+     A            IAUPD          1A         TEXT('Update authority')
+     A                                      COLHDG('Update')
+     A            IADLT          1A         TEXT('Delete authority')
+     A                                      COLHDG('Delete')
+     A            IAEXEC         1A         TEXT('Execute authority')
+     A                                      COLHDG('Execute')
+     A            IAAMGT         1A         TEXT('Auth. list mgt auth')
+     A                                      COLHDG('Autl.' 'Mgt')
+     A            IARTVD          Z         TEXT('Retrieve DTS')
+     A                                      COLHDG('Retrieve DTS')
+     A            IATYPE        11A         TEXT('IFS Object type')
+     A                                      COLHDG('IFS Object' 'type')
+     A            IAOBJK       500A         VARLEN TEXT('IFS Object name (key)')
+     A                                      COLHDG('IFS Object' 'Key')
+     A            IAOBJ       5001A         VARLEN TEXT('IFS Object name')
+     A                                      COLHDG('IFS Object')
+      *
+     A          K IAGRPN
+     A          K IAOBJK
+     A          K IAUSR

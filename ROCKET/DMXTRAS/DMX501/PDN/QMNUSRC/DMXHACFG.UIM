@@ -1,0 +1,170 @@
+.im #HDR
+
+:import       name  = 'HSTRJRNPF'
+              pnlgrp = HSTRJRNPF.
+:import       name  = 'HENDJRNPF'
+              pnlgrp = HENDJRNPF.
+:import       name  = 'HASTRJRNS'
+              pnlgrp = HASTRJRNS.
+:import       name  = 'HCHGGRPSTS'
+              pnlgrp = HCHGGRPSTS.
+:import       name  = 'RSTPRVAUT'
+              pnlgrp = RSTPRVAUT.
+:import       name  = 'HRTVJSE'
+              pnlgrp = HRTVJSE.
+:import       name  = 'HAPYJSE'
+              pnlgrp = HAPYJSE.
+:import       name  = 'HRMVJSE'
+              pnlgrp = HRMVJSE.
+:import       name  = 'HCHGJSESTS'
+              pnlgrp = HCHGJSESTS.
+:import       name  = 'HAPYDIRE'
+              pnlgrp = HAPYDIRE.
+:import       name  = 'HLSTTRG'
+              pnlgrp = HLSTTRG.
+:import       name  = 'HLSTCST'
+              pnlgrp = HLSTCST.
+:import       name  = 'RUNACTRORG'
+              pnlgrp = RUNACTRORG.
+:import       name  = 'RUNACTRRGI'
+              pnlgrp = RUNACTRRGI.
+:import       name  = 'LSTHADEF'
+              pnlgrp = LSTHADEF.
+
+.im #VAR
+:cond         name=cstrjrnpf
+              expr='chkobj("HSTRJRNPF", "*CMD")'.
+:cond         name=cendjrnpf
+              expr='chkobj("HENDJRNPF", "*CMD")'.
+:cond         name=chastrjrns
+              expr='chkobj("HASTRJRNS", "*CMD")'.
+:cond         name=cchggrpsts
+              expr='chkobj("HCHGGRPSTS", "*CMD")'.
+:cond         name=crstprvaut
+              expr='chkobj("RSTPRVAUT", "*CMD")'.
+:cond         name=crtvjse
+              expr='chkobj("HRTVJSE", "*CMD")'.
+:cond         name=capyjse
+              expr='chkobj("HAPYJSE", "*CMD")'.
+:cond         name=crmvjse
+              expr='chkobj("HRMVJSE", "*CMD")'.
+:cond         name=cchgjsests
+              expr='chkobj("HCHGJSESTS", "*CMD")'.
+:cond         name=capydire
+              expr='chkobj("HAPYDIRE", "*CMD")'.
+:cond         name=clsttrg
+              expr='chkobj("HLSTTRG", "*CMD")'.
+:cond         name=clstcst
+              expr='chkobj("HLSTCST", "*CMD")'.
+:cond         name=crunactror
+              expr='chkobj("RUNACTRORG", "*CMD")'.
+:cond         name=crunactrrg
+              expr='chkobj("RUNACTRRGI", "*CMD")'.
+:cond         name=clsthadef
+              expr='chkobj("LSTHADEF", "*CMD")'.
+
+.im #KEY
+:ekeyl.
+.im #TTL
+DMXtras High Availability Configuration menu
+.im #OPT
+
+:menugrp.     Environment setup
+:menui        option=11
+              cond=cstrjrnpf
+              help='HSTRJRNPF'
+              action='cmd ?hstrjrnpf'
+              .Start journaling for data objects                HSTRJRNPF  (S/T)
+:menui        option=12
+              cond=cendjrnpf
+              help='HENDJRNPF'
+              action='cmd ?hendjrnpf'
+              .End journaling for data object                   HENDJRNPF  (S/T)
+:menui        option=13
+              cond=chastrjrns
+              help='HASTRJRNS'
+              action='cmd ?hastrjrns'
+              .Start selective journaling for files             HASTRJRNS  (S/T)
+:menui        option=15
+              cond=cchggrpsts
+              help='HCHGGRPSTS'
+              action='cmd ?hchggrpsts'
+              .Change status for groups                         HCHGGRPSTS (S/T)
+:menui        option=21
+              cond=crstprvaut
+              help='RSTPRVAUT'
+              action='cmd ?rstprvaut'
+              .Restore private authorities                      RSTPRVAUT  (T)
+:emenugrp.
+
+:menugrp.     Special objects mirroring
+:menui        option=36
+              cond=crtvjse
+              help='HRTVJSE'
+              action='cmd ?hrtvjse'
+              .Retrieve job schedule entries into user space    HRTVJSE    (S)
+:menui        option=37
+              cond=capyjse
+              help='HAPYJSE'
+              action='cmd ?hapyjse'
+              .Apply job schedule entries from user space       HAPYJSE    (T)
+:menui        option=38
+              cond=crmvjse
+              help='HRMVJSE'
+              action='cmd ?hrmvjse'
+              .Remove applied job schedule entries              HRMVJSE    (T)
+:menui        option=39
+              cond=cchgjsests
+              help='HCHGJSESTS'
+              action='cmd ?hchgjsests'
+              .Change job schedule entry status                 HCHGJSESTS (S)
+:menui        option=41
+              cond=capydire
+              help='HAPYDIRE'
+              action='cmd ?hapydire'
+              .Apply directory entries from file                HAPYDIRE   (T)
+:menui        option=45
+              cond=clsttrg
+              help='HLSTTRG'
+              action='cmd ?HLSTTRG'
+              .List/restore triggers                            HLSTTRG    (S/T)
+:menui        option=46
+              cond=clstcst
+              help='HLSTCST'
+              action='cmd ?HLSTCST'
+              .List/Manipulate constraints                      HLSTCST    (S/T)
+:menui        option=51
+              cond=crunactror
+              help='RUNACTRORG'
+              action='cmd ?runactrorg'
+              .Run active reorganisation (HA Suite)             RUNACTRORG (S)
+:menui        option=52
+              cond=crunactrrg
+              help='RUNACTRRGI'
+              action='cmd ?runactrrgi'
+              .Run active reorganisation (iCluster)             RUNACTRRGI (S)
+:emenugrp.
+
+:menugrp.     HA Suite setup
+:menui        option=61
+              cond=clsthadef
+              help='LSTHADEF'
+              action='cmd ?lsthadef'
+              .List or create HA Suite definition               LSTHADEF   (S)
+:emenugrp.
+
+.im #DMXHAHA
+
+:emenu.
+.im #CMDL
+
+.im #HLP
+
+:help         name='menu/help'.
+DMXtras High Availability Configuration Menu - Help
+:p.
+This menu shows the tools related to configuration of your high availability
+solution.
+:ehelp.
+
+:epnlgrp.

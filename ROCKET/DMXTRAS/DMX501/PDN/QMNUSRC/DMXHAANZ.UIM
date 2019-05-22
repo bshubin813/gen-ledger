@@ -1,0 +1,218 @@
+.im #HDR
+
+:import       name  = 'HRTVFILANZ'
+              pnlgrp = HRTVFILANZ.
+:import       name  = 'DSPANZFIL'
+              pnlgrp = DSPANZFIL.
+:import       name  = 'PRTANZFIL'
+              pnlgrp = PRTANZFIL.
+:import       name  = 'HPRTXLF'
+              pnlgrp = HPRTXLF.
+:import       name  = 'HSTRJRNPF'
+              pnlgrp = HSTRJRNPF.
+:import       name  = 'HENDJRNPF'
+              pnlgrp = HENDJRNPF.
+:import       name  = 'HASTRJRNS'
+              pnlgrp = HASTRJRNS.
+:import       name  = 'HDLTJRNRCV'
+              pnlgrp = HDLTJRNRCV.
+:import       name  = 'ANZJRNDLT'
+              pnlgrp = ANZJRNDLT.
+:import       name  = 'HRTVJRNANZ'
+              pnlgrp = HRTVJRNANZ.
+:import       name  = 'ANZSAV2'
+              pnlgrp = ANZSAV2.
+:import       name  = 'HANZJRNTRN'
+              pnlgrp = HANZJRNTRN.
+:import       name  = 'HADSPTYP'
+              pnlgrp = HADSPTYP.
+:import       name  = 'ANZAUDRCV'
+              pnlgrp = ANZAUDRCV.
+:import       name  = 'OBJCOUNTS'
+              pnlgrp = OBJCOUNTS.
+:import       name  = 'HDSPLIB'
+              pnlgrp = HDSPLIB.
+:import       name  = 'HLSTIFS'
+              pnlgrp = HLSTIFS.
+:import       name  = 'RTVPRTDSK'
+              pnlgrp = RTVPRTDSK.
+:import       name  = 'HMONNETTFC'
+              pnlgrp = HMONNETTFC.
+
+.im #VAR
+:cond         name=crtvfilanz
+              expr='chkobj("HRTVFILANZ", "*CMD")'.
+:cond         name=cdspanzfil
+              expr='chkobj("DSPANZFIL", "*CMD")'.
+:cond         name=cprtanzfil
+              expr='chkobj("PRTANZFIL", "*CMD")'.
+:cond         name=cprtxlf
+              expr='chkobj("HPRTXLF", "*CMD")'.
+:cond         name=cstrjrnpf
+              expr='chkobj("HSTRJRNPF", "*CMD")'.
+:cond         name=cendjrnpf
+              expr='chkobj("HENDJRNPF", "*CMD")'.
+:cond         name=chastrjrns
+              expr='chkobj("HASTRJRNS", "*CMD")'.
+:cond         name=cdltjrnrcv
+              expr='chkobj("HDLTJRNRCV", "*CMD")'.
+:cond         name=canzjrndlt
+              expr='chkobj("ANZJRNDLT", "*CMD")'.
+:cond         name=crtvjrnanz
+              expr='chkobj("HRTVJRNANZ", "*CMD")'.
+:cond         name=cprtanz
+              expr='chkobj("HPRTANZ", "*CMD")'.
+:cond         name=canzsav2
+              expr='chkobj("ANZSAV2", "*CMD")'.
+:cond         name=canzjrntrn
+              expr='chkobj("HANZJRNTRN", "*CMD")'.
+:cond         name=cadsptyp
+              expr='chkobj("HADSPTYP", "*PGM")'.
+:cond         name=canzaudrcv
+              expr='chkobj("ANZAUDRCV", "*CMD")'.
+:cond         name=cobjcounts
+              expr='chkobj("OBJCOUNTS", "*CMD")'.
+:cond         name=cdsplib
+              expr='chkobj("HDSPLIB", "*CMD")'.
+:cond         name=clstifs
+              expr='chkobj("HLSTIFS", "*CMD")'.
+:cond         name=crtvprtdsk
+              expr='chkobj("RTVPRTDSK", "*CMD")'.
+:cond         name=cmonnettfc
+              expr='chkobj("HMONNETTFC", "*CMD")'.
+.im #KEY
+:ekeyl.
+.im #TTL
+DMXtras High Availability Analysis menu
+.im #OPT
+
+:menugrp.     File analysis
+:menui        option=11
+              cond=crtvfilanz
+              help='HRTVFILANZ'
+              action='cmd ?hrtvfilanz'
+              .Retrieve file analysis                           HRTVFILANZ (S)
+:menui        option=12
+              cond=cdspanzfil
+              help='DSPANZFIL'
+              action='cmd call dspanzfil ('' '')'
+              .Display file analysis                                       (S)
+:menui        option=13
+              cond=cprtanzfil
+              help='PRTANZFIL'
+              action='cmd ?prtanzfil'
+              .Print file analysis                              PRTANZFIL  (S)
+:menui        option=15
+              cond=cprtxlf
+              help='HPRTXLF'
+              action='cmd ?hprtxlf'
+              .Print cross-library logical files                HPRTXLF    (S)
+:emenugrp.
+
+:menugrp.     Journalling setup
+:menui        option=21
+              cond=cstrjrnpf
+              help='HSTRJRNPF'
+              action='cmd ?hstrjrnpf'
+              .Start journaling for physical files              HSTRJRNPF  (S/T)
+:menui        option=22
+              cond=cendjrnpf
+              help='HENDJRNPF'
+              action='cmd ?hendjrnpf'
+              .End journaling for physical files                HENDJRNPF  (S/T)
+:menui        option=23
+              cond=chastrjrns
+              help='HASTRJRNS'
+              action='cmd ?hastrjrns'
+              .Start selective journaling for files             HASTRJRNS  (S/T)
+:menui        option=25
+              cond=cdltjrnrcv
+              help='HDLTJRNRCV'
+              action='cmd ?hdltjrnrcv'
+              .Delete journal receivers                         HDLTJRNRCV (S/T)
+:emenugrp.
+
+:menugrp.     Data journal analysis
+:menui        option=31
+              cond=canzjrndlt
+              help='ANZJRNDLT'
+              action='cmd ?anzjrndlt'
+              .Journal receiver analysis and delete             ANZJRNDLT  (S)
+:menui        option=35
+              cond=crtvjrnanz
+              help='HRTVJRNANZ'
+              action='cmd ?hrtvjrnanz'
+              .Retrieve journal analysis to output file         HRTVJRNANZ (S)
+:menui        option=36
+              cond=cprtanz
+              help='nohelp'
+              action='cmd hprtanz'
+              .Print analysis reports                           HPRTANZ    (S)
+:menui        option=37
+              cond=canzsav2
+              help='ANZSAV2'
+              action='cmd ?anzsav2'
+              .Save journal analysis files to save file         ANZSAV2    (S)
+:menui        option=38
+              cond=canzjrntrn
+              help='HANZJRNTRN'
+              action='cmd ?hanzjrntrn'
+              .Transaction summary of analysis file (QUERY)     HANZJRNTRN (S)
+:menui        option=41
+              cond=cadsptyp
+              help='HADSPTYP'
+              action='cmd call hadsptyp parm('' '')'
+              .Select journal entry types to monitor                       (S)
+:emenugrp.
+
+:menugrp.     Object and security audit analysis
+:menui        option=51
+              cond=canzaudrcv
+              help='ANZAUDRCV'
+              action='cmd anzaudrcv'
+              .Audit journal receiver analysis with selection   ANZAUDRCV  (S)
+:menui        option=61
+              cond=cobjcounts
+              help='OBJCOUNTS'
+              action='cmd ?objcounts'
+              .Retrieve object counts per library               OBJCOUNTS  (S)
+:menui        option=62
+              cond=cdsplib
+              help='HDSPLIB'
+              action='cmd ?hdsplib'
+              .Display library attributes                       HDSPLIB    (S/T)
+:menui        option=63
+              cond=clstifs
+              help='HLSTIFS'
+              action='cmd ?hlstifs'
+              .List IFS folder contents                         HLSTIFS    (S/T)
+:menui        option=65
+              cond=crtvprtdsk
+              help='RTVPRTDSK'
+              action='cmd ?rtvprtdsk'
+              .Retrieve and print disk information              RTVPRTDSK  (S/T)
+:emenugrp.
+
+:menugrp.     Other analysis options
+:menui        option=71
+              cond=cmonnettfc
+              help='HMONNETTFC'
+              action='cmd ?hmonnettfc'
+              .Monitor network traffic                          HMONNETTFC (S/T)
+:emenugrp.
+
+.im #DMXHAHA
+
+:emenu.
+.im #CMDL
+
+.im #HLP
+
+:help         name='menu/help'.
+DMXtras High Availability Analysis Menu - Help
+:p.
+This menu shows the analysis-related tools of your high availability
+solution.
+:ehelp.
+
+:epnlgrp.

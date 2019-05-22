@@ -1,0 +1,70 @@
+/*CP: ALLOW(*BPGM *IPGM *BREXX *IREXX *BMOD *IMOD)                   */
+/* ================================================================= */
+/* Object:         HRTVJRNE        *CMD                              */
+/*                 Retrieve journal entry                            */
+/*                                                                   */
+/* Create remarks: CRTCMD .... ALLOW(*IPGM  *BPGM)                   */
+/*                                                                   */
+/* Synopsis:                                                         */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20070425 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve journal entry')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JRN) TYPE(QUALJRN) MIN(1) PROMPT('Journal')
+             PARM       KWD(JRNRCV) TYPE(QUALRCV) PROMPT('Journal +
+                          receiver')
+             PARM       KWD(FROMENTLRG) TYPE(*CHAR) LEN(20) +
+                          DFT(*FIRST) SPCVAL((*FIRST) (*LAST)) +
+                          PROMPT('Starting large sequence number')
+             PARM       KWD(FROMTIME) TYPE(STRDT) PROMPT('Starting +
+                          date and time')
+             PARM       KWD(NBRENT) TYPE(*DEC) LEN(5 0) RSTD(*YES) +
+                          DFT(1) SPCVAL((1)) PROMPT('Number of +
+                          entries to retrieve')
+             PARM       KWD(RTNRCV) TYPE(*CHAR) LEN(10) RTNVAL(*YES) +
+                          CHOICE('CHAR(10)') PROMPT('Return Journal +
+                          receiver')
+             PARM       KWD(RTNRCVLIB) TYPE(*CHAR) LEN(10) +
+                          RTNVAL(*YES) CHOICE('CHAR(10)') +
+                          PROMPT('Return Receiver library')
+             PARM       KWD(RTNSEQLRG) TYPE(*CHAR) LEN(20) +
+                          RTNVAL(*YES) CHOICE('CHAR(20)') +
+                          PROMPT('Return Large sequence number')
+             PARM       KWD(RTNENTDTS) TYPE(*CHAR) LEN(26) +
+                          RTNVAL(*YES) CHOICE('CHAR(26)') +
+                          PROMPT('Return Entry timestamp')
+             PARM       KWD(RTNJRNCDE) TYPE(*CHAR) LEN(1) +
+                          RTNVAL(*YES) CHOICE('CHAR(1)') +
+                          PROMPT('Return Journal code')
+             PARM       KWD(RTNENTTYP) TYPE(*CHAR) LEN(2) +
+                          RTNVAL(*YES) CHOICE('CHAR(2)') +
+                          PROMPT('Return Entry type')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJRN:    QUAL       TYPE(*NAME) SPCVAL((QAUDJRN))
+             QUAL       TYPE(*NAME) SPCVAL((*LIBL)) PROMPT('Library')
+ QUALRCV:    QUAL       TYPE(*NAME) DFT(*CURRENT) SPCVAL((*CURRENT) +
+                          (*CURCHAIN))
+             QUAL       TYPE(*NAME) SPCVAL((*LIBL)) PROMPT('Library')
+ STRDT:      ELEM       TYPE(*DATE) PROMPT('Starting date')
+             ELEM       TYPE(*TIME) PROMPT('Starting time')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

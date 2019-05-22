@@ -1,0 +1,35 @@
+      * ============================================================ *
+      * Object:    HUFGTTG         *FILE LF                          *
+      *            Logical file over OMFGT by Target ID, Group ID.   *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * 20001205 FK  Include target library                          *
+      * 20020531 FK  Include replication method                      *
+      * 20031208 FK  Include delete flag                             *
+      * 20060319 FK  Include journal information                     *
+      * ============================================================ *
+     A          R HUFGTTG@                  PFILE(OMFGT)
+     A            TGTID
+     A            GRPID
+     A            STATUS
+     A            REPMTD
+     A            TGTLIB
+     A            AJRNRCVLIB
+     A            AJRNRCVNME
+     A            AUDJRNRSET
+     A            POSTIME
+     A            RFJOBID
+     A            MRJOBID
+     A            DASJOBID
+     A            TODELETE
+     A            PFDFTJRN
+     A            BSFDFTJRN
+      *
+     A          K TGTID
+     A          K GRPID

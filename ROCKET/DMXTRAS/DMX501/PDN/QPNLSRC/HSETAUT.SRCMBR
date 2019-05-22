@@ -1,0 +1,179 @@
+.* ============================================================ *
+.* Object:    HSETAUT         *PNLGRP                           *
+.*            Help text for the command.                        *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20010921 FK  Initial delivery                                *
+.* 20021202 FK  Different file is used to determine differences *
+.* 20030506 FK  Add iCluster support                            *
+.* 20050518 FK  IFS authorities support                         *
+.* 20111223 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HSETAUT'.Set authorities from sync check file - Help
+:P.
+The HSETAUT (Set authorities from sync check file) may be used to
+adjust the authorities on the target machine as a result of the
+synchronisation check (HCHKSYNTGT).
+:P.
+:NT.This command should only be run on the TARGET machine, i.e. the
+machine that is receiving objects and transactions. If executed on the
+source machine for the replication, you may inadvertently alter the
+authorities of production objects.:ENT.
+:P.
+By default, the output file created from the synchronisation check
+are processed to adjust authorities. These is respectively the HS<SynID>AUT
+and HS<SynID>IFA files.
+:P.
+Alternatively, one can choose to grant all authorities that were gathered
+on the source machine or revoke all authorities gathered on the target
+machine.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ICGROUP
+:HELP NAME='HSETAUT/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+authorities must be adusted.
+Only authorities for objects included in the specified group(s) will be
+adjsuted.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+Adjust the authorities for all objects, regardless of the group or
+resilient application.
+:PT.group-name
+:PD.
+Authorities will be adjusted for objects included in the specified group.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SYNID
+:HELP NAME='HSETAUT/SYNID'.Sync. check identifier - Help
+:XH3.Sync. check identifier (SYNID)
+:P.
+Name that identifies the files composed during the sync. check.
+:P.
+The possible sync-check-identifier values are:
+:P.
+:PARML.
+:PT.:PK def.*TGT:EPK.
+:PD.
+The first 5 characters of the target definition name identify the
+synchronisation job and output files. If the sync. check is run for
+iCluster, the first 5 characters of the ICGROUP parameter determine
+this parameter. If ICGROUP(*ALL) is specified, the synchronisation ID
+is 'CLUST'.
+:PT.identifier
+:PD.
+Specify the 5-character name that identifies the synchronisation check
+files.
+:EPARML.
+:EHELP.
+
+.* Help for parameter TGTLIB
+:HELP NAME='HSETAUT/TGTLIB'.Target library - Help
+:XH3.Target library (TGTLIB)
+:P.
+Specify the library on the target machine for which the authorities
+must be adjusted.
+:P.
+The possible target-library values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+All libraries included in the sync check files are processed.
+:PT.library name
+:PD.
+Specify the name of the library for which authorities must be adjusted.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ACTION
+:HELP NAME='HSETAUT/ACTION'.Action for object authority - Help
+:XH3.Action for object authority (ACTION)
+:P.
+Determines which files are used for adjusting the authorities.
+:P.
+The possible action-for-object-authority values are:
+:P.
+:PARML.
+:PT.:PK def.*DIF:EPK.
+:PD.
+The output files from the synchronisation check, HS<SynID>AUT and HS<SynID>IFA
+are processed to adjust the authorities for
+which discrepancies were found.
+:PT.*GRT
+:PD.
+The synchronisation check authority files of the source machine,
+HS<SynID>SA and HS<SynID>SJ are processed. All authorities that were gathered
+on the source machine are applied on the target objects.
+:PT.*RVK
+:PD.
+The synchronisation check authority files of the target machine,
+HS<SynID>TA and HS<SynID>TJ are processed. All authorities that were gathered
+on the target machine are revoked from the target objects.
+:EPARML.
+:EHELP.
+
+.* Help for parameter AUTIFS
+:HELP NAME='HSETAUT/AUTIFS'.Set IFS authorities - Help
+:XH3.Set IFS authorities (AUTIFS)
+:P.
+Determines whether the authority differences found for IFS objects will be
+fixed as well.
+:P.
+The possible set-IFS-authorities values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+IFS authorities are fixed.
+:PT.*NO
+:PD.
+IFS authorities are not fixed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SUSAPY
+:HELP NAME='HSETAUT/SUSAPY'.Suspend apply job - Help
+:XH3.Suspend apply job (SUSAPY)
+:P.
+Determines whether the apply jobs must be stopped prior to setting the
+authorities. By suspending the apply jobs, object locks on the target files
+will not prevent the authorities from being set.
+:P.
+:NT.A maximum of 60 minutes is waited for the apply jobs to stop. If apply
+jobs have not stopped by then, the setting of authorities continues, even
+though it may run into object locks.:ENT.
+:P.
+The possible suspend-apply-job values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+If apply jobs are active, they will not be stopped prior to setting the
+authorities.
+:PT.*YES
+:PD.
+If the apply jobs are active prior to setting the authorities, they will be
+stopped. After completion, the apply jobs are started again.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

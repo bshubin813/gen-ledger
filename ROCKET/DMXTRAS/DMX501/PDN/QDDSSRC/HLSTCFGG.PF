@@ -1,0 +1,39 @@
+      * ============================================================ *
+      * Object:    HLSTCFGG        *FILE PF                          *
+      *            Holds the groups for a target/group combination   *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050210 FK  Initial delivery                                *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R LSTCFGG@
+     A            LGGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'name')
+     A            LGDESC        50A         TEXT('Group description')
+     A                                      COLHDG('Group' 'description')
+     A            LGPRINOD       8A         TEXT('Current primary node')
+     A                                      COLHDG('Current' 'Primary' 'Node')
+     A            LGBCKNOD       8A         TEXT('Backup node')
+     A                                      COLHDG('Backup' 'Node')
+     A            LGDFTJRN      10A         TEXT('Default database journal')
+     A                                      COLHDG('Default' 'DB journal')
+     A            LGDFTJRNL     10A         TEXT('Default database journal lib')
+     A                                      COLHDG('Default DB' 'journal lib')
+     A            LGDFTBSF      10A         TEXT('Default BSF journal')
+     A                                      COLHDG('Default' 'BSF journal')
+     A            LGDFTBSFL     10A         TEXT('Default BSF journal lib')
+     A                                      COLHDG('Default BSF' 'journal lib')
+     A            LGJRNBCK       4A         TEXT('Journal on backup')
+     A                                      COLHDG('Journal' 'on backup')
+     A            LGJRNLOC       4A         TEXT('Journal location')
+     A                                      COLHDG('Journal' 'location')
+      *
+     A          K LGGRPN

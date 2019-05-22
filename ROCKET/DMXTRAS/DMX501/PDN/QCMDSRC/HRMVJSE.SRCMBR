@@ -1,0 +1,44 @@
+/* ================================================================= */
+/* Object:         HRMVJSE         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HRMVJSE) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Removes job schedule entries that were applied    */
+/*                 with the HAPYJSE command.                         */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HRMVJSE    *PGM     CPP                                           */
+/* HRMVJSE    *PNLGRP  Help for HRMVJSE command                      */
+/* HAUMSG     *MSGF    Messages                                      */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 19990809 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Remove job schedule entries')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JSEID) TYPE(*NAME) MIN(1) PROMPT('Job +
+                          schedule entry ID')
+             PARM       KWD(JOB) TYPE(*GENERIC) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Job name')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

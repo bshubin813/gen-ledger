@@ -1,0 +1,24 @@
+      * ============================================================ *
+      * Object:    HSOSJRNT        *FILE PF                          *
+      *            Temporary file that holds the journals by target  *
+      *            and group.                                        *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000402 FK  Initial delivery                                *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R HSOSJRT@                  PFILE(HSOSJRN)
+     A            SOTGTN
+     A            SOGRPN
+     A            SOJRNN
+     A            SOJRNL
+      *
+     A          K SOTGTN
+     A          K SOGRPN
+     A          K SOJRNN
+     A          K SOJRNL

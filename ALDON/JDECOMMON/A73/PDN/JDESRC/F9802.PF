@@ -1,0 +1,28 @@
+     A****************************************************************
+     A*    (JDE) File Design Aid                                     *
+     A*                                                              *
+     A*    Created By : STOLTZFUS                                    *
+     A*    Date       : 10/12/92                                     *
+     A*    Time       : 163835                                       *
+     A*                                                              *
+     A*    File       : Software Inventory File
+     A****************************************************************
+     A                                      UNIQUE
+     A          R I9802
+     A                                      TEXT('Software Inventory File  +
+     A                                                               ')
+     A            SIMID     R               REFFLD(MID        F98FRFM          )
+     A            SILIBR    R               REFFLD(LIBR       F98FRFL          )
+     A            SILIBO    R               REFFLD(LIBO       F98FRFL          )
+     A            SIFILE    R               REFFLD(FILE       F98FRFF          )
+     A            SIUSER    R               REFFLD(USER       F98FRFU          )
+     A            SIDM      R               REFFLD(DM         F98FRFD          )
+     A            SIRLS     R               REFFLD(RLS        F98FRFR          )
+     A            SIMSAR    R               REFFLD(MSAR       F98FRFM          )
+     A            SISTC     R               REFFLD(STC        F98FRFS          )
+     A            SILFMT    R               REFFLD(LFMT       F98FRFL          )
+     A            SIGENL    R               REFFLD(GENL       F98FRFG          )
+     A            SIDVP     R               REFFLD(DVP        F98FRFD          )
+     A          K SIMID
+     A          K SILIBR
+     A          K SIFILE

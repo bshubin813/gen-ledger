@@ -1,0 +1,55 @@
+/* ================================================================= */
+/* Object:         HLSTCFG         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(HLSTCFG) HLPID(*CMD)                */
+/*                                                                   */
+/* Synopsis:       Lists the HA Suite object configuration.          */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20020916 FK  Initial delivery                                     */
+/* 20030424 FK  Add iCluster support                                 */
+/* 20030506 FK  Clarify use of TARGET/ICGROUP parameters             */
+/* 20050201 FK  Allow specification of backup node (iCluster only)   */
+/* 20050224 FK  *FIRST allowed for backup node                       */
+/* 20060206 FK  Allow generic group name and selection by string     */
+/* 20111217 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('List iCluster config')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(OUTLIB) TYPE(*NAME) DFT(QTEMP) +
+                          PROMPT('Library for output files')
+             PARM       KWD(ICGROUP) TYPE(*GENERIC) LEN(10) +
+                          DFT(*NONE) SPCVAL((*ALL *N) (*MRKSTR *N)) +
+                          PROMPT('Group or resilient application')
+             PARM       KWD(BCKNOD) TYPE(*NAME) LEN(8) DFT(*FIRST) +
+                          SPCVAL((*FIRST) (*ALL)) PMTCTL(ICALLGRP) +
+                          PROMPT('Groups for backup node')
+             PARM       KWD(CFGTYP) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*ALL) SPCVAL((*ALL) (*OBJ) (*IFS)) +
+                          PROMPT('Configuration to retrieve')
+             PARM       KWD(MRKSTR) TYPE(*CHAR) LEN(4) DFT(*NONE) +
+                          SPCVAL((*NONE ' ')) PROMPT('Marked by +
+                          string')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&ICGROUP *EQ '*MRKSTR') PARM((&MRKSTR +
+                          *NE ' ')) MSGID(LCF0001)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ ICALLGRP:   PMTCTL     CTL(ICGROUP) COND((*EQ '*ALL'))

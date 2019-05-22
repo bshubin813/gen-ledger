@@ -1,0 +1,50 @@
+/* ================================================================= */
+/* Object:         HADDALR         *CMD                              */
+/*                 Add alert destination                             */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20050126 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Add alert destination')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(UTLID) TYPE(*NAME) RSTD(*YES) DFT(*ALL) +
+                          SPCVAL((*ALL) (HMONHA)) PROMPT('Utility')
+             PARM       KWD(UTLALR) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*ALL) SPCVAL((*ALL) (*EVT) (*SUS)) +
+                          PROMPT('Utility alert type')
+             PARM       KWD(DSTTYP) TYPE(*CHAR) LEN(10) RSTD(*YES) +
+                          DFT(*EMAIL) SPCVAL((*MSGQ) (*EMAIL)) +
+                          PROMPT('Alert destination type')
+             PARM       KWD(MSGQ) TYPE(QUALMSGQ) PMTCTL(MSGQ) +
+                          PROMPT('Alert message queue')
+             PARM       KWD(EMAIL) TYPE(*CHAR) LEN(100) VARY(*YES) +
+                          CASE(*MIXED) PMTCTL(EMAIL) PROMPT('Alert +
+                          e-mail address')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALMSGQ:   QUAL       TYPE(*NAME) SPCVAL((QSYSOPR))
+             QUAL       TYPE(*NAME) SPCVAL((*LIBL)) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+             DEP        CTL(&DSTTYP *EQ *MSGQ) PARM((&MSGQ *NE ' ')) +
+                          MSGID(ALA0011)
+             DEP        CTL(&DSTTYP *EQ *EMAIL) PARM((&EMAIL *NE ' ')) +
+                          MSGID(ALA0012)
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */
+ MSGQ:       PMTCTL     CTL(DSTTYP) COND((*EQ '*MSGQ'))
+ EMAIL:      PMTCTL     CTL(DSTTYP) COND((*EQ '*EMAIL'))

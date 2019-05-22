@@ -1,0 +1,27 @@
+      * ============================================================ *
+      * Object:    HMRKPOS         *FILE PF                          *
+      *            Holds the submitted jobs for HMRKPOS              *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20030604 FK  Initial delivery                                *
+      * 20111222 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R MRKPOS@
+     A            MPGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'name')
+     A            MPJNAM        10A         TEXT('Job name')
+     A                                      COLHDG('Job name')
+     A            MPJUSR        10A         TEXT('Job user')
+     A                                      COLHDG('Job user')
+     A            MPJNBR         6A         TEXT('Job number')
+     A                                      COLHDG('Job' 'number')
+      *
+     A          K MPGRPN
+     A          K MPJNAM

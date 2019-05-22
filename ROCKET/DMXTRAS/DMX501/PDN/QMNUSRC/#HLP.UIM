@@ -1,0 +1,150 @@
+:help         name=keyl.
+Function keys - Help
+:xh3.Function keys
+:ehelp.
+
+:help         name=helpf1.
+:parml.
+:pt.F1=Help
+:pd.
+If you press F1-Help The help display shows up with help of the screen, fields
+or menu options.
+:eparml.
+:ehelp.
+
+:help         name=exit.
+:parml.
+:pt.F3=Exit
+:pd.
+If you press F3-Exit The actual task will be ended and you will return to the
+screen where the task was started.
+:eparml.
+:ehelp.
+
+:help         name=prompt.
+:parml.
+:pt.F4=Prompt
+:pd.
+Prompt you with the parameters of a command.
+:eparml.
+:ehelp.
+
+:help         name=dspmsg.
+:parml.
+:pt.F6=Display messages
+:pd.
+Display the messages sent to your message queue.
+:eparml.
+:ehelp.
+
+:help         name=retrieve.
+:parml.
+:pt.F9=Retrieve
+:pd.
+Retrieve the last command entered.
+:eparml.
+:ehelp.
+
+:help         name=cancel.
+:parml.
+:pt.F12=Cancel
+:pd.
+This key will return you to the previously displayed panel.
+:eparml.
+:ehelp.
+
+:help         name=wrksbmjob.
+:parml.
+:pt.F14=WRKSBMJOB
+:pd.
+This command key will present you with a list of submitted jobs for your
+user profile.
+:eparml.
+:ehelp.
+
+:help         name=helpf21.
+:parml.
+:pt.F21=Command entry
+:pd.
+This command key will bring up an extended command entry display, allowing for
+longer commands to be typed.
+:eparml.
+:ehelp.
+
+:help         name=helpf22.
+:parml.
+:pt.F22=DMXtras commands
+:pd.
+This command key will display a list of all DMXtras commands installed in the
+customer's library.
+:eparml.
+:ehelp.
+
+:help         name=enter.
+:parml.
+:pt.Enter
+:pd.
+This key will activate the options selected
+:eparml.
+:ehelp.
+
+:help         name=help.
+:parml.
+:pt.Help
+:pd.
+If you press Help the help display shows up with help of the screen, fields
+or menu options.
+:eparml.
+:ehelp.
+
+:help         name=pagedown.
+:parml.
+:pt.Pagedown (Roll Up)
+:pd.
+Moves forward to show additional information for this display. Page down (Roll
+Up) shows the next group of items until you reach the end of the information.
+:eparml.
+:ehelp.
+
+:help         name=pageup.
+:parml.
+:pt.Pageup (Roll Down)
+:pd.
+Moves backward to show additional information for this display. Page up (Roll
+Down) shows the previous group of items until you reach the end of the
+information.
+:eparml.
+:ehelp.
+
+:help         name=print.
+:parml.
+:pt.Print
+:pd.
+Prints information currently shown on the display.
+:eparml.
+:ehelp.
+
+:help         name=nohelp.
+:parml.
+:pt.No help available
+:pd.
+No help is available for this option.
+:eparml.
+:ehelp.
+
+:help         name='menu/option90'.
+:parml.
+:pt.90. Signoff
+:pd.
+Select this option to signoff this session.
+:eparml.
+:ehelp.
+
+:help         name='menu/option94'.
+:parml.
+:pt.94. Work with active IC jobs
+:pd.
+Select this option to work with all jobs currently active on the system that
+are related to Rocket Software products.
+:eparml.
+:ehelp.

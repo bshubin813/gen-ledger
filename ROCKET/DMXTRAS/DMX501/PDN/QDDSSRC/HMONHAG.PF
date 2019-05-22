@@ -1,0 +1,35 @@
+      * ============================================================ *
+      * Object:    HMONHAG         *FILE PF                          *
+      *            Holds the group ded objects received by the       *
+      *            listener program to be sent to the message queues *
+      *            or e-mail addresses.                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060404 FK  Initial delivery                                *
+      * 20111220 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R HMONHAGR
+     A            MGORGSYS       8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            MGGRPNAM      10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'Name')
+     A            MGCURSTS      10A         TEXT('Current status')
+     A                                      COLHDG('Current' 'Status')
+     A            MGCURDTS        Z         TEXT('Current status DTS')
+     A                                      COLHDG('Current' 'Status' -
+     A                                      'Date-time')
+     A            MGPRVSTS      10A         TEXT('Previous status')
+     A                                      COLHDG('Previous' 'Status')
+     A            MGALRSNT       4A         TEXT('Alert sent')
+     A                                      COLHDG('Alert' 'Sent')
+     A            MGRTVDTS        Z         TEXT('Retrieve DTS')
+     A                                      COLHDG('Retrieve' 'Date-time')
+
+      * Keys
+     A          K MGORGSYS
+     A          K MGGRPNAM

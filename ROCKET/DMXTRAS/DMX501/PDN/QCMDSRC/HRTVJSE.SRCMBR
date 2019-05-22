@@ -1,0 +1,46 @@
+/* ================================================================= */
+/* Object:         HRTVJSE         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HRTVJSE) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:       Retrieves job schedule entries that comply to the */
+/*                 generic name to the specified user space.         */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 19990809 FK  Initial delivery                                     */
+/* 19991201 FK  Allow send to target system using SNDHAOBJ           */
+/* 20111223 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve job schedule entries')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(USRSPC) TYPE(QUALUSP) MIN(1) +
+                          PROMPT('User space')
+             PARM       KWD(JOB) TYPE(*GENERIC) DFT(*ALL) +
+                          SPCVAL((*ALL)) PROMPT('Job name' 1)
+             PARM       KWD(TEXT) TYPE(*CHAR) LEN(50) DFT(*DFT) +
+                          SPCVAL((*DFT)) PROMPT('Text ''description''')
+             PARM       KWD(TARGET) TYPE(*NAME) DFT(*NONE) +
+                          SPCVAL((*NONE)) PROMPT('Target system name')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALUSP:    QUAL       TYPE(*NAME) SPCVAL((*SYSNAME))
+             QUAL       TYPE(*NAME) SPCVAL((*CURLIB)) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

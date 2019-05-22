@@ -1,0 +1,359 @@
+/*CP: DBGVIEW(*SOURCE) OUTPUT(*PRINT)                                */
+/* ================================================================= */
+/* Object:         HCHKSYN6C       *PGM C-SQL                        */
+/*                                                                   */
+/* Create remarks: None                                              */
+/*                                                                   */
+/* Synopsis: Lists all IFS objects in the specified path and puts    */
+/*           them in output file HCHKSYNID.                          */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20021204 FK  Initial delivery (Taken from QRYIFSOBJ tool)         */
+/* 20021206 FK  Only print to *STDOUT if error                       */
+/* 20030505 FK  Convert path object specifier to correct case        */
+/* 20050517 FK  Owner and mode no longer written                     */
+/* 20070313 FK  Allow path specifiers such as /HATEAM*               */
+/*              Files that start with a "." were ignored             */
+/* 20111224 FK  Remove HA                                            */
+/* ================================================================= */
+
+/* #include "ifsinfo"                                                */
+/* ----------------------------------------------------------------- */
+/* PHYSICAL FILE : HCHKSYNID                                         */
+/* FILE LAST CHANGE DATE : 2005/05/17                                */
+/* RECORD FORMAT : SYNID@                                            */
+/* FORMAT LEVEL IDENTIFIER : 4ADFCB6CFECA6                           */
+/* ----------------------------------------------------------------- */
+typedef _Packed struct {
+   char    _IDGRPN_[10];                    /* Group name */
+   char    _IDTYPE_[11];                    /* Object type */
+   int     _IDSIZE_;                        /* Allocated size */
+   char    _IDCNTD_[26];                    /* Contents change DTS */
+   char    _IDSTSD_[26];                    /* Status change DTS */
+   char    _IDRTVD_[26];                    /* Retrieve DTS */
+   struct { short len;                      /* LENGTH OF DATA */
+            char  data[500];                /* FIELD DATA     */
+   } _IDOBJK_;
+   char    _IDINC_[4];                      /* Object included */
+   struct { short len;                      /* LENGTH OF DATA */
+            char  data[5000];               /* FIELD DATA     */
+   } _IDOBJ_;
+   } QTEMP_HCHKSYNID__HCHKSYNID_both_t;
+/****************  end of map *****************************************/
+
+#include <sys/types.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <stddef.h>  /* error constant */
+#include <stdlib.h>  /* system */
+#include <recio.h>
+#include <time.h>
+#include <pwd.h>     /* get user id */
+#include <grp.h>     /* get group id */
+#include <unistd.h>  /* getcwd() */
+
+/* host vars must be global */
+
+#define FALSE      (0 == 1)
+#define TRUE       (1 == 1)
+
+#define MAXPATH 16384
+#define MAXEXT  1024
+
+/* Globals */
+_RFILE          *pFile;
+
+/* ----------------------------------------------------------------- */
+/* writeStat - Writes entry in HCHKSYNID file for file/directory     */
+/* ----------------------------------------------------------------- */
+void writeStat(char * GrpNam,
+               char * dir, char * fn,  struct stat *pinfo)
+{
+    struct stat    info;
+    QTEMP_HCHKSYNID__HCHKSYNID_both_t  Rec;
+    struct tm      *ptm;
+    char           ts[27];
+    char           uid[512];
+    struct passwd  *pd;
+    char           szgrp[11];
+    struct group   *grp;
+    char           tmpMod[9];
+    char           path[MAXPATH + MAXEXT + 2];
+    time_t         curTime;
+    int            i;
+
+    /* validate input args */
+    if (pinfo == NULL)
+    {
+       printf("writeStat called with NULL stat pointer\n");
+       return;
+    }
+    if (dir == NULL)
+    {
+       printf("writeStat called with NULL directory name\n");
+       return;
+    }
+
+    /* Fill Group Name */
+    strncpy(Rec._IDGRPN_, GrpNam, strlen(GrpNam) );
+
+    memset(Rec._IDTYPE_, ' ', sizeof(Rec._IDTYPE_) );
+    strncpy(Rec._IDTYPE_, pinfo->st_objtype, strlen(pinfo->st_objtype) );
+
+/*  Rec._IDSIZE_ = pinfo->st_size; */
+
+    /* Rec.IDSIZE = pinfo->st_allocsize; */
+    Rec._IDSIZE_ = pinfo->st_allocsize;
+
+    /* Rec.IDCNTD = pinfo->st_mtime; */
+    ptm = localtime(&pinfo->st_mtime);
+    strftime(ts, sizeof(ts)-1, "%Y-%m-%d-%H.%M.%S.000000", ptm);
+    strncpy(Rec._IDCNTD_, ts, 26);
+
+    /* Rec.IDSTSD = pinfo->st_ctime; */
+    ptm = localtime(&pinfo->st_ctime);
+    strftime(ts, sizeof(ts)-1, "%Y-%m-%d-%H.%M.%S.000000", ptm);
+    strncpy(Rec._IDSTSD_, ts, 26);
+
+    /* Rec.IDRTVD = curTime; */
+    time(&curTime);
+    ptm = localtime(&curTime);
+    strftime(ts, sizeof(ts)-1, "%Y-%m-%d-%H.%M.%S.000000", ptm);
+    strncpy(Rec._IDRTVD_, ts, 26);
+
+    /* Fill Object Included */
+    sprintf(Rec._IDINC_, "*INC");
+
+    /* Write out the full path name */
+    /* Rec._IDOBJ_.len = strlen(path);                   */
+    /* strncpy( Rec.FQNAME.data, path, strlen(path) );   */
+    strcpy(path, dir);
+    if (NULL != fn)
+    {
+       if (dir[strlen(dir)-1] != '/') {
+       strcat(path, "/");              }
+       strcat(path, fn);
+    }
+    strncpy( Rec._IDOBJ_.data, path, strlen(path) );
+    Rec._IDOBJ_.len = strlen(path);
+    strncpy( Rec._IDOBJK_.data, path, strlen(path) );
+    if ( strlen(path) < 500)
+    {
+      Rec._IDOBJK_.len = strlen(path);
+    }
+    else
+    {
+      Rec._IDOBJK_.len = 500;
+    }
+/*  Convert the Key to upper case */
+    for (i =  0; i < Rec._IDOBJK_.len; i++)
+    {
+       Rec._IDOBJK_.data[i] = toupper(Rec._IDOBJK_.data[i]);
+    }
+
+/*TODO: ccsid and/or code page? */
+
+/*  Write record in file    */
+    _Rwrite(pFile, (void *) &Rec,
+            sizeof(QTEMP_HCHKSYNID__HCHKSYNID_both_t) );
+}
+
+/* ----------------------------------------------------------------- */
+/* traverse - Traverses the tree for the specified directory         */
+/* ----------------------------------------------------------------- */
+void traverse(char * szGrpNam,
+              char * szDir, char * szFile, unsigned long long * pulSize,
+              int isRecursive)
+{
+    DIR *dir;
+    struct dirent *entry;
+    int count;
+    char path[MAXPATH + MAXEXT + 2];
+    struct stat info;
+    unsigned long long ulSubSize = 0;
+    int gen_obj;
+    int obj_sel;
+    char ast_char[2];
+    int i;
+    int name_len;
+    int pat_len;
+
+   if ((dir = opendir(szDir)) == NULL) /* try to open directory */
+      perror("opendir() error");
+   else
+   {
+      /* loop thru all objs in dir */
+      while ((entry = readdir(dir)) != NULL)
+      {
+         if ( (strlen(szDir) + strlen(entry->d_name) + 2) > MAXPATH )
+         {
+           printf("Exceeded maxpath %d ", (int) MAXPATH);
+           exit( EXIT_FAILURE );
+         }
+
+         gen_obj=0;
+         obj_sel=1;
+         name_len=strlen(entry->d_name);
+         for (i= 0; i<=name_len && obj_sel && !gen_obj; i++)
+         {
+            if (*(szFile+i)=='*')
+               gen_obj=TRUE;
+            else if (toupper(*(szFile+i))!=toupper(*((entry->d_name)+i)))
+               obj_sel=FALSE;
+         }
+
+         if (obj_sel == 1)
+         {
+            strcpy(path, szDir);
+            if (strlen(path) != 1) {
+            strcat(path, "/");            }
+            strcat(path, entry->d_name); /* append new obj to current dir */
+
+            /* Retrieve statistics for the IFS object in question */
+            if (lstat(path, &info) != 0)
+               printf("stat() error on %s: %s\n", path,
+                       strerror(errno));
+            else
+            {
+               /* Skip the . and .. directory entries */
+               if (!(entry->d_name[0]=='.' && S_ISDIR(info.st_mode)))
+               {
+               writeStat(szGrpNam, szDir, entry->d_name, &info);
+               * pulSize += info.st_allocsize;
+               /* is this a directory, exclude symlinks */
+               /* S_ISNATIVE returns 0 for *FILE and *LIB */
+               if ( S_ISDIR(info.st_mode) && !S_ISLNK(info.st_mode)
+                    && strncmp( path, "/QSYS.LIB", 9 ) != 0 /* skip Libraries */
+                    && isRecursive == TRUE )
+                 {
+                    /* process subdirectory */
+                    strncpy(ast_char, "*", 2);
+                    ulSubSize = 0;
+                    traverse(szGrpNam, path, ast_char,
+                             &ulSubSize , isRecursive);
+                    * pulSize += ulSubSize;
+                 }  /* ISDIR if */
+               }  /* . and .. directory entries */
+            }  /* lstat else */
+         } /* entry_sel if */
+      } /* opendir if */
+      closedir(dir);
+/* printf("Total allocated size of directory %s is %lld\n", szDir, *pulSize);*/
+   }
+}
+
+/* ----------------------------------------------------------------- */
+/* main - Main procedure                                             */
+/* ----------------------------------------------------------------- */
+main(int argc, char **argv)
+{
+   char               szGrpNam[10];
+   char               szPath[MAXPATH];
+   char               szFile[MAXEXT];
+   int                i;
+   int                isRecursive = FALSE;
+   struct stat        info;
+   unsigned long long int  ulSize = 0;
+
+/* printf("\n\nHCHKSYN6C: \n"); */
+   if (argc < 3 || argc > 4)
+   {
+     printf("Invalid number of arguments.\n");
+     return  -1;
+   }
+
+   /* Copy the group name                                                     */
+   strcpy(szGrpNam, argv[1]);
+
+   /* Validate path length  */
+   if  (strlen(argv[2]) > MAXPATH - 1)
+   {
+     printf("Path name exceeds max length of %i", MAXPATH);
+     return -1;
+   }
+
+   /* Parse the path/file - anything after the last '/' is assumed to be file */
+   strcpy(szPath, argv[2]);
+   for (i =  strlen(szPath) - 1; i >= 0; i--)
+   {
+     if  (szPath[i] == '/' || i == 0)         /* find last '/' */
+     {
+        if (strlen(szPath + i + 1) > MAXEXT - 1)
+        {
+          printf("File name exceeds max length of %i",  MAXEXT);
+          return  -1;
+        }
+        if (szPath[i] == '/')
+        {
+           strcpy( szFile,  szPath + i + 1);   /* remove leading '/'  */
+           if (i == 0)
+             szPath[i+1] = '\0';               /* keep root '/'       */
+           else
+             szPath[i] = '\0';                 /* no trailing '/'     */
+        }
+        break;
+     }
+   }
+
+   /* Validate the path and find case sensitive path name                     */
+   if (chdir(szPath) != 0)
+   {
+      printf("Directory not found: %s \n",
+              szPath);
+      return;
+   }
+   if (getcwd(szPath, sizeof(szPath)) == (char) NULL )
+   {
+      printf("Unable to get current working directory: %s\n",
+              strerror(errno));
+      return;
+   }
+
+   /* Validate the 3rd param if provided */
+   if (argc == 4)
+   {
+     if (! (*argv[3] == '\\' && toupper( (*(argv[3] + 1) ) ) == 'S') )
+     {
+       printf("Invalid argument on 3rd parameter %s",  argv[3]);
+       return  -1;
+     }
+     else
+       isRecursive = TRUE;
+   }
+
+   /* Confirm */
+/* if  (isRecursive)
+     printf("This will process all files and all files "\
+            "in all subdirectories for \n");
+   else
+     printf("This will process files for \n");
+   if (szPath[0] == '\0')
+     printf("   Start  path        : <current directory>\n");
+   else
+     printf("   Start  path        : %s\n",  szPath);
+   printf("   Filename/extension : %s\n\n",  szFile);   */
+   /* printf("Continue (Y/N)?\n");      */
+   /* if ( toupper( getchar() ) != 'Y') */
+   /*   return -1;                      */
+
+   /* Open the output file for Append */
+   if ( (pFile = _Ropen("*LIBL/HCHKSYNID", "ar")) == NULL )
+       {
+          printf("Unable to open file HCHKSYNID ");
+          return -1;
+       }
+
+   /* Ready to process the (generic) files */
+     traverse(szGrpNam, szPath, szFile, &ulSize, isRecursive );
+
+   _Rclose(pFile);
+}

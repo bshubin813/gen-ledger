@@ -1,0 +1,59 @@
+/* ================================================================= */
+/* Object:         HSTRJRNPF       *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD                                            */
+/*                                                                   */
+/* Synopsis:       Starts journaling for the specified data objects  */
+/*                 in a library and allows to restart journaling.    */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 19990806 FK  Initial delivery                                     */
+/* 20010808 FK  Change default for RESTART parameter                 */
+/* 20020502 FK  Allow for maximum of 100 libraries                   */
+/* 20050714 FK  Allow for DTAAARA and DTAQ                           */
+/* ================================================================= */
+             CMD        PROMPT('Start journaling')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JRN) TYPE(QUALJRN) MIN(1) +
+                          PROMPT('Journal' 2)
+             PARM       KWD(FILE) TYPE(QUALFILE) MAX(100) +
+                          PROMPT('Object' 1)
+             PARM       KWD(IMAGES) TYPE(*CHAR) LEN(6) RSTD(*YES) +
+                          DFT(*BOTH) SPCVAL((*AFTER) (*BOTH)) +
+                          PROMPT('Journal images')
+             PARM       KWD(RESTART) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Restart journaling')
+             PARM       KWD(BATCH) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*YES) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Submit to batch')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*GENERIC) DFT(*ALL) SPCVAL((*ALL))
+             QUAL       TYPE(*NAME) PROMPT('Library')
+             QUAL       TYPE(*CHAR) LEN(8) RSTD(*YES) DFT(*ALL) +
+                          SPCVAL((*FILE) (*DTAARA) (*DTAQ) (*ALL)) +
+                          PROMPT('Object type to journal')
+
+ QUALJRN:    QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

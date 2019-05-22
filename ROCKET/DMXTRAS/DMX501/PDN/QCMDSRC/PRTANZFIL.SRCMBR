@@ -1,0 +1,42 @@
+/* ================================================================= */
+/* Object:         PRTANZFIL       *CMD                              */
+/*                 Print File Attributes command.                    */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(PRTANZFIL) HLPID(*CMD)              */
+/*                                                                   */
+/* Synopsis:       This command accepts a library, and based on      */
+/*                 parameters, prints file attributes for all files, */
+/*                 uniquely keyed files or non uniquely files. It    */
+/*                 can also optionally include key field info. A     */
+/*                 batch job PRTANZFILS is submitted immediately.    */
+/*                 NOTE: ANZFILEBAT must be submitted first.         */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* PRTANZFIL  *CLP     Program to process command parms              */
+/* PRTANZFILS *CBL     The actual print program                      */
+/* PRTANZFILS *PRTF    Printer file for the report                   */
+/* ANZFILL2   *LF      File containing results from ANZFILS          */
+/* ANZFLDL3   *LF      File containing results from ANZFILS          */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000202 MW  Add these comments                                   */
+/* ================================================================= */
+             CMD        PROMPT('Print Analyzed File Attributes')
+             PARM       KWD(LIBRARY) TYPE(*CHAR) LEN(10) MIN(1) +
+                          ALWUNPRT(*NO) ALWVAR(*NO) PROMPT('Library +
+                          Name')
+             PARM       KWD(TYPE) TYPE(*CHAR) LEN(1) RSTD(*YES) +
+                          DFT(A) VALUES(A N U) MIN(0) ALWUNPRT(*NO) +
+                          ALWVAR(*NO) PROMPT('U=Unique, N=Non +
+                          Unique, A=ALL')
+             PARM       KWD(KEYS) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) VALUES(*YES *NO) MIN(0) +
+                          ALWUNPRT(*NO) ALWVAR(*NO) CHOICE('*YES, +
+                          *NO') PROMPT('Include Key Fields')

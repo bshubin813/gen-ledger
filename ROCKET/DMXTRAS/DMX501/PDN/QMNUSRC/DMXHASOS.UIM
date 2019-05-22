@@ -1,0 +1,91 @@
+.im #HDR
+
+:import       name  = 'HSTRSOS'
+              pnlgrp = HSTRSOS.
+:import       name  = 'HSTRSOSPRD'
+              pnlgrp = HSTRSOSPRD.
+:import       name  = 'HCHGUSRSTS'
+              pnlgrp = HCHGUSRSTS.
+:import       name  = 'HCHGJSESTS'
+              pnlgrp = HCHGJSESTS.
+:import       name  = 'HAPYJSE'
+              pnlgrp = HAPYJSE.
+:import       name  = 'HRMVJSE'
+              pnlgrp = HRMVJSE.
+:import       name  = 'HAPYDIRE'
+              pnlgrp = HAPYDIRE.
+
+.im #VAR
+:cond         name=cstrsos
+              expr='chkobj("HSTRSOS", "*CMD")'.
+:cond         name=cstrsosprd
+              expr='chkobj("HSTRSOSPRD", "*CMD")'.
+:cond         name=cchgusrsts
+              expr='chkobj("HCHGUSRSTS", "*CMD")'.
+:cond         name=cchgjsests
+              expr='chkobj("HCHGJSESTS", "*CMD")'.
+:cond         name=capyjse
+              expr='chkobj("HAPYJSE", "*CMD")'.
+:cond         name=crmvjse
+              expr='chkobj("HRMVJSE", "*CMD")'.
+:cond         name=capydire
+              expr='chkobj("HAPYDIRE", "*CMD")'.
+.im #KEY
+:ekeyl.
+.im #TTL
+DMXtras High Availability Switchover menu
+.im #OPT
+
+:menugrp.     Switchover
+:menui        option=11
+              cond=cstrsos
+              help='HSTRSOS'
+              action='cmd ?hstrsos'
+              .Switchover target from backup system             HSTRSOS    (T)
+:menui        option=12
+              cond=cstrsosprd
+              help='HSTRSOSPRD'
+              action='cmd ?hstrsosprd'
+              .Enable/Disable activity with SOS exit program    HSTRSOSPRD (S/T)
+:menui        option=15
+              cond=cchgusrsts
+              help='HCHGUSRSTS'
+              action='cmd ?hchgusrsts'
+              .Enable/Disable user profiles                     HCHGUSRSTS (S/T)
+:menui        option=16
+              cond=cchgjsests
+              help='HCHGJSESTS'
+              action='cmd ?hchgjsests'
+              .Change job schedule entry status                 HCHGJSESTS (S)
+:menui        option=21
+              cond=capyjse
+              help='HAPYJSE'
+              action='cmd ?hapyjse'
+              .Apply job schedule entries from user space       HAPYJSE    (T)
+:menui        option=22
+              cond=crmvjse
+              help='HRMVJSE'
+              action='cmd ?hrmvjse'
+              .Remove applied job schedule entries              HRMVJSE    (T)
+:menui        option=25
+              cond=capydire
+              help='HAPYDIRE'
+              action='cmd ?hapydire'
+              .Apply directory entries from file                HAPYDIRE   (T)
+:emenugrp.
+
+.im #DMXHAHA
+
+:emenu.
+.im #CMDL
+
+.im #HLP
+
+:help         name='menu/help'.
+DMXtras High Availability Switchover Menu - Help
+:p.
+This menu holds the tools related to the switchover of your high availability
+implementation.
+:ehelp.
+
+:epnlgrp.

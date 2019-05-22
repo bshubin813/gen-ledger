@@ -1,0 +1,25 @@
+      * ============================================================ *
+      * Object:    HRSHCHGFB       *FILE PF                          *
+      *            Temporary file that holds the output for DSPFD    *
+      *            *MBR. This file is placed in QTEMP at the time    *
+      *            the HRSHCHGF command is run.                      *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20010914 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HRSHBFR@
+     A            MBFILE        10A         TEXT('File')
+     A            MBLIB         10A         TEXT('File library')
+     A            MBNAME        10A         TEXT('Member name')
+     A            MBCHGC         6A         TEXT('Member change date')
+     A            MBCHGD         6A         TEXT('Member change date')
+     A            MBCHGT         6A         TEXT('Member change time')
+      *
+     A          K MBLIB
+     A          K MBFILE
+     A          K MBNAME

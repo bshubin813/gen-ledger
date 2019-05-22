@@ -1,0 +1,48 @@
+/* ================================================================= */
+/* Object:         HRLSSIGW        *CMD                              */
+/*                 Clears the SIGW status of the specified target's  */
+/*                 and/or group's apply jobs.                        */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HRLSSIGW) HLPID(*CMD)  */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HRLSSIGW   *CMD     Command                                       */
+/* HRLSSIGW   *PGM     CPP                                           */
+/* HRLSSIGW   *PNLGRP  Help text                                     */
+/* HRLSSIGW1  *PGM                                                   */
+/* HAUMSG     *MSGF    Message file with all messages issued         */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010901 FK  Initial delivery                                     */
+/* 20020506 FK  Also allow changing HADGT file                       */
+/* ================================================================= */
+             CMD        PROMPT('Release apply job SIGW status')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(SYS) TYPE(*CHAR) RSTD(*YES) +
+                          SPCVAL((*TGT) (*SRC)) MIN(1) +
+                          PROMPT('System')
+             PARM       KWD(TGTNAM) TYPE(*NAME) SPCVAL((*ALL)) +
+                          MIN(1) PROMPT('Target name')
+             PARM       KWD(GRPNAM) TYPE(*NAME) SPCVAL((*ALL)) +
+                          MIN(1) PROMPT('Group name')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

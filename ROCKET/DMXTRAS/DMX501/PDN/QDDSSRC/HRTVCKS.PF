@@ -1,0 +1,66 @@
+      *CP: SIZE(*NOMAX) REUSEDLT(*YES)
+      * ============================================================ *
+      * Object:    HRTVCKS         *FILE PF                          *
+      *            Output file for HRTVCKS command. Contains check-  *
+      *            sums for blocks of records                        *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050420 FK  Initial delivery                                *
+      * 20050425 FK  Added object type                               *
+      * 20050503 FK  Added system name                               *
+      * 20050520 FK  MD5 checksum calculation (128 bits)             *
+      * 20050727 FK  Record length                                   *
+      * 20060425 FK  Allow specifying target library                 *
+      *              Include running system                          *
+      * ============================================================ *
+     A          R RTVCKS@
+     A            CKFSYS         4A         TEXT('File system')
+     A                                      COLHDG('File' 'System')
+     A                                      VALUES('*NTV' '*IFS')
+     A            CKSYSNAM       8A         TEXT('System name')
+     A                                      COLHDG('System' 'Name')
+     A            CKLIB         10A         TEXT('File library')
+     A                                      COLHDG('File' 'Library')
+     A            CKFILE        10A         TEXT('File')
+     A                                      COLHDG('File')
+     A            CKMBR         10A         TEXT('Member')
+     A                                      COLHDG('Member')
+     A            CKCKSTYP       5A         TEXT('Checksum type')
+     A                                      COLHDG('Checksum' 'Type')
+     A            CKBLKNUM       9P 0       TEXT('Record block number')
+     A                                      COLHDG('Record' 'Block' 'Number')
+     A            CKCHKSUM      32A         TEXT('Checksum')
+     A                                      COLHDG('Checksum')
+     A            CKRCDSTR       9P 0       TEXT('Block starting record')
+     A                                      COLHDG('Block' 'Starting' 'Record')
+     A            CKRCDEND       9P 0       TEXT('Block ending record')
+     A                                      COLHDG('Block' 'Ending' 'Record')
+     A            CKRCDLEN       5P 0       TEXT('Record length, -1=*TEXT')
+     A                                      COLHDG('Record' 'Length')
+     A            CKDTS           Z         TEXT('Checksum date-time')
+     A                                      COLHDG('Checksum' 'Date-Time')
+     A            CKTGTLIB      10A         TEXT('Target library')
+     A                                      COLHDG('Target' 'Library')
+     A            CKRUNSYS      10A         TEXT('Running system')
+     A                                      COLHDG('Running' 'System')
+     A                                      VALUES('*PRIMARY' '*BACKUP')
+     A            CKPTHKEY     500          TEXT('Path key')
+     A                                      COLHDG('Path key')
+     A                                      VARLEN
+     A            CKPATH      5000          TEXT('Object path')
+     A                                      COLHDG('Object path')
+     A                                      VARLEN
+      * Key fields
+     A          K CKLIB
+     A          K CKFILE
+     A          K CKMBR
+     A          K CKPTHKEY
+     A          K CKCKSTYP
+     A          K CKBLKNUM

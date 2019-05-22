@@ -1,0 +1,47 @@
+/* ================================================================= */
+/* Object:         HCHGJSESTS      *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HCHGJSESTS) HLPID(*CMD)*/
+/*                                                                   */
+/* Synopsis:       Changes the status of job schedule entries.       */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* HCHGJSESTS *PGM     CPP                                           */
+/* HCHGJSESTS *PNLGRP  Help for command                              */
+/* HAUMSG     *MSGF    Messages                                      */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20030704 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Change job sched. ent. status')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(ACTION) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          SPCVAL((*HLD) (*RST)) MIN(1) +
+                          PROMPT('Action to perform')
+             PARM       KWD(USRSPC) TYPE(QUALUSP) MIN(1) +
+                          PROMPT('User space')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALUSP:    QUAL       TYPE(*NAME) SPCVAL((*SYSNAME))
+             QUAL       TYPE(*NAME) SPCVAL((*CURLIB)) MIN(1) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

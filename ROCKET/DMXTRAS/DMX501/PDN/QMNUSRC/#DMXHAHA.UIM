@@ -1,0 +1,10 @@
+:menugrp.     HA menu options
+:menui        option=90
+              help='menu/option90'
+              action='cmd signoff'
+              .Signoff from the system
+:menui        option=94
+              help='menu/option94'
+              action='cmd wrkactjob sbs(xdmcluster hasuite qsyswrk qcmn)'
+              .Work with active HA jobs                                    (S/T)
+:emenugrp.

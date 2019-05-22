@@ -1,0 +1,17 @@
+      * ============================================================ *
+      * Object:    HUBSBBI         *FILE LF                          *
+      *            Logical file over HABSFBASE by OBJBASID           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020517 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUBSBBI@                  PFILE(HABSFBASE)
+     A            OBJBASID                  RENAME(ID)
+     A            BASPATH                   RENAME(PATHNAME)
+      *
+     A          K OBJBASID

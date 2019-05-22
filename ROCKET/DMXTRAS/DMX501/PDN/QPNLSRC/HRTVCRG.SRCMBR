@@ -1,0 +1,160 @@
+.* ============================================================ *
+.* Object:    HRTVCRG         *PNLGRP                           *
+.*            Help text for the HRTVCRG command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20040526 FK  Initial delivery                                *
+.* 20070207 FK  Explain difference between coupled/decoupled    *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRTVCRG'.Retrieve Cluster Resource Group - Help
+:P.
+The HRTVCRG (Retrieve Cluster Resource Group) allows you to retrieve the
+status, primary node and backup node of an iCluster group. When invoked,
+the command determines if iCluster is used in coupled (connected to OS/400
+cluster resource services) or decoupled mode and retrieves the resource group
+information based on this (status, primary node, backup node).
+:P.
+If iCluster is used in coupled mode, an
+OS/400 cluster API, QcstListClusterResourceGroupIn, is employed
+to retrieve this information from the *CRG object matching the name of the
+passed group. For more detailed information, please read the
+documentation for this API.
+:P.
+If iCluster is used in de-coupled mode, the group's attributes are retrieved
+from the iCluster metadata file DMGROUPS, status will be determined by invoking
+the HRTVSTS command.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter CRG
+:HELP NAME='HRTVCRG/CRG'.Cluster Resource Group - Help
+:XH3.Cluster Resource Group (CRG)
+:P.
+Specify the name of an existing Cluster Resource Group (*CRG object). The
+name of the CRG object matches the name of a group in the iCluster
+configuration.
+:P.
+The possible cluster-resource-group values are:
+:P.
+:PARML.
+:PT.DM_INTGRP
+:PD.
+This is the name of the internal iCluster Cluster Resource Group, when used
+in coupled mode. Primary node of the DM_INTGRP CRG is the master node.
+:NT.The DM_INTGRP group does not exist if iCluster is used in decoupled mode
+:ENT.
+:PT.cluster-resource-group-name
+:PD.
+Specify the name of valid group in the iCluster configuration.
+:EPARML.
+:EHELP.
+
+.* Help for parameter INFVLD
+:HELP NAME='HRTVCRG/INFVLD'.Information valid? - Help
+:XH3.Information valid? (INFVLD)
+:P.
+Returns if the information returned is consistent for all active nodes in
+the cluster.
+:P.
+Value returned is CHAR(4).
+:P.
+The possible information-valid values are:
+:P.
+:PARML.
+:PT.*YES
+:PD.
+The information returned is consistent for all active nodes in the cluster.
+:PT.*NO
+:PD.
+Information returned may not be consistent. Most-likely reason is that the
+current node is not active.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CRGTYP
+:HELP NAME='HRTVCRG/CRGTYP'.Cl. Resource Group type - Help
+:XH3.Cl. Resource Group type (CRGTYP)
+:P.
+This value returns the type of the Cluster Resource Group.
+:P.
+Value returned is CHAR(5).
+:P.
+The possible cluster-resource-group=type values are:
+:P.
+:PARML.
+:PT.*DATA
+:PD.
+The cluster resource group is of a data resiliency type. This is the value
+that is used for a iCluster replication group.
+:PT.*APPL
+:PD.
+The cluster resource group is of an application resiliency type. This is the
+value that is used for an iCluster application group (part of a resilient
+application).
+:PT.*DEV
+:PD.
+The cluster resource group is of a device resiliency type. This is the
+value that is used for an iCluster independent ASP group.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CRGSTS
+:HELP NAME='HRTVCRG/CRGSTS'.Cl. Resource Group status - Help
+:XH3.Cl. Resource Group status (CRGSTS)
+:P.
+This value returns the current status of the Cluster Resource Group.
+:NT.Not all possible statuses of a cluster resource group are supported by
+the HRTVCRG command, only the ones which are most-common. For statuses not
+supported, *OTHER is returned.:ENT.
+:P.
+Value returned is CHAR(10).
+:P.
+The possible status values are:
+:P.
+:PARML.
+:PT.*ACTIVE
+:PD.
+The Cluster Resource Group is active, resources are resilient.
+:PT.*INACTIVE
+:PD.
+The Cluster Resource Group is inactive, resources are not resilient.
+:PT.*INDOUBT
+:PD.
+The Cluster Resource Group information may not be accurate.
+:PT.*OTHER
+:PD.
+The status of the Cluster Resource Group is not one of the supported values and
+therefore not returned by the command. This is not an erroneous condition.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PRINOD
+:HELP NAME='HRTVCRG/PRINOD'.Primary node - Help
+:XH3.Primary node (PRINOD)
+:P.
+Returns the current primary node of the Cluster Resource Group.
+:P.
+Value returned is CHAR(8).
+:EHELP.
+
+.* Help for parameter BCKNOD
+:HELP NAME='HRTVCRG/BCKNOD'.Backup node - Help
+:XH3.Backup node (BCKNOD)
+:P.
+Returns the fist backup node of the Cluster Resource Group. iCluster employs
+only one backup node per CRG.
+:P.
+Value returned is CHAR(8).
+:EHELP.
+
+:EPNLGRP.

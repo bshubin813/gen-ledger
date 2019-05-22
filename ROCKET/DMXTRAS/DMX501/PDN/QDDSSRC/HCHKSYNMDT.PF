@@ -1,0 +1,87 @@
+      *CP: SIZE(*NOMAX)
+      * ============================================================ *
+      * Object:    HCHKSYNMD       *FILE PF                          *
+      *            Holds the retrieved member descriptions.          *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20001011 FK  Initial delivery                                *
+      * 20021111 FK  Include retrieval date                          *
+      * 20021119 FK  Include target/group                            *
+      * 20030414 FK  Include indicator for member lock               *
+      * 20050214 FK  Remove journal information                      *
+      * 20051010 FK  Include target library                          *
+      * 20051230 FK  Exclude flag instead of delete of record        *
+      * 20060327 FK  Include original file name                      *
+      * 20080107 FK  Object specifier sequence                       *
+      *              Mirror contents                                 *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNMD@
+     A            MBGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            MBCMPL        10A         TEXT('Original library')
+     A                                      COLHDG('Original' 'library')
+     A            MBCMPF        10A         TEXT('Original file')
+     A                                      COLHDG('Original' 'file')
+     A            MBLIB         10A         TEXT('File library')
+     A                                      COLHDG('File' 'library')
+     A            MBFILE        10A         TEXT('File name')
+     A                                      COLHDG('File' 'name')
+     A            MBNAME        10A         TEXT('Member name')
+     A                                      COLHDG('Member' 'name')
+     A            MBTGTL        10A         TEXT('Target library')
+     A                                      COLHDG('Target' 'library')
+     A            MBSEQ          3P 0       TEXT('Object spec. sequence')
+     A                                      COLHDG('Obj. spec.' 'Sequence#')
+     A            MBFTYP         1A         TEXT('File type')
+     A                                      COLHDG('File' 'type')
+     A            MBDTAT         1A         TEXT('Data or Source file')
+     A                                      COLHDG('Data/' 'Source')
+     A            MBCCEN         1A         TEXT('Creation century')
+     A                                      COLHDG('Create' 'Century')
+     A            MBCDAT         6A         TEXT('Creation date')
+     A                                      COLHDG('Create' 'Date')
+     A            MBCTIM         6A         TEXT('Creation time')
+     A                                      COLHDG('Create' 'Time')
+     A            MBCHGC         1A         TEXT('Change century')
+     A                                      COLHDG('Change' 'Century')
+     A            MBCHGD         6A         TEXT('Change date')
+     A                                      COLHDG('Change' 'Date')
+     A            MBCHGT         6A         TEXT('Change time')
+     A                                      COLHDG('Change' 'Time')
+     A            MBNRCD        10P 0       TEXT('Current number of records')
+     A                                      COLHDG('# of Records')
+     A            MBNDTR        10P 0       TEXT('Number of deleted records')
+     A                                      COLHDG('# Deleted')
+     A            MBCNTS         1A         TEXT('Mirror contents?')
+     A                                      COLHDG('Mirror' 'contents?')
+     A            MBDSZ2        15P 0       TEXT('Data space size')
+     A                                      COLHDG('Data space')
+     A            MBCHKS        15P 0       TEXT('Member checksum')
+     A                                      COLHDG('Checksum')
+     A            MBLOCK         1A         TEXT('Member locked?')
+     A                                      COLHDG('Member' 'Locked')
+     A                                      DFT('N')
+     A            MBRCEN         1A         TEXT('Retrieval century')
+     A                                      COLHDG('Retrieve' 'Century')
+     A            MBRDAT         6A         TEXT('Retrieval date')
+     A                                      COLHDG('Retrieve' 'Date')
+     A            MBRTIM         6A         TEXT('Retrieval time')
+     A                                      COLHDG('Retrieve' 'Time')
+     A            MBINC          4A         TEXT('Included/Excluded')
+     A                                      COLHDG('Member' 'Included')
+     A                                      VALUES('*INC' '*EXC')
+     A                                      DFT('*INC')
+      *
+     A          K MBGRPN
+     A          K MBCMPL
+     A          K MBCMPF
+     A          K MBNAME
+     A          K MBSEQ                     DESCEND

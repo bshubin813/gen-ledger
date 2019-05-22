@@ -1,0 +1,31 @@
+/* ================================================================= */
+/* Object:         ANZSAV2         *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD PNLGRP(ANZSAV2) HLPID(*CMD)                */
+/*                                                                   */
+/* Synopsis:       Creates a savefile in either the user specified   */
+/*                 library with a user specified name, or if both    */
+/*                 fields are left blank, a name of ANZhhmmss in the */
+/*                 HA Tools 2000 product library is created. The     */
+/*                 journal analysis information in files ANZ* and    */
+/*                 ARC* are then saved to this savefile.             */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/* ANZSAV2    *CLP     CL to process the command parms               */
+/* ANZSAV2    *PNLGRP  Help for this command                         */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20000204 MW  Added these comments.                                */
+/* ================================================================= */
+             CMD        PROMPT('Save Journal Data')
+ SAVEFILE:   PARM       KWD(FILE) TYPE(*CHAR) LEN(10) CHOICE('Name') +
+                          PROMPT('Save File Name')
+ LIBRARY:    PARM       KWD(LIB) TYPE(*CHAR) LEN(10) CHOICE('Name') +
+                          PROMPT('Library Name')

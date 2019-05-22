@@ -1,0 +1,127 @@
+.* ============================================================ *
+.* Object:    HCFGAJE         *PNLGRP                           *
+.*            Help text for the HCFGAJE command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020515 FK  Initial delivery                                *
+.* 20030116 FK  New parameter: STRAJE                           *
+.* 20111217 FK  Remove HA and CDC                               *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HCFGAJE'.Configure autostart job entry - Help
+:P.
+The HCFGAJE (Configure autostart job entry) assists in configuring
+the jobs that are to be run as autostart job entries (AJE) in the
+iCluster subsystem. It prompts
+the command that is specified in the job descriptions' requests data
+(RQSDTA) and updates it with the parameter specified on the prompted
+command.
+:P.
+If the command is cancelled by pressing F3 or F12 while prompted,
+the request data of the job description will not be changed.
+:P.
+If the job is specified and a subsystem description, an autostart
+job entry is automatically added to the subsystem.
+:P.
+Optionally, the autostart job entry can be started immediately.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter JOBD
+:HELP NAME='HCFGAJE/JOBD'.Job description - Help
+:XH3.Job description (JOBD)
+:P.
+Specify the job description that is to be used as an AJE to the
+subsystem. The job description's request data (RQSDTA) must contain
+a valid command or an error will be issued.
+:P.
+The possible job-description values are:
+:P.
+:PARML.
+:PT.:PK def.job-description-name:EPK.
+:PD.
+Specify a valid job description that contains request data for an
+autostart job entry.
+:PT.HMONHA
+:PD.
+This is the job description for monitoring iClsuter.
+:PT.HDLTJRNRCV
+:PD.
+This is the job description for periodically deleting the obsolete
+journal receivers on the system.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JOB
+:HELP NAME='HCFGAJE/JOB'.Job name in subsystem - Help
+:XH3.Job name in subsystem (JOB)
+:P.
+Specifies the name in the subsystem for the autostart job entry.
+:P.
+The possible job values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+No autostart job entry (AJE) is added to the subsystem. Only the
+request data of the job description is changed.
+:PT.*JOBD
+:PD.
+An autostart job entry (AJE) with the same name as the job
+description is added to the specified subsystem.
+:PT.job-name
+:PD.
+Specify a valid job name to identify the autostart job entry.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SBSD
+:HELP NAME='HCFGAJE/SBSD'.Subsystem description - Help
+:XH3.Subsystem description (SBSD)
+:P.
+Specifies the name of the subsystem to which the autostart job
+entry (AJE) will be added. This parameter only needs to be entered
+if a job is specified.
+:P.
+:PARML.
+:PT.XDMCLUSTER
+:PD.
+The autostart job entry is added to iCluster's XDMCLUSTER subsystem.
+:PT.subsystem-name
+:PD.
+Specify an existing subsystem and its library for addition of the
+autostart job entry.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STRAJE
+:HELP NAME='HCFGAJE/STRAJE'.Start autostart job entry - Help
+:XH3.Start autostart job entry (STRAJE)
+:P.
+Determines whether the autostart job entry (AJE) is started immediately
+after being added to the subsystem.
+:P.
+The possible start-autostart-job-entry values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+The autostart job entry will not be started immediately but only
+after the subsystem is restarted.
+:PT.*YES
+:PD.
+The job description will be used to immediately submit a job with the
+request data (command).
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

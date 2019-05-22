@@ -1,0 +1,21 @@
+      * ============================================================ *
+      * Object:    HSUSACTF        *FILE PF                          *
+      *            Temporary file that holds the output for DSPFD    *
+      *            *MBR. This file is placed in QTEMP at the time    *
+      *            the HSUSACTF command is run.                      *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020626 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HSUSACT@
+     A            MBFILE        10A         TEXT('File')
+     A            MBLIB         10A         TEXT('File library')
+     A            MBNAME        10A         TEXT('Member name')
+     A            MBFTYP         1A         TEXT('File type')
+     A            MBDTAT         1A         TEXT('Physical file type: -
+     A                                      D=*DATA, S=*SRC')

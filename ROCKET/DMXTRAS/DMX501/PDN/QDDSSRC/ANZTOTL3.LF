@@ -1,0 +1,16 @@
+      * ============================================================ *
+      * Object:    ANZTOTL3        *FILE PF                          *
+      *            Holds the totals per program and date/hour        *
+      *            descending by # of transactions (D)               *
+      *                                                              *
+      * Create remarks:                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060127 FK  Comments                                        *
+      * ============================================================ *
+     A          R ANZTR3                    PFILE(ANZTOT3)
+     A          K TOTENT                    DESCEND

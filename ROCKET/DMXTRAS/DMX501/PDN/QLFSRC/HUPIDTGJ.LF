@@ -1,0 +1,33 @@
+      * ============================================================ *
+      * Object:    HUPIDTGJ        *FILE LF                          *
+      *            Logical file over HAPID, by target/group/journal. *
+      *            Includes HA 3.6+ fields for last position!!       *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20030106 FK  Initial delivery                                *
+      * 20070319 FK  Facilitate 20-digit journal positions           *
+      * ============================================================ *
+     A          R HUPID@                    PFILE(HAPID)
+     A            TGTNAME
+     A            GRPNAME
+     A            JRNNAME
+     A            JRNLIB
+     A            PIDPRC                    RENAME(PROCE00001)
+     A            PID
+     A            PIDSTS                    RENAME(STATUS)
+     A            CHECKDONE
+     A            CHECKWAIT
+     A            CHECKID
+     A            RCVNAME
+     A            RCVLIB
+     A            LASTPOS       20  0
+      *
+     A          K TGTNAME
+     A          K GRPNAME
+     A          K JRNLIB
+     A          K JRNNAME

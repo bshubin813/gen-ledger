@@ -1,0 +1,31 @@
+      * ============================================================ *
+      * Object:    HLSTCFGI        *FILE PF                          *
+      *            Holds the IFS object specifiers for a target/group*
+      *            combination.                                      *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20021104 FK  Initial delivery                                *
+      * 20030114 FK  Include column headings                         *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R LSTCFGI@
+     A            LIGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'name')
+     A            LIBASE      5001A         VARLEN TEXT('Base path name')
+     A                                      COLHDG('Base' 'path')
+     A            LIREL       5001A         VARLEN TEXT('Relative path name')
+     A                                      COLHDG('Relative' 'path')
+     A            LIINCF         1A         TEXT('Include/Exclude')
+     A                                      COLHDG('Include or' 'Exclude')
+     A            LISEQ          5P 0       TEXT('Object spec. sequence')
+     A                                      COLHDG('Sequence#')
+      *
+     A          K LIGRPN
+     A          K LISEQ

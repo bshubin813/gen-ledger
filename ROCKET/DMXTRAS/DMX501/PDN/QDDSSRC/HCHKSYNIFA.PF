@@ -1,0 +1,103 @@
+      * ============================================================ *
+      * Object:    HCHKSYNIFA      *FILE PF                          *
+      *            Differences in IFS object authorities             *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050517 FK  Initial delivery                                *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNIFA@
+     A            IAGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            IATYPE        11A         TEXT('IFS Object type')
+     A                                      COLHDG('IFS Object' 'type')
+     A            IAUSR         10A         TEXT('User profile')
+     A                                      COLHDG('User' 'profile')
+     A            IAMAT          1A         TEXT('Missing authority target')
+     A                                      COLHDG('Missing' 'Authority' -
+     A                                      'Target')
+     A                                      DFT('N')
+     A            IAMAS          1A         TEXT('Obsolete authority target')
+     A                                      COLHDG('Obsolete' 'Authority' -
+     A                                      'Target')
+     A                                      DFT('N')
+     A            IAAD           1A         TEXT('Authority difference')
+     A                                      COLHDG('Authority' 'difference')
+     A                                      DFT('N')
+     A            IAOD           1A         TEXT('Owner difference')
+     A                                      COLHDG('Owner' 'difference')
+     A                                      DFT('N')
+     A            IAFIX          1A         TEXT('Authority fixed')
+     A                                      COLHDG('Authority' 'fixed')
+     A                                      DFT('N')
+     A            SJOWN         10A         TEXT('Src IFS Object owner')
+     A                                      COLHDG('Src' 'Object' 'Owner')
+     A            TJOWN         10A         TEXT('Tgt IFS Object owner')
+     A                                      COLHDG('Tgt' 'Object' 'Owner')
+     A            SJDTAA        10A         TEXT('Src Data authority')
+     A                                      COLHDG('Src Data' 'Authority')
+     A            TJDTAA        10A         TEXT('Tgt Data authority')
+     A                                      COLHDG('Tgt Data' 'Authority')
+     A            SJANAM        10A         TEXT('Src Authorisation list')
+     A                                      COLHDG('Source' 'Auth. List')
+     A            TJANAM        10A         TEXT('Tgt Authorisation list')
+     A                                      COLHDG('Target' 'Auth. List')
+     A            SJOPR          1A         TEXT('Src Operational auth')
+     A                                      COLHDG('Src' 'Opr.')
+     A            TJOPR          1A         TEXT('Tgt Operational auth')
+     A                                      COLHDG('Src' 'Opr.')
+     A            SJOMGT         1A         TEXT('Src Object management auth')
+     A                                      COLHDG('Src' 'Obj.' 'Mgt')
+     A            TJOMGT         1A         TEXT('Tgt Object management auth')
+     A                                      COLHDG('Tgt' 'Obj.' 'Mgt')
+     A            SJEXS          1A         TEXT('Src Object existence auth')
+     A                                      COLHDG('Src' 'Obj.' 'Exs')
+     A            TJEXS          1A         TEXT('Tgt Object existence auth')
+     A                                      COLHDG('Tgt' 'Obj.' 'Exs')
+     A            SJALT          1A         TEXT('Src Object alter authority')
+     A                                      COLHDG('Src' 'Alter')
+     A            TJALT          1A         TEXT('Tgt Object alter authority')
+     A                                      COLHDG('Tgt' 'Alter')
+     A            SJREF          1A         TEXT('Src Object reference auth')
+     A                                      COLHDG('Src' 'Obj.' 'Ref.')
+     A            TJREF          1A         TEXT('Tgt Object reference auth')
+     A                                      COLHDG('Tgt' 'Obj.' 'Ref.')
+     A            SJREAD         1A         TEXT('Src Read authority')
+     A                                      COLHDG('Src' 'Read')
+     A            TJREAD         1A         TEXT('Tgt Read authority')
+     A                                      COLHDG('Tgt' 'Read')
+     A            SJADD          1A         TEXT('Src Add authority')
+     A                                      COLHDG('Src' 'Add')
+     A            TJADD          1A         TEXT('Tgt Add authority')
+     A                                      COLHDG('Tgt' 'Add')
+     A            SJUPD          1A         TEXT('Src Update authority')
+     A                                      COLHDG('Src' 'Update')
+     A            TJUPD          1A         TEXT('Tgt Update authority')
+     A                                      COLHDG('Tgt' 'Update')
+     A            SJDLT          1A         TEXT('Src Delete authority')
+     A                                      COLHDG('Src' 'Delete')
+     A            TJDLT          1A         TEXT('Tgt Delete authority')
+     A                                      COLHDG('Tgt' 'Delete')
+     A            SJEXEC         1A         TEXT('Src Execute authority')
+     A                                      COLHDG('Src' 'Execute')
+     A            TJEXEC         1A         TEXT('Tgt Execute authority')
+     A                                      COLHDG('Tgt' 'Execute')
+     A            SJAMGT         1A         TEXT('Src Auth. list mgt auth')
+     A                                      COLHDG('Src' 'Autl.' 'Mgt')
+     A            TJAMGT         1A         TEXT('Tgt Auth. list mgt auth')
+     A                                      COLHDG('Tgt' 'Autl.' 'Mgt')
+     A            IAOBJK       500A         VARLEN TEXT('Object name (key)')
+     A                                      COLHDG('IFS Object' 'Key')
+     A            IAOBJ       5001A         VARLEN TEXT('IFS Object name')
+     A                                      COLHDG('IFS Object')
+      *
+     A          K IAGRPN
+     A          K IAOBJK
+     A          K IAUSR

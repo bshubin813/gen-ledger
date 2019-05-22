@@ -1,0 +1,65 @@
+/* ================================================================= */
+/* Object:         HRTVNETTFC      *CMD                              */
+/*                 Retrieve network traffic analysis to output file. */
+/*                                                                   */
+/* Associated objects:                                               */
+/* Object     Type     Description                                   */
+/* ---------- -------- --------------------------------------------- */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20060216 FK  Initial delivery                                     */
+/* ================================================================= */
+             CMD        PROMPT('Retrieve network traffic')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(TFCFILE) TYPE(QUALTFC) MIN(1) +
+                          PROMPT('Traffic input file')
+             PARM       KWD(SUMOUTF) TYPE(QUALSUM) MIN(1) +
+                          PROMPT('Summary output file')
+             PARM       KWD(SUMUNIT) TYPE(*CHAR) LEN(5) RSTD(*YES) +
+                          DFT(*HOUR) SPCVAL((*HOUR) (*DAY)) +
+                          PROMPT('Summarise by unit of')
+             PARM       KWD(NBRUNIT) TYPE(*DEC) LEN(3) DFT(*DFT) +
+                          SPCVAL((*DFT 0)) PROMPT('Number of units')
+             PARM       KWD(RELDATE) TYPE(*CHAR) LEN(8) DFT(*STRPRV) +
+                          SPCVAL((*STRPRV 19670827) (*STRCUR +
+                          19680827)) CHOICE('YYYYMMDD, *STRPRV, +
+                          *STRCUR') PROMPT('Relative to date YYYYMMDD')
+             PARM       KWD(CLNHST) TYPE(*DEC) LEN(3) DFT(2) RANGE(1 +
+                          999) CHOICE('Number of months') +
+                          PROMPT('Clean history older than')
+             PARM       KWD(PORT) TYPE(*DEC) LEN(5 0) DFT(*ALL) +
+                          SPCVAL((*ALL 0) (2222) (4444) (4545)) +
+                          PMTCTL(*PMTRQS) PROMPT('Port number')
+             PARM       KWD(LCLADR) TYPE(*CHAR) LEN(15) DFT(*ALL) +
+                          SPCVAL((*ALL)) PMTCTL(*PMTRQS) +
+                          PROMPT('Local IP address')
+             PARM       KWD(RMTADR) TYPE(*CHAR) LEN(15) DFT(*ALL) +
+                          SPCVAL((*ALL)) PMTCTL(*PMTRQS) +
+                          PROMPT('Remote IP address')
+             PARM       KWD(SYSNAM) TYPE(*NAME) LEN(8) DFT(*CURRENT) +
+                          SPCVAL((*CURRENT) (*ALL)) PMTCTL(*PMTRQS) +
+                          PROMPT('System name')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALTFC:    QUAL       TYPE(*NAME)
+             QUAL       TYPE(*NAME) PROMPT('Library')
+ QUALSUM:    QUAL       TYPE(*NAME) SPCVAL((HNETTFCSUM) (*PRINT))
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

@@ -1,0 +1,361 @@
+.* ============================================================ *
+.* Object:    HPRTSAJ         *PNLGRP                           *
+.*            Help text for the HPRTSAJ command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 19990708 FK  Initial delivery                                *
+.* 20030123 FK  Default DAYS(1).                                *
+.*              DAYS and HOURS can both be specified.           *
+.*              Allow submission to batch.                      *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HPRTSAJ'.Print security audit journal - Help
+:P.
+The HPRTSAJ (Print security audit journal with selections) prints the
+contents of the security audit journal (QAUDJRN) that have been created
+since the age specified in the command parameters.
+:P.
+Selections as to which entries to print can be set in the command
+parameters. Amongst others, one can specify the library in which the
+change occurred or search for a certain string in the journal entry.
+:P.
+:NT.Make sure that the QAUDCTL and QAUDLVL system values have been set
+properly to log the changes that you want to audit.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter DAYS
+:HELP NAME='HPRTSAJ/DAYS'.Journal entry age in days - Help
+:XH3.Journal entry age in days (DAYS)
+:P.
+If specified, this number is subtracted from the current date to
+determine the starting date for security audit journal entries. All
+entries from the first minute of the starting date are retrieved.
+:P.
+:NT.You must specify either the journal entry age in days, in hours or both.
+:ENT.
+:P.
+:PARML.
+:PT.:PK def.1:EPK.
+:PD.
+Journal entries starting from yesterday are listed.
+:PT.*HOURS
+:PD.
+Journal entries of the current day with an age from the number of
+hours specified are listed.
+:PT.number-of-days
+:PD.
+Journal entries from the specified number of days ago are listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter HOURS
+:HELP NAME='HPRTSAJ/HOURS'.Journal entry age in hours - Help
+:XH3.Journal entry age in hours (HOURS)
+:P.
+If specified, the specified number of hours (1 through 24) is
+retrieving journal entries. All entries from the starting point are
+retrieved from the security audit journal.
+:P.
+:NT.You must specify either the journal entry age in days, in hours or both.
+:ENT.
+:P.
+:PARML.
+:PT.:PK def.*DAYS:EPK.
+:PD.
+Journal entries starting 00:00 on the specified number of days ago
+will be listed.
+:PT.number-of-hours
+:PD.
+Journal entries from the specified number of hours ago are listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter USRPRF
+:HELP NAME='HPRTSAJ/USRPRF'.User profile - Help
+:XH3.User profile (USRPRF)
+:P.
+Specifies that the journal entries being retrieved from the
+security audit journal are restricted to the entries created for
+the user profile specified in this parameter.
+:P.
+The possible user-profile values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+The journal entries are not restricted to a certain user profile.
+:P.
+:NT.Please note that the underlying selection program is designed to
+remove certain users from the selection. Refer to the source for a
+list of the user profiles that are being skipped.:ENT.
+:PT.user-profile
+:PD.
+Specify the name of the user profile that is listed in the journal
+entries being retrieved.
+:EPARML.
+:EHELP.
+
+.* Help for parameter JOB
+:HELP NAME='HPRTSAJ/JOB'.Job - Help
+:XH3.Job (JOB)
+:P.
+Specifies that the journal entries being retrieved from the
+security audit journal are limited to the entries created by
+the job specified in this parameter.
+:P.
+The selection is based on job name only; no selection is applied
+to the other job identifiers (user, number).
+:P.
+The possible job values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+The journal entries are not restricted to a certain job.
+:PT.job
+:PD.
+Specify the name of the job for which the journal entries were created.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PGM
+:HELP NAME='HPRTSAJ/PGM'.Program - Help
+:XH3.Program (PGM)
+:P.
+Specifies that the journal entries being retrieved from the
+security audit journal are limited to the entries created by
+the program specified in this parameter.
+:P.
+The possible program values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+The journal entries are not restricted to the ones created by a
+certain program.
+:PT.program-name
+:PD.
+Specify the name of the program for which the journal entries were
+created.
+:EPARML.
+:EHELP.
+
+.* Help for parameter OBJ
+:HELP NAME='HPRTSAJ/OBJ'.Object - Help
+:XH3.Object (OBJ)
+:P.
+Restricts the journal entries being retrieved to those for objects
+with the name that is specified here.
+:P.
+The possible object values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+No restriction is applied to the name of the object that was altered.
+:PT.object-name
+:PD.
+Only the journal entries for the object specified here are listed,
+regardless of the library in which the object is contained.
+:EPARML.
+:EHELP.
+
+.* Help for parameter LIB
+:HELP NAME='HPRTSAJ/LIB'.Library - Help
+:XH3.Library (LIB)
+:P.
+Restricts the journal entries being retrieved to those for objects
+altered in the specified library.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Journal entries for objects in any library on the system are listed.
+:PT.library-name
+:PD.
+Only journal entries for objects in the specified library are listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter TYPE
+:HELP NAME='HPRTSAJ/TYPE'.Object type - Help
+:XH3.Object type (TYPE)
+:P.
+Specifies that only journal entries for the object type specified
+here are retrieved.
+:P.
+The possible object-type values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+The object type is not a selection criteria. Objects of any type are
+retrieved from the security audit journal.
+:PT.object-type
+:PD.
+Only journal entries for objects with the type specified here are
+listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SCAN
+:HELP NAME='HPRTSAJ/SCAN'.Journal entry contains value - Help
+:XH3.Journal entry contains value (SCAN)
+:P.
+If specified, the value must be contained in the data of the journal
+entry.
+:P.
+:NT.Only the data portion of the journal entry is being scanned. The
+message that is being shown on the report is NOT part of the data
+portion.:ENT.
+:P.
+The possible journal-entry-contains-value values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+No scan is performed on the data portion of the journal entry.
+:PT.string
+:PD.
+Only journal entries which contain the value specified are retrieved.
+:NT.The scan is case-insensitive.:ENT.
+:EPARML.
+:EHELP.
+
+.* Help for parameter INCTZC
+:HELP NAME='HPRTSAJ/INCTZC'.Include T-ZC entries - Help
+:XH3.Include T-ZC entries (INCTZC)
+:P.
+Specifies whether or not journal entries which depict an internal
+object change are listed. T-ZC entries are created if auditing on the
+object level is active and the contents of an object are changed.
+:P.
+:NT.If object auditing has not been switched on (system value QAUDCTL)
+there will not be any T-ZC entries in the security audit journal.:ENT.
+:P.
+The possible include-T-ZC-entries values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Object content changes are not listed.
+:PT.*YES
+:PD.
+All changes to an object - including the contents - are listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ENTTYP
+:HELP NAME='HPRTSAJ/ENTTYP'.Entry type - Help
+:XH3.Entry type (ENTTYP)
+:P.
+Specifies which type of journal entries are selected from the security
+audit journal. Typical journal entries types that you may select are:
+:SL.
+:LI.CO - Creation of an object
+:LI.DO - Deletion of an object
+:LI.SV - Object was saved
+:LI.OR - Object was restored
+:ESL.
+:P.
+The possible entry-type values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+All journal entry types are included in the selection.
+:PT.entry-type
+:PD.
+Only entries of the type specified here are listed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter BATCH
+:HELP NAME='HPRTSAJ/BATCH'.Submit to batch - Help
+:XH3.Submit to batch (BATCH)
+:P.
+Determines whether or not the printing of security audit journal
+entries is submitted to batch.
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The listing of security audit journal entries is submitted to batch. The
+HAUTILS job description in the library list is used to submit the job and
+the job name is HPRTSAJ.
+:PT.*NO
+:PD.
+The listing of security audit journal entries is run interactively.
+:EPARML.
+:EHELP.
+
+.* Help for parameter OUTPUT
+:HELP NAME='HPRTSAJ/OUTPUT'.Output - Help
+:XH3.Output (OUTPUT)
+:P.
+Determines if the output is shown on the screen or a spooled file is
+created.
+:P.
+The possible output values are:
+:P.
+:PARML.
+:PT.:PK def.*PRINT:EPK.
+:PD.
+The output is printed with the job's spooled output.
+:PT.*
+:PD.
+The output is shown on the display. This value is translated to *PRINT if
+BATCH(*YES) is specified.
+:PT.*OUTFILE
+:PD.
+An output file with the security audit journal entries is generated.
+:EPARML.
+:EHELP.
+
+.* Help for parameter OUTFILE
+:HELP NAME='HPRTSAJ/OUTFILE'.Output file - Help
+:XH3.Output file (OUTFILE)
+:P.
+Specify the name of the output file to hold the security audit journal
+entries. The default for the output file is QTEMP/HPRTSAJ.
+:EHELP.
+
+.* Help for parameter JRNRCV
+:HELP NAME='HPRTSAJ/JRNRCV'.Starting journal receiver - Help
+:XH3.Starting journal receiver (JRNRCV)
+:P.
+Specify the journal receiver that is used as a starting point for listing
+the audit journal entries. This parameter is useful is a great number of
+security audit journal receivers are kept on the system and you do not
+want to search from the beginning of the chain.
+:P.
+The possible starting-journal-receiver values are:
+:P.
+:PARML.
+:PT.:PK def.*CURCHAIN:EPK.
+:PD.
+Journal entries are searched starting from the beginning of the chain
+of receivers.
+:PT.*CURRENT
+:PD.
+Journal entries are searched starting from the currently attached receiver.
+:PT.receiver-name
+:PD.
+Journal entries are searched starting from the specified receiver. You must
+ensure that the journal receiver exists or the command will fail.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

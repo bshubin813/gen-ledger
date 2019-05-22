@@ -1,0 +1,211 @@
+.* ============================================================ *
+.* Object:    HENDCST         *PNLGRP                           *
+.*            Help text for the HENDCST command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20040524 FK  Initial delivery                                *
+.* 20051006 FK  Wait until subsystem is ended                   *
+.* 20070504 FK  Change text for parameter ENDSBS                *
+.* 20080212 FK  Allow ending groups without ending node         *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HENDCST'.End iCluster processes - Help
+:P.
+The HENDCST (End iCluster processes) can be used from a job scheduler
+or the closure program to end any active groups in a controlled manner and
+subsequently end the current node.
+:P.
+The following actions are taken when run:
+:OL.
+:LI.If the iCluster subsystem is not started, don't do anything
+:LI.If HENDCST is run interactively, submit to batch as iCluster user
+:LI.The submitted job does the following:
+:UL.
+:LI.End all active groups and wait until inactive
+:LI.End the current node, if specified
+:LI.End the iCluster subsystem, if specified
+:EUL.
+:LI.If specified the job submitting the HENDCST job waits until the iCluster
+subsystem has ended
+:EOL.
+:P.
+The job waits a maximum amount of time, as specified in the MAXWAITGRP
+parameter, until all groups have ended. If the groups have not ended after the
+wait time, the node will be ended anyway.
+:P.
+The job waits a maximum amount of time, as specified in the MAXWAITNOD
+parameter, until the node has ended. If the node is still active after the
+wait time, the subsystem will be ended anyway.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter OPTION
+:HELP NAME='HENDCST/OPTION'.End option for groups - Help
+:XH3.End option for groups (OPTION)
+:P.
+Indicates how replication withing the replication groups or resilient
+application is stopped. Operations can be stopped immediately or ended in a
+controlled manner. See the DMENDGRP and DMENDAPP commands for more information.
+:P.
+The possible end-option-for-groups values are:
+:P.
+:PARML.
+:PT.:PK def.*CNTRLD:EPK.
+:PD.
+Ends operations in a controlled manner. The DELAY parameter is respected.
+:PT.*IMMED
+:PD.
+Ends operations immediately.
+:EPARML.
+:EHELP.
+
+.* Help for parameter DELAY
+:HELP NAME='HENDCST/DELAY'.End delay time - Help
+:XH3.End delay time (DELAY)
+:P.
+Specifies the maximum amount of time in seconds for replication to stop
+in a controlled manner without intervention. This parameter allows you to
+specify a timeout period for stopping replication. See the DMENDGRP and
+DMENDAPP commands for more information.
+:P.
+The possible end-option values are:
+:P.
+:PARML.
+:PT.:PK def.600:EPK.
+:PD.
+A maximum of 10 minutes (600 seconds) is allowed for replication to
+stop in a controlled manner.
+:PT.Number of seconds
+:PD.
+Specify the number of seconds allowed for the replication to stop in a
+controlled manner.
+:EPARML.
+:EHELP.
+
+.* Help for parameter STSMSGQ
+:HELP NAME='HENDCST/STSMSGQ'.Status/Alert message queue - Help
+:XH3.Status/Alert message queue (STSMSGQ)
+:P.
+Specify the name of the message queue to which status- and alert messages
+are sent.
+:P.
+:PARML.
+:PT.:PK def.*CURRENT:EPK.
+:PD.
+Messages are sent to the user who issued the command.
+:PT.QSYSOPR
+:PD.
+Messages are sent to the system operator message queue.
+:PT.*NONE
+:PD.
+No status and/or alert messages are sent.
+:PT.message-queue-name
+:PD.
+Specify the name and library of the message queue that is to
+receive the messages.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MAXWAITGRP
+:HELP NAME='HENDCST/MAXWAITGRP'.Max. wait until groups ended - Help
+:XH3.Max. wait until groups ended (MAXWAITGRP)
+:P.
+Specifies the maximum amount of time (in minutes) that the command waits until
+all groups active on the current node have stopped. If there is still a
+group active after the number of minutes specified, a message will be sent
+and the program continues ending the node.
+:P.
+:PARML.
+:PT.:PK def.30:EPK.
+:PD.
+The command waits a maximum of 30 minutes until all groups have finished
+processing and have ended.
+:PT.Number of minutes
+:PD.
+Specify the number of minutes that must be waited until all groups have
+finished procssing.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ENDNOD
+:HELP NAME='HENDCST/ENDNOD'.End node - Help
+:XH3.End node (ENDNOD)
+:P.
+Indicates whether the current iCluster node must be stopped.
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+Stop the current node after all the groups have come to an end.
+:PT.*NO
+:PD.
+The node will remain active.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MAXWAITNOD
+:HELP NAME='HENDCST/MAXWAITNOD'.Max. wait until node ended - Help
+:XH3.Max. wait until node ended (MAXWAITNOD)
+:P.
+Specifies the maximum amount of time (in minutes) that the command waits
+until the current node has stopped. If the node is still active after the
+the number of minutes specified, the command will continue and possibly
+end the subsystem (dependent on the ENDSBS parameter).
+:P.
+:PARML.
+:PT.:PK def.5:EPK.
+:PD.
+The command waits 5 minutes until the current node has stopped.
+:PT.Number of minutes
+:PD.
+Specify the number of minutes that must be waited until the current node
+has stopped.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ENDSBS
+:HELP NAME='HENDCST/ENDSBS'.End iCluster subsystem - Help
+:XH3.End iCluster subsystem (ENDSBS)
+:P.
+Indicates if the iCluster subsystem must be ended after ending the
+current node. Default name for the iCluster subsystem is XDMCLUSTER.
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The subsystem will be ended (controlled, delay 10 seconds) after the current
+node has stopped.
+:PT.*NO
+:PD.
+The iCluster subsystem will remain active.
+:EPARML.
+:EHELP.
+
+.* Help for parameter WAITSBS
+:HELP NAME='HENDCST/WAITSBS'.Wait until subsystem ended - Help
+:XH3.Wait until subsystem ended (WAITSBS)
+:P.
+Specified whether the job submitting the HENDCST job waits until the
+iCluster subsystem has come to a full stop.
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+The current job will not wait until the subsystem has ended; the submitted
+HENDCST job will run asynchronously.
+:PT.*YES
+:PD.
+The current job waits until the iCluster subsystem has ended.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

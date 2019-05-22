@@ -1,0 +1,189 @@
+.* ============================================================ *
+.* Object:    HRSHCHGF        *PNLGRP                           *
+.*            Help text for the command.                        *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20010914 FK  Initial delivery                                *
+.* 20020306 FK  New parameters: CMDDLY and TGTNAM               *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HRSHCHGF'.Refresh objects through SAVF - Help
+:P.
+The HRSHCHGF (Refresh objects through save file) command allows you to
+determine files that have been changed between two DSPFD TYPE(*MBR)
+commmands and save them into a save file or refresh them through the
+iCluster replication processes.
+:P.
+The command may be useful to determine and act upon files for
+which journaling has been stopped for a period of time. Via this
+command, one can selectively refresh the files.
+:P.
+By executing the command, a save file with the changed objects is
+created, including a data area that contains the command to be
+executed after objects have been restored.
+:P.
+The procedure to determine files that were changed while journaling
+was stopped is as follows if RSHMTH(*SAVF) has been specified:
+:OL.
+:LI.Stop journaling for the files in question
+:LI.Display the member descriptions to the "before" output file
+through the DSPFD TYPE(*MBR) command
+:LI.Let the application processes execute (for instance, EOD processing)
+:LI.Display the member descriptions to the "after" output file
+through the DSPFD TYPE(*MBR) command
+:LI.Start journaling again
+:LI.Set the position for the data journal using the SETHAPOS command
+:LI.Set the position for the security audit journal using the SETHAPOS command
+:LI.Start the group in question with STARTUPD(*NO)
+:LI.Execute the HRSHCHGF command to save the changed files to the save
+file
+:LI.Allow users back into the application
+:EOL.
+:P.
+The command specified on the HRSHCHGF command may be used to start
+the apply job of the group in question after the restore has completed.
+:P.
+:NT.One can save the changed files in a library and start the
+group that mirrors the files in question without starting the apply
+job. After restore, the STRHAAPY command may be executed to allow for
+stacked updates to be applied.:ENT.
+:P.
+:NT.It is the responsibility of the user to allow for sufficient time
+before starting the group and its apply job. The command does not
+check whether all access paths have already been built. Specify a
+command delay (CMDDLY) if you wish to wait the specified number of
+minutes before the command is executed.:ENT.
+:P.
+:NT.If the record format of the saved/restored files between source and
+target is not the same, the restore will fail or create xxxxx00001
+files with the old format. Please ensure that you only use this
+command if file formats have not been changed between source and
+target.:ENT.
+:P.
+:NT.If *ACT has been chosen as the refresh method, no command may be
+executed after restore. The replication processes will act
+upon the selected objects through the DMCACTOBJ command.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter OBJ
+:HELP NAME='HRSHCHGF/OBJ'.Objects to be refreshed - Help
+:XH3.Objects to be saved (OBJ)
+:P.
+Specify the library that contains the objects to be refreshed. Only
+objects in this library will be processed.
+:P.
+There are two values available for the object part of this parameter:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+All objects in the specified library will be saved with the SAVOBJ
+command. One must specify RSHMTH(*SAVF) if all objects must be saved.
+:PT.*CHG
+:PD.
+Only objects that have been changed between the two DSPFD TYPE(*MBR)
+commands are refreshed. If more than 300 files are identified as "changed",
+all objects in the library will be saved (OS/400 limitation for the
+SAVOBJ command).
+:EPARML.
+:EHELP.
+
+.* Help for parameter RSHMTH
+:HELP NAME='HRSHCHGF/RSHMTH'.Refresh method - Help
+:XH3.Refresh method (RSHMTH)
+:P.
+Specify the method that will be used for refreshing the changed
+objects.
+:P.
+The possible refresh-method values are:
+:P.
+:PARML.
+:PT.:PK def.*SAVF:EPK.
+:PD.
+Objects that have been changed are refreshed by means of a save file. After
+restoring, a command may be executed.
+:PT.*ACT
+:PD.
+Objects that have been changed are refreshed by activing them through the
+iCluster DMACGOBJ command. Currently, only files may be refreshed which
+occurs via the HSUSACTF command.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SAVF
+:HELP NAME='HRSHCHGF/SAVF'.Save file - Help
+:XH3.Save file (SAVF)
+:P.
+Specify the name and library of the save file that holds the save
+file with the changed objects and the control data area. This is the
+save file that will be replicated to the target machine.
+:EHELP.
+
+.* Help for parameter CMD
+:HELP NAME='HRSHCHGF/CMD'.Command after restore - Help
+:XH3.Command after restore (CMD)
+:P.
+Specify the command that must be executed on the target machine, after
+the restore of the objects in the save file has been done.
+:P.
+One can specify the STRHAAPY command here to start the apply job for
+the group that replicates the restored files.
+:EHELP.
+
+.* Help for parameter CMDDLY
+:HELP NAME='HRSHCHGF/CMDDLY'.Delay before executing command - Help
+:XH3.Delay before executing command (CMDDLY)
+:P.
+Specify the number of minutes that the save file exit will wait
+after the restore before executing the specified command. The delay
+will only occur if a command is specified.
+:P.
+The possible delay-before-executing-command values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+The command will be executed immediately after the restore
+completes successfully.
+:PT.number of minutes
+:PD.
+Specify the number of minutes to wait before executing the
+specified command.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MBRDBFR
+:HELP NAME='HRSHCHGF/MBRDBFR'.Member descriptions (before) - Help
+:XH3.Member descriptions (before) (MBRDBFR)
+:P.
+Specify the name of the file that holds the member descriptions of
+the "before" images of the files. The file must have been generated
+through the DSPFD TYPE(*MBR) command.
+:P.
+The file specified here is compared against the file on the MBRDAFT
+parameter for changes.
+:EHELP.
+
+.* Help for parameter MBRDAFT
+:HELP NAME='HRSHCHGF/MBRDAFT'.Member descriptions (after) - Help
+:XH3.Member descriptions (after) (MBRDAFT)
+:P.
+Specify the name of the file that holds the member descriptions of
+the "after" images of the files. The file must have been generated
+through the DSPFD TYPE(*MBR) command.
+:P.
+The file specified here is compared against the file on the MBRDBFR
+parameter for changes.
+:EHELP.
+
+:EPNLGRP.

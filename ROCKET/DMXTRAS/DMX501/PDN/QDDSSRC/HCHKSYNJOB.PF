@@ -1,0 +1,29 @@
+      * ============================================================ *
+      * Object:    HCHKSYNJOB      *FILE PF                          *
+      *            Holds the submitted jobs for HCHKSYNTGT           *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050214 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R SYNJOB@
+     A            SJSFRM         6A         TEXT('Submitted from job')
+     A                                      COLHDG('Submitted' 'from' 'job')
+     A            SJJNAM        10A         TEXT('Job name')
+     A                                      COLHDG('Job name')
+     A            SJJUSR        10A         TEXT('Job user')
+     A                                      COLHDG('Job user')
+     A            SJJNBR         6A         TEXT('Job number')
+     A                                      COLHDG('Job' 'number')
+     A            SJTGTN        10A         TEXT('Target name')
+     A                                      COLHDG('Target' 'name')
+     A            SJGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'name')
+      *
+     A          K SJSFRM

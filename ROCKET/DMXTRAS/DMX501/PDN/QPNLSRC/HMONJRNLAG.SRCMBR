@@ -1,0 +1,271 @@
+.* ============================================================ *
+.* Object:    HMONJRNLAG      *PNLGRP                           *
+.*            Help text for the HMONJRNLAG command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020912 FK  Initial delivery                                *
+.* 20021029 FK  Allow purge for history                         *
+.* 20031006 FK  Include history monitoring                      *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HMONJRNLAG'.Monitor journal repl. lag - Help
+:P.
+The HMONJRNLAG (Monitor journal replication lag) is best used as
+an autostart job for the XDMCLUSTER subsystem.
+It can be used to monitor
+the latency in replication for all journals replication by iCluster
+and warn the system operator when the latency becomes too big. In order to
+determine the replication lag, the iCluster subsystem must be
+started both the source- and target systems.
+:P.
+Every interval of time as set in the CHKITV parameter, the monitor wakes
+up and retrieves the following information from all journals scraped
+by iCluster, dependent on the measurement type
+:P.
+For measurement type *ADH (Ad Hoc)
+:UL.
+:LI.Last entry in the currently attached receiver
+:LI.Oldest journal entry still in use by iCluster (using RTVHAPOS)
+:EUL.
+:P.
+For measurement type *HST (History)
+:UL.
+:LI.Last journal entry logged in the history
+:LI.Source (sent) journal entry logged in the history
+:LI.Applied journal entry logged in the history
+:EUL.
+From the entries retrieved, either ad hoc or from the history monitor,
+the time difference in minutes between the various journal entries is calculated
+and stored in the HJRNLAG file in the specified libary. When all entries for
+all journals have been retrieved, the generated replication lag entries
+are checked for the maximum allowed lag parameters.
+of minutes exceeds these values, a message is sent to the message queue
+specified on the ALRMSGQ parameter.
+:P.
+At startup, the journal lag output file is reorganised with the key
+file HJRNLAGDJ specified so that entries in the file will be sorted in
+ascending order again.
+:P.
+If the PRGHST parameter is specified, every new day the history older
+than the specified number of days is purged from the lag file.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter MSMTYP
+:HELP NAME='HMONJRNLAG/MSMTYP'.Method of measurement - Help
+:XH3.Method of measurement (MSMTYP)
+:P.
+Specify how the replication lag is determined, either ad hoc or from
+the history monitor.
+:P.
+The possible method-of-measurement values are:
+:P.
+:PARML.
+:PT.:PK def.*ADH:EPK.
+:PD.
+The last journal entry and the journal entry still required by
+iCluster are retrieved ad hoc using the RTVHAPOS command. Subsequently, the
+latency between these entries is calculated.
+:PT.*HST
+:PD.
+The following information is retrieved for every monitor entry in the history
+monitor:
+:UL.
+:LI.Last journal entry
+:LI.Sent journal entry
+:LI.Applied journal entry
+:EUL.
+:P.
+Subsequently, the send latency (last-sent) and apply latency (sent-applied)
+is calculated.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CHKITV
+:HELP NAME='HMONJRNLAG/CHKITV'.Check interval in minutes - Help
+:XH3.Check interval in minutes (CHKITV)
+:P.
+Specify how many minutes the monitoring process must wait before
+retrieving the journal replication lag values. Every specified interval,
+monitor wakes up to retrieve latency.
+:P.
+When intially started, the monitor awaits the specified interval until it
+starts monitoring the journal replication latency.
+:P.
+The possible check-interval-in-minutes values are:
+:P.
+:PARML.
+:PT.:PK def.30:EPK.
+:PD.
+Wait for 30 minutes before retrieving the journal latency again.
+:PT.*HOUR
+:PD.
+Wait for 1 hour before retrieving the journal latency again.
+:PT.*HALFDAY
+:PD.
+Wait for 12 hours before retrieving the journal latency again.
+:PT.*DAY
+:PD.
+Wait for 24 hours before retrieving the journal latency again.
+:PT.interval-in-minutes
+:PD.
+Specify the interval time in minutes.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ALRMSGQ
+:HELP NAME='HMONJRNLAG/ALRMSGQ'.Alert message queue - Help
+:XH3.Alert message queue (ALRMSGQ)
+:P.
+Specify the name of the message queue to which alerts are sent when the
+replication lag for a journal exceeds the maximum allowed latency.
+:PARML.
+:PT.:PK def.QSYSOPR:EPK.
+:PD.
+The message is sent to the system operator message queue.
+:PT.message-queue-name
+:PD.
+Specify the name and library of the message queue that is to
+receive the message.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ALWLAG
+:HELP NAME='HMONJRNLAG/ALWLAG'.Allowed total lag in minutes - Help
+:XH3.Allowed total lag in minutes (ALWLAG)
+:P.
+Specify the maximum latency that is acceptable for journal latency, this is
+the time difference between the last entry in the current journal receiver
+and the last applied entry from the same journal.
+:P.
+The possible allowed-total-lag-in-minutes values are:
+:P.
+:PARML.
+:PT.:PK def.30:EPK.
+:PD.
+Alerts are sent when time difference between the last journal entry and
+the applied journal entry becomes greater than 30 minutes.
+:PT.*HOUR
+:PD.
+Alerts are sent when time difference between the last journal entry and
+the applied journal entry becomes greater than 1 hour.
+:PT.*HALFDAY
+:PD.
+Alerts are sent when time difference between the last journal entry and
+the applied journal entry becomes greater than 12 hours.
+:PT.*DAY
+:PD.
+Alerts are sent when time difference between the last journal entry and
+the applied journal entry becomes greater than 1 day.
+:PT.lag-in-minutes
+:PD.
+Specify the maximum allowed latency in minutes.
+:EPARML.
+:EHELP.
+
+.* Help for parameter PRGHST
+:HELP NAME='HMONJRNLAG/PRGHST'.Purge history older than -  Help
+:XH3.Purge history older than (PRGHST)
+:P.
+Specify the number of days that history must reside in the replication
+lag file. Every new day that the monitor is active, history older than
+the specified number of days is purged from the lag file.
+:P.
+The possible purge-history-older-than values are:
+:P.
+:PARML.
+:PT.:PK def.7:EPK.
+:PD.
+All journal lag history older than 7 days is purged from the lag file.
+:PT.*NONE
+:PD.
+No history is purged.
+:PT.number of days
+:PD.
+Specify the number of days that history must reside in the journal lag
+file.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ALWSNDLAG
+:HELP NAME='HMONJRNLAG/ALWSNDLAG'.Allowed send lag in minutes - Help
+:XH3.Allowed sent lag in minutes (ALWSNDLAG)
+:P.
+Specify the maximum latency that is acceptable between the last- and sent
+journal entries. This is only valid when the history (*HST) monitor entries
+are retrieved.
+:P.
+The possible allowed-send-lag-in-minutes values are:
+:P.
+:PARML.
+:PT.:PK def.*ALWLAG:EPK.
+:PD.
+The send-specific latency is ignored, only the total lag is of importance.
+:PT.30
+:PD.
+Alerts are sent when time difference between the last journal entry and
+the sent journal entry becomes greater than 30 minutes.
+:PT.*HOUR
+:PD.
+Alerts are sent when time difference between the last journal entry and
+the sent journal entry becomes greater than 1 hour.
+:PT.*HALFDAY
+:PD.
+Alerts are sent when time difference between the last journal entry and
+the sent journal entry becomes greater than 12 hours.
+:PT.*DAY
+:PD.
+Alerts are sent when time difference between the last journal entry and
+the sent journal entry becomes greater than 1 day.
+:PT.lag-in-minutes
+:PD.
+Specify the maximum allowed latency in minutes.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ALWAPYLAG
+:HELP NAME='HMONJRNLAG/ALWAPYLAG'.Allowed apply lag in minutes - Help
+:XH3.Allowed apply lag in minutes (ALWAPYLAG)
+:P.
+Specify the maximum latency that is acceptable between the sent- and applied
+journal entries. This is only valid when the history (*HST) monitor entries
+are retrieved.
+:P.
+The possible allowed-apply-lag-in-minutes values are:
+:P.
+:PARML.
+:PT.:PK def.*ALWLAG:EPK.
+:PD.
+The apply-specific latency is ignored, only the total lag is of importance.
+:PT.30
+:PD.
+Alerts are sent when time difference between the sent journal entry and
+the applied journal entry becomes greater than 30 minutes.
+:PT.*HOUR
+:PD.
+Alerts are sent when time difference between the sent journal entry and
+the applied journal entry becomes greater than 1 hour.
+:PT.*HALFDAY
+:PD.
+Alerts are sent when time difference between the sent journal entry and
+the applied journal entry becomes greater than 12 hours.
+:PT.*DAY
+:PD.
+Alerts are sent when time difference between the sent journal entry and
+the applied journal entry becomes greater than 1 day.
+:PT.lag-in-minutes
+:PD.
+Specify the maximum allowed latency in minutes.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

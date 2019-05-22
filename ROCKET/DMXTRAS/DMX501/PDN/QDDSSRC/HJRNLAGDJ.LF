@@ -1,0 +1,20 @@
+      * ============================================================ *
+      * Object:    HJRNLAGDJ       *FILE LF                          *
+      *            Replication lag file by System/Date-Time/Journal  *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020912 FK  Initial delivery                                *
+      * 20031006 FK  Include measuremen type                         *
+      * ============================================================ *
+     A          R HJRNLAG@                  PFILE(HJRNLAG)
+      *
+     A          K JLSYSN
+     A          K JLTYPM
+     A          K JLDTSM
+     A          K JLJRNN
+     A          K JLJRNL

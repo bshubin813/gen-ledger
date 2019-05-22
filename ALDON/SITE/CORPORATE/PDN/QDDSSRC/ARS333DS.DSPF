@@ -1,0 +1,71 @@
+      *  START OF SPECIFICATIONS   ******************************
+      *                                                         *
+      * PHYSICAL FILE MEMBER NAME:  QDSIGNON                    *
+      *                                                         *
+      *  END OF SPECIFICATIONS   ********************************
+      *
+      *
+      **************************************************************************
+      *                                Sign On                                 *
+      *                                       System  . . . . . :   XXXXXXXX   *
+      *                                       Subsystem . . . . :   XXXXXXXXXX *
+      *                                       Display . . . . . :   XXXXXXXXXX *
+      *                                                                        *
+      *            User  . . . . . . . . . . . . . .   ___________             *
+      *            Password  . . . . . . . . . . . .                           *
+      *            Program/procedure . . . . . . . .   ___________             *
+      *            Menu  . . . . . . . . . . . . . .   ___________             *
+      *            Current library . . . . . . . . .   ___________             *
+      *                                                                        *
+      *                                                                        *
+      *                                                                        *
+      *                                                                        *
+      *                                                                        *
+      *                                                                        *
+      *                                                                        *
+      *                                                                        *
+      *                                                                        *
+      *                                     (C) COPYRIGHT IBM CORP. 19XX, 19YY.*
+      **************************************************************************
+      *
+      * |--------|---------|---------|---------|---------|---------|---------|--
+      *  1       10        20        30        40        50        60        70
+      *
+      ***********************************************************
+      *                                                         *
+      *  RECORD FORMAT -- NAME: SIGNON                          *
+      *               FUNCTION: SIGN ON DISPLAY                 *
+      *               INDICATORS USED: 01 02                    *
+      *               FUNCTION KEYS USED: NONE                  *
+      *               NUMBER OF I/O FIELDS:  11                 *
+      *               KEYWORDS USED: DSPATR CHGINPDFT CLEAR     *
+      *                              CHECK                      *
+      *                                                         *
+      ***********************************************************
+      *
+     A          R SIGNON
+     A                                      CLEAR
+     A                                      BLINK
+     A                                 01 23'             Sign On             '
+     A                                      DSPATR(HI)
+     A                                 02 48'System  . . . . . :'
+     A            SYSNAM         8   O 02 70
+     A                                 03 48'Subsystem . . . . :'
+     A            SBSNAM        10   O 03 70
+     A                                 04 48'Display . . . . . :'
+     A            DEVNAM        10   O 04 70
+     A                                 06 17'User  . . . . . . . . . . . . . .'
+     A            USERI         10   B 06 53
+     A  01                             07 17'Password  . . . . . . . . . . . .'
+     A  01        PASSW         10   I 07 53
+     A                                      DSPATR(ND)
+     A                                 08 17'Program/procedure . . . . . . . .'
+     A            PROGR         10   B 08 53CHECK(LC)
+     A                                 09 17'Menu  . . . . . . . . . . . . . .'
+     A            MENU          10   B 09 53CHECK(LC)
+     A                                 10 17'Current library . . . . . . . . .'
+     A            CURLIB        10   B 10 53CHECK(LC)
+     A  02        QSNER         80   O 24 01DSPATR(HI)
+     A            COPYR         40   O 24 40DSPATR(HI)
+     A            UBUFF        128   H
+      *

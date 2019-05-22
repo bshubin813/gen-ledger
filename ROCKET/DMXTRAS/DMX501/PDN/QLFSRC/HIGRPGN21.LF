@@ -1,0 +1,27 @@
+      * ============================================================ *
+      * Object:    HIGRPGN21       *FILE LF                          *
+      *            Logical file over DMGROUPS (iCluster 2.1+)        *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050216 FK  Initial delivery                                *
+      * 20060317 FK  Include journal info                            *
+      * ============================================================ *
+     A          R HIGRPGN@                  PFILE(DMGROUPS)
+     A            GROUP
+     A            GRPTYPE
+     A            APPNAME
+     A            CURRPRIM
+     A            PREVPRIM
+     A            BACKUP
+     A            DESC
+     A            GRPTGTLIB                 RENAME(TGTLIB)
+     A            DFTDBJRN
+     A            DFTBSFJRN
+     A            JRNLOC
+      *
+     A          K GROUP

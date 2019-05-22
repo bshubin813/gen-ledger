@@ -1,0 +1,34 @@
+      *CP: SIZE(*NOMAX)
+      * ============================================================ *
+      * Object:    ANZDLTPF        *FILE PF                          *
+      *            Holds the list of receivers for the journal       *
+      *            and whether they have been processed              *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060126 FK  Only indicate if processed                      *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R ANZDLTR
+     A            JRNNME        10A         TEXT('Journal name')
+     A                                      COLHDG('Journal' 'name')
+     A            JRNLIB        10A         TEXT('Journal library')
+     A                                      COLHDG('Journal' 'library')
+     A            JRNRCV        10A         TEXT('Receiver name')
+     A                                      COLHDG('Receiver' 'name')
+     A            JRNRLB        10A         TEXT('Receiver library')
+     A                                      COLHDG('Receiver library')
+     A            PROC           4A         TEXT('Receiver processed?')
+     A                                      COLHDG('Receiver' 'processed?')
+     A                                      VALUES('*YES' '*NO')
+     A                                      DFT('*NO')
+      *
+     A          K JRNNME
+     A          K JRNLIB
+     A          K JRNRCV
+     A          K JRNRLB

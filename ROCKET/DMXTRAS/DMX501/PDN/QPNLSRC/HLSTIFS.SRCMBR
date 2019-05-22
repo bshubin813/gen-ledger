@@ -1,0 +1,88 @@
+.* ============================================================ *
+.* Object:    HLSTIFS         *PNLGRP                           *
+.*            Help text for the HLSTCFG command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20050715 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HLSTIFS'.List folder contents - Help
+:P.
+The HLSTIFS (List folder contents) command allows you to
+output all IFS stream files and subfolders for a specific folder to an output
+file. The output file may then be used to understand which objects make up
+an IFS folder and the size of the objects.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter PATH
+:HELP NAME='HLSTIFS/PATH'.Path name - Help
+:XH3.Path name (PATH)
+:P.
+Specify the path name (a pattern can be specified in the last part of the path
+name) which holds the IFS objects to be listed. Path names that may be
+specified include the root folder structure, /QDLS, /QOpenSys, etc.
+:P.
+Examples:
+:UL.
+:LI./QIBM/* - List all subfolders and stream files in the /QIBM folder
+:LI./tmp/ab*  - List all streamfiles and subfolders starting with "ab"
+:EUL.
+:EHELP.
+
+.* Help for parameter OUTFILE
+:HELP NAME='HLSTIFS/OUTFILE'.Output file - Help
+:XH3.Output file (OUTFILE)
+:P.
+Specify the name of output file which will contain the output for the listed
+IFS objects. If the file does not exist yet, it will be created based on the
+template file HLSTIFS in the DMXtras customer library. The library must exist.
+:P.
+The possible output-file values are:
+:P.
+:PARML.
+:PT.output-file
+:PD.
+Specify the name of the output file that must contain the records with the
+IFS folder listing.
+:EPARML.
+:P.
+The possible library values are:
+:P.
+:PARML.
+:PT.library-name
+:PD.
+Specify the name of the library which holds the output file.
+:EPARML.
+:EHELP.
+
+.* Help for parameter OPTION
+:HELP NAME='HLSTIFS/OPTION'.Replace or add records - Help
+:XH3.Replace or add records (OPTION)
+:P.
+Specify whether existing records in the output file must be replaced or that
+the output must be added to any existing records in the output file.
+:P.
+The possible replace-or-add-records values are:
+:P.
+:PARML.
+:PT.:PK def.*REPLACE:EPK.
+:PD.
+Before adding the listing of the specified IFS folder, the output file is
+emptied of all records.
+:PT.*ADD
+:PD.
+Listed IFS objects are added to any existing record in the output file.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

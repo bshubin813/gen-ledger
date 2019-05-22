@@ -1,0 +1,48 @@
+/* ================================================================= */
+/* Object:         HENDJRNPF       *CMD                              */
+/*                 Starting command.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD                                            */
+/*                                                                   */
+/* Synopsis:       Ends journaling for the specified files in a      */
+/*                 library.                                          */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20010808 FK  Initial delivery                                     */
+/* 20050714 FK  Allow for DTAAARA and DTAQ                           */
+/* ================================================================= */
+             CMD        PROMPT('End journaling')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(FILE) TYPE(QUALFILE) MIN(1) +
+                          PROMPT('Object')
+             PARM       KWD(OBJTYPE) TYPE(*CHAR) LEN(8) RSTD(*YES) +
+                          DFT(*ALL) SPCVAL((*FILE) (*DTAARA) +
+                          (*DTAQ) (*ALL)) PROMPT('Object type')
+             PARM       KWD(JRN) TYPE(QUALJRN) PROMPT('Journal')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALFILE:   QUAL       TYPE(*GENERIC) SPCVAL((*ALL))
+             QUAL       TYPE(*NAME) PROMPT('Library')
+
+ QUALJRN:    QUAL       TYPE(*NAME) DFT(*OBJECT) SPCVAL((*OBJECT) +
+                          (*FILE *OBJECT))
+             QUAL       TYPE(*NAME) DFT(*LIBL) SPCVAL((*LIBL)) +
+                          PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

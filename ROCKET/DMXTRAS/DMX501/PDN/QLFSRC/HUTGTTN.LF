@@ -1,0 +1,26 @@
+      * ============================================================ *
+      * Object:    HUTGTTN         *FILE LF                          *
+      *            Logical file over OMFTGT by Target name           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * 20001201 FK  Add host names                                  *
+      * 20060319 FK  Add journal info                                *
+      * ============================================================ *
+     A          R HUTGTTN@                  PFILE(OMFTGT)
+     A            TGTID                     RENAME(ID)
+     A            TGTNAME                   RENAME(NAME)
+     A            TGTDESC                   RENAME(DESC)
+     A            MONJOBID
+     A            HAROLE
+     A            LCLHOST                   RENAME(TCPLCLNAME)
+     A            RMTHOST                   RENAME(TCPRMTNAME)
+     A            PFDFTJRN
+     A            BSFDFTJRN
+      *
+     A          K TGTNAME

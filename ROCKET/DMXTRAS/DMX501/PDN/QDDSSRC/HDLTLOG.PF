@@ -1,0 +1,22 @@
+      * ============================================================ *
+      * Object:    HDLTLOG         *FILE PF                          *
+      *            Log file to hold all journal receiver deletions.  *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000614 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HDLTLOG@
+     A            DLJRNL        10A         TEXT('Journal library')
+     A            DLJRNN        10A         TEXT('Journal name')
+     A            DLRCVL        10A         TEXT('Journal receiver library')
+     A            DLRCVN        10A         TEXT('Journal receiver name')
+     A            DLJOBN        10A         TEXT('Job name')
+     A            DLJOBU        10A         TEXT('Job user')
+     A            DLJOB#         6A         TEXT('Job number')
+     A            DLDTS           Z         TEXT('Receiver delete date/time')
+     A            DLSIZE        10  0       TEXT('Receiver size')

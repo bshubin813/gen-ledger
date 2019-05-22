@@ -1,0 +1,76 @@
+.* ============================================================ *
+.* Object:    HDSPSYNTGT      *PNLGRP                           *
+.*            Help text for the command.                        *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020508 FK  Initial delivery                                *
+.* 20040405 FK  Enable for iCluster                             *
+.* 20111217 FK  REMOVE HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HDSPSYNTGT'.Display synchronisation check output - Help
+:P.
+The HDSPSYNTGT (Display synchronisation check output) is used to
+display the output for the synchronisation check executed by the
+HCHKSYNTGT command.
+:P.
+The command may be run on the source and target, as both locations
+will contain some information regarding differences. Basically, running
+the command shows the spooled files for job HS<SynID>. If multiple sync
+check jobs are found, a list will be shown to select from.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ICGROUP
+:HELP NAME='HDSPSYNTGT/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the synchronisation check was run.
+:P.
+The possible group-or-resilient-application values are:
+:P.
+:PARML.
+:PT.*ALL
+:PD.
+The synchronisation check was run for all iCluster groups or resilient
+applications.
+:PT.group or resilient applicaton
+:PD.
+Specify the name of the group or resilient application for which the
+synchronisation check was run.
+:EPARML.
+:EHELP.
+
+.* Help for parameter SYNID
+:HELP NAME='HDSPSYNTGT/SYNID'.Sync. check identifier - Help
+:XH3.Sync. check identifier (SYNID)
+:P.
+Name that identifies the job composed during the sync. check. The name
+of the job is HS<SynID>.
+:P.
+The possible sync-check-identifier values are:
+:P.
+:PARML.
+:PT.:PK def.*TGT:EPK.
+:PD.
+The first 5 characters of the ICGROUP parameter determine
+this parameter. If ICGROUP(*ALL) is specified, the synchronisation ID
+is 'CLUST'.
+:PT.identifier
+:PD.
+Specify the 5-character name that identifies the synchronisation check
+job.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

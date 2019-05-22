@@ -1,0 +1,43 @@
+/* ================================================================= */
+/* Object:         HWRKJRN         *CMD                              */
+/*                 Works with journals for the installed products    */
+/*                 or on the system.                                 */
+/*                                                                   */
+/* Create remarks: CRTCMD MSGF(HAUMSG) PNLGRP(HWRKJRN) HLPID(*CMD)   */
+/*                                                                   */
+/* Synopsis:                                                         */
+/*                                                                   */
+/* ----------------------------------------------------------------- */
+/*                  Changes made to this source                      */
+/*                  ---------------------------                      */
+/*                                                                   */
+/* Date     Who Description                                          */
+/* -------- --- ---------------------------------------------------- */
+/* 20070424 FK  Initial delivery                                     */
+/* 20111223 FK  Remove HA                                            */
+/* ================================================================= */
+             CMD        PROMPT('Work with journals')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter definitions                                   */
+/* ----------------------------------------------------------------- */
+             PARM       KWD(JRN) TYPE(QUALJRN) PROMPT('Journal')
+             PARM       KWD(CHKIC) TYPE(*CHAR) LEN(4) RSTD(*YES) +
+                          DFT(*NO) SPCVAL((*YES) (*NO)) +
+                          PROMPT('Check iCluster')
+
+/* ----------------------------------------------------------------- */
+/*           Qualifiers and lists                                    */
+/* ----------------------------------------------------------------- */
+ QUALJRN:    QUAL       TYPE(*GENERIC) DFT(*ALL) SPCVAL((*ALL) +
+                          (*ALLDTA) (QAUDJRN))
+             QUAL       TYPE(*NAME) DFT(*PRD) SPCVAL((*PRD) +
+                          (*USRLIBL) (*ALLUSR)) PROMPT('Library')
+
+/* ----------------------------------------------------------------- */
+/*           Parameter dependencies                                  */
+/* ----------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------- */
+/*           Prompt controls                                         */
+/* ----------------------------------------------------------------- */

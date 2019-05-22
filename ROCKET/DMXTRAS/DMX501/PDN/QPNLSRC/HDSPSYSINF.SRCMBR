@@ -1,0 +1,24 @@
+.* ============================================================ *
+.* Object:    HDSPSYSINF       *PNLGRP                          *
+.*            Help text for the HDSPSYSINF command.             *
+.*                                                              *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HDSPSYSINF'.Display system information - Help
+:P.
+The HDSPSYSINF (Display system information) command may be used
+to display all the information on the current system required for
+obtaining a licence for the iCluster product. The information is
+displayed on the screen, which may be directly printed or
+captured by copy/paste into an e-mail.
+:P.
+The command also checks the library list for Rocket Software
+products and shows the installation libraries and product versions.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+:EPNLGRP.

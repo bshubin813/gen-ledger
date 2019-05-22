@@ -1,0 +1,36 @@
+      * ============================================================ *
+      * Object:    HSTRJRNPF       *FILE PF                          *
+      *            Temporary file that holds the output for the      *
+      *            DSPOBJD command.                                  *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 19990806 FK  Initial delivery                                *
+      * 20050715 FK  DSPOBJD instead of DSPFD                        *
+      * ============================================================ *
+     A          R HSTRJRN@
+     A            ODOBNM        10A         TEXT('Object')
+     A                                      COLHDG('Object')
+     A            ODLBNM        10A         TEXT('Library')
+     A                                      COLHDG('Library')
+     A            ODOBTP         8A         TEXT('Type')
+     A                                      COLHDG('Object' 'Type')
+     A            ODOBAT        10A         TEXT('Object attribute')
+     A                                      COLHDG('Object' 'Attribute')
+     A            ODOBLK         1A         TEXT('Object locked: 0=Not locked -
+     A                                      1=Locked')
+     A                                      COLHDG('Object' 'Locked')
+     A            ODJRST         1A         TEXT('Currently journaled: 0=No -
+     A                                      1=Yes')
+     A                                      COLHDG('Currently' 'Journaled')
+     A            ODJRNM        10A         TEXT('Journal name')
+     A                                      COLHDG('Journal' 'Name')
+     A            ODJRLB        10A         TEXT('Journal library')
+     A                                      COLHDG('Journal' 'Library')
+     A            ODJRIM         1A         TEXT('Journal images: 0=*AFTER -
+     A                                      1=*BOTH')
+     A                                      COLHDG('Journal' 'Images')

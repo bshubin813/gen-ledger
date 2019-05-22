@@ -1,0 +1,28 @@
+      * ============================================================ *
+      * Object:    HUDSJJL         *FILE LF                          *
+      *            Logical file over HADDSAVJRN by journal + library *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20040526 FK  Initial delivery                                *
+      * 20070319 FK  Facilitate 20-digit journal positions           *
+      * ============================================================ *
+     A          R HUDSJJL@                  PFILE(HADSAVJRN)
+     A            TGTID
+     A            GRPID
+     A            JRNNAME
+     A            JRNLIB
+     A            AUDJRNPOS     20  0
+     A            AJRNRCVLIB
+     A            AJRNRCVNME
+     A            DTAJRNPOS     20  0
+     A            DJRNRCVLIB
+     A            DJRNRCVNME
+     A            TIMESTAMP
+      *
+     A          K JRNNAME
+     A          K JRNLIB

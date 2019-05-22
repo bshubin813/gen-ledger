@@ -1,0 +1,8 @@
+     FR01800  O   E                    PRINTER
+     FF9200   IP  E           K        DISK
+     FF01800LAIF  E           K        DISK
+     F            I01800                            KRENAMEI01800A
+     FV01200  CF  E                    WORKSTN
+     I*9800E      DS
+     I*                                       1  10 FRDTAI
+     C/COPY JDECPY,C00161

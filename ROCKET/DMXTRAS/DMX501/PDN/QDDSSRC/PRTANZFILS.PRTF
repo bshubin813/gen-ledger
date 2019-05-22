@@ -1,0 +1,69 @@
+     A          R HEADER1                   SKIPB(1)
+     A                                    50'Rocket Software, Inc. '
+     A                                   106'PAGE'
+     A                                   112PAGNBR EDTCDE(Z)
+     A                                      SPACEA(1)
+     A                                    53'File Attributes'
+     A                                   106DATE EDTCDE(Y)
+     A                                      SPACEA(2)
+     A          R HEADER2
+     A                                     2'File'
+     A                                    14'Library'
+     A                                    26'Type'
+     A                                    34'Multi'
+     A                                    41'Unique'
+     A                                    48'Joined'
+     A                                    55'Reuse'
+     A                                    66'Records'
+     A                                    74'Record'
+     A                                    81'Journalled'
+     A                                    92'Journal'
+     A                                   103'Journal'
+     A                                   114'Type of'
+     A                                      SPACEA(1)
+     A                                    34'Member'
+     A                                    55'Deleted'
+     A                                    74'Length'
+     A                                    92'Name'
+     A                                   103'Library'
+     A                                   114'Image'
+     A                                      SPACEA(1)
+     A                                     2'__________'
+     A                                    14'__________'
+     A                                    26'______'
+     A                                    34'______'
+     A                                    41'______'
+     A                                    48'______'
+     A                                    55'_______'
+     A                                    63'__________'
+     A                                    74'______'
+     A                                    81'__________'
+     A                                    92'__________'
+     A                                   103'__________'
+     A                                   114'_______'
+     A                                      SPACEA(1)
+     A          R DETAIL1                   SPACEB(1)
+     A            FILN          10A        2
+     A            LIBN          10A       14
+     A            FILA           6A       26
+     A            MBRS           1A       36
+     A            UNIQ           1A       43
+     A            JOINF          1A       50
+     A            REUSE          1A       58
+     A            RECS          10S 0     63EDTCDE(Z)
+     A            RECLEN         5S 0     75EDTCDE(Z)
+     A            JRN            1A       85
+     A            JRNN          10A       92
+     A            JRNL          10A      103
+     A            JRNI           1A      117
+     A          R DETAIL2                   SPACEB(1)
+     A            DESC          11A        8
+     A            FLDSEQ         4S 0     21EDTCDE(Z)
+     A            FLDN          10A       26
+     A          R ERR1                      SPACEB(1)
+     A                                     2'Open Error of File '
+     A            ERRFIL        10A       21
+     A                                    33'with a Status of '
+     A            ERRSTS         2A       50
+     A          R ERR2                      SPACEB(1)
+     A            ERRDESC       80A        2

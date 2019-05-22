@@ -1,0 +1,31 @@
+      * ============================================================ *
+      * Object:    HUMOBTGJ        *FILE LF                          *
+      *            Logical file over HAMOBJ by Object name, Object   *
+      *            library.                                          *
+      *                                                              *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * 20050226 FK  Changed access path (added object type)         *
+      * ============================================================ *
+     A          R HUMOBOL@                  PFILE(HAMOBJ)
+     A            TGTID
+     A            GRPID
+     A            OBJNAME                   RENAME(NAME)
+     A            OBJLIB                    RENAME(LIB)
+     A            OBJTYPE
+     A            OBJATTR
+     A            JRN
+     A            JRNLIB
+     A            STATE
+     A            DBSTATE
+     A            REASON
+      *
+     A          K OBJNAME
+     A          K OBJLIB
+     A          K OBJTYPE

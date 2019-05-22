@@ -1,0 +1,37 @@
+      * ============================================================ *
+      * Object:    HLSTIFS         *FILE PF                          *
+      *            Holds the retrieved IFS object descriptions.      *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20050712 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R LSTIFSR
+     A            IFTYPE        11A         TEXT('IFS Object type')
+     A                                      COLHDG('IFS Object' 'type')
+     A            IFMODE         9A         TEXT('Object permissions')
+     A                                      COLHDG('Object' 'permissions')
+     A            IFOWN         10A         TEXT('Object owner')
+     A                                      COLHDG('Object' 'owner')
+     A            IFSIZE         9B 0       TEXT('IFS Allocated size')
+     A                                      COLHDG('Object' 'Size')
+     A            IFCNTD          Z         TEXT('IFS Content change DTS')
+     A                                      COLHDG('Content' -
+     A                                             'Change DTS')
+     A            IFSTSD          Z         TEXT('IFS Status change DTS')
+     A                                      COLHDG('Status' -
+     A                                             'Change DTS')
+     A            IFRTVD          Z         TEXT('IFS Retrieve DTS')
+     A                                      COLHDG('Retrieve DTS')
+     A            IFOBJK       500A         VARLEN TEXT('IFS Object name (key)')
+     A                                      COLHDG('IFS Object' 'Key')
+     A            IFOBJ       5001A         VARLEN TEXT('IFS Object name')
+     A                                      COLHDG('IFS Object')
+      *
+     A          K IFOBJK

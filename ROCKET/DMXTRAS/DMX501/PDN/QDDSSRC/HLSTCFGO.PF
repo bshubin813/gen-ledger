@@ -1,0 +1,42 @@
+      * ============================================================ *
+      * Object:    HLSTCFGO        *FILE PF                          *
+      *            Holds the object specifiers for a target/group    *
+      *            combination.                                      *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020916 FK  Initial delivery                                *
+      * 20021104 FK  Include field for sequence number               *
+      * 20030114 FK  Include column headings                         *
+      * 20080107 FK  Support for mirror contents                     *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R LSTCFGO@
+     A            LOGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group' 'name')
+     A            LOLIB         10A         TEXT('Library name')
+     A                                      COLHDG('Library')
+     A            LOOBJ         10A         TEXT('Object name')
+     A                                      COLHDG('Object')
+     A            LOOBJT        10A         TEXT('Object type')
+     A                                      COLHDG('Type')
+     A            LOOBJA        10A         TEXT('Object attribute')
+     A                                      COLHDG('Attribute')
+     A            LOCNTS         1A         TEXT('Mirror contents?')
+     A                                      COLHDG('Mirror' 'contents?')
+     A            LOLIBT        10A         TEXT('Target library')
+     A                                      COLHDG('Target' 'Library')
+     A            LOINCF         1A         TEXT('Include/Exclude')
+     A                                      COLHDG('Include or' 'Exclude')
+     A            LOSEQ          3P 0       TEXT('Object spec. sequence')
+     A                                      COLHDG('Sequence#')
+      *
+     A          K LOGRPN
+     A          K LOLIB
+     A          K LOSEQ

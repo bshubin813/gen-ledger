@@ -1,0 +1,189 @@
+.* ============================================================ *
+.* Object:    HACTBSF         *PNLGRP                           *
+.*            Help text for the HLSTCST command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20080215 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HACTBSF'.Activate changed BSF objects - Help
+:P.
+The HACTBSF command (Activate changed BSF objects) will help you to keep
+non-journalled BSF objects (objects in the Integrated File System) in sync
+between the primary- and backup node.
+:P.
+Mainly, the tool was designed to bridge a gap between implementations in which
+BSF objects are being journalled and ones where they are not journalled.
+With iCluster, changes inside BSF objects can be mirrored only if the objects
+in question are journalled and the object specificiers have been set up to
+scrape the (data) journal and send the changes across. For customers where
+internal changes on BSF objects only occur occasionally or where the number
+of BSF objects are very high, journaling may not be feasible and not
+recommended as such.
+:P.
+The utility reads the audit journal (QAUDJRN) and detects entries related to
+the objects in the scope of the specified group. If T-CO (create object)
+entries are encountered for objects within the scope of the specified group,
+one can choose to change the auditing value of the object to *CHANGE. This
+ensures that for every subsequent internal change, the system logs a T-ZC
+(change object) entry. Subsequently, when T-ZC (change object) entries are
+encountered, the utility will activate the object through iCluster (using the
+ACTHAOBJ command).
+:P.
+While processing the QAUDJRN journal entries, the last entry that was processed
+from the journal will be logged in a file (default DMSYSOBJ/HACTBSF). This
+allows you to keep track of the progress of the journal scraper process and
+also to reset the position in the event of a switchover.
+:P.
+If the command is run interactively, it will submit itself with the HACTBSF
+job description. Best is to configure an autostart job entry (AJE) to
+automatically start the utility when the iCluster subsystem starts.
+:P.
+:NT.Before running the utility, please ensure that you have set the journal
+position by issuing the command with RESETPOS(*YES). If you do not set the
+position, this will be done automatically, however the process will stop
+immediately after setting the position and will have to be re-issued.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ICGROUP
+:HELP NAME='HACTBSF/ICGROUP'.Group or resilient application - Help
+:XH3.Group or resilient application (ICGROUP)
+:P.
+Specify the name of the iCluster group or resilient application for which
+the BSF objects must be activated.
+:EHELP.
+
+.* Help for parameter ACTTZC
+:HELP NAME='HACTBSF/ACTTZC'.Activate on T-ZC - Help
+:XH3.Activate on T-ZC (ACTTZC)
+:P.
+Determines whether or not the object in scope is activated when a T-ZC entry is
+encountered. Typically, you will leave this value set to *YES to ensure that
+objects are synchronised if they are changed.
+:P.
+The possible activate-on-t-zc values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+When T-ZC entries are encountered for an object, the object will be activated
+through iCluster.
+:PT.*NO
+:PD.
+T-ZC entries for objects in scope are ignored.
+:EPARML.
+:EHELP.
+
+.* Help for parameter AUDTCO
+:HELP NAME='HACTBSF/AUDTCO'.Change auditing on T-CO - Help
+:XH3.Change auditing on T-CO (AUDTCO)
+:P.
+Determines whether or not the auditing value of the object in scope is changed
+whenever a T-CO (Create object) entry is encountered. Typically, you want to
+leave this value set to *YES to ensure that internal object changes are be
+logged by the system if a new object is created.
+:P.
+The value can be set to *NO if system value QCRTOBJAUD has been set to *CHANGE
+or *ALL; this will cause the system to automatically set the auditing value
+when new objects are created.
+:P.
+The possible change-auditing-on-t-zo values are:
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+When T-CO entries are encountered for an object, the auditing for the object
+is set to *CHANGE.
+:PT.*NO
+:PD.
+No auditing is changed for an object after creation.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ACTTCO
+:HELP NAME='HACTBSF/ACTTCO'.Activate on T-CO - Help
+:XH3.Activate on T-CO (ACTTCO)
+:P.
+Determines whether or not the object in scope is activated when a T-CO entry is
+encountered. Typically, you will leave this value set to *NO because iCluster
+automatically synchronises the object when it comes into scope. This value
+may be used to activate objects that were created in the past or to handle
+special objects (such as ones that are in a different IASP).
+:P.
+The possible activate-on-t-co values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+When T-CO entries are encountered for an object, no action will be taken.
+:PT.*YES
+:PD.
+When T-ZO entries are encountered for an object, the object will be activated
+through iCluster.
+:EPARML.
+:EHELP.
+
+.* Help for parameter POSFILE
+:HELP NAME='HACTBSF/POSFILE'.File for journal positions - Help
+:XH3.File for journal positions (POSFILE)
+:P.
+Specifies the name of the file that holds the last entry of the journal that
+was read by the utility. Typically you want to place this fils in a library
+that is being mirrored by iCluster, this to be used to establish a new position
+at switchover time.
+:EHELP.
+
+.* Help for parameter DELAY
+:HELP NAME='HACTBSF/DELAY'.Delay before acting - Help
+:XH3.Delay before acting (DELAY)
+:P.
+When an actionable journal entry is read, this specifies the number of seconds
+the job will wait until the entry is processed. If the current time at scraping
+the entry is already past the timestamp of the journal entry plus the number
+of seconds, no further delay will be applied.
+:P.
+The possible delay-before-acting values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+Actionable journal entries are processed immediately.
+:PT.number of seconds
+:PD.
+Specify the number of seconds the scraper should wait before acting.
+:EPARML.
+:EHELP.
+
+.* Help for parameter RESETPOS
+:HELP NAME='HACTBSF/RESETPOS'.Reset position - Help
+:XH3.Reset position (RESETPOS)
+:P.
+This parameter can be used before initially starting the utility and at
+switchover time. When set to *YES, the journal position for the QAUDJRN scraper
+process will be set to the current entry in the journal.
+:P.
+The possible reset-position values are:
+:P.
+:PARML.
+:PT.:PK def.*NO:EPK.
+:PD.
+Position will not be reset, scraping will continue from the last known entry.
+:PT.*YES
+:PD.
+The scraping position is set to the current journal entry in the QAUDJRN
+journal. Next time the HACTBSF utility is started, it will start processing
+from the set entry.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

@@ -1,0 +1,6 @@
+     A                                      UNIQUE
+     A          R ANZFLDR                   PFILE(*LIBL/ANZFLDPF)
+     A          K FILN
+     A          K LIBN
+     A          K FLDN
+     A          K FLDSEQ

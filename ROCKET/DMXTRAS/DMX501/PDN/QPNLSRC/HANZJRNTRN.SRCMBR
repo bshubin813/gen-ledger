@@ -1,0 +1,59 @@
+.* ============================================================ *
+.* Object:    HANZJRNTRN      *PNLGRP                           *
+.*            Help text for the HANZJRNTRN command.             *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020508 FK  Initial delivery                                *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HANZJRNTRN'.Analyse ANZJRNPF file by transactions - Help
+:P.
+The HANZJRNTRN (Analyse ANZJRNPF by transactions) command will
+run queries over the version of the ANZJRNPF file that you specify
+These queries will summarise record level transactions (journal code
+= R) by hour within transaction type and then summarise all transaction
+codes by transaction code and type for the whole file.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter ANALFILE
+:HELP NAME='HANZJRNTRN/ANALFILE'.Analysis file - Help
+:XH3.Analysis file (ANALFILE)
+:P.
+Specify the name of the file, created by prior use of the ANZJRNOF
+utility, that contains the transactions to analyse.
+:P.
+The name defaults to ANZJRNPF
+:EHELP.
+
+.* Help for parameter ANALFLIB
+:HELP NAME='HANZJRNTRN/ANALFLIB'.Analysis file library - Help
+:XH3.Analysus file library (ANALFLIB)
+:P.
+Specify the library which holds the analysis file you have specified.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK def.*LIBL:EPK.
+:PD.
+The library list is searched
+:PT.*CURLIB
+:PD.
+The current library is where the file is to be found.
+:PT.library name
+:PD.
+The specific library to use
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

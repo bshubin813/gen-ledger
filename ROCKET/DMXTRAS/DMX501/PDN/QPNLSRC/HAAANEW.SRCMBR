@@ -1,0 +1,263 @@
+.* ============================================================ *
+.* Object:    HAAANEW         *PNLGRP                           *
+.*            Help text for the HAAANEW command.                *
+.*                                                              *
+.* ------------------------------------------------------------ *
+.*             Changes made to this source                      *
+.*             ---------------------------                      *
+.*                                                              *
+.* Date     Who Description                                     *
+.* -------- --- ----------------------------------------------- *
+.* 20020521 FK  Initial delivery                                *
+.* 20021227 FK  Rename to HAAANEW                               *
+.* 20030605 FK  Do not allow install over HA and iCluster       *
+.* 20030728 FK  New parameter: INSLIB                           *
+.* 20041218 FK  Replace HMONEVL by HMONHA                       *
+.* 20070821 FK  New parameter: TMONTS                           *
+.* 20071025 FK  New parameter: CCSID                            *
+.*              Help text for parameter MODULES                 *
+.* 20111223 FK  Remove HA                                       *
+.* ============================================================ *
+:PNLGRP.
+.* ------------------------------------------------------------ *
+.* Command level help                                           *
+.* ------------------------------------------------------------ *
+:HELP NAME='HAAANEW'.Install new version of DMXtras - Help
+:P.
+The HAAANEW (Install new version of DMXtras) command allows you to
+install a custom version of the DMXtras (utilities) or upgrade an existing
+version of the utilities.
+:P.
+In order to install or upgrade DMXtras, you will need the following
+special authorities in your user- or group profile:
+:UL.
+:LI.*ALLOBJ
+:LI.*SECADM
+:LI.*IOSYSCFG
+:EUL.
+:P.
+A custom library containing the utilities will be created, or the existing
+custom library is upgraded. Also, dependent
+on the product libraries specified, changes will be made to the library
+lists of iCluster job descriptions and
+exit programs will be copied into these libraries.
+:P.
+Whenever possible, the command will retain customer modifications to
+DMXtras utilities. If an object (program, file) is compiled from
+the custom library, it will not be replaced by a new version and an
+informational message will be issued.
+:P.
+:NT.If you upgrade your existing iCluster
+installation, please ensure to re-run this command to apply all
+changes again to the job descriptions.:ENT.
+:EHELP.
+.* ------------------------------------------------------------ *
+.* Parameter level help                                         *
+.* ------------------------------------------------------------ *
+.* Help for parameter CUSLIB
+:HELP NAME='HAAANEW/CUSLIB'.Custom DMXtras library - Help
+:XH3.Custom DMXtras library (CUSLIB)
+:P.
+Specifies the library name into which the custom version of the
+DMXtras utilities will be installed/upgraded. Usually, this is a library
+called DMXTRASxxx where xxx stands for an abbreviation representing
+the customer name.
+:P.
+This is a required library.
+:EHELP.
+
+.* Help for parameter OLDLIB
+:HELP NAME='HAAANEW/OLDLIB'.Library for old version - Help
+:XH3.Library for old version (OLDLIB)
+:P.
+Specifies the library into which the existing objects of the customer
+library will be moved when upgrading the DMXtras custom library. The library
+must not exist upon upgrading the utilities or an inquiry message to delete
+the old library will be issued during install.
+:P.
+This library also contains a save file <old version library>/<customer library>
+which contains the saved customer library before installation.
+:P.
+Once the new version of the utilities have been approved, please remove
+this library from the system to preserve disk space.
+:P.
+The possible library-for-old-version values are:
+:P.
+:PARML.
+:PT.:PK def.DMXTRASOLD:EPK.
+:PD.
+When replacing existing objects in the customer library, the objects
+will first be moved to the DMXTRASOLD library.
+:PT.library-name
+:PD.
+Specify a non-existing library into which existing objects will be
+moved.
+:EPARML.
+:EHELP.
+
+.* Help for parameter INSLIB
+:HELP NAME='HAAANEW/INSLIB'.Temporary library for install - Help
+:XH3.Temporary library for install (INSLIB)
+:P.
+Specifies the library into which the base version of DMXtras is restored
+during the installation. The library must not exist when the installation is
+started or an inquiry message to delete the old library will be issued.
+:P.
+Once the installation process has completed, the library is deleted from the
+system automatically.
+:P.
+The possible temporary-library-for-install values are:
+:P.
+:PARML.
+:PT.:PK def.DMXTRASTMP:EPK.
+:PD.
+The base version of DMXtras is restored into the DMXTRASTMP library.
+:PT.library-name
+:PD.
+Specify a non-existing library into which the base version of DMXtras is
+restored.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ICLIB
+:HELP NAME='HAAANEW/ICLIB'.iCluster library - Help
+:XH3.iCluster library (ICLIB)
+:P.
+The library into which iCluster is installed (if applicable).
+This value is used when composing the job descriptions library lists of the
+DMXtras utilities and also in order to move certain objects to the
+iCluster product library.
+:P.
+The possible iCluster-library values are:
+:P.
+:PARML.
+:PT.:PK def.*NONE:EPK.
+:PD.
+iCluster is not (yet) installed on this system. Library lists
+do not contain a iCluster library.
+:PT.DMCLUSTER
+:PD.
+DMXtras library lists will be adjusted to contain the DMCLUSTER library and
+certain objects (such as exit programs) will be moved to the DMCLUSTER library.
+:PT.library-name
+:PD.
+Specify the library into which iCluster was installed.
+:EPARML.
+:EHELP.
+
+.* Help for parameter ORGLIB
+:HELP NAME='HAAANEW/ORGLIB'.Utilities base library - Help
+:XH3.Utilities base library (ORGLIB)
+:P.
+The library from which the DMXtras utilities will be installed. This is
+a pre-determined value and cannot be changed on the prompt. All utilities
+are installed from this library (DMXTRAS) to the custom library specified
+on the CUSLIB parameter.
+:P.
+After installation, this library may be removed from the system to
+preserve disk space.
+:EHELP.
+
+.* Help for parameter BATCH
+:HELP NAME='HAAANEW/BATCH'.Submit to batch - Help
+:XH3.Submit to batch (BATCH)
+:P.
+Determines whether or not the installation/upgrade must be submitted
+to batch.
+:P.
+:PARML.
+:PT.:PK def.*YES:EPK.
+:PD.
+The installation is submitted to batch. The user's current job
+description is used to submit the job.
+:PT.*NO
+:PD.
+The installation is run interactively.
+:EPARML.
+:EHELP.
+
+.* Help for parameter HMONHA
+:HELP NAME='HAAANEW/HMONHA'.Listening port for HMONHA - Help
+:XH3.Listening port for HMONHA (HMONHA)
+:P.
+Specify the port which is used for the HMONHA (monitoring of
+iCluster) listening job. A service table entry 'hmonha'
+be added with the port number specified.
+:P.
+See help text of the HMONHA command for more details about the service
+table entry used.
+:P.
+The possible listening-port-for-HMONHA values are:
+:P.
+:PARML.
+:PT.:PK def.4446:EPK.
+:PD.
+A service table entry 'hmonha' will be added with number 4446. HMONHA
+jobs will be listening on this port.
+:PT.*NONE
+:PD.
+No service table entry will be added. If HMONHA is to be used to
+monitor for iCluster, one will have to add the 'hmonha'
+service table entry manually.
+:EPARML.
+:EHELP.
+
+.* Help for parameter CCSID
+:HELP NAME='HAAANEW/CCSID'.CCSID for DMXtras files - Help
+:XH3.CCSID for DMXtras files (CCSID)
+:P.
+Specify the CCSID (Coded Character Set Identifier) that will be used for all
+physical- and logical files in DMXtras. For most systems, if will be ok to set
+the CCSID of the files to the system value QCCSID. For multi-language systems,
+you may want to set the system value to the preferred language's character set
+to show special characters such as the at-sign, paragraph, pound, etc.
+:P.
+The possible CCSID-for-DMXtras-files values are:
+:P.
+:PARML.
+:PT.:PK def.*QCCSID:EPK.
+:PD.
+CCSID for files will be set to the system value QCCSID.
+:PT.*QCHRID
+:PD.
+CCSID for files will be set to the "Code page" part of system value QCHRID.
+:PT.1-65535
+:PD.
+CCSID for files will be set to the numeric value entered.
+:EPARML.
+:EHELP.
+
+.* Help for parameter MODULES
+:HELP NAME='HAAANEW/MODULES'.Modules to install - Help
+:XH3.Modules to install (MODULES)
+:P.
+DMXtras tools have been classified into modules; this way you don't have to
+install all components if this is not needed for your installation. For example,
+if you plan to only use the HDLTJRNRCV command to manage journal receivers,
+installing the *OPR module is sufficient.
+:P.
+The possible modules-to-install values are:
+:P.
+:PARML.
+:PT.:PK def.*ALL:EPK.
+:PD.
+Utilities from all modules will be installed.
+:PT.*ANZ
+:PD.
+Analysis utilities are installed.
+:PT.*OPR
+:PD.
+Operations utilities are installed.
+:PT.*MON
+:PD.
+Monitoring utilities are installed.
+:PT.*CFG
+:PD.
+Configuration utilities are installed.
+:PT.*SWO
+:PD.
+Switchover utilities are installed.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

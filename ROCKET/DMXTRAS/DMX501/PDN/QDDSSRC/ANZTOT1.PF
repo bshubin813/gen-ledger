@@ -1,0 +1,27 @@
+      *CP: SIZE(*NOMAX)
+      * ============================================================ *
+      * Object:    ANZTOT1         *FILE PF                          *
+      *            Holds the totals per date/hour                    *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20060127 FK  Field text and column headings                  *
+      * ============================================================ *
+     A                                      UNIQUE
+     A          R ANZTR1
+     A            DTE            8A         TEXT('Date YYYYMMDD')
+     A                                      COLHDG('Date')
+     A            HOURX          2A         TEXT('Hour')
+     A                                      COLHDG('Hour')
+     A            TOTENT        15S 0       TEXT('# of Transactions')
+     A                                      COLHDG('Total # of' 'Transactions')
+     A            TOTLEN        15S 0       TEXT('Total Tx Length')
+     A                                      COLHDG('Total' 'Tx length')
+      * Key fields
+     A          K DTE
+     A          K HOURX

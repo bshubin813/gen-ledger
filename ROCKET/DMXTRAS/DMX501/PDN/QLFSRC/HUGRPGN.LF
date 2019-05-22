@@ -1,0 +1,18 @@
+      * ============================================================ *
+      * Object:    HUGRPGN         *FILE LF                          *
+      *            Logical file over OMFGRP by Group name            *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20000705 FK  Initial delivery                                *
+      * ============================================================ *
+     A          R HUGRPGN@                  PFILE(OMFGRP)
+     A            GRPID                     RENAME(ID)
+     A            GRPNAME                   RENAME(NAME)
+     A            GRPDESC                   RENAME(DESC)
+      *
+     A          K GRPNAME

@@ -1,0 +1,56 @@
+      * ============================================================ *
+      * Object:    HCHKSYNIFS      *FILE PF                          *
+      *            Differences in IFS objects.                       *
+      *                                                              *
+      * Create remarks: CRTPF SIZE(*NOMAX)                           *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 20020925 FK  Initial delivery                                *
+      * 20050517 FK  Remove owner and mode fields                    *
+      * 20111217 FK  REMOVE HA                                       *
+      * ============================================================ *
+     A          R SYNIFS@
+     A            IDGRPN        10A         TEXT('Group name')
+     A                                      COLHDG('Group name')
+     A            IDTYPE        11A         TEXT('IFS Object type')
+     A                                      COLHDG('IFS Object' 'type')
+     A            IDOBJK       500A         VARLEN TEXT('Object name (key)')
+     A                                      COLHDG('IFS Object' 'Key')
+     A            IDMIT          1A         TEXT('Missing IFS object target')
+     A                                      COLHDG('Missing' 'IFS Object' -
+     A                                             'Target')
+     A                                      DFT('N')
+     A            IDMIS          1A         TEXT('Obsolete IFS object target')
+     A                                      COLHDG('Obsolete' 'IFS Object' -
+     A                                             'Target')
+     A                                      DFT('N')
+     A            IDID           1A         TEXT('IFS Object differences')
+     A                                      COLHDG('IFS Object' -
+     A                                             'Difference')
+     A                                      DFT('N')
+     A            SISIZE         9B 0       TEXT('Src IFS Object size')
+     A                                      COLHDG('Source' 'Object' 'Size')
+     A            TISIZE         9B 0       TEXT('Tgt IFS Object size')
+     A                                      COLHDG('Target' 'Object' 'Size')
+     A            SICNTD          Z         TEXT('Src IFS Content change DTS')
+     A                                      COLHDG('Source' 'Content' -
+     A                                             'Change DTS')
+     A            TICNTD          Z         TEXT('Tgt IFS Content change DTS')
+     A                                      COLHDG('Target' 'Content' -
+     A                                             'Change DTS')
+     A            SISTSD          Z         TEXT('Src IFS Status change DTS')
+     A                                      COLHDG('Source' 'Status' -
+     A                                             'Change DTS')
+     A            TISTSD          Z         TEXT('Tgt IFS Status change DTS')
+     A                                      COLHDG('Target' 'Status' -
+     A                                             'Change DTS')
+     A            IDOBJ       5001A         VARLEN TEXT('Object name')
+     A                                      COLHDG('IFS Object')
+      *
+     A          K IDGRPN
+     A          K IDOBJK

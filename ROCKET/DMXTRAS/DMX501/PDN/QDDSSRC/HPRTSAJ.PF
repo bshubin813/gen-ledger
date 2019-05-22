@@ -1,0 +1,59 @@
+      * ============================================================ *
+      * Object:    HPRTSAJ         *FILE PF                          *
+      *            Temporary file that holds the security audit      *
+      *            journal entries for command HPRTSAJ               *
+      *                                                              *
+      * ------------------------------------------------------------ *
+      *             Changes made to this source                      *
+      *             ---------------------------                      *
+      *                                                              *
+      * Date     Who Description                                     *
+      * -------- --- ----------------------------------------------- *
+      * 19990708 FK  Initial delivery                                *
+      * 20030123 FK  Add column headings                             *
+      * ============================================================ *
+     A          R HPRTSAJ@
+     A            SAENTL         5S 0       TEXT('Entry length')
+     A                                      COLHDG('Entry' 'length')
+     A            SASEQN        10S 0       TEXT('Sequence number')
+     A                                      COLHDG('Sequence' 'number')
+     A            SACODE         1A         TEXT('Journal code')
+     A                                      COLHDG('Journal' 'code')
+     A            SAENTT         2A         TEXT('Entry type')
+     A                                      COLHDG('Entry' 'type')
+     A            SADATE         6A         TEXT('Entry date')
+     A                                      COLHDG('Entry' 'date')
+     A            SATIME         6S 0       TEXT('Entry time')
+     A                                      COLHDG('Entry' 'time')
+     A            SAJOB         10A         TEXT('Job')
+     A                                      COLHDG('Job')
+     A            SAUSER        10A         TEXT('User')
+     A                                      COLHDG('User')
+     A            SANBR          6S 0       TEXT('Job number')
+     A                                      COLHDG('Job' 'number')
+     A            SAPGM         10A         TEXT('Program name')
+     A                                      COLHDG('Program' 'name')
+     A            SARSV1        30A         TEXT('Reserved')
+     A                                      COLHDG('Reserved')
+     A            SACTRR        10S 0       TEXT('Count or relative record nr.')
+     A                                      COLHDG('Count or' 'RRN')
+     A            SAFLAG         1A         TEXT('Flag')
+     A                                      COLHDG('Flag')
+     A            SACCID        10S 0       TEXT('Commit cycle ID')
+     A                                      COLHDG('Commit' 'cycle ID')
+     A            SAUSPF        10A         TEXT('User profile')
+     A                                      COLHDG('User' 'profile')
+     A            SASYNM         8A         TEXT('System name')
+     A                                      COLHDG('System' 'name')
+     A            SARSV2        20A         TEXT('Reserved')
+     A                                      COLHDG('Reserved')
+     A            SAENTS         1A         TEXT('Entry subtype')
+     A                                      COLHDG('Entry' 'subtype')
+     A            SAOBJ         10A         TEXT('Object')
+     A                                      COLHDG('Object')
+     A            SALIB         10A         TEXT('Library')
+     A                                      COLHDG('Library')
+     A            SATYPE         8A         TEXT('Object type')
+     A                                      COLHDG('Type')
+     A            SASPEC        71A         TEXT('Entry specific data')
+     A                                      COLHDG('Entry specific data')

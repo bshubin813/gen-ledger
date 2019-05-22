@@ -2,10 +2,9 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H**  CHANGED ON BASE MAY 20TH 2019                             *
+     H**  CHANGED ON BASE MAY 22 2019                                    *
      H*   BY BILL SHUBIN
-     H*   CHANGE DATE FIELD TWO
-     H*
+     H*   CHANGE DATE FIELD
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

@@ -4,7 +4,7 @@
      H********************************************************************
      H**  CHANGED ON MAY 21,2019                                         *
      H*   BY BILL SHUBIN                                                 *
-     H*   CHANGE DATE FORMAT FIELD                                       *
+     H*   CHANGE DATE FORMAT FIELD TO MM/DD/YYYY                         *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

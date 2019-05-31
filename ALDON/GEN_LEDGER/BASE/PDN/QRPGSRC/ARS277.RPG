@@ -2,9 +2,9 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H**  CHANGED ON MAY 23,2019                                         *
+     H**  CHANGED ON MAY 26,2019                                         *
      H*   BY BILL SHUBIN                                                 *
-     H*   CHANGE DATE FORMAT FIELD TO MM/DD/YY                           *
+     H*   CHANGE DATE FORMAT FIELD TO MM/DD/YYYY                         *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

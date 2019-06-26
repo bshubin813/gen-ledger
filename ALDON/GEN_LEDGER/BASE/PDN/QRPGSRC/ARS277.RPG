@@ -2,10 +2,10 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H**  CHANGED ON JUNE 21,2019                                        *
+     H**  CHANGED ON JUNE 26,2019                                        *
      H*   BY BILL SHUBIN                                             *
      H*   CHANGE DATE FORMAT FIELD TO MM/DD/YYYY                         *
-     H*   TASK TEST                                                      *
+     H*   TASK TESTING WEB PORTAL                                        *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

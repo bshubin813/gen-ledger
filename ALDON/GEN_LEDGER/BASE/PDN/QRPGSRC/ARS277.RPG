@@ -3,7 +3,7 @@
      H**   ARS277                                                        *
      H********************************************************************
      H*   CHANGED ON JULY 25, 2019                                       *
-     H*   BY B SHUBIN                                                    *
+     H*   BY BILL SHUBIN                                                 *
      H*   TASK TESTING OPS PORTAL                                        *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
@@ -13,7 +13,7 @@
      C*
      C*
      C*
-     H**   TASK007                                                       *
+     H**   TASK005                                                       *
      C* THIS IS A TEST COMMENT
      C*
      C*

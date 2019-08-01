@@ -2,9 +2,9 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H**  CHANGED ON JULY 24,2019                                        *
-     H*   BY BILL SHUBIN                                             *
-     H*   TASK TESTING PORTAL                                        *
+     H**  CHANGED ON JULY 2019                                           *
+     H*   BY BILL SHUBIN                                                 *
+     H*   TASK TESTING PORTAL                                            *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

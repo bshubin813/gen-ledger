@@ -2,9 +2,9 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H*   CHANGED ON AUGUST 17, 2019                                     *
-     H*   BY BILL SHUBIN                                                 *
-     H*   CHANGE OUTSIDE OF LMI                                          *
+     H*   CHANGED ON AUGUST 26, 2019                                     *
+     H*   BY WILLIAM SHUBIN                                              *
+     H*   ASSIGNED TO TASK008                                            *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

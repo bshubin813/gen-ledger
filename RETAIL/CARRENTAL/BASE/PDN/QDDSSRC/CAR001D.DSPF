@@ -21,7 +21,7 @@
      A                                  8 13'Brand         :'
      A            S1BRAN    R     Y  B  8 30REFFLD(BRAND)
      A                                      EDTCDE(4)
-     A                                  8 39'1 = HONDA'
+     A                                  8 39'1 = CHEVY'
      A                                  9 39'2 = Ford'
      A                                 10 39'3 = Mercedes'
      A                                 14 13'Model         :'

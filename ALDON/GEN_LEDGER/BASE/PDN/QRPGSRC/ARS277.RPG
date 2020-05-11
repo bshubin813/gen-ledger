@@ -2,10 +2,10 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H*   CHANGED ON MAY 7, 2020                                         *
-     H*   BY WILLIAM SHUBIN - WILLIAM                                    *
+     H*   CHANGED ON MAY 11, 2020                                        *
+     H*   BY WILLIAM SHUBIN - BILL D                                     *
      H*   ASSIGNED TO MARK                                               *
-     H*   EDITTED IN SITE1                                               *
+     H*   EDITTED IN BASE                                                *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

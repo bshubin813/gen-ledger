@@ -1,1 +1,3 @@
-/home/aldoncms/repo/ALDON/GEN_LEDGER/BASE/PDN/QLBLSRC/ARS334CPY.TXT
+      * This is a copybook comment.
+      * COPYBOOK.
+      * This is a copybook comment.

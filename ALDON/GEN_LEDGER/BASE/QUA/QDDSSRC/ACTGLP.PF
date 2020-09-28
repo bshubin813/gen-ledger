@@ -1,1 +1,2 @@
-/home/aldoncms/repo/ALDON/GEN_LEDGER/BASE/PDN/QDDSSRC/ACTGLP.PF
+     A          R ACTGLP                    TEXT('Minimum PF')
+     A            FIELD1         1          TEXT('One byte field')

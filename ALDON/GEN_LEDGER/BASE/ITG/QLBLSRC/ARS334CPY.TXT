@@ -1,3 +1,1 @@
-      * This is a copybook comment.
-      * COPYBOOK.
-      * This is a copybook comment.
+/home/aldoncms/repo/ALDON/GEN_LEDGER/BASE/QUA/QLBLSRC/ARS334CPY.TXT

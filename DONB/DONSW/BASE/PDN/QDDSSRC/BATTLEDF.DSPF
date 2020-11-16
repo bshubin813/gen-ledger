@@ -1,4 +1,4 @@
-     A*%%TS  SD  20201116  074320  DONB_X      REL-V7R4M0  5770-WDS
+     A*%%TS  SD  20201116  121615  DONB_X      REL-V7R4M0  5770-WDS
      A*-------------------------------------------------------------------------
      A*  BTLD  QDDSSRC  TYPE: DSPF
      A*  BattleShip Display file  DON2CHANGE NOV 2020
@@ -10,7 +10,7 @@
      A                                      CA05
      A                                      CA12
      A          R SCREEN1
-     A*%%TS  SD  20201116  074320  DONB_X      REL-V7R4M0  5770-WDS
+     A*%%TS  SD  20201116  121615  DONB_X      REL-V7R4M0  5770-WDS
      A                                      CF10
      A            BTR0101        1A  P
      A            BTR0102        1A  P
@@ -124,7 +124,7 @@
      A                                  1 55'8'
      A                                  1 57'9'
      A                                  1 59'0'
-     A                                  3  2'The Grid to the right is'
+     A                                  3  2'The Grid to the left is '
      A                                      DSPATR(HI)
      A                                  3 37'1'
      A            B01C01         1A  O  3 41DSPATR(&BTR0101)

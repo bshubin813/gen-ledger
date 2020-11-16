@@ -1,7 +1,1 @@
-PGM
-/*******************************/
-/* NOT REALLY A LOT HERE       */
-/* NOT MEATWORK BUT ME AT WORK */
-/*******************************/
-
-ENDPGM
+/home/aldoncms/repo/DONB/DONSW/BASE/PDN/QCLSRC/MEATWORK.CLP

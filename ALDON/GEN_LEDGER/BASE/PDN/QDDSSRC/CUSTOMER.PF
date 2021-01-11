@@ -4,4 +4,5 @@
      A            ADDRESS       30
      A            ZIP            5P
      A            PHONE         10P
+     A            EMAIL         30
      A          K CUSTNO

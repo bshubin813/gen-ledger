@@ -1,10 +1,10 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H*   Changed on September 21, 2021                                  *
+     H*   Changed on September 22, 2021                                  *
      H*   By William Shubin                                              *
-     H*   Assigned to Mark
-     H*   Editted in SITE1                                               *
+     H*   Assigned to Mark Watts
+     H*   Editted in BASE                                                *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

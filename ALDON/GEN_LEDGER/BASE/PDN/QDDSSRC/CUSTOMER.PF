@@ -2,6 +2,7 @@
      A            CUSTNO         7P
      A            NAME          30
      A            ADDRESS       30
+     A            CITY          23
      A            ZIP            5P
      A            PHONE         10P
      A            EMAIL         30

@@ -3,6 +3,10 @@
      H**   ARS277                                                        *
      H**   DA Git config exits                                           *
      H**   May 22, 2019                                                  *
+     H*                                                                  *
+     H*    Does the fun ever start?                                      *
+     H*     It do.                                                       *
+     H*                                                                  *
      H********************************************************************
      H*
      FMASTERL1IF  E           K        DISK
@@ -12,8 +16,8 @@
      C           CHECK     IFLT 3
      C                     MOVE '1'       *IN90
      C                     ENDIF
-     C*   I AM A COMMMENT
-     C*
+     C*   I am fxing this...
+     C*    I swear...
      C                     READ MASTERL1                 90
      C           *IN90     IFEQ '3'
      C*   I am also a comment

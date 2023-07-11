@@ -56,7 +56,7 @@
      A            DEVNAM        10   O 04 70
      A                                 06 17'User  . . . . . . . . . . . . . .'
      A            USERI         10   B 06 53
-     A  01                             07 17'Password  . . . . . . . . . . . .'
+     A  01                             07 17'Passweird . . . . . . . . . . . .'
      A  01        PASSW         10   I 07 53
      A                                      DSPATR(ND)
      A                                 08 17'Program/procedure . . . . . . . .'

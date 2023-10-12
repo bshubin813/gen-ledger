@@ -1,1 +1,37 @@
-/home/aldoncms/repo/ALDON/PACKAGE/BASE/QUA/QRPGSRC/ARS277.RPG
+     H*
+     H********************************************************************
+     H**   ARS277                                                        *
+     H**   DA Git config exits                                           *
+     H**   May 22, 2019                                                  *
+     H*                                                                  *
+     H*    Does the fun ever start?                                      *
+     H*     It do.                                                       *
+     H*                                                                  *
+     H********************************************************************
+     H*
+     FMASTERL1IF  E           K        DISK
+     F            ACTGLP                            KRENAMERPGID2
+     C           *ENTRY    PLIST
+     C                     PARM           CHECK   10
+     C           CHECK     IFLT 3
+     C                     MOVE '1'       *IN90
+     C                     ENDIF
+     C*   I am fxing this...
+     C*    I swear...
+     C                     READ MASTERL1                 90
+     C           *IN90     IFEQ '3'
+     C*   I am also a comment
+     C                     GOTO ENDFIL
+     C                     END
+     C                     READ MASTERL1                 90
+     C           *IN90     IFEQ '1'
+     C                     GOTO ENDFIL
+     C                     END
+     C                     READ MASTERL1                 90
+     C           CHECK     IFGT 1
+     C                     GOTO ENDFIL
+     C                     ENDIF
+     C*
+     C           ENDFIL    TAG
+     C                     MOVE '1'       *INLR
+     C                     RETRN

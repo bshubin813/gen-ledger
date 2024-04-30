@@ -18,8 +18,8 @@
      FCARB04  UF  E           K        DISK                      A
      F* ==================================================================
      E                    MSG     1   9 60
-     E                    OPM        12  8 0             OPEL MILES
-     E                    OPD        12  4 0             OPEL DAMAGES
+     E                    OPM        12  8 0             BMW  MILES
+     E                    OPD        12  4 0             BMW  DAMAGES
      E                    FOM        12  8 0             FORD MILES
      E                    FOD        12  4 0             FORD DAMAGES
      E                    MEM        12  8 0             MERC MILES
@@ -886,7 +886,7 @@
      C           *IN40     IFEQ '1'
      C                     MOVE S7LICE    LICENC
      C                     SELEC
-     C           S7BRNO    WHEQ 'OPEL'
+     C           S7BRNO    WHEQ 'BMW'
      C                     MOVE '1'       BRANDC
      C           S7BRNO    WHEQ 'FORD'
      C                     MOVE '2'       BRANDC
@@ -909,7 +909,7 @@
      C                     ELSE
      C                     MOVE S7LICE    LICENC
      C                     SELEC
-     C           S7BRNO    WHEQ 'OPEL'
+     C           S7BRNO    WHEQ 'BMW'
      C                     MOVE '1'       BRANDC
      C           S7BRNO    WHEQ 'FORD'
      C                     MOVE '2'       BRANDC
@@ -1010,7 +1010,7 @@
      C                     MOVE LICENC    S2LICE
      C                     SELEC
      C           BRANDC    WHEQ 1
-     C                     MOVEL'OPEL'    S2BRNO    P
+     C                     MOVEL'BMW'     S2BRNO    P
      C           BRANDC    WHEQ 2
      C                     MOVEL'FORD'    S2BRNO    P
      C           BRANDC    WHEQ 3
@@ -1133,7 +1133,7 @@
      C                     MOVE LICENC    S9LICE
      C                     SELEC
      C           BRANDC    WHEQ 1
-     C                     MOVEL'Opel'    S9BRNO    P
+     C                     MOVEL'BMW'     S9BRNO    P
      C           BRANDC    WHEQ 2
      C                     MOVEL'Ford'    S9BRNO    P
      C           BRANDC    WHEQ 3

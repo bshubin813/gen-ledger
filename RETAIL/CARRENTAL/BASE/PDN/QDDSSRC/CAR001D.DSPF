@@ -72,7 +72,7 @@
      A                                  1 38'Model'
      A                                      DSPATR(HI)
      A                                  4  5'New :'
-     A            S7BRNO        10A  B  4 13VALUES('OPEL' 'FORD' 'MERCEDES')
+     A            S7BRNO        10A  B  4 13VALUES('BMW' 'FORD' 'MERCEDES')
      A            S7MDLO    R        B  4 28CHECK(LC)
      A                                      REFFLD(MDLDES)
      A                                      CHANGE(40)
@@ -317,7 +317,7 @@
      A                                      REFFLD(BRAND)
      A                                      VALUES(1 2 3)
      A  30                                  DSPATR(RI)
-     A                                  9 39'1 = Opel'
+     A                                  9 39'1 = BMW'
      A                                 10 39'2 = Ford'
      A                                 11 39'3 = Mercedes'
      A                                 15 13'Total Miles   :'
@@ -361,13 +361,13 @@
      A                                  5 51'--------------------------'
      A                                  6  4'Month'
      A                                      DSPATR(UL)
-     A                                  6 15'Opel'
+     A                                  6 15'BMW'
      A                                      DSPATR(UL)
      A                                  6 26'Ford'
      A                                      DSPATR(UL)
      A                                  6 33'Mercedes'
      A                                      DSPATR(UL)
-     A                                  6 51'Opel'
+     A                                  6 51'BMW'
      A                                      DSPATR(UL)
      A                                  6 62'Ford'
      A                                      DSPATR(UL)
@@ -528,7 +528,7 @@
      A                                      REFFLD(BRAND)
      A  44N45                               DSPATR(PR)
      A                                      VALUES(1 2 3)
-     A                                  5 39'1 = Opel'
+     A                                  5 39'1 = BMW'
      A                                  6 39'2 = Ford'
      A                                  7 39'3 = Mercedes'
      A                                  9  8'Model               :'

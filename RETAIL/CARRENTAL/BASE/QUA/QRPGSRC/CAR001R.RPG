@@ -1,1 +1,1175 @@
-/home/aldoncms/repo/RETAIL/CARRENTAL/BASE/PDN/QRPGSRC/CAR001R.RPG
+     H              D
+     H* ==================================================================
+     H*   PROGRAM NAME   ......: CAR001R
+     H*   AUTHOR ..............: J. DE VOS
+     H*   DATE  ...............: 09-JAN-2019
+     H*   DESCRIPTION  ........: THIS PROGRAM IS FOR DEMO PURPOSES FOR
+     H*                          CAR RENTAL DEMO
+     H* ==================================================================
+     FCAR001D CF  E                    WORKSTN
+     F                                        SFLRRNKSFILE F010S
+     F                                        SFLRR2KSFILE F020S
+     F                                        SFLRR3KSFILE F070S
+     FCARB01  UF  E           K        DISK                      A
+     FCARB02  UF  E           K        DISK                      A
+     FCARB02L1IF  E           K        DISK
+     F            CARB02R1                          KRENAMECARB02L
+     FCARB03  UF  E           K        DISK                      A
+     FCARB04  UF  E           K        DISK                      A
+     F* ==================================================================
+     E                    MSG     1   9 60
+     E                    OPM        12  8 0             BMW  MILES
+     E                    OPD        12  4 0             BMW  DAMAGES
+     E                    FOM        12  8 0             FORD MILES
+     E                    FOD        12  4 0             FORD DAMAGES
+     E                    MEM        12  8 0             MERC MILES
+     E                    MED        12  4 0             MERC DAMAGES
+     E* ==================================================================
+     I            DS
+     I                                        1  960OPM
+     I                                        1   80S5OM01
+     I                                        9  160S5OM02
+     I                                       17  240S5OM03
+     I                                       25  320S5OM04
+     I                                       33  400S5OM05
+     I                                       41  480S5OM06
+     I                                       49  560S5OM07
+     I                                       57  640S5OM08
+     I                                       65  720S5OM09
+     I                                       73  800S5OM10
+     I                                       81  880S5OM11
+     I                                       89  960S5OM12
+     I            DS
+     I                                        1  480OPD
+     I                                        1   40S5OD01
+     I                                        5   80S5OD02
+     I                                        9  120S5OD03
+     I                                       13  160S5OD04
+     I                                       17  200S5OD05
+     I                                       21  240S5OD06
+     I                                       25  280S5OD07
+     I                                       29  320S5OD08
+     I                                       33  360S5OD09
+     I                                       37  400S5OD10
+     I                                       41  440S5OD11
+     I                                       45  480S5OD12
+     I            DS
+     I                                        1  960FOM
+     I                                        1   80S5FM01
+     I                                        9  160S5FM02
+     I                                       17  240S5FM03
+     I                                       25  320S5FM04
+     I                                       33  400S5FM05
+     I                                       41  480S5FM06
+     I                                       49  560S5FM07
+     I                                       57  640S5FM08
+     I                                       65  720S5FM09
+     I                                       73  800S5FM10
+     I                                       81  880S5FM11
+     I                                       89  960S5FM12
+     I            DS
+     I                                        1  480FOD
+     I                                        1   40S5FD01
+     I                                        5   80S5FD02
+     I                                        9  120S5FD03
+     I                                       13  160S5FD04
+     I                                       17  200S5FD05
+     I                                       21  240S5FD06
+     I                                       25  280S5FD07
+     I                                       29  320S5FD08
+     I                                       33  360S5FD09
+     I                                       37  400S5FD10
+     I                                       41  440S5FD11
+     I                                       45  480S5FD12
+     I            DS
+     I                                        1  960MEM
+     I                                        1   80S5MM01
+     I                                        9  160S5MM02
+     I                                       17  240S5MM03
+     I                                       25  320S5MM04
+     I                                       33  400S5MM05
+     I                                       41  480S5MM06
+     I                                       49  560S5MM07
+     I                                       57  640S5MM08
+     I                                       65  720S5MM09
+     I                                       73  800S5MM10
+     I                                       81  880S5MM11
+     I                                       89  960S5MM12
+     I            DS
+     I                                        1  480MED
+     I                                        1   40S5MD01
+     I                                        5   80S5MD02
+     I                                        9  120S5MD03
+     I                                       13  160S5MD04
+     I                                       17  200S5MD05
+     I                                       21  240S5MD06
+     I                                       25  280S5MD07
+     I                                       29  320S5MD08
+     I                                       33  360S5MD09
+     I                                       37  400S5MD10
+     I                                       41  440S5MD11
+     I                                       45  480S5MD12
+     I            DS
+     I                                        1  160S6CARD
+     I                                        1   40S6CRD1
+     I                                        5   80S6CRD2
+     I                                        9  120S6CRD3
+     I                                       13  160S6CRD4
+     I* ==================================================================
+     C* KEY LISTS & PARAMETER LISTS
+     C* ===========================
+     C           K#B01     KLIST                           KEY CARB01
+     C                     KFLD           K#LICE
+     C           K#B02     KLIST                           KEY CARB02
+     C                     KFLD           K#CNTR
+     C           K#B021    KLIST                           KEY CARB02L1
+     C                     KFLD           K#NAME
+     C                     KFLD           K#CNTR
+     C           K#B03     KLIST                           KEY CARB03
+     C                     KFLD           K#YEAR
+     C                     KFLD           K#MONT
+     C                     KFLD           K#BRAN
+     C           K#B032    KLIST                           PART CARB03
+     C                     KFLD           K#YEAR
+     C           K#B04     KLIST                           KEY CARB04
+     C                     KFLD           K#RETU
+     C*
+     C           *ENTRY    PLIST
+     C                     PARM           KEUZE   2
+     C* ==================================================================
+     C*          MAIN LINE
+     C* ==================================================================
+     C* FIELD DEFINITIONS
+     C* =================
+     C           *LIKE     DEFN LICENC    K#LICE
+     C           *LIKE     DEFN CNTRCT    K#CNTR
+     C           *LIKE     DEFN NAME      K#NAME
+     C           *LIKE     DEFN YEARST    K#YEAR
+     C           *LIKE     DEFN MONTH     K#MONT
+     C           *LIKE     DEFN BRANDC    K#BRAN
+     C           *LIKE     DEFN RETURN    K#RETU
+     C*
+     C* HANDLE SCREENS
+     C* ==============
+     C                     EXSR SR01
+     C* ==================================================================
+     C* END OF PROGRAM
+     C* ==============
+     C           EINDE     TAG
+     C                     SETON                     LR
+     C* ==================================================================
+     C*          SR01      HANDLE SCREENS
+     C* ==================================================================
+     C           SR01      BEGSR
+     C*
+     C                     SELEC
+     C           KEUZE     WHEQ '1'
+     C                     EXSR SR02                       MAINT. CARPARK
+     C           KEUZE     WHEQ '2'
+     C                     EXSR SR03                       CONTRACTS
+     C           KEUZE     WHEQ '3'
+     C                     EXSR SR04A                      ADD STATISTICS
+     C           KEUZE     WHEQ '4'
+     C                     EXSR SR04R                      RETRIEVE STATISTICS
+     C           KEUZE     WHEQ '5'
+     C                     EXSR SR05                       RETURNED CARS
+     C                     ENDSL
+     C*
+     C           SR01ZZ    ENDSR
+     C* ==================================================================
+     C*          SR02      SCREEN MAINTAIN CARPARK F000
+     C* ==================================================================
+     C           SR02      BEGSR
+     C* INITIALIZE SCREEN F000
+     C                     CLEARS1LICE
+     C                     CLEARS1BRAN
+     C                     CLEARS1MODE
+     C*                    CLEARS1MDLO
+     C                     CLEARS1MILA
+     C                     CLEARS1CATE
+     C                     SETOF                     31
+     C*
+     C           SR0201    TAG
+     C*
+     C                     EXFMTF000
+     C                     CLEARS1MSGT
+     C                     SETOF                     30
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     GOTO SR02ZZ
+     C                     ENDIF
+     C* F4 = PROMPT
+     C           *IN04     IFEQ '1'
+     C           S1CFLD    IFEQ 'S1MODE'
+     C                     EXSR SR06
+     C                     GOTO SR0201
+     C                     ELSE
+     C                     MOVE MSG,4     S1MSGT
+     C                     GOTO SR0201
+     C                     ENDIF
+     C                     ENDIF
+     C*
+     C           S1LICE    IFEQ *BLANKS
+     C                     SETON                     30
+     C                     MOVE MSG,1     S1MSGT
+     C                     GOTO SR0201
+     C                     ENDIF
+     C*
+     C           S1LICE    IFNE K#LICE
+     C                     MOVE S1LICE    K#LICE
+     C           K#B01     CHAINCARB01               90
+     C                     ENDIF
+     C*
+     C           *IN90     IFEQ '1'
+     C                     MOVE S1LICE    LICENC
+     C                     MOVE S1BRAN    BRANDC
+     C                     MOVE S1MODE    MODELC
+     C*                    MOVE S1MDLO    MDLOMS
+     C                     MOVE S1MILA    MILAGE
+     C                     MOVE S1CATE    CATEGY
+     C                     WRITECARB01R1
+     C           K#B01     CHAINCARB01               90
+     C                     SETON                     31
+     C                     MOVE MSG,2     S1MSGT
+     C                     GOTO SR0201
+     C                     ELSE
+     C           *IN31     IFEQ '0'
+     C                     MOVE LICENC    S1LICE
+     C                     MOVE BRANDC    S1BRAN
+     C                     MOVE MODELC    S1MODE
+     C*                    MOVE MDLOMS    S1MDLO
+     C                     MOVE MILAGE    S1MILA
+     C                     MOVE CATEGY    S1CATE
+     C           K#B01     CHAINCARB01               90
+     C                     SETON                     31
+     C                     GOTO SR0201
+     C                     ELSE
+     C                     MOVE S1LICE    LICENC
+     C                     MOVE S1BRAN    BRANDC
+     C                     MOVE S1MODE    MODELC
+     C*                    MOVE S1MDLO    MDLOMS
+     C                     MOVE S1MILA    MILAGE
+     C                     MOVE S1CATE    CATEGY
+     C                     UPDATCARB01R1
+     C                     MOVE MSG,9     S1MSGT
+     C           K#B01     CHAINCARB01               90
+     C                     SETON                     31
+     C                     GOTO SR0201
+     C                     ENDIF
+     C                     ENDIF
+     C*
+     C           SR02ZZ    ENDSR
+     C* ==================================================================
+     C*          SR03      SCREEN CONTRACTS F020
+     C* ==================================================================
+     C           SR03      BEGSR
+     C           SR0300    TAG
+     C***********
+     C* INITIALIZE SCREEN F020
+     C                     MOVE *HIVAL    K#CNTR
+     C                     CLEARS3CNTR
+     C                     CLEARS3NAME
+     C                     CLEARS3INIT
+     C                     CLEARS3ADRS
+     C                     CLEARS3PLAC
+     C                     CLEARS3GT23
+     C                     CLEARS3CRCH
+     C                     CLEARS3AGE
+     C                     CLEARS3CASH
+     C                     CLEARS3RESI
+     C                     CLEARS3LICE
+     C                     CLEARS3TARI
+     C                     CLEARS3DAMA
+     C                     SETOF                     324445
+     C***********
+     C           SR0301    TAG
+     C***********
+     C                     EXFMTF020
+     C                     CLEARS1MSGT
+     C                     SETOF                     30
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     GOTO SR03ZZ
+     C                     ENDIF
+     C* F4 = PROMPT
+     C           *IN04     IFEQ '1'
+     C                     SELEC
+     C           S3CFLD    WHEQ 'S3CNTR'
+     C           S3CFLD    OREQ 'S3NAME'
+     C                     EXSR SR08
+     C                     GOTO SR0301
+     C           S3CFLD    WHEQ 'S3LICE'
+     C                     EXSR SR06
+     C                     MOVE LICENC    S3LICE
+     C                     GOTO SR0301
+     C                     OTHER
+     C                     MOVE MSG,5     S1MSGT
+     C                     GOTO SR0301
+     C                     ENDSL
+     C                     ENDIF
+     C* F5 = CHANGE
+     C           *IN05     IFEQ '1'
+     C           *IN32     ANDEQ'1'
+     C                     SETON                     45
+     C                     GOTO SR0301
+     C                     ENDIF
+     C* F6 = ADD
+     C           *IN06     IFEQ '1'
+     C           S3CNTR    IFEQ *ZERO
+     C                     SETON                     30
+     C                     MOVE MSG,1     S1MSGT
+     C                     GOTO SR0301
+     C                     ENDIF
+     C                     MOVE S3CNTR    CNTRCT
+     C                     MOVE S3NAME    NAME
+     C                     MOVE S3INIT    INITIA
+     C                     MOVE S3ADRS    ADRESS
+     C                     MOVE S3PLAC    PLACE
+     C                     MOVE S3GT23    AGGT23
+     C                     MOVE S3CRCH    CRCHK
+     C                     MOVE S3AGE     AGE
+     C                     MOVE S3CASH    CASH
+     C                     MOVE S3RESI    RESIDE
+     C                     MOVE S3LICE    LICENC
+     C                     MOVE S3TARI    TARIF
+     C                     MOVE S3DAMA    DAMAGE
+     C                     WRITECARB02R1               92
+     C           *IN92     IFEQ '1'
+     C                     SETON                     32
+     C                     MOVE MSG,3     S1MSGT
+     C                     GOTO SR0301
+     C                     ENDIF
+     C                     MOVE S3CNTR    K#CNTR
+     C           K#B02     CHAINCARB02               90
+     C                     SETON                     3244
+     C                     MOVE MSG,2     S1MSGT
+     C                     GOTO SR0301
+     C                     ENDIF
+     C* F13 = COPY
+     C           *IN13     IFEQ '1'
+     C           *IN32     IFEQ '1'
+     C                     CLEARS3CNTR
+     C                     SETOF                     3244
+     C                     GOTO SR0301
+     C                     ELSE
+     C                     SETON                     30
+     C                     MOVE MSG,7     S1MSGT
+     C                     GOTO SR0301
+     C                     ENDIF
+     C                     ENDIF
+     C*
+     C           S3CNTR    IFEQ *ZEROS
+     C                     SETON                     30
+     C                     MOVE MSG,1     S1MSGT
+     C                     GOTO SR0301
+     C                     ENDIF
+     C*
+     C           S3CNTR    IFEQ K#CNTR
+     C           *IN45     ANDEQ'0'
+     C                     GOTO SR0300
+     C                     END
+     C*
+     C           S3CNTR    IFNE K#CNTR
+     C                     MOVE S3CNTR    K#CNTR
+     C           K#B02     CHAINCARB02               90
+     C                     ENDIF
+     C*
+     C           *IN90     IFEQ '1'
+     C                     SETON                     30
+     C                     SETOF                     4445
+     C                     CLEARS3NAME
+     C                     CLEARS3INIT
+     C                     CLEARS3ADRS
+     C                     CLEARS3PLAC
+     C                     CLEARS3GT23
+     C                     CLEARS3CRCH
+     C                     CLEARS3AGE
+     C                     CLEARS3CASH
+     C                     CLEARS3RESI
+     C                     CLEARS3LICE
+     C                     CLEARS3TARI
+     C                     CLEARS3DAMA
+     C                     SETOF                     32
+     C                     MOVE MSG,6     S1MSGT
+     C                     GOTO SR0301
+     C                     ELSE
+     C           *IN32     IFEQ '0'
+     C                     MOVE CNTRCT    S3CNTR
+     C                     MOVE NAME      S3NAME
+     C                     MOVE INITIA    S3INIT
+     C                     MOVE ADRESS    S3ADRS
+     C                     MOVE PLACE     S3PLAC
+     C                     MOVE AGGT23    S3GT23
+     C                     MOVE CRCHK     S3CRCH
+     C                     MOVE AGE       S3AGE
+     C                     MOVE CASH      S3CASH
+     C                     MOVE RESIDE    S3RESI
+     C                     MOVE LICENC    S3LICE
+     C                     MOVE TARIF     S3TARI
+     C                     MOVE DAMAGE    S3DAMA
+     C           K#B02     CHAINCARB02               90
+     C                     SETON                     3244
+     C                     GOTO SR0301
+     C                     ELSE
+     C                     MOVE S3INIT    INITIA
+     C                     MOVE S3ADRS    ADRESS
+     C                     MOVE S3DAMA    DAMAGE
+     C                     UPDATCARB02R1
+     C                     MOVE MSG,9     S1MSGT
+     C           K#B02     CHAINCARB02               90
+     C                     SETON                     3244
+     C                     SETOF                     45
+     C                     GOTO SR0301
+     C                     ENDIF
+     C                     ENDIF
+     C*
+     C           SR03ZZ    ENDSR
+     C* ==================================================================
+     C*          SR04A     HANDLE SCREEN F030 ADD STATISTICS
+     C* ==================================================================
+     C           SR04A     BEGSR
+     C*
+     C* INITIALIZE SCREEN F030
+     C                     CLEARS4YEAR
+     C                     CLEARS4MONT
+     C                     CLEARS4BRAN
+     C                     CLEARS4MILE
+     C                     CLEARS4TDAM
+     C***********
+     C           SR0401    TAG
+     C***********
+     C                     EXFMTF030
+     C                     CLEARS1MSGT
+     C                     SETOF                     30
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     GOTO SR04AZ
+     C                     ENDIF
+     C*
+     C                     MOVE S4YEAR    K#YEAR
+     C                     MOVE S4MONT    K#MONT
+     C                     MOVE S4BRAN    K#BRAN
+     C           K#B03     CHAINCARB03               90
+     C*
+     C           *IN90     IFEQ '1'
+     C                     MOVE S4YEAR    YEARST
+     C                     MOVE S4MONT    MONTH
+     C                     MOVE S4BRAN    BRANDC
+     C                     MOVE S4MILE    MILES
+     C                     MOVE S4TDAM    TDAMAG
+     C                     WRITECARB03R1               92
+     C                     CLEARS4YEAR
+     C                     CLEARS4MONT
+     C                     CLEARS4BRAN
+     C                     CLEARS4MILE
+     C                     CLEARS4TDAM
+     C                     GOTO SR0401
+     C                     ELSE
+     C                     ADD  S4MILE    MILAGE
+     C                     ADD  S4TDAM    TDAMAG
+     C                     UPDATCARB03R1
+     C                     CLEARS4YEAR
+     C                     CLEARS4MONT
+     C                     CLEARS4BRAN
+     C                     CLEARS4MILE
+     C                     CLEARS4TDAM
+     C                     GOTO SR0401
+     C                     ENDIF
+     C*
+     C           SR04AZ    ENDSR
+     C* ==================================================================
+     C*          SR04R     HANDLE SCREEN F050 SHOW STATISTICS
+     C* ==================================================================
+     C           SR04R     BEGSR
+     C*
+     C* INITIALIZE SCREEN F040W
+     C                     CLEARW2YEAR
+     C                     EXFMTF040W
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     GOTO SR04RZ
+     C                     ENDIF
+     C***********
+     C           SR04R2    TAG
+     C***********
+     C                     CLEAROPM
+     C                     CLEAROPD
+     C                     CLEARFOM
+     C                     CLEARFOD
+     C                     CLEARMEM
+     C                     CLEARMED
+     C                     CLEARS5YEAR
+     C                     CLEARS5OM01
+     C                     CLEARS5FM01
+     C                     CLEARS5MM01
+     C                     CLEARS5OD01
+     C                     CLEARS5FD01
+     C                     CLEARS5MD01
+     C                     CLEARS5OM02
+     C                     CLEARS5FM02
+     C                     CLEARS5MM02
+     C                     CLEARS5OD02
+     C                     CLEARS5FD02
+     C                     CLEARS5MD02
+     C                     CLEARS5OM03
+     C                     CLEARS5FM03
+     C                     CLEARS5MM03
+     C                     CLEARS5OD03
+     C                     CLEARS5FD03
+     C                     CLEARS5MD03
+     C                     CLEARS5OM04
+     C                     CLEARS5FM04
+     C                     CLEARS5MM04
+     C                     CLEARS5OD04
+     C                     CLEARS5FD04
+     C                     CLEARS5MD04
+     C                     CLEARS5OM05
+     C                     CLEARS5FM05
+     C                     CLEARS5MM05
+     C                     CLEARS5OD05
+     C                     CLEARS5FD05
+     C                     CLEARS5MD05
+     C                     CLEARS5OM06
+     C                     CLEARS5FM06
+     C                     CLEARS5MM06
+     C                     CLEARS5OD06
+     C                     CLEARS5FD06
+     C                     CLEARS5MD06
+     C                     CLEARS5OM07
+     C                     CLEARS5FM07
+     C                     CLEARS5MM07
+     C                     CLEARS5OD07
+     C                     CLEARS5FD07
+     C                     CLEARS5MD07
+     C                     CLEARS5OM08
+     C                     CLEARS5FM08
+     C                     CLEARS5MM08
+     C                     CLEARS5OD08
+     C                     CLEARS5FD08
+     C                     CLEARS5MD08
+     C                     CLEARS5OM09
+     C                     CLEARS5FM09
+     C                     CLEARS5MM09
+     C                     CLEARS5OD09
+     C                     CLEARS5FD09
+     C                     CLEARS5MD09
+     C                     CLEARS5OM10
+     C                     CLEARS5FM10
+     C                     CLEARS5MM10
+     C                     CLEARS5OD10
+     C                     CLEARS5FD10
+     C                     CLEARS5MD10
+     C                     CLEARS5OM11
+     C                     CLEARS5FM11
+     C                     CLEARS5MM11
+     C                     CLEARS5OD11
+     C                     CLEARS5FD11
+     C                     CLEARS5MD11
+     C                     CLEARS5OM12
+     C                     CLEARS5FM12
+     C                     CLEARS5MM12
+     C                     CLEARS5OD12
+     C                     CLEARS5FD12
+     C                     CLEARS5MD12
+     C                     CLEARS5OMTT
+     C                     CLEARS5FMTT
+     C                     CLEARS5MMTT
+     C                     CLEARS5ODTT
+     C                     CLEARS5FDTT
+     C                     CLEARS5MDTT
+     C                     MOVE W2YEAR    S5YEAR
+     C                     MOVE W2YEAR    K#YEAR
+     C                     CLEARK#MONT
+     C                     CLEARK#BRAN
+     C           K#B03     SETLLCARB03
+     C           K#B032    READECARB03                   90
+     C*
+     C           *IN90     DOWEQ'0'
+     C           MONTH     IFNE *ZEROS
+     C                     Z-ADDMONTH     X       20
+     C                     ELSE
+     C                     GOTO SR04R4
+     C                     ENDIF
+     C                     SELEC
+     C           BRANDC    WHEQ 1
+     C                     Z-ADDMILES     OPM,X
+     C                     Z-ADDTDAMAG    OPD,X
+     C           BRANDC    WHEQ 2
+     C                     Z-ADDMILES     FOM,X
+     C                     Z-ADDTDAMAG    FOD,X
+     C           BRANDC    WHEQ 3
+     C                     Z-ADDMILES     MEM,X
+     C                     Z-ADDTDAMAG    MED,X
+     C                     ENDSL
+     C***********
+     C           SR04R4    TAG
+     C***********
+     C           K#B032    READECARB03                   90
+     C                     ENDDO
+     C                     XFOOTOPM       S5OMTT
+     C                     XFOOTOPD       S5ODTT
+     C                     XFOOTFOM       S5FMTT
+     C                     XFOOTFOD       S5FDTT
+     C                     XFOOTMEM       S5MMTT
+     C                     XFOOTMED       S5MDTT
+     C***********
+     C           SR04R3    TAG
+     C***********
+     C                     EXFMTF050
+     C* F1 = HELP
+     C           *IN01     IFEQ '1'
+     C                     EXFMTF050W
+     C                     GOTO SR04R3
+     C                     ENDIF
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     GOTO SR04RZ
+     C                     ENDIF
+     C* F10 = CHANGE YEAR
+     C           *IN10     IFEQ '1'
+     C                     EXFMTF040W
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     GOTO SR04R3
+     C                     ENDIF
+     C*
+     C                     ENDIF
+     C*
+     C                     GOTO SR04R2
+     C*
+     C           SR04RZ    ENDSR
+     C* ==================================================================
+     C*          SR05      SCREEN RETURED CARS F060
+     C* ==================================================================
+     C           SR05      BEGSR
+     C***********
+     C           SR0500    TAG
+     C***********
+     C* INITIALIZE SCREEN F060
+     C                     MOVE *HIVAL    K#RETU
+     C                     CLEARS6RETU
+     C                     CLEARS6CNTR
+     C                     CLEARS6LICE
+     C                     CLEARS6BRAN
+     C                     CLEARS6MODE
+     C                     CLEARS6MILE
+     C                     CLEARS6CHKD
+     C                     CLEARS6DAMA
+     C                     CLEARS6TANK
+     C                     CLEARS6PAID
+     C                     CLEARS6CARD
+     C                     SETOF                     32
+     C                     SETOF                     444546
+     C***********
+     C           SR0501    TAG
+     C***********
+     C                     EXFMTF060
+     C                     CLEARS1MSGT
+     C                     SETOF                     30
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     GOTO SR05ZZ
+     C                     ENDIF
+     C* F4 = PROMPT
+     C           *IN04     IFEQ '1'
+     C                     SELEC
+     C           S6CFLD    WHEQ 'S6MODE'
+     C                     EXSR SR10
+     C                     MOVE S9MODE    S6MODE
+     C                     MOVE S9BRAN    S6BRAN
+     C                     GOTO SR0501
+     C           S6CFLD    WHEQ 'S6LICE'
+     C                     EXSR SR10
+     C                     MOVE S9LICE    S6LICE
+     C                     MOVE S9MODE    S6MODE
+     C                     MOVE S9BRAN    S6BRAN
+     C                     GOTO SR0501
+     C                     OTHER
+     C                     MOVE MSG,5     S1MSGT
+     C                     GOTO SR0501
+     C                     ENDSL
+     C                     ENDIF
+     C* F5 = CHANGE
+     C           *IN05     IFEQ '1'
+     C           *IN32     ANDEQ'1'
+     C                     SETON                     45
+     C                     GOTO SR0501
+     C                     ENDIF
+     C* F6 = ADD
+     C           *IN06     IFEQ '1'
+     C           S6RETU    IFEQ *ZERO
+     C                     SETON                     30
+     C                     MOVE MSG,1     S1MSGT
+     C                     GOTO SR0501
+     C                     ENDIF
+     C                     MOVE S6RETU    RETURN
+     C                     MOVE S6CNTR    CNTRCT
+     C                     MOVE S6LICE    LICENC
+     C                     MOVE S6BRAN    BRANDC
+     C                     MOVE S6MODE    MODELC
+     C                     MOVE S6MILE    MILAGE
+     C                     MOVE S6CHKD    CHKDMG
+     C                     MOVE S6DAMA    DAMAGE
+     C                     MOVE S6TANK    TANKED
+     C                     MOVE S6PAID    PAID
+     C                     MOVE S6CARD    CARDNR
+     C                     WRITECARB04R1               92
+     C           *IN92     IFEQ '1'
+     C                     SETON                     32
+     C                     MOVE MSG,3     S1MSGT
+     C                     GOTO SR0501
+     C                     ENDIF
+     C                     MOVE S6RETU    K#RETU
+     C           K#B04     CHAINCARB04               90
+     C                     SETON                     3244
+     C                     MOVE MSG,2     S1MSGT
+     C                     GOTO SR0501
+     C                     ENDIF
+     C* F13 = COPY
+     C           *IN13     IFEQ '1'
+     C           *IN32     IFEQ '1'
+     C                     CLEARS6RETU
+     C                     SETOF                     3244
+     C                     GOTO SR0501
+     C                     ELSE
+     C                     SETON                     30
+     C                     MOVE MSG,7     S1MSGT
+     C                     GOTO SR0501
+     C                     ENDIF
+     C                     ENDIF
+     C* F14 = DELETE
+     C           *IN14     IFEQ '1'
+     C           *IN32     IFEQ '1'
+     C           S6RETU    DELETCARB04R1             90
+     C           *IN90     IFEQ '1'
+     C                     SETOF                     32
+     C                     MOVE MSG,6     S1MSGT
+     C                     GOTO SR0501
+     C                     ELSE
+     C                     SETON                     30
+     C                     SETOF                     32
+     C                     CLEARS6CNTR
+     C                     CLEARS6LICE
+     C                     CLEARS6BRAN
+     C                     CLEARS6MODE
+     C                     CLEARS6MILE
+     C                     CLEARS6CHKD
+     C                     CLEARS6DAMA
+     C                     CLEARS6TANK
+     C                     CLEARS6PAID
+     C                     CLEARS6CARD
+     C                     MOVE MSG,8     S1MSGT
+     C                     GOTO SR0501
+     C                     ENDIF
+     C                     ENDIF
+     C                     ENDIF
+     C* F24 = MORE KEYS
+     C           *IN24     IFEQ '1'
+     C           *IN46     IFEQ *OFF
+     C                     SETON                     46
+     C                     ELSE
+     C                     SETOF                     46
+     C                     ENDIF
+     C                     GOTO SR0501
+     C                     ENDIF
+     C*
+     C           S6RETU    IFEQ *ZEROS
+     C                     SETON                     30
+     C                     MOVE MSG,1     S1MSGT
+     C                     GOTO SR0501
+     C                     ENDIF
+     C*
+     C           S6RETU    IFEQ K#RETU
+     C           *IN45     ANDEQ'1'
+     C                     GOTO SR0500
+     C                     END
+     C*
+     C           S6RETU    IFNE K#RETU
+     C                     MOVE S6RETU    K#RETU
+     C           K#B04     CHAINCARB04               90
+     C                     ENDIF
+     C*
+     C           *IN90     IFEQ '1'
+     C                     SETON                     30
+     C                     SETOF                     4445
+     C                     CLEARS6RETU
+     C                     CLEARS6CNTR
+     C                     CLEARS6LICE
+     C                     CLEARS6BRAN
+     C                     CLEARS6MODE
+     C                     CLEARS6MILE
+     C                     CLEARS6CHKD
+     C                     CLEARS6DAMA
+     C                     CLEARS6TANK
+     C                     CLEARS6PAID
+     C                     CLEARS6CARD
+     C                     SETOF                     32
+     C                     MOVE MSG,6     S1MSGT
+     C                     GOTO SR0501
+     C                     ELSE
+     C           *IN32     IFEQ '0'
+     C                     MOVE RETURN    S6RETU
+     C                     MOVE CNTRCT    S6CNTR
+     C                     MOVE LICENC    S6LICE
+     C                     MOVE BRANDC    S6BRAN
+     C                     MOVE MODELC    S6MODE
+     C                     MOVE MILAGE    S6MILE
+     C                     MOVE CHKDMG    S6CHKD
+     C                     MOVE DAMAGE    S6DAMA
+     C                     MOVE TANKED    S6TANK
+     C                     MOVE PAID      S6PAID
+     C                     MOVE CARDNR    S6CARD
+     C           K#B04     CHAINCARB04               90
+     C                     SETON                     3244
+     C                     GOTO SR0501
+     C                     ELSE
+     C                     MOVE S6CNTR    CNTRCT
+     C                     MOVE S6LICE    LICENC
+     C                     MOVE S6BRAN    BRANDC
+     C                     MOVE S6MODE    MODELC
+     C                     MOVE S6MILE    MILAGE
+     C                     MOVE S6CHKD    CHKDMG
+     C                     MOVE S6DAMA    DAMAGE
+     C                     MOVE S6TANK    TANKED
+     C                     MOVE S6PAID    PAID
+     C                     MOVE S6CARD    CARDNR
+     C                     UPDATCARB04R1
+     C                     MOVE MSG,9     S1MSGT
+     C           K#B04     CHAINCARB04               90
+     C                     SETON                     3244
+     C                     SETOF                     45
+     C                     GOTO SR0501
+     C                     ENDIF
+     C                     ENDIF
+     C*
+     C           SR05ZZ    ENDSR
+     C* ==================================================================
+     C*          SR06      HANDLE SCREEN F010 SUBFILE MODELS
+     C* ==================================================================
+     C           SR06      BEGSR
+     C*
+     C* FILL SUBFILE
+     C*
+     C                     EXSR SR07
+     C*
+     C                     Z-ADD1         SFLRRN
+     C***********
+     C           SR0601    TAG
+     C***********
+     C                     WRITEF010H
+     C                     EXFMTF010C
+     C                     CLEARS1MSGT
+     C                     SETOF                     30
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     SETOF                     31
+     C                     GOTO SR06ZZ
+     C                     ENDIF
+     C*
+     C* F16 = BACK TO MAIN MENU
+     C           *IN16     IFEQ '1'
+     C                     GOTO EINDE
+     C                     ENDIF
+     C*
+     C           S7LICE    IFNE *BLANKS
+     C                     MOVE S7LICE    K#LICE
+     C           K#B01     CHAINCARB01               90
+     C           *IN90     IFEQ '0'
+     C           *IN40     IFEQ '1'
+     C                     MOVE S7LICE    LICENC
+     C                     SELEC
+     C           S7BRNO    WHEQ 'BMW'
+     C                     MOVE '1'       BRANDC
+     C           S7BRNO    WHEQ 'FORD'
+     C                     MOVE '2'       BRANDC
+     C           S7BRNO    WHEQ 'MERCEDES'
+     C                     MOVE '3'       BRANDC
+     C                     ENDSL
+     C                     MOVE S7MODE    MODELC
+     C                     MOVE S7MDLO    MDLOMS
+     C                     MOVE S7MILA    MILAGE
+     C                     MOVE S7CATE    CATEGY
+     C                     UPDATCARB01R1
+     C                     MOVE MSG,9     S1MSGT
+     C                     EXSR SR07
+     C                     GOTO SR0601
+     C                     ELSE
+     C                     SETON                     30
+     C                     MOVE MSG,3     S1MSGT
+     C                     GOTO SR0601
+     C                     ENDIF
+     C                     ELSE
+     C                     MOVE S7LICE    LICENC
+     C                     SELEC
+     C           S7BRNO    WHEQ 'BMW'
+     C                     MOVE '1'       BRANDC
+     C           S7BRNO    WHEQ 'FORD'
+     C                     MOVE '2'       BRANDC
+     C           S7BRNO    WHEQ 'MERCEDES'
+     C                     MOVE '3'       BRANDC
+     C                     ENDSL
+     C                     MOVE S7MODE    MODELC
+     C                     MOVE S7MDLO    MDLOMS
+     C                     MOVE S7MILA    MILAGE
+     C                     MOVE S7CATE    CATEGY
+     C                     WRITECARB01R1               34
+     C                     EXSR SR07
+     C                     GOTO SR0601
+     C                     ENDIF
+     C                     ENDIF
+     C*
+     C* ACTIONS ON ADD/CHANGE/DELETE
+     C* ----------------------------
+     C                     Z-ADD1         SFLRRN
+     C           SFLRRN    CHAINF010S                90
+     C           *IN90     DOWEQ*OFF
+     C           S2OPTN    IFEQ *ZERO
+     C                     GOTO NEXTS
+     C                     ELSE
+     C           S2OPTN    IFEQ 1
+     C                     MOVE S2BRNO    S7BRNO
+     C                     MOVE S2MODE    S7MODE
+     C                     MOVE S2MDLO    S7MDLO
+     C                     MOVE S2CATE    S7CATE
+     C                     MOVE S2LICE    S7LICE
+     C                     MOVE S2MILA    S7MILA
+     C                     CLEARS2OPTN
+     C                     UPDATF010S
+     C                     GOTO SR0601
+     C                     ENDIF
+     C           S2OPTN    IFEQ 2
+     C           S2OPTN    OREQ 5
+     C                     MOVE S2LICE    K#LICE
+     C           K#B01     CHAINCARB01               90
+     C                     MOVE LICENC    S1LICE
+     C                     MOVE BRANDC    S1BRAN
+     C                     MOVE MODELC    S1MODE
+     C                     MOVE MILAGE    S1MILA
+     C                     MOVE CATEGY    S1CATE
+     C                     SETON                     31
+     C                     GOTO SR06ZZ
+     C                     ENDIF
+     C                     ENDIF
+     C           S2OPTN    IFEQ 4
+     C                     EXFMTF010W
+     C           W1DEL     IFEQ 'Y'
+     C                     MOVE S2LICE    K#LICE
+     C           K#B01     DELETCARB01R1             33
+     C                     CLEARS2OPTN
+     C                     SETON                     35
+     C                     UPDATF010S
+     C                     SETOF                     35
+     C                     CLEARW1DEL
+     C                     ENDIF
+     C                     ENDIF
+     C           NEXTS     TAG
+     C                     ADD  1         SFLRRN
+     C           SFLRRN    CHAINF010S                90
+     C                     ENDDO
+     C*
+     C           SR06ZZ    ENDSR
+     C* ==================================================================
+     C*          SR07      FILL SUBFILE  MODEL
+     C* ==================================================================
+     C           SR07      BEGSR
+     C*
+     C*    CLEAR INPUT FIELDS
+     C*
+     C                     CLEARS7BRNO
+     C                     CLEARS7MODE
+     C                     CLEARS7MDLO
+     C                     CLEARS7CATE
+     C                     CLEARS7LICE
+     C                     CLEARS7MILA
+     C*
+     C*    INIT SUBFILE
+     C*
+     C                     SETOF                     80    SFLCLR
+     C                     SETOF                     81    SFLDSPCTL
+     C                     WRITEF010C                      WRITE CTL
+     C                     SETON                     81    SFLDSPCTL
+     C*
+     C                     Z-ADD0         SFLRRN  30
+     C*
+     C* FILL SUBFILE
+     C*
+     C           *BLANKS   SETLLCARB01
+     C                     READ CARB01              N    91
+     C           *IN91     DOWEQ*OFF
+     C                     SETON                     80    SFLDSP
+     C                     ADD  1         SFLRRN
+     C                     CLEARS2OPTN
+     C                     MOVE LICENC    S2LICE
+     C                     SELEC
+     C           BRANDC    WHEQ 1
+     C                     MOVEL'BMW'     S2BRNO    P
+     C           BRANDC    WHEQ 2
+     C                     MOVEL'FORD'    S2BRNO    P
+     C           BRANDC    WHEQ 3
+     C                     MOVEL'MERCEDES'S2BRNO    P
+     C                     ENDSL
+     C                     MOVE BRANDC    S2BRAN
+     C                     MOVE MODELC    S2MODE
+     C                     MOVE MDLOMS    S2MDLO
+     C                     MOVE MILAGE    S2MILA
+     C                     MOVE CATEGY    S2CATE
+     C                     WRITEF010S
+     C                     READ CARB01              N    91
+     C                     ENDDO
+     C*
+     C           SR07ZZ    ENDSR
+     C* ==================================================================
+     C*          SR08      HANDLE SCREEN F020 SUBFILE NAME
+     C* ==================================================================
+     C           SR08      BEGSR
+     C*
+     C* FILL SUBFILE
+     C*
+     C                     EXSR SR09
+     C*
+     C                     Z-ADD1         SFLRR2
+     C                     WRITEF020H
+     C                     EXFMTF020C
+     C                     CLEARS1MSGT
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     SETOF                     32
+     C                     GOTO SR08ZZ
+     C                     ENDIF
+     C*
+     C* F16 = BACK TO MAIN MENU
+     C           *IN16     IFEQ '1'
+     C                     GOTO EINDE
+     C                     ENDIF
+     C*
+     C                     READCF020S                    90
+     C           *IN90     IFEQ '0'
+     C           S8OPTN    IFEQ 5
+     C                     MOVE S8CNTR    K#CNTR
+     C           K#B02     CHAINCARB02               90
+     C                     MOVE CNTRCT    S3CNTR
+     C                     MOVE NAME      S3NAME
+     C                     MOVE INITIA    S3INIT
+     C                     MOVE ADRESS    S3ADRS
+     C                     MOVE PLACE     S3PLAC
+     C                     MOVE AGGT23    S3GT23
+     C                     MOVE CRCHK     S3CRCH
+     C                     MOVE AGE       S3AGE
+     C                     MOVE CASH      S3CASH
+     C                     MOVE RESIDE    S3RESI
+     C                     MOVE LICENC    S3LICE
+     C                     MOVE TARIF     S3TARI
+     C                     MOVE DAMAGE    S3DAMA
+     C                     SETON                     3244
+     C                     GOTO SR08ZZ
+     C                     ENDIF
+     C                     ENDIF
+     C*
+     C           SR08ZZ    ENDSR
+     C* ==================================================================
+     C*          SR09      FILL SUBFILE NAME
+     C* ==================================================================
+     C           SR09      BEGSR
+     C*
+     C*    INIT SUBFILE
+     C*
+     C                     SETOF                     80    SFLCLR
+     C                     SETOF                     81    SFLDSPCTL
+     C                     WRITEF020C                      WRITE CTL
+     C                     SETON                     81    SFLDSPCTL
+     C*
+     C                     Z-ADD0         SFLRR2  30
+     C*
+     C* FILL SUBFILE
+     C*
+     C                     MOVE *BLANKS   K#NAME
+     C                     MOVE *ZEROS    K#CNTR
+     C           K#B021    SETLLCARB02L1
+     C                     READ CARB02L1                 91
+     C           *IN91     DOWEQ*OFF
+     C                     SETON                     80    SFLDSP
+     C                     ADD  1         SFLRR2
+     C                     CLEARS8OPTN
+     C                     MOVELNAME      S8NAME    P
+     C                     MOVE CNTRCT    S8CNTR
+     C                     MOVELADRESS    S8ADRS    P
+     C                     MOVE LICENC    S8LICE
+     C                     WRITEF020S
+     C                     READ CARB02L1                 91
+     C                     ENDDO
+     C*
+     C           SR09ZZ    ENDSR
+     C* ==================================================================
+     C*          SR10      HANDLE SUBFILE MODEL F070S
+     C* ==================================================================
+     C           SR10      BEGSR
+     C*
+     C*    INIT SUBFILE
+     C*
+     C                     SETOF                     80    SFLCLR
+     C                     SETOF                     81    SFLDSPCTL
+     C                     WRITEF070C                      WRITE CTL
+     C                     SETON                     81    SFLDSPCTL
+     C*
+     C                     Z-ADD0         SFLRR3  30
+     C*
+     C* FILL SUBFILE
+     C*
+     C           *BLANKS   SETLLCARB01
+     C                     READ CARB01              N    91
+     C           *IN91     DOWEQ*OFF
+     C                     SETON                     80    SFLDSP
+     C                     ADD  1         SFLRR3
+     C                     CLEARS9OPTN
+     C                     MOVE LICENC    S9LICE
+     C                     SELEC
+     C           BRANDC    WHEQ 1
+     C                     MOVEL'BMW'     S9BRNO    P
+     C           BRANDC    WHEQ 2
+     C                     MOVEL'Ford'    S9BRNO    P
+     C           BRANDC    WHEQ 3
+     C                     MOVEL'Mercedes'S9BRNO    P
+     C                     ENDSL
+     C                     MOVE BRANDC    S9BRAN
+     C                     MOVE MODELC    S9MODE
+     C                     MOVE MDLOMS    S9MDLO
+     C                     MOVE MILAGE    S9MILA
+     C                     MOVE CATEGY    S9CATE
+     C                     WRITEF070S
+     C                     READ CARB01              N    91
+     C                     ENDDO
+     C*
+     C                     Z-ADD1         SFLRR3
+     C                     WRITEF070H
+     C                     EXFMTF070C
+     C                     CLEARS1MSGT
+     C* F3 OR F12 = EXIT
+     C           *IN03     IFEQ '1'
+     C           *IN12     OREQ '1'
+     C                     SETOF                     32
+     C                     GOTO SR10ZZ
+     C                     ENDIF
+     C*
+     C                     READCF070S                    90
+     C*
+     C           SR10ZZ    ENDSR
+     C* ==================================================================
+** MESSAGES
+Mandatory entry |
+Record added to file.
+Record already exists |
+Prompt only for Model.
+Prompt not available.
+Record does not exist |
+First select a contract |
+Record deleted from file.
+Record changed.

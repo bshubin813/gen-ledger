@@ -1,1 +1,4 @@
-/home/aldoncms/repo/RETAIL/CARRENTAL/BASE/PDN/QCLSRC/CAR.CLP
+             PGM
+             CHGCURLIB  CURLIB(CARLIB)
+             GO         MENU(CARREN)
+             ENDPGM

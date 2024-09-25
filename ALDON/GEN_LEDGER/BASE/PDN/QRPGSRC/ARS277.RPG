@@ -1,10 +1,10 @@
      H********************************************************************
      H**   ARS277                                                        *
      H********************************************************************
-     H*   Changed on SEPT 24, 2024                                       *
+     H*   Changed on SEPT 26, 2024                                       *
      H*   By ROLF                                                        *
      H*   Assigned to BSHUBIN_X                                          *
-     H*   Editted in BASE  TASK199                                       *
+     H*   Editted in BASE  TASK200                                       *
      H********************************************************************
      FMASTERL1IF  E           K        DISK
      F            ACTGLP                            KRENAMERPGID2

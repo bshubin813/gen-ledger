@@ -18,11 +18,8 @@
      A*                                     EDTCDE(Y)
      A                                  6 13'Licence plate :'
      A            S1LICE    R        B  6 30REFFLD(LPLATE)
-     A*                                     COLOR(RED)
      A  30                                  DSPATR(RI)
      A                                  8 13'Brand         :'
-     A*                                     COLOR(RED)
-     A                                      DSPATR(HI)
      A            S1BRAN    R     Y  B  8 30REFFLD(BRAND)
      A                                      EDTCDE(4)
      A                                  8 39'1 = BMW'

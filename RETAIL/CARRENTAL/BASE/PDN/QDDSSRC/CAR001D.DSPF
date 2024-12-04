@@ -21,6 +21,7 @@
      A                                      COLOR(RED)
      A  30                                  DSPATR(RI)
      A                                  8 13'Brand         :'
+     A                                      COLOR(RED)
      A            S1BRAN    R     Y  B  8 30REFFLD(BRAND)
      A                                      EDTCDE(4)
      A                                  8 39'1 = BMW'

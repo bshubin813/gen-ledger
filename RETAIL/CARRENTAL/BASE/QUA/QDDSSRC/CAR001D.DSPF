@@ -1,1 +1,641 @@
-/home/aldoncms/repo/RETAIL/CARRENTAL/BASE/PDN/QDDSSRC/CAR001D.DSPF
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      REF(*LIBL/CARREF)
+     A                                      WDWBORDER((*COLOR GRN))
+     A                                      CF03(03 'EXIT')
+     A          R F000
+     A                                      CF04(04 'PROMPT')
+     A                                      CF12(12 'CANCEL')
+     A                                      RTNCSRLOC(&S1CREC &S1CFLD &S1CPOS)
+     A            S1CREC        10A  H
+     A            S1CFLD        10A  H
+     A            S1CPOS         4S 0H
+     A                                  1 33'Maintain Carpark'
+     A*                                     COLOR(RED)
+     A                                      DSPATR(HI)
+     A*                                 1 70SYSNAME
+     A*                                 2 60TIME
+     A*                                 2 70DATE
+     A*                                     EDTCDE(Y)
+     A                                  6 13'Licence plate :'
+     A            S1LICE    R        B  6 30REFFLD(LPLATE)
+     A*                                     COLOR(RED)
+     A  30                                  DSPATR(RI)
+     A                                  8 13'Brand         :'
+     A*                                     COLOR(RED)
+     A                                      DSPATR(HI)
+     A            S1BRAN    R     Y  B  8 30REFFLD(BRAND)
+     A                                      EDTCDE(4)
+     A                                  8 39'1 = BMW'
+     A                                  9 39'2 = Ford'
+     A                                 10 39'3 = Mercedes'
+     A                                 14 13'Model         :'
+     A            S1MODE    R     Y  B 14 30REFFLD(MODEL)
+     A                                      EDTCDE(4)
+     A                                 15 13'Milage        :'
+     A            S1MILA    R     Y  B 15 30REFFLD(MILAGE)
+     A                                      EDTCDE(4)
+     A                                 16 13'Category      :'
+     A            S1CATE    R        B 16 30REFFLD(PRCCAT)
+     A                                 16 39'A <= $30.00 per Day'
+     A                                 17 39'B =  $30.00 - $50.00 per Day'
+     A                                 18 39'C => $50.00 per Day'
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 13'F4=Prompt'
+     A                                      COLOR(BLU)
+     A                                 22 26'F12=Cancel'
+     A                                      COLOR(BLU)
+     A            S1MSGT        60   O 23  2DSPATR(HI)
+     A                                      COLOR(WHT)
+     A                                  1  3USER
+     A          R F010S                     SFL
+     A            S2BRAN    R        H      REFFLD(BRAND)
+     A            S2OPTN         1Y 0B 10  7EDTCDE(4)
+     A  35                                  DSPATR(ND)
+     A  35                                  DSPATR(PR)
+     A            S2BRNO        10A  O 10 13
+     A            S2MDLO        12A  O 10 28
+     A            S2CATE    R        O 10 46REFFLD(PRCCAT)
+     A            S2LICE    R        O 10 56REFFLD(LPLATE)
+     A            S2MILA    R        O 10 69REFFLD(MILAGE)
+     A            S2MODE    R        O 11 39REFFLD(MODEL)
+     A                                 11 28'Modelnr :'
+     A          R F010C                     SFLCTL(F010S)
+     A                                      SFLSIZ(0006)
+     A                                      SFLPAG(0005)
+     A                                      CF06(06 'ADD')
+     A                                      CF07(07 'ZOOM')
+     A                                      CF12(12 'CANCEL')
+     A                                      CF16(16 'MAIN MENU')
+     A                                      OVERLAY
+     A  80                                  SFLDSP
+     A  81                                  SFLDSPCTL
+     A N80                                  SFLCLR
+     A  80                                  SFLEND(*MORE)
+     A                                      SFLDROP(CF07)
+     A                                  1 38'Model'
+     A                                      DSPATR(HI)
+     A                                  4  5'New :'
+     A            S7BRNO        10A  B  4 13VALUES('BMW' 'FORD' 'MERCEDES')
+     A            S7MDLO    R        B  4 28CHECK(LC)
+     A                                      REFFLD(MDLDES)
+     A                                      CHANGE(40)
+     A            S7CATE    R        B  4 46CHANGE(40)
+     A                                      REFFLD(PRCCAT)
+     A            S7LICE    R        B  4 56REFFLD(LPLATE)
+     A  30                                  DSPATR(RI)
+     A  30                                  DSPATR(PC)
+     A                                      CHANGE(40)
+     A            S7MILA    R     Y  B  4 69EDTCDE(4)
+     A                                      REFFLD(MILAGE)
+     A                                      CHANGE(40)
+     A            S7MODE    R     Y  B  5 28EDTCDE(4)
+     A                                      REFFLD(MODEL)
+     A                                      CHANGE(40)
+     A                                  7  5'Options :'
+     A                                      COLOR(BLU)
+     A                                  7 16'1=Copy'
+     A                                      COLOR(BLU)
+     A                                  9  6'Opt'
+     A                                      DSPATR(UL)
+     A                                  9 13'Brand'
+     A                                      DSPATR(UL)
+     A                                  9 28'Model'
+     A                                      DSPATR(UL)
+     A                                  9 43'Category'
+     A                                      DSPATR(UL)
+     A                                  9 56'Licence'
+     A                                      DSPATR(UL)
+     A                                  9 69'Milage'
+     A                                      DSPATR(UL)
+     A                                  7 24'2=Change'
+     A                                      COLOR(BLU)
+     A                                  7 34'4=Delete'
+     A                                      COLOR(BLU)
+     A                                  7 44'5=Select'
+     A                                      COLOR(BLU)
+     A                                  3 13'Brand'
+     A                                      DSPATR(UL)
+     A                                  3 28'Model'
+     A                                      DSPATR(UL)
+     A                                  3 43'Category'
+     A                                      DSPATR(UL)
+     A                                  3 56'Licence'
+     A                                      DSPATR(UL)
+     A                                  3 69'Milage'
+     A                                      DSPATR(UL)
+     A          R F010H
+     A                                      OVERLAY
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 12'F6=Add'
+     A                                      COLOR(BLU)
+     A                                 22 21'F7=Zoom'
+     A                                      COLOR(BLU)
+     A                                 22 31'F12=Cancel'
+     A                                      COLOR(BLU)
+     A                                 22 44'F16=Main Menu'
+     A                                      COLOR(BLU)
+     A            S1MSGT        60A  O 23  2COLOR(BLU)
+     A          R F010W
+     A                                      WINDOW(16 28 4 20)
+     A                                  3  2'Delete'
+     A            W1DEL          1A  B  3 11
+     A                                  3 15'(Y/N)'
+     A                                  1  7'Confirm'
+     A                                      DSPATR(HI)
+     A          R F020
+     A                                      CF04(04 'PROMPT')
+     A                                      CF05(05 'CHANGE')
+     A                                      CF06(06 'ADD')
+     A                                      CF12(12 'CANCEL')
+     A                                      CF13(13 'COPY')
+     A                                      RTNCSRLOC(&S3CREC &S3CFLD &S3CPOS)
+     A            S3CREC        10A  H
+     A            S3CFLD        10A  H
+     A            S3CPOS         4S 0H
+     A                                  1 36'Contracts'
+     A                                      DSPATR(HI)
+     A                                  1 70SYSNAME
+     A N44N45                           2  3' ADD  '
+     A                                      DSPATR(RI)
+     A  45                              2  3'CHANGE'
+     A                                      DSPATR(RI)
+     A  44N45                           2  3' VIEW '
+     A                                      DSPATR(RI)
+     A                                  2 60TIME
+     A                                  2 70DATE
+     A                                      EDTCDE(Y)
+     A                                  3 50'Contractnr.  :'
+     A            S3CNTR    R     Y  B  3 65REFFLD(CONTNR)
+     A                                      EDTCDE(4)
+     A                                      CHECK(RZ)
+     A                                  5  3'Name          :'
+     A            S3NAME    R        B  5 19REFFLD(NAME)
+     A  44                                  DSPATR(PR)
+     A  44                                  COLOR(RED)
+     A  44                                  DSPATR(RI)
+     A                                  6  3'Initials      :'
+     A            S3INIT    R        B  6 19REFFLD(INITIA)
+     A  44                                  DSPATR(PR)
+     A  44                                  COLOR(RED)
+     A  44                                  DSPATR(RI)
+     A                                  7  3'Adress        :'
+     A            S3ADRS    R        B  7 19REFFLD(ADRESS)
+     A  44N45                               DSPATR(PR)
+     A  44N45                               COLOR(RED)
+     A  44N45                               DSPATR(RI)
+     A                                  7 50'Place        :'
+     A            S3PLAC    R   13A  B  7 65REFFLD(PLACE)
+     A  44N45                               DSPATR(PR)
+     A  44N45                               COLOR(RED)
+     A  44N45                               DSPATR(RI)
+     A                                  8  3'Age > 23      :'
+     A            S3GT23    R        B  8 19REFFLD(AGGT23)
+     A                                      VALUES('Y' 'N')
+     A  44                                  DSPATR(PR)
+     A                                  8 24'(Y/N)'
+     A                                  8 50'Credit Check :'
+     A            S3CRCH    R        B  8 65REFFLD(CRCHK)
+     A                                      VALUES('Y' 'N')
+     A  44                                  DSPATR(PR)
+     A                                  8 70'(Y/N)'
+     A                                  9  3'Age           :'
+     A            S3AGE     R     Y  B  9 19REFFLD(AGE)
+     A                                      EDTCDE(4)
+     A                                      RANGE(18 65)
+     A  44                                  DSPATR(PR)
+     A                                  9 24'(18-65)'
+     A                                 10  3'Cash Payment  :'
+     A            S3CASH    R        B 10 19REFFLD(CASH)
+     A                                      VALUES('Y' 'N')
+     A  44                                  DSPATR(PR)
+     A                                 10 24'(Y/N)'
+     A                                 10 50'Resident     :'
+     A            S3RESI    R     Y  B 10 65REFFLD(RESIDE)
+     A                                      EDTCDE(4)
+     A                                      VALUES(1 2 3 4)
+     A  44                                  DSPATR(PR)
+     A                                 10 70'1=EEC'
+     A                                 11 70'2=USA'
+     A                                 12 70'3=FarEast'
+     A                                 13 70'4=Others'
+     A                                 14  3'Car           :'
+     A            S3LICE    R        B 14 19REFFLD(LPLATE)
+     A  44                                  DSPATR(PR)
+     A                                 16  3'Tarif per day :'
+     A            S3TARI    R     Y  B 16 19REFFLD(TARIF)
+     A                                      EDTCDE(4)
+     A  44                                  DSPATR(PR)
+     A                                 18  3'Damage History:'
+     A            S3DAMA    R    1Y00B 18 19REFFLD(DAMHIS)
+     A                                      EDTCDE(4)
+     A  44N45                               DSPATR(PR)
+     A                                 18 24'1=No Damage      2=One Damage'
+     A                                 19 24'3=Lot of Damage  4=Disaster driver'
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 13'F4=Prompt'
+     A                                      COLOR(BLU)
+     A                                 22 26'F5=Change'
+     A                                      COLOR(BLU)
+     A                                 22 39'F6=Add'
+     A                                      COLOR(BLU)
+     A                                 22 49'F12=Cancel'
+     A                                      COLOR(BLU)
+     A                                 22 63'F13=Copy'
+     A                                      COLOR(BLU)
+     A            S1MSGT        60A  O 23  2COLOR(BLU)
+     A          R F020S                     SFL
+     A            S8OPTN         1Y 0B  6  4EDTCDE(4)
+     A  35                                  DSPATR(ND)
+     A  35                                  DSPATR(PR)
+     A                                      CHECK(ER)
+     A            S8NAME        25A  O  6  7
+     A            S8CNTR    R        O  6 34REFFLD(CONTNR)
+     A            S8ADRS        25A  O  6 43
+     A            S8LICE    R        O  6 70REFFLD(LPLATE)
+     A          R F020C                     SFLCTL(F020S)
+     A                                      SFLSIZ(0016)
+     A                                      SFLPAG(0015)
+     A                                      CF06(06 'ADD')
+     A                                      CF07(07 'ZOOM')
+     A                                      CF12(12 'CANCEL')
+     A                                      CF16(16 'MAIN MENU')
+     A                                      OVERLAY
+     A  80                                  SFLDSP
+     A  81                                  SFLDSPCTL
+     A N80                                  SFLCLR
+     A  80                                  SFLEND(*MORE)
+     A                                      SFLDROP(CF07)
+     A                                  1 38'Contracts'
+     A                                      DSPATR(HI)
+     A                                  1 70SYSNAME
+     A                                  2 60TIME
+     A                                  2 70DATE
+     A                                      EDTCDE(Y)
+     A                                  3  5'Options :'
+     A                                      COLOR(BLU)
+     A                                  5  3'Opt'
+     A                                      DSPATR(UL)
+     A                                  5  7'Name '
+     A                                      DSPATR(UL)
+     A                                  5 34'Contr'
+     A                                      DSPATR(UL)
+     A                                  5 43'Adress  '
+     A                                      DSPATR(UL)
+     A                                  5 70'Licence'
+     A                                      DSPATR(UL)
+     A                                  3 16'5=Select'
+     A                                      COLOR(BLU)
+     A          R F020H
+     A                                      OVERLAY
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 12'F12=Cancel'
+     A                                      COLOR(BLU)
+     A                                 22 25'F16=Main Menu'
+     A                                      COLOR(BLU)
+     A            S1MSGT        60A  O 23  2COLOR(BLU)
+     A          R F030
+     A                                      CF12(12 'CANCEL')
+     A                                  1 33'Add Statistics'
+     A                                      DSPATR(HI)
+     A                                  1 70SYSNAME
+     A                                  2 60TIME
+     A                                  2 70DATE
+     A                                      EDTCDE(Y)
+     A                                  6 13'Year          :'
+     A            S4YEAR    R     Y  B  6 30EDTCDE(4)
+     A                                      REFFLD(YEAR)
+     A  30                                  DSPATR(RI)
+     A  30                                  DSPATR(PC)
+     A                                  7 13'Month         :'
+     A            S4MONT    R     Y  B  7 30EDTCDE(4)
+     A                                      REFFLD(MONTH)
+     A                                      RANGE(1 12)
+     A  30                                  DSPATR(RI)
+     A                                  7 39'(1-12)'
+     A                                  9 13'Brand         :'
+     A            S4BRAN    R     Y  B  9 30EDTCDE(4)
+     A                                      REFFLD(BRAND)
+     A                                      VALUES(1 2 3)
+     A  30                                  DSPATR(RI)
+     A                                  9 39'1 = BMW'
+     A                                 10 39'2 = Ford'
+     A                                 11 39'3 = Mercedes'
+     A                                 15 13'Total Miles   :'
+     A            S4MILE    R     Y  B 15 30EDTCDE(4)
+     A                                      REFFLD(TOTMIL)
+     A                                 16 13'Total Damages :'
+     A            S4TDAM    R     Y  B 16 30EDTCDE(4)
+     A                                      REFFLD(TOTDAM)
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 13'F12=Cancel'
+     A                                      COLOR(BLU)
+     A            S1MSGT        60A  O 23  2COLOR(BLU)
+     A          R F040W
+     A                                      CF12(12 'CANCEL')
+     A                                      WINDOW(7 18 8 40)
+     A                                  1  1'Show Statistics - Select Year'
+     A                                  1 33SYSNAME
+     A                                  4  1'Please enter the year'
+     A                                  5  1'and press ENTER'
+     A            W2YEAR    R     Y  B  4 25EDTCDE(4)
+     A                                      REFFLD(YEAR)
+     A                                  7  1'F3=Exit'
+     A                                  7 11'F12=Cancel'
+     A          R F050
+     A                                      CF01(01 'HELP')
+     A                                      CF10(10 'CHANGE YEAR')
+     A                                      CF12(12 'CANCEL')
+     A                                  1 33'Show Statistics'
+     A                                      DSPATR(HI)
+     A                                  1 70SYSNAME
+     A                                  2 60TIME
+     A                                  2 70DATE
+     A                                      EDTCDE(Y)
+     A                                  3 31'Year          :'
+     A            S5YEAR    R     Y  O  3 48EDTCDE(4)
+     A                                      REFFLD(YEAR)
+     A                                  4 22'Milages'
+     A                                  4 61'Damages'
+     A                                  5 11'------------------------------'
+     A                                  5 51'--------------------------'
+     A                                  6  4'Month'
+     A                                      DSPATR(UL)
+     A                                  6 16'BMW'
+     A                                      DSPATR(UL)
+     A                                  6 26'Ford'
+     A                                      DSPATR(UL)
+     A                                  6 33'Mercedes'
+     A                                      DSPATR(UL)
+     A                                  6 52'BMW'
+     A                                      DSPATR(UL)
+     A                                  6 62'Ford'
+     A                                      DSPATR(UL)
+     A                                  6 69'Mercedes'
+     A                                      DSPATR(UL)
+     A                                  7  6'1'
+     A            S5OM01         8Y 0O  7 11EDTCDE(3)
+     A            S5FM01         8Y 0O  7 22EDTCDE(3)
+     A            S5MM01         8Y 0O  7 33EDTCDE(3)
+     A            S5OD01         4Y 0O  7 51EDTCDE(3)
+     A            S5FD01         4Y 0O  7 62EDTCDE(3)
+     A            S5MD01         4Y 0O  7 73EDTCDE(3)
+     A                                  8  6'2'
+     A            S5OM02         8Y 0O  8 11EDTCDE(3)
+     A            S5FM02         8Y 0O  8 22EDTCDE(3)
+     A            S5MM02         8Y 0O  8 33EDTCDE(3)
+     A            S5OD02         4Y 0O  8 51EDTCDE(3)
+     A            S5FD02         4Y 0O  8 62EDTCDE(3)
+     A            S5MD02         4Y 0O  8 73EDTCDE(3)
+     A                                  9  6'3'
+     A            S5OM03         8Y 0O  9 11EDTCDE(3)
+     A            S5FM03         8Y 0O  9 22EDTCDE(3)
+     A            S5MM03         8Y 0O  9 33EDTCDE(3)
+     A            S5OD03         4Y 0O  9 51EDTCDE(3)
+     A            S5FD03         4Y 0O  9 62EDTCDE(3)
+     A            S5MD03         4Y 0O  9 73EDTCDE(3)
+     A                                 10  6'4'
+     A            S5OM04         8Y 0O 10 11EDTCDE(3)
+     A            S5FM04         8Y 0O 10 22EDTCDE(3)
+     A            S5MM04         8Y 0O 10 33EDTCDE(3)
+     A            S5OD04         4Y 0O 10 51EDTCDE(3)
+     A            S5FD04         4Y 0O 10 62EDTCDE(3)
+     A            S5MD04         4Y 0O 10 73EDTCDE(3)
+     A                                 11  6'5'
+     A            S5OM05         8Y 0O 11 11EDTCDE(3)
+     A            S5FM05         8Y 0O 11 22EDTCDE(3)
+     A            S5MM05         8Y 0O 11 33EDTCDE(3)
+     A            S5OD05         4Y 0O 11 51EDTCDE(3)
+     A            S5FD05         4Y 0O 11 62EDTCDE(3)
+     A            S5MD05         4Y 0O 11 73EDTCDE(3)
+     A                                 12  6'6'
+     A            S5OM06         8Y 0O 12 11EDTCDE(3)
+     A            S5FM06         8Y 0O 12 22EDTCDE(3)
+     A            S5MM06         8Y 0O 12 33EDTCDE(3)
+     A            S5OD06         4Y 0O 12 51EDTCDE(3)
+     A            S5FD06         4Y 0O 12 62EDTCDE(3)
+     A            S5MD06         4Y 0O 12 73EDTCDE(3)
+     A                                 13  6'7'
+     A            S5OM07         8Y 0O 13 11EDTCDE(3)
+     A            S5FM07         8Y 0O 13 22EDTCDE(3)
+     A            S5MM07         8Y 0O 13 33EDTCDE(3)
+     A            S5OD07         4Y 0O 13 51EDTCDE(3)
+     A            S5FD07         4Y 0O 13 62EDTCDE(3)
+     A            S5MD07         4Y 0O 13 73EDTCDE(3)
+     A                                 14  6'8'
+     A            S5OM08         8Y 0O 14 11EDTCDE(3)
+     A            S5FM08         8Y 0O 14 22EDTCDE(3)
+     A            S5MM08         8Y 0O 14 33EDTCDE(3)
+     A            S5OD08         4Y 0O 14 51EDTCDE(3)
+     A            S5FD08         4Y 0O 14 62EDTCDE(3)
+     A            S5MD08         4Y 0O 14 73EDTCDE(3)
+     A                                 15  6'9'
+     A            S5OM09         8Y 0O 15 11EDTCDE(3)
+     A            S5FM09         8Y 0O 15 22EDTCDE(3)
+     A            S5MM09         8Y 0O 15 33EDTCDE(3)
+     A            S5OD09         4Y 0O 15 51EDTCDE(3)
+     A            S5FD09         4Y 0O 15 62EDTCDE(3)
+     A            S5MD09         4Y 0O 15 73EDTCDE(3)
+     A                                 16  5'10'
+     A            S5OM10         8Y 0O 16 11EDTCDE(3)
+     A            S5FM10         8Y 0O 16 22EDTCDE(3)
+     A            S5MM10         8Y 0O 16 33EDTCDE(3)
+     A            S5OD10         4Y 0O 16 51EDTCDE(3)
+     A            S5FD10         4Y 0O 16 62EDTCDE(3)
+     A            S5MD10         4Y 0O 16 73EDTCDE(3)
+     A                                 17  5'11'
+     A            S5OM11         8Y 0O 17 11EDTCDE(3)
+     A            S5FM11         8Y 0O 17 22EDTCDE(3)
+     A            S5MM11         8Y 0O 17 33EDTCDE(3)
+     A            S5OD11         4Y 0O 17 51EDTCDE(3)
+     A            S5FD11         4Y 0O 17 62EDTCDE(3)
+     A            S5MD11         4Y 0O 17 73EDTCDE(3)
+     A                                 18  5'12'
+     A            S5OM12         8Y 0O 18 11EDTCDE(3)
+     A            S5FM12         8Y 0O 18 22EDTCDE(3)
+     A            S5MM12         8Y 0O 18 33EDTCDE(3)
+     A            S5OD12         4Y 0O 18 51EDTCDE(3)
+     A            S5FD12         4Y 0O 18 62EDTCDE(3)
+     A            S5MD12         4Y 0O 18 73EDTCDE(3)
+     A                                 19 10'---------'
+     A                                 19 21'---------'
+     A                                 19 32'---------'
+     A                                 19 50'-----'
+     A                                 19 61'-----'
+     A                                 19 72'-----'
+     A                                 20  3'Total'
+     A            S5OMTT         9Y 0O 20 10EDTCDE(3)
+     A            S5FMTT         9Y 0O 20 21EDTCDE(3)
+     A            S5MMTT         9Y 0O 20 32EDTCDE(3)
+     A            S5ODTT         5Y 0O 20 50EDTCDE(3)
+     A            S5FDTT         5Y 0O 20 61EDTCDE(3)
+     A            S5MDTT         5Y 0O 20 72EDTCDE(3)
+     A                                 22  2'F1=Help'
+     A                                      COLOR(BLU)
+     A                                 22 12'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 22'F10=Change year'
+     A                                      COLOR(BLU)
+     A                                 22 40'F12=Cancel'
+     A                                      COLOR(BLU)
+     A          R F050W
+     A                                      WINDOW(16 20 5 50)
+     A                                  3  1'This screen shows you the number o-
+     A                                      f miles driven'
+     A                                  4  1'per month and the number of crashe-
+     A                                      s'
+     A                                  1 23'Help'
+     A                                      DSPATR(HI)
+     A          R F060
+     A                                      CF04(04 'PROMPT')
+     A                                      CF05(05 'CHANGE')
+     A                                      CF06(06 'COPY')
+     A                                      CF12(12 'CANCEL')
+     A                                      CF24(24 'MORE KEYS')
+     A                                      CF14(14 'DELETE')
+     A                                      RTNCSRLOC(&S6CREC &S6CFLD &S6CPOS)
+     A            S6CREC        10A  H
+     A            S6CFLD        10A  H
+     A            S6CPOS         4S 0H
+     A                                  1 34'Returned Cars'
+     A                                      DSPATR(HI)
+     A                                  1 70SYSNAME
+     A                                  2 60TIME
+     A                                  2 70DATE
+     A                                      EDTCDE(Y)
+     A N44N45                           2  3' ADD  '
+     A                                      DSPATR(RI)
+     A  45                              2  3'CHANGE'
+     A                                      DSPATR(RI)
+     A  44N45                           2  3' VIEW '
+     A                                      DSPATR(RI)
+     A                                  3  8'Licence             :'
+     A            S6LICE    R        B  3 30REFFLD(LPLATE)
+     A  44N45                               DSPATR(PR)
+     A                                  3 54'Return nr.  :'
+     A            S6RETU    R     Y  B  3 69EDTCDE(4)
+     A                                      REFFLD(RETNNR)
+     A  30                                  DSPATR(RI)
+     A  30                                  DSPATR(PC)
+     A                                      CHECK(RZ)
+     A                                  4 54'Contract nr.:'
+     A            S6CNTR    R     Y  B  4 69EDTCDE(4)
+     A                                      REFFLD(CONTNR)
+     A                                      CHECK(RZ)
+     A  44N45                               DSPATR(PR)
+     A                                  5  8'Brand               :'
+     A            S6BRAN    R     Y  B  5 30EDTCDE(4)
+     A                                      REFFLD(BRAND)
+     A  44N45                               DSPATR(PR)
+     A                                      VALUES(1 2 3)
+     A                                  5 39'1 = BMW'
+     A                                  6 39'2 = Ford'
+     A                                  7 39'3 = Mercedes'
+     A                                  9  8'Model               :'
+     A            S6MODE    R     Y  B  9 30EDTCDE(4)
+     A                                      REFFLD(MODEL)
+     A  44N45                               DSPATR(PR)
+     A                                 10  8'End Milage          :'
+     A            S6MILE    R     Y  B 10 30EDTCDE(4)
+     A                                      REFFLD(MILAGE)
+     A  44N45                               DSPATR(PR)
+     A                                      CHECK(RB)
+     A                                 11  8'Checked for damages :'
+     A            S6CHKD    R        B 11 30VALUES('Y' 'N')
+     A                                      REFFLD(CHKDMG)
+     A  44N45                               DSPATR(PR)
+     A                                 11 39'(Y/N)'
+     A                                 12  8'Damages             :'
+     A            S6DAMA    R        B 12 30VALUES('Y' 'N')
+     A                                      REFFLD(DAMFND)
+     A  44N45                               DSPATR(PR)
+     A                                 12 39'(Y/N)'
+     A                                 13  8'Tank filled         :'
+     A            S6TANK    R        B 13 30VALUES('Y' 'N')
+     A                                      REFFLD(TNKFIL)
+     A  44N45                               DSPATR(PR)
+     A                                 13 39'(Y/N)'
+     A                                 15  8'Paid with           :'
+     A            S6PAID    R     Y  B 15 30EDTCDE(4)
+     A                                      REFFLD(PAID)
+     A  44N45                               DSPATR(PR)
+     A                                 15 39'1 = Cash'
+     A                                 16 39'2 = VISA Card'
+     A                                 17 39'3 = Master Card'
+     A                                 18 39'4 = Other Card'
+     A                                 19  8'Card number         :'
+     A            S6CRD1         4Y 0B 19 30EDTCDE(4)
+     A  44N45                               DSPATR(PR)
+     A            S6CRD2         4Y 0B 19 35EDTCDE(4)
+     A  44N45                               DSPATR(PR)
+     A            S6CRD3         4Y 0B 19 40EDTCDE(4)
+     A  44N45                               DSPATR(PR)
+     A            S6CRD4         4Y 0B 19 45EDTCDE(4)
+     A  44N45                               DSPATR(PR)
+     A            S1MSGT        60A  O 23  2COLOR(BLU)
+     A N46                             22  2'F3=Exit   F4=Prompt   F5=change   -
+     A                                      F6=Add    F12=Cancel   F24=More key-
+     A                                      s'
+     A                                      COLOR(BLU)
+     A  46                             22  2'F3=Exit   F4=Prompt   F12=Cancel  -
+     A                                      F13=Copy  F14=Delete   F24=More key-
+     A                                      s'
+     A                                      COLOR(BLU)
+     A          R F070S                     SFL
+     A            S9BRAN    R        H
+     A                                      REFFLD(BRAND)
+     A            S9OPTN         1Y 0B  7  7EDTCDE(4)
+     A                                      VALUES(5 0)
+     A                                      CHECK(ER)
+     A            S9BRNO        10A  O  7 13
+     A            S9MDLO    R        O  7 28REFFLD(MDLDES)
+     A            S9CATE    R        O  7 46REFFLD(PRCCAT)
+     A            S9LICE    R        O  7 56REFFLD(LPLATE)
+     A            S9MILA    R        O  7 69REFFLD(MILAGE)
+     A            S9MODE    R        O  8 28REFFLD(MODEL)
+     A          R F070C                     SFLCTL(F070S)
+     A                                      SFLSIZ(0008)
+     A                                      SFLPAG(0007)
+     A                                      CF06(06 'ADD')
+     A                                      CF07(07 'ZOOM')
+     A                                      CF12(12 'CANCEL')
+     A                                      CF16(16 'Main Menu')
+     A                                      OVERLAY
+     A  80                                  SFLDSP
+     A  81                                  SFLDSPCTL
+     A N80                                  SFLCLR
+     A  80                                  SFLEND(*MORE)
+     A                                      SFLDROP(CF07)
+     A                                  1 38'Car Park'
+     A                                      DSPATR(HI)
+     A                                  1 70SYSNAME
+     A                                  2 60TIME
+     A                                  2 70DATE
+     A                                      EDTCDE(Y)
+     A                                  4  5'Options :'
+     A                                  6  6'Opt'
+     A                                      DSPATR(UL)
+     A                                  6 13'Brand'
+     A                                      DSPATR(UL)
+     A                                  6 28'Model'
+     A                                      DSPATR(UL)
+     A                                  6 43'Category'
+     A                                      DSPATR(UL)
+     A                                  6 56'Licence'
+     A                                      DSPATR(UL)
+     A                                  6 69'Milage'
+     A                                      DSPATR(UL)
+     A                                  4 16'5 = Select'
+     A          R F070H
+     A                                      OVERLAY
+     A                                 22  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 22 12'F7=Zoom'
+     A                                      COLOR(BLU)
+     A                                 22 22'F12=Cancel'
+     A                                      COLOR(BLU)
+     A            S1MSGT        60A  O 23  2COLOR(BLU)

@@ -10,7 +10,7 @@
      A            S1CFLD        10A  H
      A            S1CPOS         4S 0H
      A                                  1 33'Maintain Carpark'
-     A                                      DSPATR(HI)
+     A*                                     DSPATR(HI)
      A                                  1 70SYSNAME
      A                                  2 60TIME
      A                                  2 70DATE
